@@ -1,0 +1,4 @@
+# Ignore subdirectores/files of .emacs.d
+abbrev_defs
+auto-save-list/
+elpa/
