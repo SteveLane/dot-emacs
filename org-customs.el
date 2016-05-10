@@ -66,3 +66,6 @@
 ;; Set up syntax highlighting for latex (use minted)
 (setq org-latex-listings 'minted)
 (add-to-list 'org-latex-packages-alist '("" "minted") t)
+;; To use minted, need to use shell escape
+(setq org-latex-pdf-process
+      (list "latexmk --shell-escape -pdf %f"))
