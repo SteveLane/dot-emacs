@@ -69,3 +69,11 @@
 ;; To use minted, need to use shell escape
 (setq org-latex-pdf-process
       (list "latexmk --shell-escape -pdf %f"))
+
+;; More templates for R source code (? means place cursor back here).
+;; rb: export both results and code
+(add-to-list 'org-structure-template-alist
+	     '("rb" "#+BEGIN_SRC R :session :exports both :results output?\n\n#+END_SRC"))
+;; rf no export, but figure output
+(add-to-list 'org-structure-template-alist
+	     '("rf" "#+BEGIN_SRC R :session :exports none :results output graphics :file XXX?\n\n#+END_SRC\n#+CAPTION: XXX\n#+LABEL: XXX"))

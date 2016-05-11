@@ -243,5 +243,8 @@
    kept-old-versions 2
    version-control t)       ; use versioned backups
 
+;; Magit status bind global key
+(global-set-key (kbd "C-x g") 'magit-status)
+
 ;; Load separated customisation files.
 (load "~/.emacs.d/org-customs.el")
