@@ -248,3 +248,4 @@
 
 ;; Load separated customisation files.
 (load "~/.emacs.d/org-customs.el")
+(load "~/.emacs.d/yas-customs.el")
