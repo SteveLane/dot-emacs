@@ -10,7 +10,6 @@
 #+EMAIL: lane.s@unimelb.edu.au
 
 #+HTML_MATHJAX: align: left tagindent: 5em tagside: right font: Neo-Euler
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="worg.css" type="text/css" />
 
 ${2:#+BEGIN_abstract
 Some abstract
