@@ -1,0 +1,29 @@
+# -*- mode: snippet -*-
+# name: title
+# key: title:
+# --
+#+OPTIONS: num:t todo:nil tasks:nil
+#+OPTIONS: toc:nil
+#+OPTIONS: H:4
+#+TITLE: ${1:Some Title}
+#+AUTHOR: Stephen E Lane
+#+EMAIL: lane.s@unimelb.edu.au
+
+#+HTML_MATHJAX: align: left tagindent: 5em tagside: right font: Neo-Euler
+#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="worg.css" type="text/css" />
+
+${2:#+BEGIN_abstract
+Some abstract
+#+END_abstract}
+
+#+TOC: headlines 2
+
+#+LATEX: \listoftables
+#+LATEX: \listoffigures
+#+LATEX_CLASS: article
+#+LATEX_CLASS_OPTIONS: [a4paper,10pt]
+#+LATEX_HEADER: \usepackage{palatino}
+#+LATEX_HEADER: \usepackage[margin=15pt,font=small,labelfont=bf]{caption}
+#+LATEX_HEADER: \usepackage{booktabs}
+#+LATEX_HEADER: \usepackage[margin=25mm]{geometry}
+#+LATEX_HEADER: \usepackage{setspace}
