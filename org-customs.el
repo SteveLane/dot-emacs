@@ -77,3 +77,6 @@
 ;; rf no export, but figure output
 (add-to-list 'org-structure-template-alist
 	     '("rf" "#+BEGIN_SRC R :session :exports none :results output graphics :file XXX?\n\n#+END_SRC\n#+CAPTION: XXX\n#+LABEL: XXX"))
+
+;; Load the html export css
+(load "~/.emacs.d/org-html-export.el")
