@@ -23,7 +23,7 @@
 	      beamer
 	      md
 	      odt
-	      twbs
+	      pandoc
 	      )))
 
 ;; fontify the code blocks in org-mode
@@ -80,3 +80,6 @@
 
 ;; Load the html export css
 (load "~/.emacs.d/org-html-export.el")
+
+;; Load org-capture customs
+(load "~/.emacs.d/org-capture-customs.el")
