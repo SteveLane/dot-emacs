@@ -34,20 +34,6 @@
 ;; Do not generate internal css formatting for HTML exports
 ;; (setq org-export-htmlize-output-type 'css)
 
-;; This makes setting up an org file easy.
-(define-skeleton org-skeleton
-  "Header info for a emacs-org file."
-  "Title: "
-  "#+TITLE:" str " \n"
-  "#+AUTHOR: Stephen E Lane\n"
-  "#+email: lane.s@unimelb.edu.au\n"
-  "#+INFOJS_OPT: \n"
-  "#+BABEL: :session *R* :cache yes :results output graphics :exports both :tangle yes \n"
-  "-----"
-  )
-;; This sets the shortcut
-(global-set-key [C-S-f4] 'org-skeleton)
-
 ;; Wrap lines at column limit, but don't put hard returns in
 (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
 
