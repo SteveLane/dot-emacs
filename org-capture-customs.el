@@ -35,8 +35,9 @@
 ;; Set org-capture templates
 (setq org-capture-templates
       (quote (("t" "Tasks")
-	      ("tr" "Tasks (research, public on github)" entry (file+headline (get-research-notes-file) "Tasks") "* TODO %?\n%U\n")
-	      ("tg" "Tasks (general, local only)" entry (file+headline (general-notes) "Tasks") "* TODO %?\n%U\n")
+	      ("tr" "Tasks (research, public on github)" entry (file+headline (get-research-notes-file) "Tasks") "* TODO %?\n%T\n")
+	      ("tc" "Tasks (research, public on github, include clipboard)" entry (file+headline (get-research-notes-file) "Tasks") "* TODO %?\n%T\n- %x\n")
+	      ("tg" "Tasks (general, local only)" entry (file+headline (general-notes) "Tasks") "* TODO %?\n%T\n")
 	      ("n" "Notes")
               ("nr" "Notes (research, public on github)" entry (file+headline (get-research-notes-file) "Notes") "* %? %^G\n%T\n- \n")
 	      ("ng" "Notes (general, local only)" entry (file+headline (general-notes) "Notes") "* %? %^G\n%T\n- \n")
