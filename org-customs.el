@@ -29,6 +29,9 @@
 ;; fontify the code blocks in org-mode
 (setq org-src-fontify-natively t)
 
+;; Flyspell on
+(add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
+
 ;; This is for nicer css...
 ;; (setq org-html-head-include-default-style nil)
 ;; Do not generate internal css formatting for HTML exports
