@@ -187,7 +187,7 @@
 (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
 (setq reftex-plug-into-AUCTeX t)
 ;; Make autofill work for tex mode
-(add-hook 'LaTeX-mode-hook (lambda () (auto-fill-mode 1)))
+(add-hook 'LaTeX-mode-hook (lambda () (visual-line-mode 1)))
 ;; Flyspell on
 (add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode 1)))
 
