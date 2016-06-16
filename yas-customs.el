@@ -1,10 +1,15 @@
 ;; Emacs customisations for yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
+(require 'yasnippet)
+
 (with-eval-after-load "yasnippet"
-  (yas-global-mode 1)
+  ;; No global mode (just yet)
+  ;; (yas-global-mode 1)
 
   ;; Load snippet tables
   (yas-reload-all)
+  ;; Make sure yasnippet is on for org files
+  (add-hook 'org-mode-hook #'yas-minor-mode)
 
   ;; Bind `yas-expand' to SPC. This is because it plays up with org-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)

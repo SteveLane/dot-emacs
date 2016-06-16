@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: yaml
+# key: yaml:
+# --
+#+OPTIONS: toc:nil num:nil
+#+OPTIONS: H:4
+#+BEGIN_HTML
+---
+layout: post
+title: ${1:Some title}
+description: ${2:Some description}
+tags: ${3:Some tags}
+categories: ${4:Some categories}
+comments: true
+---
+#+END_HTML
