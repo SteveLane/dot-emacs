@@ -2,7 +2,7 @@
 # name: yaml
 # key: yaml:
 # --
-#+OPTIONS: toc:nil num:nil
+#+OPTIONS: toc:nil num:nil tags:nil
 #+OPTIONS: H:4
 #+BEGIN_HTML
 ---
