@@ -42,3 +42,13 @@ Some abstract
 #+LATEX_HEADER: \usepackage{booktabs}
 #+LATEX_HEADER: \usepackage[margin=25mm]{geometry}
 #+LATEX_HEADER: \usepackage{setspace}
+#+LATEX_HEADER: \usepackage[dvipsnames]{xcolor}
+#+LATEX_HEADER: \definecolor{mylinkcolour}{HTML}{FC8D62}
+#+LATEX_HEADER: \definecolor{myurlcolour}{HTML}{8DA0CB}
+#+LATEX_HEADER: \definecolor{mycitecolour}{HTML}{66C2A5}
+#+LATEX_HEADER: \hypersetup{
+#+LATEX_HEADER:   linkcolor = mylinkcolour,
+#+LATEX_HEADER:   urlcolor = myurlcolour,
+#+LATEX_HEADER:   citecolor = mycitecolour,
+#+LATEX_HEADER:   colorlinks = true
+#+LATEX_HEADER: }
