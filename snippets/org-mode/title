@@ -52,3 +52,5 @@ Some abstract
 #+LATEX_HEADER:   citecolor = mycitecolour,
 #+LATEX_HEADER:   colorlinks = true
 #+LATEX_HEADER: }
+
+#+MACRO: figure (eval (if (org-export-derived-backend-p org-export-current-backend 'html) "[[$1.svg]]" "[[$1.pdf]]"))
