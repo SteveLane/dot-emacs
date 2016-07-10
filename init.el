@@ -4,6 +4,9 @@
 (setq inhibit-startup-screen t)
 (setq initial-buffer-choice nil)
 
+;; Get rid of OSX native fullscreen (use f11 or M-x toggle-frame-fullscreen)
+(setq ns-use-native-fullscreen nil)
+
 ;; Set column fill to 80
 (setq-default fill-column 80)
 
