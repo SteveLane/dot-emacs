@@ -102,28 +102,9 @@
 (fset 'title-matlab
    [?\C-u ?8 ?0 ?% return ?\C-u ?8 ?0 ?% return ?% ?  ?T ?i ?t ?l ?e ?: return ?% ?  ?A ?u ?t ?h ?o ?r ?: return ?% ?  ?D ?a ?t ?e ?: ?  ?\C-u ?\M-\! ?d ?a ?t ?e ?  ?\" ?\+ ?\% ?d ?  ?\% ?B ?  ?\% ?Y ?\" ?\/ ?t return backspace ?  ?\C-e return ?% ?  ?S ?y ?n ?o ?p ?s ?i ?s ?: return ?\C-u ?8 ?0 ?% return ?\C-u ?8 ?0 ?% return up up up up up ?\C-e ?  ?S ?t ?e ?v ?e ?  ?L ?a ?n ?e up ? ])
 
-
-
 ;; Default dictionary
 (setq default-dictionary "british")
 (setq ispell-dictionary "british")
-
-;; Markdown mode
-(autoload 'markdown-mode "markdown-mode"
-   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.text\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
-(add-to-list 'auto-mode-alist '("\\.Rmd\\'" . markdown-mode))
-;; Wrap lines at column limit, but don't put hard returns in
-(add-hook 'markdown-mode-hook (lambda () (visual-line-mode 1)))
-;; Flyspell on
-(add-hook 'markdown-mode-hook (lambda () (flyspell-mode 1)))
-;; Make sure markdown-mode uses pandoc for previewing
-;; Use this one if you have a css file
-;; (setq markdown-command "pandoc -c file:///home/beaujean/.emacs.d/github-pandoc.css --from markdown_github -t html5 --mathjax --highlight-style pygments --standalone")
-;; Without a css file:
-(setq markdown-command "pandoc --from markdown_github -t html5 --mathjax --highlight-style pygments --standalone")
 
 ;; Column number mode
 (setq column-number-mode t)
@@ -213,33 +194,6 @@
     TeX-command-list)))
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
 
-;; Add extra reftex commands for pandoc/knitcitations
-;; (setq reftex-cite-format
-;;       '(
-;; 	(?P . "[@%l]")
-;; 	(?T . "@%l [p. ]")
-;; 	))
-
-;; Do this in a function so that it can be only loaded in markdown
-(defun markdown-mode-reftex-setup ()
-  (interactive)
-  (and (buffer-file-name) (file-exists-p (buffer-file-name))
-       (progn
-	 ;; Reftex should use the org file as master file. See C-h v TeX-master for infos.
-	 (setq TeX-master t)
-	 (turn-on-reftex)
-	 (setq reftex-cite-format
-	       '(
-		 ;; These next two were for using knitcitations
-		 ;; (?p . "`r knitcitations::citep(bib[['%l']])`")
-		 ;; (?t . "`r knitcitations::citet(bib[['%l']])`")
-		 ;; These use pandoc and work fine using bookdown/render
-		 (?t . "@%l")
-		 (?p . "[@%l]")
-		 )))))
-
-(add-hook 'markdown-mode-hook 'markdown-mode-reftex-setup)
-
 ;; I'm sick of backups... at least in my working directory. Let's place them somewhere else (plus some other cool stuff:
 (setq
    backup-by-copying t      ; don't clobber symlinks
@@ -254,5 +208,6 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Load separated customisation files.
+(load "~/.emacs.d/markdown-customs.el")
 (load "~/.emacs.d/org-customs.el")
 (load "~/.emacs.d/yas-customs.el")

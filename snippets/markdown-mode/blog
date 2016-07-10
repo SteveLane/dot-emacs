@@ -1,0 +1,12 @@
+# -*- mode: snippet -*-
+# name: blog
+# key: blog:
+# --
+---
+layout: post
+title: ${1:Some title}
+description: ${2:Some description}
+tags: ${3:Some tags}
+categories: ${4:Some categories}
+comments: true
+---
