@@ -150,7 +150,7 @@
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(org-agenda-files
    (quote
-    ("/Users/slane/org/defaultNotes.org" "/Users/slane/org/git-workflow.org" "/Users/slane/github/researchNotes2016/2016-05-19-notes.org" "/Users/slane/github/researchNotes2016/2016-05-21-notes.org" "/Users/slane/github/researchNotes2016/2016-05-31-notes.org" "/Users/slane/github/researchNotes2016/2016-06-10-notes.org"))))
+    ("/Users/slane/org/defaultNotes.org" "/Users/slane/org/git-workflow.org" "/Users/slane/github/researchNotes2016/05-May.org" "/Users/slane/github/researchNotes2016/2016-05-19-notes.org" "/Users/slane/github/researchNotes2016/2016-05-21-notes.org" "/Users/slane/github/researchNotes2016/2016-05-26-notes.org" "/Users/slane/github/researchNotes2016/2016-05-31-notes.org" "/Users/slane/github/researchNotes2016/2016-06-10-notes.org" "/Users/slane/github/researchNotes2016/2016-06-14-notes.org" "/Users/slane/github/researchNotes2016/2016-06-28-notes.org" "/Users/slane/github/researchNotes2016/2016-06-29-notes.org" "/Users/slane/github/researchNotes2016/2016-07-06-notes.org" "/Users/slane/github/researchNotes2016/2016-07-08-notes.org" "/Users/slane/github/researchNotes2016/2016-07-18-notes.org" "/Users/slane/github/researchNotes2016/2016-07-25-notes.org"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -189,7 +189,7 @@
 
 (add-hook 'LaTeX-mode-hook (lambda ()
   (push
-    '("latexmk" "latexmk -pvc %s" TeX-run-TeX nil t
+    '("latexmk" "latexmk --shell-escape -xelatex -pvc %s" TeX-run-TeX nil t
       :help "Run latexmk on file")
     TeX-command-list)))
 (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
