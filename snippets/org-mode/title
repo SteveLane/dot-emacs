@@ -35,7 +35,7 @@ Some abstract
 #+LATEX_HEADER:   \fi
 #+LATEX_HEADER:   \setmainfont{Raleway}
 #+LATEX_HEADER:   \setsansfont{Raleway}
-#+LATEX_HEADER:   \setmonofont{Hack}
+#+LATEX_HEADER:   \setmonofont[Scale=MatchLowercase]{Hack}
 #+LATEX_HEADER:   \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
 #+LATEX_HEADER: \fi
 #+LATEX_HEADER: \usepackage[margin=15pt,font=small,labelfont=bf]{caption}
