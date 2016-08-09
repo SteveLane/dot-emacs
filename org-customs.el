@@ -57,7 +57,7 @@
 (add-to-list 'org-latex-packages-alist '("" "minted") t)
 ;; To use minted, need to use shell escape
 (setq org-latex-pdf-process
-      (list "latexmk --shell-escape -pdf %f"))
+      (list "latexmk --shell-escape -xelatex -pdf %f"))
 
 ;; More templates for R source code (? means place cursor back here).
 ;; rb: export both results and code
