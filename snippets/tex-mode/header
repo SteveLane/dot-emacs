@@ -1,0 +1,85 @@
+# -*- mode: snippet -*-
+# name: header
+# key: header:
+# --
+
+\documentclass[a4paper,10pt]{article}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage[default]{raleway}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{fontspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \setmainfont{Raleway}
+  \setsansfont{Raleway}
+  \setmonofont[Scale=MatchLowercase]{Hack}
+  \defaultfontfeatures{Ligatures=TeX}
+\fi
+\usepackage[margin=15pt,font=small,labelfont=bf]{caption}
+\usepackage{booktabs}
+\usepackage[margin=25mm]{geometry}
+\usepackage{setspace}
+\usepackage[dvipsnames]{xcolor}
+\definecolor{mylinkcolour}{HTML}{FC8D62}
+\definecolor{myurlcolour}{HTML}{8DA0CB}
+\definecolor{mycitecolour}{HTML}{66C2A5}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{bm}
+\usepackage{accents}
+\usepackage{stfloats}
+\usepackage[backend=biber,style=numeric,natbib=true,url=false,doi=true]{biblatex}
+% \bibliography{bib-name}
+\usepackage{xr}
+\usepackage{dsfont}
+\usepackage[section]{placeins}
+
+\newcommand{\ua}[1]{\underaccent{\tilde}{#1}}
+\newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg\,min}}\;}
+\newcommand{\argmax}[1]{\underset{#1}{\operatorname{arg\,max}}\;}
+\newcommand{\up}[1]{\ensuremath{^\textrm{\scriptsize#1}}}
+\newcommand{\bs}[1]{\ensuremath{\boldsymbol{#1}}} % Command to bold
+                                % greek for vectors
+\newcommand{\dd}{\, \mathrm{d}} % Roman d in integrals
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\theoremstyle{definition} \newtheorem{definition}{Definition}
+
+\usepackage{hyperref}
+\usepackage{minted}
+\hypersetup{
+  linkcolor = mylinkcolour,
+  urlcolor = myurlcolour,
+  citecolor = mycitecolour,
+  colorlinks = true,
+  pdfauthor = {Stephen E Lane},
+  pdftitle = {${1:Some Title}}
+}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.pdf,.PDF,.png,.PNG}
+\author{${2:Authors}}
+\date{\today}
+\title{$1}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+
+Here is an abstract.
+
+\end{abstract}
+
+\setcounter{tocdepth}{2}
+\tableofcontents
+
+\end{document}
