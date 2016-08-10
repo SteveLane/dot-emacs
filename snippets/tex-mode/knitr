@@ -3,7 +3,7 @@
 # key: knitr:
 # --
 
-<<knitr-setup,echo=FALSE>>
+<<knitr-setup,echo=FALSE>>=
 knitr::opts_chunk$set(cache = TRUE, error = FALSE, warning = FALSE,
                       message = FALSE)
 ## Fix xcolor bug
