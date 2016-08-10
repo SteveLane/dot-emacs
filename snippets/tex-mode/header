@@ -4,6 +4,7 @@
 # --
 
 \documentclass[a4paper,10pt]{article}
+\usepackage{amsmath}
 \usepackage{ifxetex,ifluatex}
 \ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
   \usepackage[T1]{fontenc}
@@ -29,7 +30,6 @@
 \definecolor{mylinkcolour}{HTML}{FC8D62}
 \definecolor{myurlcolour}{HTML}{8DA0CB}
 \definecolor{mycitecolour}{HTML}{66C2A5}
-\usepackage{amsmath}
 \usepackage{textcomp}
 \usepackage{amssymb}
 \usepackage{capt-of}
@@ -54,7 +54,6 @@
 \theoremstyle{definition} \newtheorem{definition}{Definition}
 
 \usepackage{hyperref}
-\usepackage{minted}
 \hypersetup{
   linkcolor = mylinkcolour,
   urlcolor = myurlcolour,
