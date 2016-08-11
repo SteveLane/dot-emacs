@@ -7,9 +7,9 @@
 knitr::opts_chunk$set(cache = TRUE, error = FALSE, warning = FALSE,
                       message = FALSE)
 ## Fix xcolor bug
-knit_hooks$set(document = function(x){
+knitr::knit_hooks$set(document = function(x){
     sub('\\usepackage[]{color}',
         '\\usepackage[table, usenames, dvipsnames]{xcolor}', x,
         fixed = TRUE)})
-knit_theme$set("acid")
+knitr::knit_theme$set("acid")
 @
