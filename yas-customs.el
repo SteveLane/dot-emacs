@@ -9,7 +9,11 @@
   ;; Load snippet tables
   (yas-reload-all)
   ;; Make sure yasnippet is on for org files
-  (add-hook 'org-mode-hook #'yas-minor-mode)
+  (add-hook 'org-mode-hook 'yas/minor-mode-on)
+  ;; Make sure yasnippet is on for R files
+  (add-hook 'ess-mode-hook 'yas/minor-mode-on)
+  ;; Make sure yasnippet is on for stan files
+  (add-hook 'stan-mode-hook 'yas/minor-mode-on)
 
   ;; Bind `yas-expand' to SPC. This is because it plays up with org-mode
   (define-key yas-minor-mode-map (kbd "<tab>") nil)
