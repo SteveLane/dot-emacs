@@ -8,9 +8,7 @@
 ;; Set default notes file (private)
 (setq general-notes (expand-file-name "~/org/defaultNotes.org"))
 ;; Find all agenda files (doesn't do if new file added to the current emacs session)
-(setq org-agenda-files
-      '("~/org"
-	"~/github/researchNotes2016"))
+(setq org-agenda-files "~/org/agenda-list.org")
 
 ;; I base my default notes file for my current days research notes
 ;; Filenames are set to YYYY-mm-dd in case I want to publish on jekyll
