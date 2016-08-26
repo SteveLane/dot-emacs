@@ -2,6 +2,9 @@
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
 (require 'yasnippet)
 
+;; Get rid of the default snippets
+(setq yas-snippet-dirs "~/.emacs.d/snippets")
+
 (with-eval-after-load "yasnippet"
   ;; No global mode (just yet)
   ;; (yas-global-mode 1)
