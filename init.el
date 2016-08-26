@@ -150,7 +150,7 @@
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
  '(org-agenda-files
    (quote
-    ("/Users/slane/org/defaultNotes.org" "/Users/slane/org/git-workflow.org" "/Users/slane/github/researchNotes2016/05-May.org" "/Users/slane/github/researchNotes2016/2016-05-19-notes.org" "/Users/slane/github/researchNotes2016/2016-05-21-notes.org" "/Users/slane/github/researchNotes2016/2016-05-26-notes.org" "/Users/slane/github/researchNotes2016/2016-05-31-notes.org" "/Users/slane/github/researchNotes2016/2016-06-10-notes.org" "/Users/slane/github/researchNotes2016/2016-06-14-notes.org" "/Users/slane/github/researchNotes2016/2016-06-28-notes.org" "/Users/slane/github/researchNotes2016/2016-06-29-notes.org" "/Users/slane/github/researchNotes2016/2016-07-06-notes.org" "/Users/slane/github/researchNotes2016/2016-07-08-notes.org" "/Users/slane/github/researchNotes2016/2016-07-18-notes.org" "/Users/slane/github/researchNotes2016/2016-07-25-notes.org"))))
+    ("/Users/slane/org/defaultNotes.org" "/Users/slane/org/git-workflow.org" "/Users/slane/github/researchNotes2016/05-May.org" "/Users/slane/github/researchNotes2016/2016-05-19-notes.org" "/Users/slane/github/researchNotes2016/2016-05-21-notes.org" "/Users/slane/github/researchNotes2016/2016-05-26-notes.org" "/Users/slane/github/researchNotes2016/2016-05-31-notes.org" "/Users/slane/github/researchNotes2016/2016-06-10-notes.org" "/Users/slane/github/researchNotes2016/2016-06-14-notes.org" "/Users/slane/github/researchNotes2016/2016-06-28-notes.org" "/Users/slane/github/researchNotes2016/2016-06-29-notes.org" "/Users/slane/github/researchNotes2016/2016-07-06-notes.org" "/Users/slane/github/researchNotes2016/2016-07-08-notes.org" "/Users/slane/github/researchNotes2016/2016-07-18-notes.org" "/Users/slane/github/researchNotes2016/2016-07-25-notes.org" "/Users/slane/github/researchNotes2016/2016-08-04-notes.org"))))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -211,3 +211,6 @@
 (load "~/.emacs.d/markdown-customs.el")
 (load "~/.emacs.d/org-customs.el")
 (load "~/.emacs.d/yas-customs.el")
+
+;; Require ess-jags-mode
+(require 'ess-jags-d)
