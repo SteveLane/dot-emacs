@@ -3,13 +3,28 @@
 # key: knitr:
 # --
 
-<<knitr-setup,echo=FALSE>>=
+<<knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide">>=
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)){
+        if(pkg != "some-github-package"){
+            install.packages(new.pkg, dependencies = TRUE)
+        } else {
+            devtools::install_github("reponame/some-github-package")
+        }
+    }
+    sapply(pkg, require, character.only = TRUE)
+}
+packages <- c("dplyr")
+ipak(packages)
 knitr::opts_chunk$set(cache = TRUE, error = FALSE, warning = FALSE,
-                      message = FALSE)
+                      message = FALSE, fig.align = "center",
+                      out.width = "0.7\\textwidth")
 ## Fix xcolor bug
 knitr::knit_hooks$set(document = function(x){
     sub('\\usepackage[]{color}',
         '\\usepackage[table, usenames, dvipsnames]{xcolor}', x,
         fixed = TRUE)})
+knitr::opts_knit$set(out.format = "latex")
 knitr::knit_theme$set("acid")
 @
