@@ -211,3 +211,13 @@
 
 ;; Require ess-jags-mode
 (require 'ess-jags-d)
+
+;; Adding in polymode stuff
+(require 'poly-R)
+(require 'poly-markdown)
+(require 'poly-noweb)
+;; Markdown polymode
+(add-to-list 'auto-mode-alist '("\\.md" . poly-markdown-mode))
+;; R/tex polymodes
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
