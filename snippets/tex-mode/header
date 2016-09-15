@@ -17,10 +17,10 @@
   \else
     \usepackage{fontspec}
   \fi
+  \defaultfontfeatures{Ligatures=TeX}
   \setmainfont{Raleway}
   \setsansfont{Raleway}
   \setmonofont[Scale=MatchLowercase]{Hack}
-  \defaultfontfeatures{Ligatures=TeX}
 \fi
 \usepackage[margin=15pt,font=small,labelfont=bf]{caption}
 \usepackage{booktabs}
