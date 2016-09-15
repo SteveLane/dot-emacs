@@ -50,8 +50,10 @@
                                 % greek for vectors
 \newcommand{\dd}{\, \mathrm{d}} % Roman d in integrals
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-
-\theoremstyle{definition} \newtheorem{definition}{Definition}
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{rexample}{R Example}
 
 \usepackage{hyperref}
 \hypersetup{
