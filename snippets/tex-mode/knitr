@@ -27,11 +27,14 @@ knitr::knit_hooks$set(document = function(x){
 knitr::opts_knit$set(out.format = "latex")
 knitr::knit_theme$set("acid")
 ## Label code chunks
-knitr::knit_hooks$set(rexample = function(before, options, envir){
+knitr::knit_hooks$set(rexample = function(before, options, envir) {
+    cap <- ifelse(is.null(options$fig.cap), '', options$fig.cap)
     if (before){
-        sprintf('\\\\begin{rexample}\\\\label{%s}\\\\hfill{}', options$label)
+        sprintf('\\begin{rexample}[%s]\\label{%s}\\hfill{}', cap,
+                options$label)
     } else {
-        '\\\\end{rexample}'
+        '\\end{rexample}'
     }
 })
+
 @ 
