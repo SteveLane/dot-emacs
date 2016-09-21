@@ -109,28 +109,6 @@
 ;; Column number mode
 (setq column-number-mode t)
 
-;; ;; R indentation from (http://stackoverflow.com/questions/12805873/changing-indentation-in-emacs-ess)
-;; ;;; ESS
-;; (add-hook 'ess-mode-hook
-;;           (lambda ()
-;;             (ess-set-style 'C++ 'quiet)
-;;             ;; Because
-;;             ;;                                 DEF GNU BSD K&R C++
-;;             ;; ess-indent-level                  2   2   8   5   4
-;;             ;; ess-continued-statement-offset    2   2   8   5   4
-;;             ;; ess-brace-offset                  0   0  -8  -5  -4
-;;             ;; ess-arg-function-offset           2   4   0   0   0
-;;             ;; ess-expression-offset             4   2   8   5   4
-;;             ;; ess-else-offset                   0   0   0   0   0
-;;             ;; ess-close-brace-offset            0   0   0   0   0
-;; 	    (setq ess-first-continued-statement-offset 4)
-;;             (setq ess-continued-statement-offset 0)
-;;             (add-hook 'local-write-file-hooks
-;;                       (lambda ()
-;;                         (ess-nuke-trailing-whitespace)))))
-;; ;; (setq ess-nuke-trailing-whitespace-p 'ask)
-;; ;; or even
-
 (setq ess-default-style 'RRR)
 (setq ess-nuke-trailing-whitespace t)
 
@@ -149,48 +127,6 @@
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default))))
 
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-
-;; AucTex and Preview-Latex
-(load "auctex.el" nil t t)
-(load "preview-latex.el" nil t t)
-;; use Skim as default pdf viewer
-;; Skim's displayline is used for forward search (from .tex to .pdf)
-;; option -b highlights the current line; option -g opens Skim in the background  
-(setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
-(setq TeX-view-program-list
-     '(("PDF Viewer" "/Users/slane/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
-(setq TeX-auto-save t)
-(setq TeX-parse-self t)
-(setq-default TeX-master nil)
-(add-hook 'LaTeX-mode-hook 'turn-on-reftex)
-(setq reftex-plug-into-AUCTeX t)
-;; Make autofill work for tex mode
-(add-hook 'LaTeX-mode-hook (lambda () (visual-line-mode 1)))
-;; Flyspell on
-(add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode 1)))
-
-;; make latexmk available via C-c C-c
-;; The -c tells latexmk to clean up regeneratble files (log and aux files)
-;; (add-hook 'LaTeX-mode-hook (lambda ()
-;;   (push
-;;     '("latexmk" "latexmk -c -interaction=nonstopmode -file-line-error -synctex=1 -pdf %s" TeX-run-TeX nil t
-;;       :help "Run latexmk on file")
-;;     TeX-command-list)))
-;; (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-
-(add-hook 'LaTeX-mode-hook (lambda ()
-  (push
-    '("latexmk" "latexmk --shell-escape -xelatex -pvc %s" TeX-run-TeX nil t
-      :help "Run latexmk on file")
-    TeX-command-list)))
-(add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-
 ;; I'm sick of backups... at least in my working directory. Let's place them somewhere else (plus some other cool stuff:
 (setq
    backup-by-copying t      ; don't clobber symlinks
@@ -205,6 +141,7 @@
 (global-set-key (kbd "C-x g") 'magit-status)
 
 ;; Load separated customisation files.
+(load "~/.emacs.d/tex-customs.el")
 (load "~/.emacs.d/markdown-customs.el")
 (load "~/.emacs.d/org-customs.el")
 (load "~/.emacs.d/yas-customs.el")
