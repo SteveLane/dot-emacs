@@ -74,4 +74,4 @@
 (load "~/.emacs.d/org-capture-customs.el")
 
 ;; Require org-octopress (for exporting org to jekyll-sane html)
-(require 'org-octopress)
+;; (require 'org-octopress)
