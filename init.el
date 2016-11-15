@@ -140,6 +140,14 @@
 ;; Magit status bind global key
 (global-set-key (kbd "C-x g") 'magit-status)
 
+;; Add a timestamp to files (and on save)
+;; http://emacs-fu.blogspot.com.au/2008/12/automatic-timestamps.html
+(setq 
+ time-stamp-active t          ; do enable time-stamps
+ time-stamp-line-limit 10     ; check first 10 buffer lines for Time-stamp: 
+ time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
+(add-hook 'write-file-hooks 'time-stamp) ; update when saving
+
 ;; Load separated customisation files.
 (load "~/.emacs.d/tex-customs.el")
 (load "~/.emacs.d/markdown-customs.el")
