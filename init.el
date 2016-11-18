@@ -126,6 +126,7 @@
  '(custom-safe-themes
    (quote
     ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" default)))
+ '(magit-tag-arguments (quote ("--annotate")))
  '(package-selected-packages
    (quote
     (yasnippet stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess))))
