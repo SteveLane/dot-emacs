@@ -43,5 +43,5 @@ knitr::knit_hooks$set(rexample = function(before, options, envir) {
 {\\protect\\numberline{\\therexample}#1}%
 \\rmfamily%
 }{\\medskip}%
-\\numberwithin{rexample}{chapter}
+\\numberwithin{rexample}{section}
 
