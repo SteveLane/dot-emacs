@@ -3,44 +3,37 @@
 # key: header:
 # --
 
-\documentclass[a4paper,10pt]{article}
+\documentclass[a4paper,11pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{newpxtext,newpxmath}
+\usepackage[scaled=0.85]{DejaVuSansMono}
+\usepackage[table, usenames, dvipsnames]{xcolor}
+\usepackage{amsfonts}
 \usepackage{amsmath}
-\usepackage{ifxetex,ifluatex}
-\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
-  \usepackage[T1]{fontenc}
-  \usepackage[utf8]{inputenc}
-  \usepackage[default]{raleway}
-\else % if luatex or xelatex
-  \ifxetex
-    \usepackage{mathspec}
-    \usepackage{fontspec}
-  \else
-    \usepackage{fontspec}
-  \fi
-  \defaultfontfeatures{Ligatures=TeX}
-  \setmainfont{Raleway}
-  \setsansfont{Raleway}
-  \setmonofont[Scale=MatchLowercase]{Hack}
-\fi
-\usepackage[margin=15pt,font=small,labelfont=bf]{caption}
-\usepackage{booktabs}
 \usepackage[margin=25mm]{geometry}
-\usepackage{setspace}
-\usepackage[dvipsnames]{xcolor}
+\usepackage{threeparttable}
+\usepackage{parskip}
+\usepackage{lineno}
+\usepackage{booktabs}
+\usepackage{dcolumn}
+\usepackage{units}
+\usepackage{graphicx}
+\usepackage[margin=15pt,font=small,labelfont=bf]{caption}
+\usepackage[backend=biber,style=numeric,natbib=true,url=false,doi=true]{biblatex}
+\usepackage{pdflscape}
+\usepackage{verbatim}
+\usepackage{longtable}
+\usepackage{appendix}
+\usepackage{multirow}
+\usepackage[bottom]{footmisc} %ensure footnotes aren't glued to bottom of body text
+\usepackage{authblk}
+\usepackage{subfig}
+
+% Define colours
 \definecolor{mylinkcolour}{HTML}{FC8D62}
 \definecolor{myurlcolour}{HTML}{8DA0CB}
 \definecolor{mycitecolour}{HTML}{66C2A5}
-\usepackage{textcomp}
-\usepackage{amssymb}
-\usepackage{capt-of}
-\usepackage{bm}
-\usepackage{accents}
-\usepackage{stfloats}
-\usepackage[backend=biber,style=numeric,natbib=true,url=false,doi=true]{biblatex}
-% \bibliography{bib-name}
-\usepackage{xr}
-\usepackage{dsfont}
-\usepackage[section]{placeins}
 
 \newcommand{\ua}[1]{\underaccent{\tilde}{#1}}
 \newcommand{\argmin}[1]{\underset{#1}{\operatorname{arg\,min}}\;}
@@ -50,10 +43,6 @@
                                 % greek for vectors
 \newcommand{\dd}{\, \mathrm{d}} % Roman d in integrals
 \newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
-\usepackage{amsthm}
-\theoremstyle{definition}
-\newtheorem{definition}{Definition}
-\newtheorem{rexample}{R Example}
 
 \usepackage{hyperref}
 \hypersetup{
@@ -61,10 +50,11 @@
   urlcolor = myurlcolour,
   citecolor = mycitecolour,
   colorlinks = true,
+  bookmarksnumbered = true,
   pdfauthor = {Stephen E Lane},
   pdftitle = {${1:Some Title}}
 }
-\usepackage{graphicx}
+
 \DeclareGraphicsExtensions{.pdf,.PDF,.png,.PNG}
 \author{${2:Authors}}
 \date{\today}
@@ -79,8 +69,5 @@
 Here is an abstract.
 
 \end{abstract}
-
-\setcounter{tocdepth}{2}
-\tableofcontents
 
 \end{document}
