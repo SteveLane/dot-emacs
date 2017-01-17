@@ -56,7 +56,13 @@
 }
 
 \DeclareGraphicsExtensions{.pdf,.PDF,.png,.PNG}
-\author{${2:Authors}}
+
+\author[1]{${2:Authors}}
+\author[1]{Author Two}
+\author[2]{Author Three}
+\author[1]{Author Four}
+\affil[1]{University of Author One, Two \& Four}
+\affil[2]{University of Author Three}
 \date{\today}
 \title{$1}
 
