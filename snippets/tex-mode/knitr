@@ -21,27 +21,7 @@ knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
                       out.width = "0.8\\\\textwidth")
 knitr::opts_knit$set(out.format = "latex")
 knitr::knit_theme$set("acid")
-## Label code chunks
-knitr::knit_hooks$set(rexample = function(before, options, envir) {
-    cap <- ifelse(is.null(options$fig.cap), '', options$fig.cap)
-    if (before){
-        sprintf('\\\\begin{rexample}[%s]\\\\label{%s}\\\\hfill{}', cap,
-                options$label)
-    } else {
-        '\\\\end{rexample}'
-    }
-})
 
 @ 
 
-% List of Code chunks
-\\newcommand{\\listcodename}{List of Code Examples}
-\\newlistof{rexample}{code}{\\listcodename}
-\\newenvironment{rexample}[1][]{%
-\\refstepcounter{rexample}\\par\\noindent\\textbf{R Chunk~\\therexample.}%
-\\addcontentsline{code}{figure}%
-{\\protect\\numberline{\\therexample}#1}%
-\\rmfamily%
-}{\\medskip}%
-\\numberwithin{rexample}{section}
 
