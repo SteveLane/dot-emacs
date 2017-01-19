@@ -11,3 +11,16 @@
 ## Time-stamp: <>
 ################################################################################
 ################################################################################
+ipak <- function(pkg){
+    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
+    if (length(new.pkg)){
+        if(pkg != "some-github-package"){
+            install.packages(new.pkg, dependencies = TRUE)
+        } else {
+            devtools::install_github("reponame/some-github-package")
+        }
+    }
+    sapply(pkg, require, character.only = TRUE)
+}
+packages <- c("dplyr")
+ipak(packages)
