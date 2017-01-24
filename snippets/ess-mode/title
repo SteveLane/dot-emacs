@@ -12,15 +12,19 @@
 ################################################################################
 ################################################################################
 ipak <- function(pkg){
-    new.pkg <- pkg[!(pkg %in% installed.packages()[, "Package"])]
-    if (length(new.pkg)){
-        if(pkg != "some-github-package"){
+    ## Check for github packages (throw away github username)
+    chk.git <- gsub(".*/", "", pkg)    
+    new.pkg <- pkg[!(chk.git %in% installed.packages()[, "Package"])]
+    if(!(length(new.pkg) == 0)){
+        git.ind <- grep("/", new.pkg)
+        if(length(git.ind) == 0){
             install.packages(new.pkg, dependencies = TRUE)
         } else {
-            devtools::install_github("reponame/some-github-package")
+            devtools::install_github(new.pkg[git.ind])
         }
     }
-    sapply(pkg, require, character.only = TRUE)
+    sapply(chk.git, require, character.only = TRUE)
 }
+## Add github packages using gitname/reponame format
 packages <- c("dplyr")
 ipak(packages)
