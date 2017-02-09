@@ -29,6 +29,7 @@
 \usepackage[bottom]{footmisc} %ensure footnotes aren't glued to bottom of body text
 \usepackage{authblk}
 \usepackage{subfig}
+\usepackage{setspace}
 
 % Define colours
 \definecolor{mylinkcolour}{HTML}{FC8D62}
@@ -69,6 +70,8 @@
 \begin{document}
 
 \maketitle
+
+\onehalfspacing
 
 \begin{abstract}
 
