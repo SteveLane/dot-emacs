@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: rmarkdown
+# key: rmarkdown:
+# --
+<!-- Time-stamp: <2017-03-17 14:13:39 (slane)> -->
+
+---
+title: ${1:Some title}
+author:
+- ${2:Stephen E. Lane}
+date: \`r format(Sys.Date(), format = '%B %d, %Y')\`
+output: html_document
+---
