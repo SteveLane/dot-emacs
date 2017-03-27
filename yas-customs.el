@@ -23,9 +23,9 @@
   (add-hook 'markdown-mode-hook 'yas/minor-mode-on)
 
   ;; Bind `yas-expand' to SPC. This is because it plays up with org-mode
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "SPC") #'yas-expand)
+  ;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+  ;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+  ;; (define-key yas-minor-mode-map (kbd "SPC") #'yas-expand)
 
   ;; However, you then don't want other things to stuff up?
   ;; Don't expand when you are typing in a string or comment.
