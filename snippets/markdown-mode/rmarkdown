@@ -2,7 +2,7 @@
 # name: rmarkdown
 # key: rmarkdown:
 # --
-<!-- Time-stamp: <2017-03-17 14:13:39 (slane)> -->
+<!-- Time-stamp: <2017-04-20 14:56:21 (slane)> -->
 
 ---
 title: ${1:Some title}
@@ -11,3 +11,28 @@ author:
 date: \`r format(Sys.Date(), format = '%B %d, %Y')\`
 output: html_document
 ---
+
+\`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
+ipak <- function(pkg){
+    ## Check for github packages (throw away github username)
+    chk.git <- gsub(".*/", "", pkg)    
+    new.pkg <- pkg[!(chk.git %in% installed.packages()[, "Package"])]
+    if(!(length(new.pkg) == 0)){
+        git.ind <- grep("/", new.pkg)
+        if(length(git.ind) == 0){
+            install.packages(new.pkg, dependencies = TRUE,
+	                     repos = "https://cran.csiro.au/")
+        } else {
+            devtools::install_github(new.pkg[git.ind])
+        }
+    }
+    sapply(chk.git, require, character.only = TRUE)
+}
+## Add github packages using gitname/reponame format
+packages <- c("dplyr")
+ipak(packages)
+knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
+                      message = FALSE, echo = FALSE)
+options(digits = 2)
+
+\`\`\`
