@@ -10,7 +10,8 @@ ipak <- function(pkg){
     if(!(length(new.pkg) == 0)){
         git.ind <- grep("/", new.pkg)
         if(length(git.ind) == 0){
-            install.packages(new.pkg, dependencies = TRUE)
+            install.packages(new.pkg, dependencies = TRUE,
+	                     repos = "https://cran.csiro.au/")
         } else {
             devtools::install_github(new.pkg[git.ind])
         }
