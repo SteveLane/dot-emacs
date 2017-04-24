@@ -10,8 +10,6 @@ output:
   html_document:
     theme: simplex
     highlight: zenburn
-    include:
-      after_body: footer.html
 ---
 
 <!-- Time-stamp: <2017-04-20 14:56:21 (slane)> -->
@@ -40,3 +38,9 @@ knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
 options(digits = 2)
 
 \`\`\`
+
+<p>
+  <br><br><br>
+  All views presented within are the author's only, and do not necessarily represent the views of CEBRA.
+  <br><br>
+</p>
