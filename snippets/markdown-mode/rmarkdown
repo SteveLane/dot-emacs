@@ -2,15 +2,19 @@
 # name: rmarkdown
 # key: rmarkdown:
 # --
-<!-- Time-stamp: <2017-04-20 14:56:21 (slane)> -->
-
 ---
 title: ${1:Some title}
 author:
 - ${2:Stephen E. Lane}
-date: \`r format(Sys.Date(), format = '%B %d, %Y')\`
-output: html_document
+output:
+  html_document:
+    theme: simplex
+    highlight: zenburn
+    include:
+      after_body: footer.html
 ---
+
+<!-- Time-stamp: <2017-04-20 14:56:21 (slane)> -->
 
 \`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
 ipak <- function(pkg){
