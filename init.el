@@ -12,23 +12,23 @@
 
 ;; Change option and meta keys around.
 (when (eq system-type 'darwin)
-  ;; (set-default-font "-*-Hack-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1")
   (setq maq-option-key-is-meta nil
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta
 	mac-option-modifier 'none))
-;; Use this next when on the large screen - need to figure out how to identify it
-;; -*-Hack-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1
 
-;; This gets the fonts right depending on whether I'm on the external screen or the retina...
-;; Gist-ed from in https://github.com/arnab/emacs-starter-kit
+;; For resizing screens between external monitor and retina
 (defun fontify-frame (frame)
   (interactive)
   (if window-system
       (progn
         (if (> (x-display-pixel-width) 2000)
-            (set-frame-parameter frame 'font "-*-Hack-normal-normal-normal-*-18-*-*-*-m-0-iso10646-1") ;; Cinema Display
-         (set-frame-parameter frame 'font "-*-Hack-normal-normal-normal-*-12-*-*-*-m-0-iso10646-1")))))
+	    ;; For the larger external display
+	    (set-face-attribute
+	     'default nil :family "Hack" :foundry "simp" :slant 'normal :weight 'normal :height 180 :width 'normal)
+	  ;; For the smaller retina
+	  (set-face-attribute
+	   'default nil :family "Hack" :foundry "simp" :slant 'normal :weight 'normal :height 120 :width 'normal)))))
 
 ;; Fontify current frame
 (fontify-frame nil)
