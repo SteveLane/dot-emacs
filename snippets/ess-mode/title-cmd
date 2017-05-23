@@ -1,0 +1,54 @@
+# -*- mode: snippet -*-
+# name: title-cmd
+# key: title-cmd:
+# --
+#!/usr/bin/env Rscript
+args <- commandArgs(trailingOnly = TRUE)
+################################################################################
+################################################################################
+## Title: ${1:Some Title}
+## Author: Steve Lane
+## Date: `(format-time-string "%A, %d %B %Y" (current-time))`
+## Synopsis: ${2:Description}
+## Time-stamp: <2017-05-23 13:54:59 (slane)>
+################################################################################
+################################################################################
+if(!(length(args) %in% 2:3)){
+    stop("Three arguments must be supplied: arg1, arg2, and arg3.\narg3 is optional, and defaults to 2000.\nRscript script-name.R arg1=arg1-value arg2=arg2-value arg3=arg3-value",
+         call. = FALSE)
+} else {
+    if(length(args) == 2){
+        ## Default if option not specified
+        arg3 <- 2000
+    }
+    hasOpt <- grepl("=", args)
+    argLocal <- strsplit(args[hasOpt], "=")
+    for(i in seq_along(argLocal)){
+        value <- NA
+        tryCatch(value <- as.double(argLocal[[i]][2]), warning = function(e){})
+        if(!is.na(value)){
+            ## Assume int/double
+            assign(argLocal[[i]][1], value, inherits = TRUE)
+        } else {
+            assign(argLocal[[i]][1], argLocal[[i]][2], inherits = TRUE)
+        }
+    }
+}
+ipak <- function(pkg){
+    ## Check for github packages (throw away github username)
+    chk.git <- gsub(".*/", "", pkg)    
+    new.pkg <- pkg[!(chk.git %in% installed.packages()[, "Package"])]
+    if(!(length(new.pkg) == 0)){
+        git.ind <- grep("/", new.pkg)
+        if(length(git.ind) == 0){
+            install.packages(new.pkg, dependencies = TRUE,
+	                     repos = "https://cran.csiro.au/")
+        } else {
+            devtools::install_github(new.pkg[git.ind])
+        }
+    }
+    sapply(chk.git, require, character.only = TRUE)
+}
+## Add github packages using gitname/reponame format
+packages <- c("dplyr")
+ipak(packages)
