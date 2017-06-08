@@ -71,7 +71,7 @@
 (require 'ess-site)
 
 ;; Solarized
-(load-theme 'solarized-dark t)
+(load-theme 'dracula t)
 
 ;; Make sure that ediff doesn't start in windowed mode
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
