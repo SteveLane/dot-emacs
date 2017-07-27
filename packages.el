@@ -1,30 +1,9 @@
-;; Time-stamp: <2017-07-27 10:09:51 (slane)>
+;; Time-stamp: <2017-07-27 10:15:29 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 
 ;; These are all the packages I need (there may be more)
 ;; (yasnippet stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula)
-
-;; Set up packages
-(require 'package)
-(setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
-;; Bootstrap use-package
-;; Install use-package if it's not already installed.
-;; use-package is used to configure the rest of the packages.
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
-(let ((default-directory "~/.emacs.d/elpa/"))
-  (normal-top-level-add-to-load-path '("."))
-  (normal-top-level-add-subdirs-to-load-path))
-(eval-when-compile
-  (require 'use-package))
 
 ;; ESS
 (use-package ess
