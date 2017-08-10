@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-07-27 10:15:29 (slane)>
+;; Time-stamp: <2017-08-10 16:42:40 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 
@@ -65,32 +65,32 @@
 	     )
 
 
-;; Comment out whilst I still need to install them...
-;; ;; Include stan highlighting
-;; (require 'stan-mode)
-;; ;; Make sure bugs mode is loaded
-;; (require 'ess-bugs-d)
-;; ;; Require php-mode
-;; (require 'php-mode)
+;; ;; Comment out whilst I still need to install them...
+;; ;; ;; Include stan highlighting
+;; ;; (require 'stan-mode)
+;; ;; ;; Make sure bugs mode is loaded
+;; ;; (require 'ess-bugs-d)
+;; ;; ;; Require php-mode
+;; ;; (require 'php-mode)
 
 
-(add-hook 'bibtex-mode-hook 'turn-on-auto-revert-mode) ; Automatically detects changes to bibtex.
+;; (add-hook 'bibtex-mode-hook 'turn-on-auto-revert-mode) ; Automatically detects changes to bibtex.
 
-;; R details
- ; Make autofill work for R files.
-;; R details, from zmjones.com/mac-setup
-;; Don't want it to ask where to create the directory; do it where I currently am.
+;; ;; R details
+;;  ; Make autofill work for R files.
+;; ;; R details, from zmjones.com/mac-setup
+;; ;; Don't want it to ask where to create the directory; do it where I currently am.
 
-;;; Perl
-(add-hook 'perl-mode-hook
-          (lambda () (setq perl-indent-level 4)))
+;; ;;; Perl
+;; (add-hook 'perl-mode-hook
+;;           (lambda () (setq perl-indent-level 4)))
 
-;; Magit status bind global key
-(global-set-key (kbd "C-x g") 'magit-status)
-;; Magit commit messages have line wrap at 72 not 80 chars
-(add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
-(magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
-(magit-tag-arguments (quote ("--annotate")))
+;; ;; Magit status bind global key
+;; (global-set-key (kbd "C-x g") 'magit-status)
+;; ;; Magit commit messages have line wrap at 72 not 80 chars
+;; (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
+;; (magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256")))
+;; (magit-tag-arguments (quote ("--annotate")))
 
-;; Require ess-jags-mode
-(require 'ess-jags-d)
+;; ;; Require ess-jags-mode
+;; (require 'ess-jags-d)

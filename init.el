@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-07-27 10:15:41 (slane)>
+;; Time-stamp: <2017-08-10 17:20:21 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -112,12 +112,26 @@
  time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
-;; Load separated customisation files.
-;; (load "~/.emacs.d/packages.el")
-(load "~/.emacs.d/tex-customs.el")
-(load "~/.emacs.d/markdown-customs.el")
-;; (load "~/.emacs.d/org-customs.el")
-(load "~/.emacs.d/yas-customs.el")
+;; ;; Load separated customisation files.
+(load "~/.emacs.d/packages.el")
+;; (load "~/.emacs.d/tex-customs.el")
+;; (load "~/.emacs.d/markdown-customs.el")
+;; ;; (load "~/.emacs.d/org-customs.el")
+;; (load "~/.emacs.d/yas-customs.el")
+;; (custom-set-variables
+;;  ;; custom-set-variables was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  '(package-selected-packages
+;;    (quote
+;;     (use-package zenburn-theme yasnippet stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula-theme abyss-theme))))
+;; (custom-set-faces
+;;  ;; custom-set-faces was added by Custom.
+;;  ;; If you edit it by hand, you could mess it up, so be careful.
+;;  ;; Your init file should contain only one such instance.
+;;  ;; If there is more than one, they won't work right.
+;;  )
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -125,7 +139,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (use-package zenburn-theme yasnippet stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula-theme abyss-theme))))
+    (dracula zenburn-theme yasnippet use-package stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula-theme abyss-theme))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
