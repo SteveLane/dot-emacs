@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-18 14:15:45 (slane)>
+;; Time-stamp: <2017-08-18 14:16:29 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -79,12 +79,6 @@
 
 ;; Fontify any future frames
 (push 'fontify-frame after-make-frame-functions)
-
-;; Fonts on my linux box
-(when (eq system-type 'gnu/linux)
-  (set-face-attribute
-   'default nil :family "Hack" :foundry "simp" :slant 'normal :weight 'normal :height 113 :width 'normal))
-
 
 ;; Set the default directory
 (setq default-directory "~/Documents")
