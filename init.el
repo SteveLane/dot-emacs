@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-10 17:20:21 (slane)>
+;; Time-stamp: <2017-08-18 14:14:18 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -39,6 +39,27 @@
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta
 	mac-option-modifier 'none))
+
+;; Set default fonts depending on what's installed?
+(cond
+ ;; mac os
+ ((eq system-type 'darwin)
+  ;; check if on external screen or retine
+  (if (> (x-display-pixel-width) 2000)
+      ;; Bigger external screen
+      (when (member "Hack" (font-family-list))
+	(add-to-list 'initial-frame-alist '(font . "Hack-18"))
+	(add-to-list 'default-frame-alist '(font . "Hack-18")))
+      ;; smaller retina
+      (when (member "Hack" (font-family-list))
+	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
+	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
+  ;; linux
+  ((eq system-type 'gnu/linux) ; linux
+   (when (member "Hack" (font-family-list))
+     (add-to-list 'initial-frame-alist '(font . "Hack-12"))
+     (add-to-list 'default-frame-alist '(font . "Hack-12"))))
+  )
 
 ;; For resizing screens between external monitor and retina
 (defun fontify-frame (frame)
