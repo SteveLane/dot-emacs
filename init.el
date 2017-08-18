@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-18 14:14:18 (slane)>
+;; Time-stamp: <2017-08-18 14:15:45 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -69,10 +69,10 @@
         (if (> (x-display-pixel-width) 2000)
 	    ;; For the larger external display
 	    (set-face-attribute
-	     'default nil :family "Hack" :foundry "simp" :slant 'normal :weight 'normal :height 180 :width 'normal)
-	  ;; For the smaller retina
-	  (set-face-attribute
-	   'default nil :family "Hack" :foundry "simp" :slant 'normal :weight 'normal :height 120 :width 'normal)))))
+	     'default nil :height 180)
+	    ;; For the smaller retina
+	    (set-face-attribute
+	     'default nil :height 120)))))
 
 ;; Fontify current frame
 (fontify-frame nil)
