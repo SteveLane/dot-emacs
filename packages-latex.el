@@ -1,8 +1,9 @@
-;; Time-stamp: <2017-08-21 11:30:09 (slane)>
+;; Time-stamp: <2017-08-21 11:56:53 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; AucTex and Preview-Latex
 (use-package tex-site
+  :ensure t
   :load-path "site-lisp/auctex/"
   :mode ("\\.tex\\'" . TeX-latex-mode)
   :init
@@ -20,6 +21,7 @@
 
 ;; preview latex
 (use-package latex
+  :ensure t
   :defer t
   :config
   (use-package preview)
