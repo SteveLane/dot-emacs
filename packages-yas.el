@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 12:20:23 (slane)>
+;; Time-stamp: <2017-08-21 14:17:49 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; yasnippet
@@ -8,6 +8,8 @@
   :init
   (setq yas-snippet-dirs "~/.emacs.d/snippets")
   :config
+  ;; Fix indentation
+  (setq yas-indent-line 'fixed)
   ;; Load snippet tables
   (yas-reload-all)
   ;; Make sure yasnippet is on for org files
