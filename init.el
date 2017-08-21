@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 11:30:27 (slane)>
+;; Time-stamp: <2017-08-21 11:44:16 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -132,6 +132,7 @@
 (load "~/.emacs.d/packages-polymode.el")
 (load "~/.emacs.d/packages-theming.el")
 (load "~/.emacs.d/packages-latex.el")
+(load "~/.emacs.d/packages-stan.el")
 
 ;; (load "~/.emacs.d/tex-customs.el")
 ;; (load "~/.emacs.d/markdown-customs.el")
