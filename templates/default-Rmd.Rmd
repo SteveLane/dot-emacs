@@ -1,0 +1,26 @@
+---
+title: ${1:Some title}
+author:
+- ${2:Stephen E. Lane}
+output:
+  html_document:
+    theme: yeti
+    highlight: molokai
+---
+
+<!-- Time-stamp: <2017-08-21 14:14:07 (slane)> -->
+
+\`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
+library(dplyr)
+ipak(packages)
+knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
+                      message = FALSE, echo = FALSE)
+options(digits = 2)
+
+\`\`\`
+
+<p>
+  <br><br><br>
+  All views presented within are the author's only, and do not necessarily represent the views of CEBRA.
+  <br><br>
+</p>

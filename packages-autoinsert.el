@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 14:02:08 (slane)>
+;; Time-stamp: <2017-08-21 14:14:17 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; autoinsert
@@ -14,4 +14,5 @@
     "Replace text in yasnippet template."
     (yas-expand-snippet (buffer-string) (point-min) (point-max)))
   (define-auto-insert "\\.R$" [ "default-R.R" autoinsert-yas-expand ])
+  (define-auto-insert "\\.Rmd$" [ "default-Rmd.Rmd" autoinsert-yas-expand ])
   )
