@@ -8,13 +8,12 @@ output:
     highlight: molokai
 ---
 
-<!-- Time-stamp: <2017-08-21 14:14:07 (slane)> -->
+<!-- Time-stamp: <> -->
 
 \`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
 library(dplyr)
-ipak(packages)
 knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
-                      message = FALSE, echo = FALSE)
+                      message = FALSE, echo = TRUE)
 options(digits = 2)
 
 \`\`\`
