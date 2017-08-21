@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 13:24:00 (slane)>
+;; Time-stamp: <2017-08-21 14:04:07 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -135,3 +135,4 @@
 (load "~/.emacs.d/packages-stan.el")
 (load "~/.emacs.d/packages-yas.el")
 (load "~/.emacs.d/packages-magit.el")
+(load "~/.emacs.d/packages-autoinsert.el")
