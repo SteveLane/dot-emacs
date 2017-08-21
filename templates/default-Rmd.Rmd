@@ -5,7 +5,7 @@ author:
 output:
   html_document:
     theme: yeti
-    highlight: molokai
+    highlight: zenburn
 ---
 
 <!-- Time-stamp: <> -->
