@@ -5,6 +5,9 @@
 ;; Get rid of the default snippets
 (setq yas-snippet-dirs "~/.emacs.d/snippets")
 
+;; Fix indenting
+(setq yas-indent-line 'fixed)
+
 (with-eval-after-load "yasnippet"
   ;; No global mode (just yet)
   ;; (yas-global-mode 1)
