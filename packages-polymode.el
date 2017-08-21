@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 11:38:13 (slane)>
+;; Time-stamp: <2017-08-21 11:45:19 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package polymode
@@ -19,13 +19,3 @@
 	     ;; Flyspell on
 	     (add-hook 'markdown-mode-hook (lambda () (flyspell-mode 1)))
 	     )
-
-;; ;; Comment out whilst I still need to install them...
-;; ;; ;; Include stan highlighting
-;; ;; (require 'stan-mode)
-;; ;; ;; Make sure bugs mode is loaded
-;; ;; (require 'ess-bugs-d)
-;; ;; ;; Require php-mode
-;; ;; (require 'php-mode)
-;; ;; Require ess-jags-mode
-;; (require 'ess-jags-d)
