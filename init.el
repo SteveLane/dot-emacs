@@ -1,6 +1,9 @@
-;; Time-stamp: <2017-08-21 12:08:47 (slane)>
+;; Time-stamp: <2017-08-21 12:37:31 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
+
+;; move customs away.
+(setq custom-file "~/.emacs.d/custom.el")
 
 ;; Set up packages
 (require 'package)
