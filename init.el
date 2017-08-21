@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-18 14:16:29 (slane)>
+;; Time-stamp: <2017-08-21 11:04:57 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -128,7 +128,10 @@
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; ;; Load separated customisation files.
-(load "~/.emacs.d/packages.el")
+(load "~/.emacs.d/packages-ess.el")
+(load "~/.emacs.d/packages-polymode.el")
+(load "~/.emacs.d/packages-theming.el")
+
 ;; (load "~/.emacs.d/tex-customs.el")
 ;; (load "~/.emacs.d/markdown-customs.el")
 ;; ;; (load "~/.emacs.d/org-customs.el")
