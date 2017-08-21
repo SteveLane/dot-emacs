@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 12:07:39 (slane)>
+;; Time-stamp: <2017-08-21 12:08:47 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -135,36 +135,3 @@
 (load "~/.emacs.d/packages-stan.el")
 (load "~/.emacs.d/packages-yas.el")
 (load "~/.emacs.d/packages-magit.el")
-
-;; (load "~/.emacs.d/tex-customs.el")
-;; (load "~/.emacs.d/markdown-customs.el")
-;; ;; (load "~/.emacs.d/org-customs.el")
-;; (load "~/.emacs.d/yas-customs.el")
-;; (custom-set-variables
-;;  ;; custom-set-variables was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  '(package-selected-packages
-;;    (quote
-;;     (use-package zenburn-theme yasnippet stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula-theme abyss-theme))))
-;; (custom-set-faces
-;;  ;; custom-set-faces was added by Custom.
-;;  ;; If you edit it by hand, you could mess it up, so be careful.
-;;  ;; Your init file should contain only one such instance.
-;;  ;; If there is more than one, they won't work right.
-;;  )
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   (quote
-    (dracula zenburn-theme yasnippet use-package stan-mode solarized-theme polymode ox-twbs ox-pandoc ox-ioslide ox-impress-js org-ref org-octopress markdown-mode+ magit ess dracula-theme abyss-theme))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
