@@ -1,11 +1,10 @@
-;; Time-stamp: <2017-08-21 11:56:53 (slane)>
+;; Time-stamp: <2017-08-21 13:51:17 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; AucTex and Preview-Latex
-(use-package tex-site
-  :ensure t
-  :load-path "site-lisp/auctex/"
-  :mode ("\\.tex\\'" . TeX-latex-mode)
+(use-package tex
+  :ensure auctex
+  :defer t
   :init
   (setq reftex-plug-into-AUCTeX t)
   (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
@@ -16,15 +15,8 @@
   (setq-default TeX-master nil)
   (add-to-list 'ispell-skip-region-alist '("^<<.*>>=" . "^@"))
   :config
-  (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
-  )
-
-;; preview latex
-(use-package latex
-  :ensure t
-  :defer t
-  :config
   (use-package preview)
+  (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
   (add-hook 'LaTeX-mode-hook 'turn-on-reftex)
   ;; Make autofill work for tex mode
   (add-hook 'LaTeX-mode-hook (lambda () (visual-line-mode 1)))
