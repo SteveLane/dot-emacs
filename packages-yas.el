@@ -1,9 +1,10 @@
-;; Time-stamp: <2017-08-21 11:51:08 (slane)>
+;; Time-stamp: <2017-08-21 11:57:24 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
 (use-package yasnippet
+  :ensure t
   :init
   (setq yas-snippet-dirs "~/.emacs.d/snippets")
   :config
