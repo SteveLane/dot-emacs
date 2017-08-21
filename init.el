@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 12:37:31 (slane)>
+;; Time-stamp: <2017-08-21 12:42:25 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -8,11 +8,7 @@
 ;; Set up packages
 (require 'package)
 (setq package-archives
-      '(("melpa" . "https://melpa.org/packages/")
-        ("org" . "http://orgmode.org/elpa/")))
-(when (< emacs-major-version 24)
-  ;; For important compatibility libraries like cl-lib
-  (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/")))
+      '(("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 ;; Bootstrap use-package
 ;; Install use-package if it's not already installed.
