@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-10 16:42:40 (slane)>
+;; Time-stamp: <2017-08-21 10:58:10 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 
@@ -60,7 +60,7 @@
 ;; Theming
 (use-package dracula
 	     :ensure t
-	     :config
+	     :init
 	     (load-theme 'dracula t)
 	     )
 
