@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 14:04:07 (slane)>
+;; Time-stamp: <2017-08-23 09:42:38 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -6,11 +6,11 @@
 (setq custom-file "~/.emacs.d/custom.el")
 
 ;; Set up packages
+(package-initialize)
 (require 'package)
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
 	("gnu" . "https://elpa.gnu.org/packages/")))
-(package-initialize)
 ;; Bootstrap use-package
 ;; Install use-package if it's not already installed.
 ;; use-package is used to configure the rest of the packages.
@@ -44,7 +44,7 @@
 (cond
  ;; mac os
  ((eq system-type 'darwin)
-  ;; check if on external screen or retine
+  ;; check if on external screen or retina
   (if (> (x-display-pixel-width) 2000)
       ;; Bigger external screen
       (when (member "Hack" (font-family-list))
@@ -54,11 +54,18 @@
       (when (member "Hack" (font-family-list))
 	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
 	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
-  ;; linux
-  ((eq system-type 'gnu/linux) ; linux
-   (when (member "Hack" (font-family-list))
-     (add-to-list 'initial-frame-alist '(font . "Hack-12"))
-     (add-to-list 'default-frame-alist '(font . "Hack-12"))))
+ ;; linux
+ ((eq system-type 'gnu/linux) ; linux
+  ;; check if on external screen or retina
+  (if (> (x-display-pixel-width) 2000)
+      ;; Bigger external screen
+      (when (member "Hack" (font-family-list))
+	(add-to-list 'initial-frame-alist '(font . "Hack-18"))
+	(add-to-list 'default-frame-alist '(font . "Hack-18")))
+      ;; smaller retina
+      (when (member "Hack" (font-family-list))
+	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
+	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
   )
 
 ;; For resizing screens between external monitor and retina
@@ -81,7 +88,7 @@
 (push 'fontify-frame after-make-frame-functions)
 
 ;; Set the default directory
-(setq default-directory "~/Documents")
+(setq default-directory "~/")
 
 ;; Turn off the toolbar
 (tool-bar-mode -1)
@@ -103,7 +110,8 @@
 (setq column-number-mode t)
 
 ;; Show parentheses matching
-(setq show-paren-mode t)
+(setq show-paren-delay 0)
+(setq show-paren-mode 1)
 
 ;; Make sure that ediff doesn't start in windowed mode
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
@@ -136,3 +144,5 @@
 (load "~/.emacs.d/packages-yas.el")
 (load "~/.emacs.d/packages-magit.el")
 (load "~/.emacs.d/packages-autoinsert.el")
+(load "~/.emacs.d/packages-company.el")
+(load "~/.emacs.d/packages-parentheses.el")
