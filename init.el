@@ -1,16 +1,20 @@
-;; Time-stamp: <2017-08-23 09:42:38 (slane)>
+;; Time-stamp: <2017-08-23 11:35:03 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
 ;; move customs away.
 (setq custom-file "~/.emacs.d/custom.el")
 
+;; Where to save abbrevs (and silently)
+(setq abbrev-file-name "~/.emacs.d/.abbrev_defs")
+(setq save-abbrevs 'silently)
+
 ;; Set up packages
-(package-initialize)
 (require 'package)
 (setq package-archives
       '(("melpa" . "https://melpa.org/packages/")
 	("gnu" . "https://elpa.gnu.org/packages/")))
+(package-initialize)
 ;; Bootstrap use-package
 ;; Install use-package if it's not already installed.
 ;; use-package is used to configure the rest of the packages.
@@ -55,17 +59,19 @@
 	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
 	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
  ;; linux
- ((eq system-type 'gnu/linux) ; linux
-  ;; check if on external screen or retina
-  (if (> (x-display-pixel-width) 2000)
-      ;; Bigger external screen
-      (when (member "Hack" (font-family-list))
-	(add-to-list 'initial-frame-alist '(font . "Hack-18"))
-	(add-to-list 'default-frame-alist '(font . "Hack-18")))
-      ;; smaller retina
-      (when (member "Hack" (font-family-list))
-	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
-	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
+ ((eq system-type 'gnu/linux)
+  ;; Make sure we've actually got an X window
+  (if (eq window-system 'x)
+      ;; check if on external screen or retina
+      (if (> (x-display-pixel-width) 2000)
+	  ;; Bigger external screen
+	  (when (member "Hack" (font-family-list))
+	    (add-to-list 'initial-frame-alist '(font . "Hack-18"))
+	    (add-to-list 'default-frame-alist '(font . "Hack-18")))
+	;; smaller retina
+	(when (member "Hack" (font-family-list))
+	  (add-to-list 'initial-frame-alist '(font . "Hack-12"))
+	  (add-to-list 'default-frame-alist '(font . "Hack-12"))))))
   )
 
 ;; For resizing screens between external monitor and retina
