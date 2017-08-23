@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-23 11:35:03 (slane)>
+;; Time-stamp: <2017-08-23 11:53:41 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -39,40 +39,28 @@
 
 ;; Change option and meta keys around.
 (when (eq system-type 'darwin)
-  (setq maq-option-key-is-meta nil
+  (setq mac-option-key-is-meta nil
 	mac-command-key-is-meta t
 	mac-command-modifier 'meta
 	mac-option-modifier 'none))
 
-;; Set default fonts depending on what's installed?
-(cond
- ;; mac os
- ((eq system-type 'darwin)
-  ;; check if on external screen or retina
-  (if (> (x-display-pixel-width) 2000)
-      ;; Bigger external screen
-      (when (member "Hack" (font-family-list))
-	(add-to-list 'initial-frame-alist '(font . "Hack-18"))
-	(add-to-list 'default-frame-alist '(font . "Hack-18")))
-      ;; smaller retina
-      (when (member "Hack" (font-family-list))
-	(add-to-list 'initial-frame-alist '(font . "Hack-12"))
-	(add-to-list 'default-frame-alist '(font . "Hack-12")))))
- ;; linux
- ((eq system-type 'gnu/linux)
-  ;; Make sure we've actually got an X window
-  (if (eq window-system 'x)
-      ;; check if on external screen or retina
-      (if (> (x-display-pixel-width) 2000)
-	  ;; Bigger external screen
-	  (when (member "Hack" (font-family-list))
-	    (add-to-list 'initial-frame-alist '(font . "Hack-18"))
-	    (add-to-list 'default-frame-alist '(font . "Hack-18")))
-	;; smaller retina
-	(when (member "Hack" (font-family-list))
-	  (add-to-list 'initial-frame-alist '(font . "Hack-12"))
-	  (add-to-list 'default-frame-alist '(font . "Hack-12"))))))
-  )
+;; Set fonts based on system/screensize
+(if (eq window-system nil)
+    ;; if no window/no X                                                        
+    (when (member "Hack" (font-family-list))
+      (add-to-list 'initial-frame-alist '(font . "Hack-12"))
+      (add-to-list 'default-frame-alist '(font . "Hack-12")))
+    ;; else if windowed system                                                  
+    ;; Bigger external screen                                                   
+    (if (> (x-display-pixel-width) 2000)
+        ;; Bigger external screen                                               
+        (when (member "Hack" (font-family-list))
+          (add-to-list 'initial-frame-alist '(font . "Hack-18"))
+          (add-to-list 'default-frame-alist '(font . "Hack-18")))
+        ;; smaller retina                                                       
+        (when (member "Hack" (font-family-list))
+          (add-to-list 'initial-frame-alist '(font . "Hack-12"))
+          (add-to-list 'default-frame-alist '(font . "Hack-12")))))
 
 ;; For resizing screens between external monitor and retina
 (defun fontify-frame (frame)
