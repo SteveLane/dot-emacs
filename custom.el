@@ -35,7 +35,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (highlight-parentheses company magit yasnippet stan-mode auctex dracula-theme polymode ess use-package))))
+    (markdown-mode yasnippet use-package stan-mode polymode magit highlight-parentheses ess dracula-theme company auctex))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
