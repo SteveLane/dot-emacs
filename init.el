@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-24 20:39:41 (slane)>
+;; Time-stamp: <2017-08-29 20:38:32 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -113,6 +113,12 @@
 ;; Show parentheses matching
 (setq show-paren-delay 0)
 (setq show-paren-mode 1)
+
+;; Change default searching to regexp
+(global-set-key (kbd "C-s") 'isearch-forward-regexp)
+(global-set-key (kbd "C-r") 'isearch-backward-regexp)
+(global-set-key (kbd "C-M-s") 'isearch-forward)
+(global-set-key (kbd "C-M-r") 'isearch-backward)
 
 ;; Make sure that ediff doesn't start in windowed mode
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)
