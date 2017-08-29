@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-24 20:36:37 (slane)>
+;; Time-stamp: <2017-08-29 11:54:07 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package markdown-mode
@@ -28,3 +28,8 @@
   ;; Flyspell on
   (add-hook 'markdown-mode-hook (lambda () (flyspell-mode 1)))
   )
+
+;; Add yaml to markdown an .yml files
+(use-package yaml-mode
+  :ensure t
+  :mode (("\\.yml\\'" . yaml-mode)))
