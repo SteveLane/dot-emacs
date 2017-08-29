@@ -1,6 +1,0 @@
-* dot-emacs
-
-This repository contains my emacs configuration files. They were getting a bit unruly, so I've started separating them.
-
-- =init.el= is the base configuration file
-- =org-customs.el= contains customisations for =.org= files
