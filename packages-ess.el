@@ -1,10 +1,12 @@
-;; Time-stamp: <2017-08-21 11:55:32 (slane)>
+;; Time-stamp: <2017-08-29 11:57:30 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
-(use-package ess
+(use-package ess-site
   ;; installs if not already installed
-  :ensure t
-  :init (require 'ess-site)
+  :ensure ess
+  :diminish eldoc-mode
+  :defer 1
+  ;; :init (require 'ess-site)
   ;; Set ESS up the way you like it
   :config
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
