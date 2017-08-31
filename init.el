@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-30 09:17:06 (slane)>
+;; Time-stamp: <2017-08-31 15:58:16 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -153,6 +153,6 @@
 (load "~/.emacs.d/packages-autoinsert.el")
 (load "~/.emacs.d/packages-company.el")
 (load "~/.emacs.d/packages-parentheses.el")
-(load "~/.emacs.d/packages-elpy.el")
 (load "~/.emacs.d/packages-multiterm.el")
-(load "~/.emacs.d/packages-execpath.el")
+;; (load "~/.emacs.d/packages-elpy.el")
+;; (load "~/.emacs.d/packages-execpath.el")
