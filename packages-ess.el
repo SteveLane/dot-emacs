@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-29 11:57:30 (slane)>
+;; Time-stamp: <2017-09-06 08:56:47 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess-site
@@ -6,6 +6,8 @@
   :ensure ess
   :diminish eldoc-mode
   :defer 1
+  ;; add jags mode (others taken care of)
+  :mode ("\\.[Jj][Aa][Gg]\\'" . ess-jags-mode)
   ;; :init (require 'ess-site)
   ;; Set ESS up the way you like it
   :config
