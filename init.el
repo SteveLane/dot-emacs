@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-31 15:58:16 (slane)>
+;; Time-stamp: <2017-09-12 13:44:47 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -13,7 +13,12 @@
 (require 'package)
 (setq package-archives
       '(("gnu" . "https://elpa.gnu.org/packages/")
-	("melpa-stable" . "https://stable.melpa.org/packages/")))
+	("melpa-stable" . "https://stable.melpa.org/packages/")
+	("melpa" . "https://melpa.org/packages/"))
+      package-archive-priorities
+      '(("melpa-stable" . 10)
+	("gnu" . 5)
+	("melpa" . 1)))
 (package-initialize)
 ;; Bootstrap use-package
 ;; Install use-package if it's not already installed.
