@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-09-14 10:01:32 (slane)>
+;; Time-stamp: <2017-09-14 13:48:19 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; Theming
@@ -7,30 +7,13 @@
 ;;   :init
 ;;   (load-theme 'dracula t)
 ;;   )
-
-;; Try a couple of others
-;; (use-package noctilux-theme
+;; (use-package monokai-theme
 ;;   :ensure t
 ;;   :init
-;;   (load-theme 'noctilux t)
+;;   (load-theme 'monokai t)
 ;;   )
-;; (use-package atom-one-dark-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'atom-one-dark t)
-;;   )
-(use-package monokai-theme
+(use-package spacemacs-theme
   :ensure t
   :init
-  (load-theme 'monokai t)
+  (load-theme 'spacemacs-dark t)
   )
-;; (use-package zenburn-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'zenburn t)
-;;   )
-;; (use-package ubuntu-theme
-;;   :ensure t
-;;   :init
-;;   (load-theme 'ubuntu t)
-;;   )
