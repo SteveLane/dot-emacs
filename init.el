@@ -42,37 +42,64 @@
 ;; Set column fill to 80
 (setq-default fill-column 80)
 
-;; Change option and meta keys around.
-(when (eq system-type 'darwin)
-  (setq mac-option-key-is-meta nil
-	mac-command-key-is-meta t
-	mac-command-modifier 'meta
-	mac-option-modifier 'none))
-
-;; Set fonts based on system/screensize
-(if (eq window-system nil)
-    ;; if no window/no X                                                        
-    (when (member "Hack" (font-family-list))
-      (add-to-list 'initial-frame-alist '(font . "Hack-10"))
-      (add-to-list 'default-frame-alist '(font . "Hack-10")))
-    ;; else if windowed system
-    ;; and its an x system (which has different sizes... why?
-    (if (eq window-system 'x)
-      ;; Bigger external screen
+;; Set display size if on a display
+(when (display-graphic-p)
+    (when (eq system-type 'darwin)
+      ;; Change option and meta keys around.
+      (setq mac-option-key-is-meta nil
+	    mac-command-key-is-meta t
+	    mac-command-modifier 'meta
+	    mac-option-modifier 'none)
+      ;; If on external monitor, make font bigger
       (if (> (x-display-pixel-width) 2000)
 	  ;; Bigger external screen
 	  (when (member "Hack" (font-family-list))
 	    (add-to-list 'initial-frame-alist '(font . "Hack-18"))
 	    (add-to-list 'default-frame-alist '(font . "Hack-18")))
-	  (if (< (x-display-pixel-width) 1300)
-	      ;; smaller retina
-	      (when (member "Hack" (font-family-list))
-		(add-to-list 'initial-frame-alist '(font . "Hack-9"))
-		(add-to-list 'default-frame-alist '(font . "Hack-9")))
-	      (when (member "Hack" (font-family-list))
-		(add-to-list 'initial-frame-alist '(font . "Hack-14"))
-		(add-to-list 'default-frame-alist '(font . "Hack-14"))))
-	  )))
+	;; Else on Smaller retina
+	(when (member "Hack" (font-family-list))
+	  (add-to-list 'initial-frame-alist '(font . "Hack-12"))
+	  (add-to-list 'default-frame-alist '(font . "Hack-12")))
+	)
+      ;; Function to fontify-frame (swicth between external and retina)
+      (defun fontify-frame (frame)
+	(interactive)
+	(if window-system
+	    (progn
+	      (if (> (x-display-pixel-width) 2000)
+		  ;; For the larger external display
+		  (set-face-attribute
+		   'default nil :font 180)
+		;; For the smaller retina
+		(set-face-attribute
+		 'default nil :height 120)))))
+      )
+  )
+
+;; Set fonts based on system/screensize
+;; (if (eq window-system nil)
+;;     ;; if no window/no X                                                        
+;;     (when (member "Hack" (font-family-list))
+;;       (add-to-list 'initial-frame-alist '(font . "Hack-10"))
+;;       (add-to-list 'default-frame-alist '(font . "Hack-10")))
+;;     ;; else if windowed system
+;;     ;; and its an x system (which has different sizes... why?
+;;     (if (eq window-system 'x)
+;;       ;; Bigger external screen
+;;       (if (> (x-display-pixel-width) 2000)
+;; 	  ;; Bigger external screen
+;; 	  (when (member "Hack" (font-family-list))
+;; 	    (add-to-list 'initial-frame-alist '(font . "Hack-18"))
+;; 	    (add-to-list 'default-frame-alist '(font . "Hack-18")))
+;; 	  (if (< (x-display-pixel-width) 1300)
+;; 	      ;; smaller retina
+;; 	      (when (member "Hack" (font-family-list))
+;; 		(add-to-list 'initial-frame-alist '(font . "Hack-9"))
+;; 		(add-to-list 'default-frame-alist '(font . "Hack-9")))
+;; 	      (when (member "Hack" (font-family-list))
+;; 		(add-to-list 'initial-frame-alist '(font . "Hack-14"))
+;; 		(add-to-list 'default-frame-alist '(font . "Hack-14"))))
+;; 	  )))
 
 ;; For resizing screens between external monitor and retina
 (defun fontify-frame (frame)
