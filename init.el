@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-09-12 13:44:47 (slane)>
+;; Time-stamp: <2017-09-15 10:20:54 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -136,8 +136,14 @@
    [?\C-u ?8 ?0 ?# return ?\C-u ?8 ?0 ?# return ])
 
 ;; Default dictionary
-(setq default-dictionary "british")
-(setq ispell-dictionary "british")
+;; Find aspell automatically
+(cond
+ ((executable-find "aspell")
+  (setq ispell-program-name "aspell")
+  (setq default-dictionary "british")
+  (setq ispell-dictionary "british")
+  (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_AU" "--run-together" "--run-together-limit=5" "--run-together-min=2")))
+ )
 
 ;; Column number mode
 (setq column-number-mode t)
