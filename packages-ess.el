@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-09-21 15:05:35 (slane)>
+;; Time-stamp: <2017-09-21 15:12:11 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess-site
@@ -38,5 +38,5 @@
     (interactive "sHeader: ") 
     (insert (concat "```{r " header "}\n\n\n```")) 
     (forward-line -2))
-  (define-key ess-mode-map (kbd "M-s") #'insert-r-chunk)
+  (define-key poly-markdown+r-mode-map (kbd "M-s") #'insert-r-chunk)
   )
