@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-09-06 08:56:47 (slane)>
+;; Time-stamp: <2017-09-21 15:05:35 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess-site
@@ -33,9 +33,10 @@
   ;; Add a chunk for rmarkdown
   ;; Need to add a keyboard shortcut
   ;; https://emacs.stackexchange.com/questions/27405/insert-code-chunk-in-r-markdown-with-yasnippet-and-polymode
-  (defun tws-insert-r-chunk (header) 
+  (defun insert-r-chunk (header) 
     "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yas snippet" 
     (interactive "sHeader: ") 
-    (insert (concat "```{r " header "}\n\n```")) 
-    (forward-line -1))
+    (insert (concat "```{r " header "}\n\n\n```")) 
+    (forward-line -2))
+  (define-key ess-mode-map (kbd "M-s") #'insert-r-chunk)
   )
