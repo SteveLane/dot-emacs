@@ -2,19 +2,23 @@
 title: ${1:Some title}
 author:
 - ${2:Stephen E. Lane}
-output:
-  html_document:
-    theme: yeti
-    highlight: zenburn
 ---
 
-<!-- Time-stamp: <> -->
+<!-- Time-stamp: <2017-11-17 07:53:10 (slane)> -->
 
-\`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
-library(dplyr)
+\`\`\`{r setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
 knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
                       message = FALSE, echo = TRUE)
 options(digits = 2)
+
+\`\`\`
+
+# Introduction
+
+The following packages are required:
+
+\`\`\`{r libraries}
+library(dplyr)
 
 \`\`\`
 
