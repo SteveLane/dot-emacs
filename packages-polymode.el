@@ -1,8 +1,14 @@
-;; Time-stamp: <2017-09-12 13:51:58 (slane)>
+;; Time-stamp: <2018-02-06 15:01:15 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package markdown-mode
   :ensure t
+  :mode
+  (("README\\.md\\'" . gfm-mode)
+   ("\\.md\\'" . markdown-mode)
+   ("\\.markdown\\'" . markdown-mode))
+  :init
+  (setq markdown-command "markdown")
   )
 
 (use-package polymode
@@ -22,8 +28,6 @@
 (use-package poly-markdown
   :ensure polymode
   :defer t
-  :mode
-  ("\\.md" . poly-markdown-mode)
   :config
   ;; Wrap lines at column limit, but don't put hard returns in
   (add-hook 'markdown-mode-hook (lambda () (visual-line-mode 1)))
