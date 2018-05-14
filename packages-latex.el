@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 13:51:17 (slane)>
+;; Time-stamp: <2018-05-14 12:30:59 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; AucTex and Preview-Latex
@@ -14,6 +14,16 @@
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
   (add-to-list 'ispell-skip-region-alist '("^<<.*>>=" . "^@"))
+  (eval-after-load 'reftex-vars
+    '(progn
+       ;; (also some other reftex-related customizations)
+       (setq reftex-cite-format
+	     '((?\C-m . "\\cite[]{%l}")
+	       (?f . "\\footcite[][]{%l}")
+	       (?t . "\\textcite[]{%l}")
+	       (?p . "\\parencite[]{%l}")
+	       (?o . "\\citepr[]{%l}")
+	       (?n . "\\nocite{%l}")))))
   :config
   (use-package preview)
   (add-hook 'TeX-mode-hook '(lambda () (setq TeX-command-default "latexmk")))
