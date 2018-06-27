@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-04-16 11:23:22 (slane)>
+;; Time-stamp: <2018-06-27 20:34:06 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; Theming
@@ -14,9 +14,15 @@
 ;;   :init (progn (load-theme 'monokai t)
 ;; 	       (enable-theme 'monokai))
 ;;   )
-(use-package spacemacs-theme
+;; (use-package spacemacs-theme
+;;   :ensure t
+;;   :defer t
+;;   :init (progn (load-theme 'spacemacs-dark t)
+;; 	       (enable-theme 'spacemacs-dark))
+;;   )
+(use-package anti-zenburn-theme
   :ensure t
   :defer t
-  :init (progn (load-theme 'spacemacs-dark t)
-	       (enable-theme 'spacemacs-dark))
+  :init (progn (load-theme 'anti-zenburn t)
+	       (enable-theme 'anti-zenburn))
   )
