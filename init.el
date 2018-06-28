@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-06-27 12:46:37 (slane)>
+;; Time-stamp: <2018-06-28 15:00:47 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -35,6 +35,7 @@
 ;; Make sure if I double click a file, it is opened instead of the scratch buffer
 (setq inhibit-startup-screen t)
 (setq initial-buffer-choice nil)
+(scroll-bar-mode -1)
 
 ;; Get rid of OSX native fullscreen (use f11 or M-x toggle-frame-fullscreen)
 (setq ns-use-native-fullscreen nil)
@@ -196,6 +197,7 @@
 (load "~/.emacs.d/packages-web.el")
 (load "~/.emacs.d/packages-org.el")
 (load "~/.emacs.d/packages-mu4e.el")
+(load "~/.emacs.d/fonts.el")
 ;; (load "~/.emacs.d/packages-flycheck.el")
 ;; (load "~/.emacs.d/packages-elpy.el")
 ;; (load "~/.emacs.d/packages-execpath.el")
