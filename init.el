@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-06-28 15:00:47 (slane)>
+;; Time-stamp: <2018-07-04 07:30:51 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -42,6 +42,9 @@
 
 ;; Set column fill to 80
 (setq-default fill-column 80)
+
+;; Replace yes/no with y/n
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Set display size if on a display
 (when (display-graphic-p)
@@ -195,7 +198,8 @@
 (load "~/.emacs.d/packages-parentheses.el")
 (load "~/.emacs.d/packages-multiterm.el")
 (load "~/.emacs.d/packages-web.el")
-(load "~/.emacs.d/packages-org.el")
+;; (load "~/.emacs.d/packages-org.el")
+(load "~/.emacs.d/org-setup.el")
 (load "~/.emacs.d/packages-mu4e.el")
 (load "~/.emacs.d/fonts.el")
 ;; (load "~/.emacs.d/packages-flycheck.el")

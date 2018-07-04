@@ -1,0 +1,167 @@
+#+TITLE: Org setup
+#+AUTHOR: Steve Lane
+#+DESCRIPTION: A description of my current org setup. This is a literate file which can be tangled to the source required to mimic my org setup.
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+
+* Introduction
+
+This file provides details on my current =org= setup. It is intended as a literate programming approach to structure my =org= setup. It may work, or it may not (!) but I thought I'd give it a go.
+
+If you want to use some (all) of this setup, you'll need to change directories appropriately. You can tangle this file to Emacs lisp using =C-c C-v C-t=, which will create org-setup.el in the same folder as this file. You can then source this in your init.el file.
+
+This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][Gregory Stein]] and in turn by [[http://doc.norang.ca/org-mode.html][Bernt Hansen]]. You should check out those great resources.
+
+* Initial setup
+
+The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I want to make sure that org files have poly-org-mode, and some general editing stuff.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :exports none
+  (use-package org
+    :ensure ox-pandoc
+    :mode (("\\.org$" . poly-org-mode))
+    ;; keybindings
+    :bind (
+	   ;; Open the agenda
+	   ("C-c a" . org-agenda)
+	   ;; Capture something
+	   ("C-c c" . org-capture)
+	   ;; Store a link
+	   ("C-c l" . org-store-link)
+	   )
+    :config
+    (progn
+      ;; soft line wrapping
+      (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+      ;; Disable whitespace mode in org mode
+      (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
+      ;; Flyspell on
+      (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
+      )
+    )
+#+END_SRC
+
+* Where do I store stuff?
+
+The default directory for org files is ~/org, and I'm going to stick with that convention, but make it explicit. When I capture tasks/notes (=C-c t= / =C-c n=), I'm going to have them sent to the ~/org/refile.org file, when I can refile them at my convenience. This saves time when capturing TODO items, as it means I don't have to decide which project they'll go into straight away. Speaking of, when it comes time to refile, these can be put into separate project files; the refile-targets allows the nesting to be searched. Finally, I set the agenda from the default org directory.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Default directory for org files
+   org-directory "~/org"
+   ;; Directory for notes/tasks to be refiled
+   org-default-notes-file "~/org/refile.org"
+   ;; Allows to store agenda files in their appropriate files.
+   ;; This is useful when per project task lists are used.
+   org-refile-targets (quote ((nil :maxlevel . 9)
+                              (org-agenda-files :maxlevel . 9)))
+   ;; Org agenda files read from here
+   org-agenda-files (quote ("~/org"))
+   )
+#+END_SRC
+
+I spoke above about refiling. Here's where I set that up. I'm telling org to use the filename and the headers (so a level 2 header will be filename/level1/level2). complete-in-steps nil means that we can use helm/ivy to provide nice completion, and finally allow the creation of parent headers (with confirmation).
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Be sure to use the full path for refile setup
+   org-refile-use-outline-path 'file
+   ;; Set this to nil to use helm/ivy for completion
+   org-outline-path-complete-in-steps nil
+   ;; Allow refile to create parent tasks with confirmation
+   org-refile-allow-creating-parent-nodes 'confirm
+   )
+
+#+END_SRC
+
+* How do I capture stuff?
+
+I now need to set up _capture templates_. When I go to capture a task/note etc, I am presented with the options listed below.
+
+** Task categories
+
+I'm migrating/supplementing a BuJo. The following provides my current 'bullets' from my BuJo, translated to an org setup. What the code does is define the TODO keywords, and the transition between them. Keywords to the left of the =|= are in a state of 'not done' whilst those on the right are done.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq org-todo-keywords
+	(quote ((sequence "TODO(t)" "|" "DONE(d)")
+		(sequence "WAITING(w)" "|")
+		(sequence "|" "CANCELLED(c)")
+		)
+	       )
+	)
+#+END_SRC
+
+My BuJo is pretty simple, I've mapped it as follows:
+
+- todo :: (t) this is the standard task/todo item, which can be marked done
+- waiting :: (w) this keyword is added to a task when I'm waiting to hear back from someone before progressing the task
+- cancelled :: (c) pretty self-explanatory ...
+
+** Capture templates
+
+The following code provides the capture templates when I add TODO tasks. Best place to check how these work is the help for that variable. You can find the help for a variable by placing the cursor over the variable and entering =C-h v= (help for variable). To make sure that folded views keep some space between headers, we set the separator-lines variable.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Define the custum capture templates
+   org-capture-templates
+   '(("t" "todo" entry (file org-default-notes-file)
+      "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
+     ("m" "Meeting" entry (file org-default-notes-file)
+      "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
+     ;; ("d" "Diary" entry (file+datetree "~/org/diary.org")
+     ;;  "* %?\n%U\n" :clock-in t :clock-resume t)
+     ("i" "Idea" entry (file org-default-notes-file)
+      "* %? :IDEA: \n%t\n" :clock-in t :clock-resume t)
+     ;; ("n" "Next task" entry (file+headline org-default-notes-file "Tasks")
+     ;;  "** NEXT %? \nDEADLINE: %t")
+     ("e" "Respond email" entry (file org-default-notes-file)
+      "* TODO Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+     )
+   ;; Keep a line between headers
+   org-cycle-separator-lines 1
+   )
+#+END_SRC
+
+** Tagging tasks
+
+Extensibility is provided by tagging. You can tag on the fly, or use a predefined list. Below I set a predefined list. Everything between =:startgroup= =:endgroup= below is a single tag for that task---i.e. you can only choose one. =?= gives the shortcut to add the tag.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  ;; Custom tags
+  (setq org-tag-alist '((:startgroup . nil)
+			("@work" . ?w)
+			("@train" . ?t)
+			("@home" . ?h)
+			(:endgroup . nil)
+			("research" . ?r)
+			("coding" . ?c)
+			("writing" . ?p)
+			("emacs" . ?e)
+			)
+	)
+
+#+END_SRC
+
+* Effort
+
+When setting up a task, you can add effort estimates for billing/budgeting, and tracking how you're going with your tasks. Apparently the best way to set effort is by using [[info:org#Effort%20estimates][column view]]. Next I define the columns to display (and their widths), and also provide default effort values.
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Set column view headings
+   org-columns-default-format "%50ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM"
+   ;; Set default effort values
+   org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")))
+   )
+
+#+END_SRC
+
