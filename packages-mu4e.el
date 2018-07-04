@@ -1,9 +1,13 @@
-;; Time-stamp: <2018-06-28 20:17:45 (slane)>
+;; Time-stamp: <2018-07-02 16:12:45 (slane)>
 ;; Commands to load mu4e related stuff
+;; When it comes time to add another account, this is a great resource:
+;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
+
 (use-package mu4e
   ;; Must be installed first...
   :load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e"
   :config
+  (use-package org-mu4e)
   (setq mu4e-sent-folder "/unimelb/Sent Items"
 	mu4e-drafts-folder "/unimelb/Drafts"
 	mu4e-trash-folder "/unimelb/Deleted Items/")
@@ -13,11 +17,9 @@
 	mu4e-view-prefer-html t
 	;; Get email using mbsync every 60 minutes
 	mu4e-get-mail-command "mbsync -aq"
-	mu4e-update-interval 3600
+	mu4e-update-interval 1800
 	;; For wrapping nicer in other clients
 	mu4e-compose-format-flowed t
-	;; ;; 'fancy' characters for marks and threads
-	;; mu4e-use-fancy-chars t
 	;; display attached images
 	mu4e-view-show-images t
 	;; shows email addresses rather than only names (may want to change later)
@@ -28,11 +30,31 @@
 				 ("/unimelb/Drafts" . ?d))
 	;; don't keep message buffers around
 	message-kill-buffer-on-exit t
+	;; don't confirm quit
+	mu4e-confirm-quit nil
 	;; default save directory for attachments
 	mu4e-attachment-dir "~/Downloads"
-	;; default sending
-	send-mail-function 'smtpmail-send-it
-	message-send-mail-function 'smtpmail-send-it
+	;; ;; Use imagemagick, if available.
+	;; (when (fboundp 'imagemagick-register-types)
+	;;   (imagemagick-register-types))
+	;; Don't reply to self...
+	;; Need to list all self emails
+	mu4e-user-mail-address-list '("lane.s@unimelb.edu.au" "address2@domain2.com")
+	mu4e-compose-dont-reply-to-self t
+	;; Store link to message, not header, if in header mode
+	org-mu4e-link-query-in-headers-mode nil
+
+	;; Sendmail stuff...
+	;; Use msmtp to send mail
+	message-send-mail-function 'message-send-mail-with-sendmail
+	sendmail-program "msmtp"
+	message-sendmail-extra-arguments '("--read-envelope-from")
+	message-sendmail-f-is-evil 't
+	mail-specify-envelope-from 't
+	mail-envelope-from 'header
+	;; smtpmail-auth-credentials
+	user-mail-address "lane.s@unimelb.edu.au"
+	smtpmail-smtp-user "lane.s@unimelb.edu.au"
 	;; Some user details
 	user-full-name "Steve Lane"
 	mu4e-compose-signature (concat
@@ -41,12 +63,11 @@
 				"W // https://cebra.unimelb.edu.au/\n"
 				"W // https://gtown-ds.netlify.com/\n"
 				"T // https://twitter.com/stephenelane/\n")
-	;; smtpmail-auth-credentials
-	user-mail-address "lane.s@unimelb.edu.au"
-	smtpmail-smtp-user "lane.s@unimelb.edu.au"
-	smtpmail-default-smtp-server "smtp.office365.com"
-	smtpmail-local-domain "office365.com"
-	smtpmail-smtp-server "smtp.office365.com"
-	smtpmail-stream-type 'starttls
-	smtpmail-smtp-service 587)
+	
+	)
+  ;; Auto fill on compose for line wrapping, and flyspell as well.
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda ()
+              (auto-fill-mode 1)
+              (flyspell-mode)))
   )
