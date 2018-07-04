@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-02 16:12:45 (slane)>
+;; Time-stamp: <2018-07-04 16:46:31 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -70,4 +70,33 @@
             (lambda ()
               (auto-fill-mode 1)
               (flyspell-mode)))
+
+  ;; Provide an option to change the signature of an email.
+  (defun my-mu4e-choose-signature ()
+    "Insert one of a number of email signatures"
+    (interactive)
+    (let ((message-signature
+           (mu4e-read-option "Signature:"
+			     '(("formal" .
+				(concat
+				 "Dr Stephen Lane\n"
+				 "Deputy Director & Research Fellow, CEBRA, School of Biosciences\n"
+				 "P // +61 3 8344 0071\n"
+				 "A // University of Melbourne, Victoria 3010, Australia\n"
+				 "W // https://cebra.unimelb.edu.au/\n"
+				 "W // https://gtown-ds.netlify.com/\n"
+				 "T // https://twitter.com/stephenelane/\n"))
+			       ("informal" .
+				(concat
+				 "Steve Lane\n"
+				 "P // +61 3 8344 0071\n"
+				 "W // https://cebra.unimelb.edu.au/\n"
+				 "W // https://gtown-ds.netlify.com/\n"
+				 "T // https://twitter.com/stephenelane/\n")
+			        )))))
+      (message-insert-signature)))
+  ;; Set the local shortcut key to 'add' the signature at the mouse point.
+  ;; That's a really important point: this just adds text...
+  (add-hook 'mu4e-compose-mode-hook
+            (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-choose-signature)))
   )
