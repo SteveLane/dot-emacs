@@ -10,17 +10,18 @@ This file provides details on my current =org= setup. It is intended as a litera
 
 If you want to use some (all) of this setup, you'll need to change directories appropriately. You can tangle this file to Emacs lisp using =C-c C-v C-t=, which will create org-setup.el in the same folder as this file. You can then source this in your init.el file.
 
-This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][Gregory Stein]] and in turn by [[http://doc.norang.ca/org-mode.html][Bernt Hansen]]. You should check out those great resources.
+This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][Gregory Stein]] (GS) and in turn by [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] (BH). You should check out those great resources.
 
 * Initial setup
 
-The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I want to make sure that org files have poly-org-mode, and some general editing stuff.
+The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
 
 #+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :exports none
   (use-package org
-    :ensure ox-pandoc
-    :mode (("\\.org$" . poly-org-mode))
+    ;; :ensure ox-pandoc
+    :ensure all-the-icons
+    ;; :mode (("\\.org$" . poly-org-mode))
     ;; keybindings
     :bind (
 	   ;; Open the agenda
@@ -91,6 +92,8 @@ I'm migrating/supplementing a BuJo. The following provides my current 'bullets' 
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
 		(sequence "WAITING(w)" "|")
 		(sequence "|" "CANCELLED(c)")
+		(sequence "SOMEDAY(s)" "|" "CANCELLED(c)")
+		(sequence "|" "MEETING")
 		)
 	       )
 	)
@@ -101,6 +104,31 @@ My BuJo is pretty simple, I've mapped it as follows:
 - todo :: (t) this is the standard task/todo item, which can be marked done
 - waiting :: (w) this keyword is added to a task when I'm waiting to hear back from someone before progressing the task
 - cancelled :: (c) pretty self-explanatory ...
+- someday :: (s) this is for tasks that I may want to do at some stage, but not just yet. I still want to keep track of them though.
+
+On top of this, I'm going to try and use GS/BH's keyword:
+
+- meeting :: This will be used for 'true' meetings, as well as any other interruptions that may carry on for a long time...
+
+*** Colours for the agenda
+
+When we display these in the agenda, we'd also like to have different colours for different keywords:
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Coloured faces for agenda/todo items
+   org-todo-keyword-faces
+   '(
+     ("DONE" . (:foreground "#2B4450" :weight bold))
+     ("TODO" . (:foreground "#ff3030" :weight bold))
+     ("WAITING" . (:foreground "#ff4500" :weight bold))
+     ("CANCELLED" . (:foreground "#999999" :weight bold))
+     ("SOMEDAY" . (:foreground "#ab82ff" :weight bold))
+     ("MEETING" . (:foreground "#1874cd" :weight bold))
+     )
+   )
+#+END_SRC
 
 ** Capture templates
 
@@ -113,7 +141,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
    org-capture-templates
    '(("t" "todo" entry (file org-default-notes-file)
       "* TODO %?\n%u\n%a\n" :clock-in t :clock-resume t)
-     ("m" "Meeting" entry (file org-default-notes-file)
+     ("m" "Meeting/Interruption" entry (file org-default-notes-file)
       "* MEETING with %? :MEETING:\n%t" :clock-in t :clock-resume t)
      ;; ("d" "Diary" entry (file+datetree "~/org/diary.org")
      ;;  "* %?\n%U\n" :clock-in t :clock-resume t)
@@ -122,7 +150,9 @@ The following code provides the capture templates when I add TODO tasks. Best pl
      ;; ("n" "Next task" entry (file+headline org-default-notes-file "Tasks")
      ;;  "** NEXT %? \nDEADLINE: %t")
      ("e" "Respond email" entry (file org-default-notes-file)
-      "* TODO Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+      "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+     ("s" "Someday" entry (file org-default-notes-file)
+      "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1
@@ -137,16 +167,74 @@ Extensibility is provided by tagging. You can tag on the fly, or use a predefine
 #+BEGIN_SRC emacs-lisp :export yes
   ;; Custom tags
   (setq org-tag-alist '((:startgroup . nil)
-			("@work" . ?w)
-			("@train" . ?t)
-			("@home" . ?h)
-			(:endgroup . nil)
-			("research" . ?r)
-			("coding" . ?c)
-			("writing" . ?p)
-			("emacs" . ?e)
-			)
-	)
+  			("@work" . ?w)
+  			("@train" . ?t)
+  			("@home" . ?h)
+  			(:endgroup . nil)
+  			("research" . ?r)
+  			("coding" . ?c)
+  			("writing" . ?p)
+  			("emacs" . ?e)
+			("miscellaneous" . ?m)
+			("supervision" . ?s)
+  			)
+  	)
+
+#+END_SRC
+
+** Automatic tagging of tasks.
+
+Tasks can have automatic actions taken to tag them. Following BH, I'm using the following triggers:
+
+- moving a task to CANCELLED adds a :CANCELLED: tag
+- moving a task to a done state removes cancelled tags
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Triggers for state changes
+   org-todo-state-tags-triggers
+   (quote (
+	   ;; Move to cancelled adds the cancelled tag
+	   ("CANCELLED" ("CANCELLED" . t))
+	   ;; Move to waiting adds the waiting tag
+	   ("WAITING" ("WAITING" . t))
+	   ;; Move to a done state removes waiting/cancelled
+	   (done ("WAITING") ("CANCELLED"))
+	   ("DONE" ("WAITING") ("CANCELLED"))
+	   ;; Move to todo, removes waiting/cancelled
+	   ("TODO" ("WAITING") ("CANCELLED"))
+	   )
+	  )
+   )
+#+END_SRC
+
+** Finishing tasks
+
+To make sure that tasks with child tasks are not completed prematurely:
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Ensure child dependencies complete before parents can be marked complete
+   org-enforce-todo-dependencies t
+   )
+
+#+END_SRC
+
+** Archiving
+
+We'll want to move stuff out of our agenda tree at some stage. This sets up our archiving to go into the archive sub-directory:
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq
+   ;; Where I'm going to archive stuff
+   org-archive-location "archive/%s_archive::"
+   )
+
+  ;; How archive files will appear
+  (defvar org-archive-file-header-format "#+FILETAGS: ARCHIVE\nArchived entries from file %s\n")
 
 #+END_SRC
 
@@ -165,3 +253,66 @@ When setting up a task, you can add effort estimates for billing/budgeting, and 
 
 #+END_SRC
 
+
+* Bling
+
+I wanted some bling! I added the all-the-icons requirement above, now the next block of code sets some bling in the agenda:
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq org-agenda-category-icon-alist
+	`(("TODO" (list (all-the-icons-faicon "tasks")) nil nil :ascent center)))
+  ;; (setq
+   ;; Add fancy icons to the agenda...
+   ;; org-agenda-category-icon-alist
+   ;; '(
+   ;;   (("TODO" (#("" 0 1 (font-lock-ignore t rear-nonsticky t display (raise -0.24) face (:family "FontAwesome" :height 1.2)))) nil nil :ascent center))
+   ;;   ;; (`(("MEETING" ,(list (all-the-icons-faicon "tasks")) nil nil :ascent center)))
+   ;;   )
+   ;; )
+
+#+END_SRC
+
+* Agenda View
+
+The default agenda lacks a little oomph. What I'd like to see is collections such as:
+
+- tasks for today
+- tasks to be refiled
+- tasks for next week
+- tasks that are waiting
+
+#+header: :tangle yes
+#+BEGIN_SRC emacs-lisp :export yes
+  ;; Custom agenda views
+  (setq org-agenda-custom-commands
+	'(				; start list
+	  (" " "Agenda" ((agenda "" ((org-agenda-overriding-header "Today's Schedule:")
+				     (org-agenda-span 'day)
+				     (org-agenda-ndays 1)
+				     (org-agenda-start-on-weekday nil)
+				     (org-agenda-start-day "+0d")
+				     ;; Remove refiling tasks (https://www.reddit.com/r/orgmode/comments/69acg5/orgagendaskipentryif_but_for_categories/)
+				     (org-agenda-skip-function '(when (equal (file-name-nondirectory (buffer-file-name)) "refile.org")
+								  (outline-next-heading) (1- (point))))
+				     (org-agenda-todo-ignore-deadlines nil)))
+			 ;; Refiling category set file wide in file.
+			 (tags "REFILING" ((org-agenda-overriding-header "Tasks to Refile:")
+					 (org-tags-match-list-sublevels nil)))
+			 ;; Tasks upcoming (should be similar to above?)
+			 (agenda "" ((org-agenda-overriding-header "Upcoming:")
+				     (org-agenda-span 7)
+				     (org-agenda-start-day "+1d")
+				     (org-agenda-start-on-weekday nil)
+				     (org-agenda-skip-function '(when (equal (file-name-nondirectory (buffer-file-name)) "refile.org")
+								  (outline-next-heading) (1- (point))))
+				     ;; I should set this next one to true, so that deadlines are ignored...?
+				     (org-agenda-todo-ignore-deadlines nil)))
+			 ;; Tasks that are waiting or someday
+			 (todo "WAITING|SOMEDAY" ((org-agenda-overriding-header "Waiting/Someday Tasks:")
+					 (org-tags-match-list-sublevels nil)))
+			 )
+	   )
+	  )				; end list
+	)
+#+END_SRC
