@@ -122,7 +122,7 @@ When we display these in the agenda, we'd also like to have different colours fo
    '(
      ("DONE" . (:foreground "#2B4450" :weight bold))
      ("TODO" . (:foreground "#ff3030" :weight bold))
-     ("WAITING" . (:foreground "#ff4500" :weight bold))
+     ("WAITING" . (:foreground "#fe2f92" :weight bold))
      ("CANCELLED" . (:foreground "#999999" :weight bold))
      ("SOMEDAY" . (:foreground "#ab82ff" :weight bold))
      ("MEETING" . (:foreground "#1874cd" :weight bold))
