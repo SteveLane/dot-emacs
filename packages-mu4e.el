@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-04 16:46:31 (slane)>
+;; Time-stamp: <2018-07-06 09:00:01 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -70,6 +70,9 @@
             (lambda ()
               (auto-fill-mode 1)
               (flyspell-mode)))
+
+  ;; create a shortcut to start mu4e (M-x mu4e) takes too long...
+  (global-set-key (kbd "C-c m") 'mu4e)
 
   ;; Provide an option to change the signature of an email.
   (defun my-mu4e-choose-signature ()
