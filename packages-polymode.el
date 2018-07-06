@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-06-21 20:46:53 (slane)>
+;; Time-stamp: <2018-07-05 10:00:42 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package markdown-mode
@@ -21,8 +21,8 @@
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
   (add-to-list 'auto-mode-alist '("\\.rnw" . poly-noweb+r-mode))
   (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
-  ;; org-mode poly
-  (add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
+  ;; org-mode poly (not working at the moment)
+  ;; (add-to-list 'auto-mode-alist '("\\.org" . poly-org-mode))
   ;; Make sure r-mode is loaded
   (autoload 'r-mode "ess-site.el" "Major mode for editing R source." t)
   )
