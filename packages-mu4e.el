@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-06 09:00:01 (slane)>
+;; Time-stamp: <2018-07-06 15:18:01 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -102,4 +102,34 @@
   ;; That's a really important point: this just adds text...
   (add-hook 'mu4e-compose-mode-hook
             (lambda () (local-set-key (kbd "C-c C-w") #'my-mu4e-choose-signature)))
+
+  ;; Use ivy for completion (needs ivy above...)
+  (defun my/select-and-insert-contact (&optional start)
+    (interactive)
+    (let ((mail-abbrev-mode-regexp mu4e~compose-address-fields-regexp)
+          (eoh ;; end-of-headers
+           (save-excursion
+             (goto-char (point-min))
+             (search-forward-regexp mail-header-separator nil t))))
+      (when (and eoh (> eoh (point)) (mail-abbrev-in-expansion-header-p))
+	(let* ((end (point))
+               (start
+		(or start
+                    (save-excursion
+                      (re-search-backward "\\(\\`\\|[\n:,]\\)[ \t]*")
+                      (goto-char (match-end 0))
+                      (point))))
+               (contact
+		(ivy-completing-read "Contact: "
+                          (hash-table-keys mu4e~contacts)
+                          nil
+                          nil
+                          (buffer-substring-no-properties start end))))
+          (unless (equal contact "")
+            (kill-region start end)
+            (insert contact))))))
+  ;; Now remap the TAB key for completion there...
+  (define-key mu4e-compose-mode-map (kbd "TAB") 'my/select-and-insert-contact)
+  ;; And then make sure it's used when I compose an email...
+  (add-hook 'mu4e-compose-mode-hook 'my/select-and-insert-contact)
   )
