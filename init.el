@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-01-15 16:31:13 (slane)>
+;; Time-stamp: <2018-07-06 09:11:45 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -32,15 +32,22 @@
 (eval-when-compile
   (require 'use-package))
 
-;; Make sure if I double click a file, it is opened instead of the scratch buffer
+;; General tweaks to UI
 (setq inhibit-startup-screen t)
 (setq initial-buffer-choice nil)
-
+;; remove scroll bars
+(scroll-bar-mode -1)
+;; Remove bells
+(setq visible-bell nil)
+(setq ring-bell-function 'ignore)
 ;; Get rid of OSX native fullscreen (use f11 or M-x toggle-frame-fullscreen)
 (setq ns-use-native-fullscreen nil)
-
 ;; Set column fill to 80
 (setq-default fill-column 80)
+;; Replace yes/no with y/n
+(fset 'yes-or-no-p 'y-or-n-p)
+;; Turn off the toolbar
+(tool-bar-mode -1)
 
 ;; Set display size if on a display
 (when (display-graphic-p)
@@ -123,9 +130,6 @@
 ;; Set the default directory
 (setq default-directory "~/")
 
-;; Turn off the toolbar
-(tool-bar-mode -1)
-
 ;; Macros for sectioning in R mode.
 ;; This macro inserts section comments as a header
 (fset 'header
@@ -194,6 +198,12 @@
 (load "~/.emacs.d/packages-parentheses.el")
 (load "~/.emacs.d/packages-multiterm.el")
 (load "~/.emacs.d/packages-web.el")
+;; (load "~/.emacs.d/packages-org.el")
+(load "~/.emacs.d/org-setup.el")
+(load "~/.emacs.d/packages-mu4e.el")
+(load "~/.emacs.d/fonts.el")
+(load "~/.emacs.d/packages-bling.el")
+(load "~/.emacs.d/packages-ivy.el")
 ;; (load "~/.emacs.d/packages-flycheck.el")
 ;; (load "~/.emacs.d/packages-elpy.el")
 ;; (load "~/.emacs.d/packages-execpath.el")

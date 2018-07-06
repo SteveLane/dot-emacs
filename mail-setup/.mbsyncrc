@@ -1,0 +1,35 @@
+## This sync file is based on a heap of resources.
+## http://irreal.org/blog/?p=6119 is one especially
+## this file needs to be symlinked to ~/.mbsyncrc
+
+## Configure access to the IMAP server
+IMAPAccount unimelb
+Host outlook.office365.com
+User "lane.s@unimelb.edu.au"
+PassCmd "security find-internet-password -s mbsync.unimelb -w"
+Port 993
+SSLType IMAPS
+SSLVersions TLSv1.2
+
+## Now here I create 'labels' for the actual server
+IMAPStore unimelb-remote
+Account unimelb
+
+## Here I set up the local folder details
+MaildirStore unimelb-local
+Path ~/Maildir/unimelb/
+Inbox ~/Maildir/unimelb/Inbox
+
+## Here we create channels/groups so everything gets stored 'flat'
+## Patterns is the name of the folders on the web email server
+Channel unimelb-folders
+Master :unimelb-remote:
+Slave :unimelb-local:
+# Patterns "In*" "Drafts" "Sent*" "Deleted*" "170615" "Archive" "ISPM 31 Paper"
+Create Both
+Expunge Both
+SyncState *
+
+## The groups here allows the syncing of multiple accounts at once (I believe!)
+Group unimelb
+Channel unimelb-folders
