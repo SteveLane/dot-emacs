@@ -3,3 +3,4 @@ abbrev_defs
 auto-save-list/
 elpa/
 /custom.el
+/mail-setup/.msmtprc
