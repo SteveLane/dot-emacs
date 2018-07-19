@@ -56,8 +56,9 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    org-default-notes-file "~/org/refile.org"
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
-   org-refile-targets (quote ((nil :maxlevel . 9)
-                              (org-agenda-files :maxlevel . 9)))
+   ;; Only show level 1 headings for refiling (level 2 are the task headers)
+   org-refile-targets (quote ((nil :maxlevel . 1)
+			      (org-agenda-files :maxlevel . 1)))
    ;; Org agenda files read from here
    org-agenda-files (quote ("~/org"))
    )
