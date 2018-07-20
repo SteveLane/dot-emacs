@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-06 09:11:45 (slane)>
+;; Time-stamp: <2018-07-20 16:10:40 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -184,6 +184,9 @@
  time-stamp-line-limit 20     ; check first 10 buffer lines for Time-stamp: 
  time-stamp-format "%04y-%02m-%02d %02H:%02M:%02S (%u)") ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
+
+;; Make sure that [mM]akefile's with an 'extension' are opened in makefile-mode
+(add-to-list 'auto-mode-alist '("[mM]akefile\\.[a-zA-Z]*\\'" . makefile-mode))
 
 ;; ;; Load separated customisation files.
 (load "~/.emacs.d/packages-ess.el")
