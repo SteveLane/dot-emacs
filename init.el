@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-20 16:10:40 (slane)>
+;; Time-stamp: <2018-07-20 17:02:38 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -188,9 +188,7 @@
 ;; Make sure that [mM]akefile's with an 'extension' are opened in makefile-mode
 (add-to-list 'auto-mode-alist '("[mM]akefile\\.[a-zA-Z]*\\'" . makefile-mode))
 
-;; ;; Load separated customisation files.
-(load "~/.emacs.d/packages-ess.el")
-(load "~/.emacs.d/packages-polymode.el")
+;; Load separated customisation files.
 (load "~/.emacs.d/packages-theming.el")
 (load "~/.emacs.d/packages-latex.el")
 (load "~/.emacs.d/packages-stan.el")
@@ -207,6 +205,9 @@
 (load "~/.emacs.d/fonts.el")
 (load "~/.emacs.d/packages-bling.el")
 (load "~/.emacs.d/packages-ivy.el")
+(load "~/.emacs.d/packages-ess.el")
+(load "~/.emacs.d/packages-polymode.el")
+
 ;; (load "~/.emacs.d/packages-flycheck.el")
 ;; (load "~/.emacs.d/packages-elpy.el")
 ;; (load "~/.emacs.d/packages-execpath.el")
