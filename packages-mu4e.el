@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-06 15:18:01 (slane)>
+;; Time-stamp: <2018-07-25 16:29:17 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -65,10 +65,10 @@
 				"T // https://twitter.com/stephenelane/\n")
 	
 	)
-  ;; Auto fill on compose for line wrapping, and flyspell as well.
+  ;; Turn off auto fill on compose, and rather use visual-line-mode. Use flyspell as well.
   (add-hook 'mu4e-compose-mode-hook
             (lambda ()
-              (auto-fill-mode 1)
+              (auto-fill-mode -1)
               (flyspell-mode)))
 
   ;; create a shortcut to start mu4e (M-x mu4e) takes too long...
@@ -133,3 +133,7 @@
   ;; And then make sure it's used when I compose an email...
   (add-hook 'mu4e-compose-mode-hook 'my/select-and-insert-contact)
   )
+
+;; Add bookmarks. These need to be changed when necessary.
+;; My bookmarks are stored in another file so they don't get placed under version control with this document.
+(load "~/.emacs.d/mu4e-bookmarks.el")
