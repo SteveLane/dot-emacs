@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-24 07:47:40 (slane)>
+;; Time-stamp: <2018-07-24 10:05:38 (slane)>
 ;; Split out package loading into a separate file.
 
 ;; Icons!
@@ -18,58 +18,27 @@
   (setq neo-theme (if (display-graphic-p) 'icons 'arrow))
   )
 
-;; ;; powerline
-;; (use-package powerline
-;;   :ensure t
-;;   ;; :defer t
-;;   :config
-;;   (powerline-center-theme)
-;;   )
-
-;; Use the spaceline version...
-;; (use-package spaceline
-;;   :ensure t
-;;   :init
-;;   (setq powerline-default-separator 'wave)
-;;   )
-
-;; (use-package spaceline-config
-;;   :ensure spaceline
-;;   :config
-;;   (spaceline-emacs-theme)
-;;   )
-
-;; (use-package doom-modeline
-;;   :ensure t
-;;   :defer t
-;;   :hook
-;;   (after-init . doom-modeline-init)
-;;   )
-
-(use-package spaceline
+;; This dims the non-active buffers
+(use-package dimmer
   :ensure t
-  :init 
-  (progn 
-    ;; size of modeline
-    (setq powerline-height 18)
-    ;; (setq spaceline-highlight-face-func 'spaceline-highlight-face-evil-state)
-    
-    ;; slant (requires srbg support)
-    (setq-default powerline-default-separator 'chamfer) 
-    (setq spaceline-separator-dir-left '(right . right))
-    (setq spaceline-separator-dir-right '(right . right))
-    )
+  :config
+  (add-hook 'after-init-hook 'dimmer-mode)
+  (setq-default dimmer-fraction 0.5)
   )
 
-(use-package spaceline-config
-  :ensure spaceline
-  :config
-  (spaceline-toggle-buffer-size-off)
-  (spaceline-spacemacs-theme)
-  (setq spaceline-buffer-encoding-abbrev-p nil
-	spaceline-window-numbers-unicode t
-	spaceline-line-column-p nil
-	spaceline-buffer-id-p nil
-	spaceline-minor-modes-separator nil)
-  (powerline-reset)
-  )
+;; Try minions and moody from magit author
+;; (use-package minions
+;;   :ensure t
+;;   :init (minions-mode)
+;;   :config
+;;   (setq
+;;    minions-mode-line-lighter "#"
+;;    minions-direct '(flycheck-mode))
+;;   )
+
+;; (use-package moody
+;;   :ensure t
+;;   :config
+;;   (moody-replace-mode-line-buffer-identification)
+;;   (moody-replace-vc-mode)
+;;   )
