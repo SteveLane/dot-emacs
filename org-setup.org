@@ -243,6 +243,8 @@ We'll want to move stuff out of our agenda tree at some stage. This sets up our 
 
 When setting up a task, you can add effort estimates for billing/budgeting, and tracking how you're going with your tasks. Apparently the best way to set effort is by using [[info:org#Effort%20estimates][column view]]. Next I define the columns to display (and their widths), and also provide default effort values.
 
+Related to this is how tasks are clocked. If I clock-in and clock-out immediately (such as when capturing an email), I shouldn't record that clock.
+
 #+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
@@ -250,6 +252,8 @@ When setting up a task, you can add effort estimates for billing/budgeting, and 
    org-columns-default-format "%50ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM"
    ;; Set default effort values
    org-global-properties (quote (("Effort_ALL" . "0:15 0:30 0:45 1:00 2:00 3:00 4:00 5:00 6:00 0:00")))
+   ;; When there's 0 time spent, remove the entry
+   org-clock-out-remove-zero-time-clocks t
    )
 
 #+END_SRC
