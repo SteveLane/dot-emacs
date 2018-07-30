@@ -5,3 +5,5 @@ elpa/
 /custom.el
 /mail-setup/.msmtprc
 /org-setup.el
+/.DS_Store
+/snippets/.DS_Store
