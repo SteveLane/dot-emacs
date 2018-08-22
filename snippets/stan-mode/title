@@ -8,25 +8,26 @@
 // Author: Steve Lane
 // Date: `(format-time-string "%A, %d %B %Y" (current-time))`
 // Synopsis: ${2:Description}
+// Time-stamp: <>
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
-data{
+data {
   // Data to be supplied to sampler
 }
 
-parameters{
+parameters {
   // Parameters for the model
 }
 
-transformed parameters{
+transformed parameters {
   // Make it easier for some sampling statements (not necessary)
 }
 
-model{
+model {
   // Model sampling statements
 }
 
-generated quantities{
+generated quantities {
   // Statements for predictive outputs, e.g. new data
 }
