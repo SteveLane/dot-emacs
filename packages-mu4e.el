@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-25 16:29:17 (slane)>
+;; Time-stamp: <2018-08-23 09:20:27 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -65,6 +65,9 @@
 				"T // https://twitter.com/stephenelane/\n")
 	
 	)
+  ;; use imagemagick, if available, to display images
+  (when (fboundp 'imagemagick-register-types)
+    (imagemagick-register-types))
   ;; Turn off auto fill on compose, and rather use visual-line-mode. Use flyspell as well.
   (add-hook 'mu4e-compose-mode-hook
             (lambda ()
