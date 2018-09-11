@@ -4,7 +4,7 @@ author:
 - ${2:Stephen E. Lane}
 ---
 
-<!-- Time-stamp: <2017-11-17 07:53:10 (slane)> -->
+<!-- Time-stamp: <> -->
 
 \`\`\`{r setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
 knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
@@ -18,7 +18,9 @@ options(digits = 2)
 The following packages are required:
 
 \`\`\`{r libraries}
+library(here)
 library(dplyr)
+library(ggplot2)
 
 \`\`\`
 
