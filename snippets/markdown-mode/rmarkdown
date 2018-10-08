@@ -3,38 +3,21 @@
 # key: rmarkdown:
 # --
 ---
-title: ${1:Some title}
+title: Some title, please edit
 author:
-- ${2:Stephen E. Lane}
+- Stephen E. Lane
 output:
   html_document:
     theme: simplex
     highlight: zenburn
 ---
 
-<!-- Time-stamp: <2017-04-20 14:56:21 (slane)> -->
+<!-- Time-stamp: <> -->
 
-\`\`\`{r,knitr-setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
-ipak <- function(pkg){
-    ## Check for github packages (throw away github username)
-    chk.git <- gsub(".*/", "", pkg)    
-    new.pkg <- pkg[!(chk.git %in% installed.packages()[, "Package"])]
-    if(!(length(new.pkg) == 0)){
-        git.ind <- grep("/", new.pkg)
-        if(length(git.ind) == 0){
-            install.packages(new.pkg, dependencies = TRUE,
-	                     repos = "https://cran.csiro.au/")
-        } else {
-            devtools::install_github(new.pkg[git.ind])
-        }
-    }
-    sapply(chk.git, require, character.only = TRUE)
-}
-## Add github packages using gitname/reponame format
-packages <- c("dplyr")
-ipak(packages)
+\`\`\`{r, setup,echo=FALSE,warning=FALSE,message=FALSE,cache=FALSE,results="hide"}
 knitr::opts_chunk$set(cache = FALSE, error = FALSE, warning = FALSE,
-                      message = FALSE, echo = FALSE)
+                      message = FALSE, fig.align = "center", echo = FALSE,
+                      fig.width = 7, fig.height = 14 / (1 + sqrt(5))
 options(digits = 2)
 
 \`\`\`

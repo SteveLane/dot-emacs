@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-07-20 17:02:38 (slane)>
+;; Time-stamp: <2018-10-09 09:58:24 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -16,9 +16,9 @@
 	("melpa-stable" . "https://stable.melpa.org/packages/")
 	("melpa" . "https://melpa.org/packages/"))
       package-archive-priorities
-      '(("melpa-stable" . 10)
-	("gnu" . 5)
-	("melpa" . 1)))
+      '(("melpa" . 10)
+	("melpa-stable" . 5)
+	("gnu" . 1)))
 (package-initialize)
 ;; Bootstrap use-package
 ;; Install use-package if it's not already installed.
@@ -207,7 +207,7 @@
 (load "~/.emacs.d/packages-ivy.el")
 (load "~/.emacs.d/packages-ess.el")
 (load "~/.emacs.d/packages-polymode.el")
+(load "~/.emacs.d/packages-flycheck.el")
 
-;; (load "~/.emacs.d/packages-flycheck.el")
 ;; (load "~/.emacs.d/packages-elpy.el")
 ;; (load "~/.emacs.d/packages-execpath.el")
