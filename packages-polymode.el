@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-08 12:38:26 (slane)>
+;; Time-stamp: <2018-10-08 12:41:56 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package markdown-mode
@@ -13,6 +13,8 @@
 
 (use-package polymode
   :ensure markdown-mode
+  :ensure poly-R
+  :ensure poly-noweb
   :init
   (require 'poly-R)
   (require 'poly-noweb)
