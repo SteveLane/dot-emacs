@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-09 09:27:21 (slane)>
+;; Time-stamp: <2018-10-09 09:58:24 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -207,7 +207,7 @@
 (load "~/.emacs.d/packages-ivy.el")
 (load "~/.emacs.d/packages-ess.el")
 (load "~/.emacs.d/packages-polymode.el")
+(load "~/.emacs.d/packages-flycheck.el")
 
-;; (load "~/.emacs.d/packages-flycheck.el")
 ;; (load "~/.emacs.d/packages-elpy.el")
 ;; (load "~/.emacs.d/packages-execpath.el")
