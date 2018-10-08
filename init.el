@@ -200,7 +200,7 @@
 (load "~/.emacs.d/packages-multiterm.el")
 (load "~/.emacs.d/packages-web.el")
 ;; (load "~/.emacs.d/packages-org.el")
-(load "~/.emacs.d/org-setup.el")
+(org-babel-load-file "~/.emacs.d/org-setup.org")
 (load "~/.emacs.d/packages-mu4e.el")
 (load "~/.emacs.d/fonts.el")
 (load "~/.emacs.d/packages-bling.el")
