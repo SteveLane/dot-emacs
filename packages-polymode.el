@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-08 12:41:56 (slane)>
+;; Time-stamp: <2018-10-09 09:24:04 (slane)>
 ;; Split out package loading into a separate file.
 ;; Code highlighting via polymode
 (use-package markdown-mode
@@ -31,12 +31,12 @@
   ;; Add a chunk for rmarkdown
   ;; Need to add a keyboard shortcut
   ;; https://emacs.stackexchange.com/questions/27405/insert-code-chunk-in-r-markdown-with-yasnippet-and-polymode
-  (defun insert-r-chunk (header) 
-    "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yas snippet" 
-    (interactive "sHeader: ") 
-    (insert (concat "```{r " header "}\n\n\n```")) 
-    (forward-line -2))
-  (define-key poly-markdown+r-mode-map (kbd "M-c") #'insert-r-chunk)
+  ;; (defun insert-r-chunk (header) 
+  ;;   "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yas snippet" 
+  ;;   (interactive "sHeader: ") 
+  ;;   (insert (concat "```{r " header "}\n\n\n```")) 
+  ;;   (forward-line -2))
+  ;; (define-key poly-markdown+r-mode-map (kbd "M-c") #'insert-r-chunk)
   )
 
 (use-package poly-markdown

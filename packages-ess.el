@@ -1,10 +1,11 @@
-;; Time-stamp: <2018-10-08 12:37:02 (slane)>
+;; Time-stamp: <2018-10-09 09:25:24 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
-(use-package ess-site
+(use-package ess
   ;; installs if not already installed
+  :ensure t
   :ensure julia-mode
-  :ensure ess
+  :init (require 'ess-site)
   :diminish eldoc-mode
   :defer 1
   ;; add jags mode (others taken care of)
