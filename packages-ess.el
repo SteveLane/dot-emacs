@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-08 15:25:55 (slane)>
+;; Time-stamp: <2018-10-08 16:06:46 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -32,13 +32,4 @@
     (ess-newline-and-indent))
   (define-key ess-mode-map (kbd "M-p") #'my/add-pipe)
   
-  ;; Add a chunk for rmarkdown
-  ;; Need to add a keyboard shortcut
-  ;; https://emacs.stackexchange.com/questions/27405/insert-code-chunk-in-r-markdown-with-yasnippet-and-polymode
-  (defun insert-r-chunk (header) 
-    "Insert an r-chunk in markdown mode. Necessary due to interactions between polymode and yas snippet" 
-    (interactive "sHeader: ") 
-    (insert (concat "```{r " header "}\n\n\n```")) 
-    (forward-line -2))
-  (define-key poly-markdown+r-mode-map (kbd "M-c") #'insert-r-chunk)
   )
