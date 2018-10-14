@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-09 09:58:24 (slane)>
+;; Time-stamp: <2018-10-15 10:07:38 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -199,7 +199,6 @@
 (load "~/.emacs.d/packages-parentheses.el")
 (load "~/.emacs.d/packages-multiterm.el")
 (load "~/.emacs.d/packages-web.el")
-;; (load "~/.emacs.d/packages-org.el")
 (org-babel-load-file "~/.emacs.d/org-setup.org")
 (load "~/.emacs.d/packages-mu4e.el")
 (load "~/.emacs.d/fonts.el")
@@ -209,5 +208,5 @@
 (load "~/.emacs.d/packages-polymode.el")
 (load "~/.emacs.d/packages-flycheck.el")
 
-;; (load "~/.emacs.d/packages-elpy.el")
-;; (load "~/.emacs.d/packages-execpath.el")
+;; ;; (load "~/.emacs.d/packages-elpy.el")
+;; ;; (load "~/.emacs.d/packages-execpath.el")
