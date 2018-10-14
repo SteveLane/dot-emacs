@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-05-14 12:30:59 (slane)>
+;; Time-stamp: <2018-10-12 13:33:27 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; AucTex and Preview-Latex
@@ -7,9 +7,9 @@
   :defer t
   :init
   (setq reftex-plug-into-AUCTeX t)
-  (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
-  (setq TeX-view-program-list
-	'(("PDF Viewer" "/Users/slane/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
+  ;; (setq TeX-view-program-selection '((output-pdf "PDF Viewer")))
+  ;; (setq TeX-view-program-list
+  ;; 	'(("PDF Viewer" "/Users/slane/Applications/Skim.app/Contents/SharedSupport/displayline -b -g %n %o %b")))
   (setq TeX-auto-save t)
   (setq TeX-parse-self t)
   (setq-default TeX-master nil)
@@ -32,9 +32,10 @@
   (add-hook 'LaTeX-mode-hook (lambda () (visual-line-mode 1)))
   ;; Flyspell on
   (add-hook 'LaTeX-mode-hook (lambda () (flyspell-mode 1)))
+  ;; Use latexmk for compiling to pdf, and continuously view/update/compile.
   (add-hook 'LaTeX-mode-hook (lambda ()
 			       (push
-				'("latexmk" "latexmk --shell-escape -xelatex -pvc %s" TeX-run-TeX nil t
+				'("latexmk" "latexmk --shell-escape -pdf -pvc %s" TeX-run-TeX nil t
 				  :help "Run latexmk on file")
 				TeX-command-list)))
   (defun flyspell-eligible ()
