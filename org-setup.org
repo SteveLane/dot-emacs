@@ -3,6 +3,7 @@
 #+DESCRIPTION: A description of my current org setup. This is a literate file which can be tangled to the source required to mimic my org setup.
 #+EXPORT_SELECT_TAGS: export
 #+EXPORT_EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args :tangle yes
 
 * Introduction
 
@@ -16,49 +17,38 @@ This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-
 
 The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :exports none
-  (use-package org
-    ;; :ensure ox-pandoc
-    :ensure all-the-icons
-    ;; :mode (("\\.org$" . poly-org-mode))
-    ;; keybindings
-    :bind (
-	   ;; Open the agenda
-	   ("C-c a" . org-agenda)
-	   ;; Capture something
-	   ("C-c c" . org-capture)
-	   ;; Store a link
-	   ("C-c l" . org-store-link)
-	   )
-    :config
-    (progn
-      ;; soft line wrapping
-      (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
-      ;; Disable whitespace mode in org mode
-      (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
-      ;; Flyspell on
-      (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
-      )
-    )
+  (require 'org)
+
+  ;; keybindings
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c l") 'org-store-link)
+
+  ;; soft line wrapping
+  (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+  ;; Disable whitespace mode in org mode
+  (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
+  ;; Flyspell on
+  (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
+
 #+END_SRC
 
 * Where do I store stuff?
 
 The default directory for org files is ~/org, and I'm going to stick with that convention, but make it explicit. When I capture tasks/notes (=C-c t= / =C-c n=), I'm going to have them sent to the ~/org/refile.org file, when I can refile them at my convenience. This saves time when capturing TODO items, as it means I don't have to decide which project they'll go into straight away. Speaking of, when it comes time to refile, these can be put into separate project files; the refile-targets allows the nesting to be searched. Finally, I set the agenda from the default org directory.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Default directory for org files
    org-directory "~/org"
    ;; Directory for notes/tasks to be refiled
-   org-default-notes-file "~/org/refile.org"
+   ;; org-default-notes-file (concat org-directory "/refile.org")
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
    org-refile-targets (quote ((nil :maxlevel . 1)
-			      (org-agenda-files :maxlevel . 1)))
+   			      (org-agenda-files :maxlevel . 1)))
    ;; Org agenda files read from here
    org-agenda-files (quote ("~/org"))
    )
@@ -66,7 +56,6 @@ The default directory for org files is ~/org, and I'm going to stick with that c
 
 I spoke above about refiling. Here's where I set that up. I'm telling org to use the filename and the headers (so a level 2 header will be filename/level1/level2). complete-in-steps nil means that we can use helm/ivy to provide nice completion, and finally allow the creation of parent headers (with confirmation).
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Be sure to use the full path for refile setup
@@ -87,7 +76,6 @@ I now need to set up _capture templates_. When I go to capture a task/note etc, 
 
 I'm migrating/supplementing a BuJo. The following provides my current 'bullets' from my BuJo, translated to an org setup. What the code does is define the TODO keywords, and the transition between them. Keywords to the left of the =|= are in a state of 'not done' whilst those on the right are done.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
@@ -115,7 +103,6 @@ On top of this, I'm going to try and use GS/BH's keyword:
 
 When we display these in the agenda, we'd also like to have different colours for different keywords:
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Coloured faces for agenda/todo items
@@ -135,7 +122,6 @@ When we display these in the agenda, we'd also like to have different colours fo
 
 The following code provides the capture templates when I add TODO tasks. Best place to check how these work is the help for that variable. You can find the help for a variable by placing the cursor over the variable and entering =C-h v= (help for variable). To make sure that folded views keep some space between headers, we set the separator-lines variable.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Define the custum capture templates
@@ -164,7 +150,6 @@ The following code provides the capture templates when I add TODO tasks. Best pl
 
 Extensibility is provided by tagging. You can tag on the fly, or use a predefined list. Below I set a predefined list. Everything between =:startgroup= =:endgroup= below is a single tag for that task---i.e. you can only choose one. =?= gives the shortcut to add the tag.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   ;; Custom tags
   (setq org-tag-alist '((:startgroup . nil)
@@ -190,7 +175,6 @@ Tasks can have automatic actions taken to tag them. Following BH, I'm using the 
 - moving a task to CANCELLED adds a :CANCELLED: tag
 - moving a task to a done state removes cancelled tags
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Triggers for state changes
@@ -214,7 +198,6 @@ Tasks can have automatic actions taken to tag them. Following BH, I'm using the 
 
 To make sure that tasks with child tasks are not completed prematurely:
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Ensure child dependencies complete before parents can be marked complete
@@ -227,7 +210,6 @@ To make sure that tasks with child tasks are not completed prematurely:
 
 We'll want to move stuff out of our agenda tree at some stage. This sets up our archiving to go into the archive sub-directory:
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Where I'm going to archive stuff
@@ -245,7 +227,6 @@ When setting up a task, you can add effort estimates for billing/budgeting, and 
 
 Related to this is how tasks are clocked. If I clock-in and clock-out immediately (such as when capturing an email), I shouldn't record that clock.
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Set column view headings
@@ -263,7 +244,6 @@ Related to this is how tasks are clocked. If I clock-in and clock-out immediatel
 
 I wanted some bling! I added the all-the-icons requirement above, now the next block of code sets some bling in the agenda:
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq org-agenda-category-icon-alist
 	`(("TODO" (list (all-the-icons-faicon "tasks")) nil nil :ascent center)))
@@ -288,7 +268,6 @@ The default agenda lacks a little oomph. What I'd like to see is collections suc
 - tasks that are unscheduled
 - tasks that are waiting/someday
 
-#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   ;; Custom agenda views
   (setq org-agenda-custom-commands
