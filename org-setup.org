@@ -43,14 +43,14 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    ;; Default directory for org files
    org-directory "~/org"
    ;; Directory for notes/tasks to be refiled
-   ;; org-default-notes-file (concat org-directory "/refile.org")
+   org-default-notes-file (concat org-directory "/refile.org")
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
    org-refile-targets (quote ((nil :maxlevel . 1)
    			      (org-agenda-files :maxlevel . 1)))
    ;; Org agenda files read from here
-   org-agenda-files (quote ("~/org"))
+   org-agenda-files (list org-directory)
    )
 #+END_SRC
 
@@ -76,6 +76,7 @@ I now need to set up _capture templates_. When I go to capture a task/note etc, 
 
 I'm migrating/supplementing a BuJo. The following provides my current 'bullets' from my BuJo, translated to an org setup. What the code does is define the TODO keywords, and the transition between them. Keywords to the left of the =|= are in a state of 'not done' whilst those on the right are done.
 
+#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
@@ -103,6 +104,7 @@ On top of this, I'm going to try and use GS/BH's keyword:
 
 When we display these in the agenda, we'd also like to have different colours for different keywords:
 
+#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Coloured faces for agenda/todo items
@@ -122,6 +124,7 @@ When we display these in the agenda, we'd also like to have different colours fo
 
 The following code provides the capture templates when I add TODO tasks. Best place to check how these work is the help for that variable. You can find the help for a variable by placing the cursor over the variable and entering =C-h v= (help for variable). To make sure that folded views keep some space between headers, we set the separator-lines variable.
 
+#+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Define the custum capture templates
