@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-15 10:07:38 (slane)>
+;; Time-stamp: <2018-11-13 08:38:07 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -207,6 +207,7 @@
 (load "~/.emacs.d/packages-ess.el")
 (load "~/.emacs.d/packages-polymode.el")
 (load "~/.emacs.d/packages-flycheck.el")
+(org-babel-load-file "~/.emacs.d/modeline-setup.org")
 
 ;; ;; (load "~/.emacs.d/packages-elpy.el")
 ;; ;; (load "~/.emacs.d/packages-execpath.el")
