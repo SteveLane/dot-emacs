@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-13 08:38:07 (slane)>
+;; Time-stamp: <2018-11-14 10:15:37 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -195,7 +195,7 @@
 (load "~/.emacs.d/packages-yas.el")
 (load "~/.emacs.d/packages-magit.el")
 (load "~/.emacs.d/packages-autoinsert.el")
-(load "~/.emacs.d/packages-company.el")
+(org-babel-load-file "~/.emacs.d/company-setup.org")
 (load "~/.emacs.d/packages-parentheses.el")
 (load "~/.emacs.d/packages-multiterm.el")
 (load "~/.emacs.d/packages-web.el")

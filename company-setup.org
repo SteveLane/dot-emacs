@@ -19,61 +19,26 @@ I've got a couple of different setups here. To use a particular setup, make sure
 
 * Basic setup
 
-The following modeline uses the spacemacs modeline, [[https://github.com/TheBB/spaceline][spaceline]]. Because I'm on a mac, the colours get stuffed up, so the =powerline-image-apple-rgb= setting fixes that (found [[https://emacs.stackexchange.com/questions/14984/emacs-powerline-inconsistent-colors-behind-arrows][here]]):
+I had this basic setup, but hadn't enabled =company-mode= globally. What's happening here is that we set up some values for delays etc for when completions get popped up. We also limit tips to 10.
+
+We define keys as well so that we get TAB completion.
 
 #+BEGIN_SRC emacs-lisp :exports none :tangle yes
-  (use-package spaceline
-    :ensure t
-    :init
-    ;; (setq powerline-default-separator 'utf-8)
-    ;; (setq powerline-image-apple-rgb t)
-    :config
-    ;; (require 'spaceline-config)
-    ;; (spaceline-emacs-theme)
-    )
-
-#+END_SRC
-
-The separator uses =utf-8=, you can check what others are available, e.g. =C-h v powerline-default-separator=.
-
-** Bling it up
-
-Using =all-the-icons= we can bling things up a bit:
-
-#+BEGIN_SRC emacs-lisp :exports none :tangle yes
-  (use-package all-the-icons
-    :ensure t
-    :defer t
-    )
-
-  (use-package spaceline-all-the-icons
+  (use-package company
     :ensure t
     :config
-    (spaceline-all-the-icons-theme)
-    (spaceline-all-the-icons--setup-neotree)
-    (setq spaceline-all-the-icons-hide-long-buffer-path t)
-    (setq spaceline-all-the-icons-slim-render t)
-    )
-#+END_SRC
-
-Here, the theme is set, and some options to make things a little slimmer.
-
-* moody/minions
-
-The following setup is taken directly from [[https://github.com/tarsius/moody][moody github]] and [[https://github.com/tarsius/minions][tarsius github]]. No configuration at the moment.
-
-#+BEGIN_SRC emacs-lisp :exports none :tangle no
-  (use-package moody
-    :ensure t
-    :config
-    (setq x-underline-at-descent-line t)
-    (moody-replace-mode-line-buffer-identification)
-    (moody-replace-vc-mode)
-    )
-
-  (use-package minions
-    :ensure t
-    :pin melpa-stable
-    :config (minions-mode 1)
+    ;; (setq ess-use-company 'script-only)
+    (setq company-selection-wrap-around t
+	  company-tooltip-align-annotations t
+	  company-idle-delay 0.36
+	  company-minimum-prefix-length 2
+	  company-tooltip-limit 10)
+    ;; TABS for completion
+    (define-key company-active-map [return] nil)
+    (define-key company-active-map [tab] 'company-complete-common)
+    (define-key company-active-map (kbd "TAB") 'company-complete-common)
+    (define-key company-active-map (kbd "M-TAB") 'company-complete-selection)
+    ;; Enable it globally
+    (add-hook 'after-init-hook 'global-company-mode)
     )
 #+END_SRC
