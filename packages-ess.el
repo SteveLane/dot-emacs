@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-10-09 09:25:24 (slane)>
+;; Time-stamp: <2018-11-14 10:06:43 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -23,7 +23,8 @@
   (setq ess-default-style 'RRR)
   (setq ess-nuke-trailing-whitespace t)
   (setq ess-eval-visibly 'nowait)
-  
+
+  ;; Function to add the pipe operator
   (defun my/add-pipe ()
     "Adds a pipe operator %>% with one space to the left and then starts a newline with proper indentation"
     (interactive)
