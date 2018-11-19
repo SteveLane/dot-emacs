@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-14 10:06:43 (slane)>
+;; Time-stamp: <2018-11-16 11:22:39 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -18,9 +18,10 @@
   (setq ess-ask-for-ess-directory nil)
   (setq inferior-R-program-name "/usr/local/bin/R") 
   (setq ess-local-process-name "R")
-  ;; indentation etc (can sort this out later)
-  ;; (add-hook 'ess-mode-hook (lambda () (ess-set-style 'RRR)))
-  (setq ess-default-style 'RRR)
+  ;; Default indentation style as RStudio
+  (setq ess-default-style 'RStudio-)
+  ;; But with indentation of 4
+  (add-hook 'ess-mode-hook (lambda () (setq ess-indent-offset 4)))
   (setq ess-nuke-trailing-whitespace t)
   (setq ess-eval-visibly 'nowait)
 
