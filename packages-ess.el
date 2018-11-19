@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-16 11:22:39 (slane)>
+;; Time-stamp: <2018-11-20 08:57:05 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -33,5 +33,10 @@
     (insert "%>%")
     (ess-newline-and-indent))
   (define-key ess-mode-map (kbd "M-p") #'my/add-pipe)
+
+  ;; Define the 'smart' assignment key to ;
+  (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
+  ;; Remove old _ mapping
+  (setq ess-smart-S-assign-key nil)
   
   )
