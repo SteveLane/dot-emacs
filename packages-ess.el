@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-20 08:57:05 (slane)>
+;; Time-stamp: <2018-11-21 08:10:56 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -10,7 +10,14 @@
   :defer 1
   ;; add jags mode (others taken care of)
   :mode ("\\.[Jj][Aa][Gg]\\'" . ess-jags-mode)
-  ;; :init (require 'ess-site)
+  ;; remap some keys
+  :bind
+  (:map ess-mode-map
+        (";" . ess-insert-assign))
+  (:map inferior-ess-mode-map
+        (";" . ess-insert-assign))
+  (:map ess-mode-map
+	("M-p" . #'my/add-pipe))
   ;; Set ESS up the way you like it
   :config
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
@@ -24,19 +31,15 @@
   (add-hook 'ess-mode-hook (lambda () (setq ess-indent-offset 4)))
   (setq ess-nuke-trailing-whitespace t)
   (setq ess-eval-visibly 'nowait)
-
-  ;; Function to add the pipe operator
-  (defun my/add-pipe ()
-    "Adds a pipe operator %>% with one space to the left and then starts a newline with proper indentation"
-    (interactive)
-    (just-one-space 1)
-    (insert "%>%")
-    (ess-newline-and-indent))
-  (define-key ess-mode-map (kbd "M-p") #'my/add-pipe)
-
-  ;; Define the 'smart' assignment key to ;
-  (define-key ess-mode-map (kbd ";") 'ess-insert-assign)
   ;; Remove old _ mapping
   (setq ess-smart-S-assign-key nil)
   
   )
+
+;; Function to add the pipe operator (set in map above)
+(defun my/add-pipe ()
+  "Adds a pipe operator %>% with one space to the left and then starts a newline with proper indentation"
+  (interactive)
+  (just-one-space 1)
+  (insert "%>%")
+  (ess-newline-and-indent))
