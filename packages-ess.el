@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-21 08:10:56 (slane)>
+;; Time-stamp: <2018-12-03 14:34:42 (slane)>
 ;; Split out package loading into a separate file.
 ;; ESS
 (use-package ess
@@ -33,6 +33,9 @@
   (setq ess-eval-visibly 'nowait)
   ;; Remove old _ mapping
   (setq ess-smart-S-assign-key nil)
+  ;; Similarly for bugs/jags mode
+  (define-key ess-jags-mode-map "_" nil)
+  (define-key ess-jags-mode-map ";" #'ess-bugs-hot-arrow)
   
   )
 
