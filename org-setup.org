@@ -80,6 +80,7 @@ I'm migrating/supplementing a BuJo. The following provides my current 'bullets' 
 #+BEGIN_SRC emacs-lisp :export yes
   (setq org-todo-keywords
 	(quote ((sequence "TODO(t)" "|" "DONE(d)")
+		(sequence "PROJECT(p)" "|" "DONE(d)" "CANCELLED(c)")
 		(sequence "WAITING(w)" "|")
 		(sequence "|" "CANCELLED(c)")
 		(sequence "SOMEDAY(s)" "|" "CANCELLED(c)")
@@ -95,6 +96,7 @@ My BuJo is pretty simple, I've mapped it as follows:
 - waiting :: (w) this keyword is added to a task when I'm waiting to hear back from someone before progressing the task
 - cancelled :: (c) pretty self-explanatory ...
 - someday :: (s) this is for tasks that I may want to do at some stage, but not just yet. I still want to keep track of them though.
+- project :: (p) I'm using as a top-level to keep a track of projects.
 
 On top of this, I'm going to try and use GS/BH's keyword:
 
@@ -143,6 +145,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
      ("s" "Someday" entry (file org-default-notes-file)
       "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
+     ("p" "Project entry" entry (file org-default-notes-file)
+      "* PROJECT %? :PROJECT: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1
@@ -287,6 +291,9 @@ The default agenda lacks a little oomph. What I'd like to see is collections suc
 								      ))
 				     ;; (org-agenda-skip-entry-if 'todo 'done)
 				     (org-agenda-todo-ignore-deadlines nil)))
+			 ;; Project tickle list.
+			 (todo "PROJECT" ((org-agenda-overriding-header "Project list:")
+					 (org-tags-match-list-sublevels nil)))
 			 ;; Refiling category set file wide in file.
 			 (tags "REFILING" ((org-agenda-overriding-header "Tasks to Refile:")
 					 (org-tags-match-list-sublevels nil)))
@@ -320,3 +327,5 @@ The default agenda lacks a little oomph. What I'd like to see is collections suc
 #+END_SRC
 
 The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
+
+2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
