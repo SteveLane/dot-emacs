@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-11-14 10:15:37 (slane)>
+;; Time-stamp: <2019-02-15 12:08:33 (slane)>
 ;; init.el for emacs setup
 ;; separate files are provided that do different things for easy maintaining
 
@@ -141,14 +141,14 @@
 
 ;; Default dictionary
 ;; Find aspell automatically
-(cond
- ((executable-find "hunspell")
-  (setq ispell-program-name "hunspell")
-  ;; (setq default-dictionary "british")
-  ;; (setq ispell-dictionary "british")
-  ;; (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_AU" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
-  )
- )
+;; (cond
+;;  ((executable-find "hunspell")
+;;   (setq ispell-program-name "hunspell")
+;;   ;; (setq default-dictionary "british")
+;;   ;; (setq ispell-dictionary "british")
+;;   ;; (setq ispell-extra-args '("--sug-mode=ultra" "--lang=en_AU" "--run-together" "--run-together-limit=5" "--run-together-min=2"))
+;;   )
+;;  )
 
 ;; Column number mode
 (setq column-number-mode t)
