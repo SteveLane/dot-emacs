@@ -1,11 +1,11 @@
-;; Time-stamp: <2018-08-23 09:20:27 (slane)>
+;; Time-stamp: <2019-02-15 12:16:41 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
 
 (use-package mu4e
   ;; Must be installed first...
-  :load-path "/usr/local/Cellar/mu/1.0/share/emacs/site-lisp/mu/mu4e"
+  :load-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e"
   :config
   (use-package org-mu4e)
   (setq mu4e-sent-folder "/unimelb/Sent Items"
