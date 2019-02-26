@@ -17,11 +17,27 @@ If you want to use some (all) of this setup, you'll need to change directories a
 
 I've got a couple of different setups here. To use a particular setup, make sure it has =:tangle yes= in the header arguments.
 
+* doom-modeline
+
+** Vanilla =doom-modeline=
+
+I'm now using =doom-modeline=, the version from [[https://github.com/seagle0128/doom-modeline][here]] which was extracted from [[https://github.com/hlissner/doom-emacs/tree/master/modules/ui/doom-modeline][doom-emacs]]. The only change I've made to it is to change filenames relative to the project. E.g. when in a git folder, the file will be displayed relative to the .git folder.
+
+#+BEGIN_SRC emacs-lisp :exports none :tangle yes
+  (use-package doom-modeline
+    :ensure t
+    :hook (after-init . doom-modeline-mode)
+    :init
+    (setq doom-modeline-buffer-file-name-style 'relative-to-project)
+    )
+
+#+END_SRC
+
 * Spaceline
 
 The following modeline uses the spacemacs modeline, [[https://github.com/TheBB/spaceline][spaceline]]. Because I'm on a mac, the colours get stuffed up, so the =powerline-image-apple-rgb= setting fixes that (found [[https://emacs.stackexchange.com/questions/14984/emacs-powerline-inconsistent-colors-behind-arrows][here]]):
 
-#+BEGIN_SRC emacs-lisp :exports none :tangle yes
+#+BEGIN_SRC emacs-lisp :exports none :tangle no
   (use-package spaceline
     :ensure t
     :init
@@ -40,7 +56,7 @@ The separator uses =utf-8=, you can check what others are available, e.g. =C-h v
 
 Using =all-the-icons= we can bling things up a bit:
 
-#+BEGIN_SRC emacs-lisp :exports none :tangle yes
+#+BEGIN_SRC emacs-lisp :exports none :tangle no
   (use-package all-the-icons
     :ensure t
     :defer t
