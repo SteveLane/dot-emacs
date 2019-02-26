@@ -329,3 +329,11 @@ The default agenda lacks a little oomph. What I'd like to see is collections suc
 The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
 
 2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
+
+* Habits
+
+Habits allows some recurring tasks to reappear when marked done. See [[https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html][here]] for some good info. To enable habits, you need to load the =org-habits= module into org, which is achieved with the following:
+
+#+BEGIN_SRC emacs-lisp :export yes
+  (add-to-list 'org-modules 'org-habit t)
+#+END_SRC
