@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: function(...) { ... } + roxygen2
+# key: fundoc
+# contributor: SteveLane
+# --
+#' ${3:Short Description}
+#'
+#' \\code{$1} ${4:Description}
+#'
+#' @param ${5:Parameter}
+#'
+#' @return ${6:Return Value}
+${1:name} <- function(${2:args}) {
+    `yas-selected-text`$0
+}
