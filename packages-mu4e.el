@@ -1,4 +1,4 @@
-;; Time-stamp: <2019-02-15 12:16:41 (slane)>
+;; Time-stamp: <2019-03-18 10:39:01 (slane)>
 ;; Commands to load mu4e related stuff
 ;; When it comes time to add another account, this is a great resource:
 ;; https://notanumber.io/2016-10-03/better-email-with-mu4e/
@@ -59,7 +59,7 @@
 	user-full-name "Steve Lane"
 	mu4e-compose-signature (concat
 				"Steve Lane\n"
-				"P // +61 3 8344 0071\n"
+				"P // +61 3 8344 9578\n"
 				"W // https://cebra.unimelb.edu.au/\n"
 				"W // https://gtown-ds.netlify.com/\n"
 				"T // https://twitter.com/stephenelane/\n")
@@ -87,7 +87,7 @@
 				(concat
 				 "Dr Stephen Lane\n"
 				 "Deputy Director & Research Fellow, CEBRA, School of Biosciences\n"
-				 "P // +61 3 8344 0071\n"
+				 "P // +61 3 8344 9578\n"
 				 "A // University of Melbourne, Victoria 3010, Australia\n"
 				 "W // https://cebra.unimelb.edu.au/\n"
 				 "W // https://gtown-ds.netlify.com/\n"
@@ -95,7 +95,7 @@
 			       ("informal" .
 				(concat
 				 "Steve Lane\n"
-				 "P // +61 3 8344 0071\n"
+				 "P // +61 3 8344 9578\n"
 				 "W // https://cebra.unimelb.edu.au/\n"
 				 "W // https://gtown-ds.netlify.com/\n"
 				 "T // https://twitter.com/stephenelane/\n")
