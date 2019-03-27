@@ -1,4 +1,4 @@
-;; Time-stamp: <2017-08-21 12:07:00 (slane)>
+;; Time-stamp: <2019-03-27 16:30:14 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; magit
