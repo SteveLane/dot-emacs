@@ -15,17 +15,22 @@ This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-
 
 * Initial setup
 
-The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
+# The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
+
+First up, we'll add a block to load all this org config after spacemacs starts, else we'll get conflicts. If you're following along at home, don't forget to complete the block at the end of the file.
+
+#+begin_src emacs-lisp :exports none
+  (with-eval-after-load 'org
+#+end_src
 
 #+BEGIN_SRC emacs-lisp :exports none
-  (require 'org)
 
   ;; keybindings
-  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c l") 'org-store-link)
+  ;; (global-set-key (kbd "C-c a") 'org-agenda)
+  ;; (global-set-key (kbd "C-c c") 'org-capture)
+  ;; (global-set-key (kbd "C-c l") 'org-store-link)
 
-  ;; soft line wrapping
+  ;; ;; soft line wrapping
   (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
   ;; Disable whitespace mode in org mode
   (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
@@ -337,3 +342,8 @@ Habits allows some recurring tasks to reappear when marked done. See [[https://b
 #+BEGIN_SRC emacs-lisp :export yes
   (add-to-list 'org-modules 'org-habit t)
 #+END_SRC
+
+Finally close off the =with=eval-after-load= from earlier:
+#+begin_src emacs-lisp :exports none
+  )
+#+end_src
