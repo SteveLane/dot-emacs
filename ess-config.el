@@ -10,7 +10,7 @@
   (setq ess-ask-for-ess-directory nil)
   (setq inferior-R-program-name "/usr/local/bin/R") 
   (setq ess-local-process-name "R")
-  ;; Default indentation style as RStudio
+  ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
   (setq ess-first-continued-statement-offset 'straight
         ess-continued-statement-offset 'straight
         ess-default-style 'RStudio-
