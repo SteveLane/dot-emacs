@@ -47,7 +47,7 @@ values."
              mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
      latex
-     ;; markdown
+     markdown
      org
      ;; (shell :variables
      ;;        shell-default-height 30
