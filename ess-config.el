@@ -1,4 +1,4 @@
-;; Time-stamp: <2019-03-28 12:41:45 (slane)>
+;; Time-stamp: <2019-04-04 15:45:04 (slane)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -11,13 +11,18 @@
   (setq inferior-R-program-name "/usr/local/bin/R") 
   (setq ess-local-process-name "R")
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
-  (setq ess-first-continued-statement-offset 'straight
-        ess-continued-statement-offset 'straight
-        ess-default-style 'RStudio-
-        ess-indent-offset 4
-        ess-offset-arguments 'prev-line
-        ess-align-blocks nil
-        ess-indent-with-fancy-comments nil)
+  (add-hook 'ess-mode-hook (lambda ()
+                             (setq
+                              ess-first-continued-statement-offset 'straight
+                              ess-continued-statement-offset 'straight
+                              ess-default-style 'RStudio-
+                              ess-indent-offset 4
+                              ess-offset-arguments 'prev-line
+                              ess-align-blocks nil
+                              ess-indent-with-fancy-comments nil)
+                             )
+            )
+  (setq ess-indent-offset 4)
   (setq ess-nuke-trailing-whitespace t)
   (setq ess-eval-visibly 'nowait)
   ;; Remove old _ mapping
