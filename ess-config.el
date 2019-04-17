@@ -1,9 +1,9 @@
-;; Time-stamp: <2019-04-05 16:39:56 (slane)>
+;; Time-stamp: <2019-04-17 14:37:34 (slane)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
   (define-key inferior-ess-mode-map ";" 'ess-insert-assign)
-  ;; (define-key ess-mode-map "M-;" #'my/add-pipe)
+  (define-key ess-mode-map "M-p" #'my/add-pipe)
   ;; Set ESS up the way you like it
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
