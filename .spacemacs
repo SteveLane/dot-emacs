@@ -47,10 +47,10 @@ values."
      emacs-lisp
      ess
      ;; extra-langs
-     (mu4e :variables
-             mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
+     ;; (mu4e :variables
+     ;;        mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
-     latex
+     ;; latex
      markdown
      org
      polymode
@@ -323,9 +323,9 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (load-file "~/github/emacs-config/general.el")
-  (load-file "~/github/emacs-config/mu4e-config.el")
+  ;; (load-file "~/github/emacs-config/mu4e-config.el")
   (load-file "~/github/emacs-config/magit-config.el")
-  (org-babel-load-file "~/github/emacs-config/org-setup.org")
+  ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/polymode-config.el")
   )

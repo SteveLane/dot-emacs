@@ -7,7 +7,7 @@
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
   (setq ess-ask-for-ess-directory nil)
-  (setq inferior-R-program-name "/usr/local/bin/R")
+  (setq inferior-R-program-name "/c/Program\ Files\ \(x86\)/R")
   (setq ess-local-process-name "R")
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
   (add-hook 'ess-mode-hook (lambda ()
