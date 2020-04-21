@@ -1,4 +1,4 @@
-;; Time-stamp: <2018-06-27 19:52:26 (slane)>
+;; Time-stamp: <2020-04-21 10:30:54 (lanes1)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; yasnippet
@@ -6,7 +6,7 @@
 (use-package yasnippet
   :ensure t
   :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-snippet-dirs '("~/github/emacs-config/snippets"))
   :config
   ;; Fix indentation
   (setq yas-indent-line 'fixed)
