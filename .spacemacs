@@ -328,6 +328,7 @@ you should place your code here."
   ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/polymode-config.el")
+  (load-file "~/github/emacs-config/yas-config.el")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
