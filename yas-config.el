@@ -1,10 +1,10 @@
-;; Time-stamp: <2019-04-05 13:46:42 (slane)>
+;; Time-stamp: <2020-04-22 09:49:14 (lanes1)>
 ;; yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
 (with-eval-after-load 'yasnippet
   (setq yas-snippet-dirs '("~/github/emacs-config/snippets")
         ;; Fix indentation
-        (setq yas-indent-line 'fixed)
+        yas-indent-line 'fixed
         )
   ;; Load snippet tables
   (yas-reload-all)
