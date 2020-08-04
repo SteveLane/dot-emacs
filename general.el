@@ -45,5 +45,5 @@
 
 ;; try and speed projectile up by using alien indexing
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
-(setq projectile-indexing-method 'native)
+(setq projectile-indexing-method 'alien)
 
