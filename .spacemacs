@@ -62,6 +62,7 @@ values."
      stan-mode
      syntax-checking
      themes-megapack
+     treemacs
      ;; version-control
      )
    ;; List of additional packages that will be installed without being
