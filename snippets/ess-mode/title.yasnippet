@@ -1,17 +1,18 @@
 # -*- mode: snippet -*-
-# name: title
-# key: title:
+# name: ## Title ##
+# key: :title
 # --
 ################################################################################
 ################################################################################
-## Title: ${1:Some Title}
+## Filename: `filename-non-directory (buffer-file-name)`
 ## Author: Steve Lane
-## Date: `(format-time-string "%A, %d %B %Y" (current-time))`
-## Synopsis: ${2:Description}
+## Date Created: `(format-time-string "%A, %d %B %Y" (current-time))`
+## Synopsis: ${1:Description}
+## Dependencies: {Please Add}
+## Output: {Please Add}
 ## Time-stamp: <>
 ################################################################################
 ################################################################################
-rm(list = ls())
+library(tidyverse)
 library(here)
-library(dplyr)
-library(ggplot2)
+$0
