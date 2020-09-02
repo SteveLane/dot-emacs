@@ -1,4 +1,4 @@
-;; Time-stamp: <2020-04-22 09:49:14 (lanes1)>
+;; Time-stamp: <2020-09-03 08:50:05 (lanes1)>
 ;; yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
 (with-eval-after-load 'yasnippet
@@ -18,6 +18,9 @@
   (add-hook 'ess-jags-mode-hook 'yas/minor-mode-on)
   ;; Make sure yasnippet is on for rmarkdown files
   (add-hook 'markdown-mode-hook 'yas/minor-mode-on)
+  ;; Add snippet availability in all modes
+  (add-hook 'yas-minor-mode-hook (lambda ()
+                                   (yas-activate-extra-mode 'fundamental-mode)))
   ;; Don't expand when you are typing in a string or comment.
   (add-hook 'prog-mode-hook
 	    (lambda ()
