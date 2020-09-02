@@ -1,0 +1,49 @@
+#+TITLE: Org-roam setup
+#+AUTHOR: Steve Lane
+#+DESCRIPTION: A description of my current org-roam setup. This is a literate file which can be tangled to the source required to mimic my org-roam setup.
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args :tangle yes
+
+* Introduction
+
+This document is literate explanation of the setup for my org-roam implementation. I've got a pretty basic ~packages.el~ in use that installs and sets up leader keys:
+
+** ~/private/org-roam/packages.el~
+
+   #+INCLUDE: ./private/org-roam/packages.el example emacs-lisp
+
+* Capture templates
+
+Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
+
+** Template definitions
+   
+   #+header: :tangle yes
+   #+begin_src emacs-lisp :export yes
+     (setq
+      ;; Define custom org-roam capture templates
+      org-roam-capture-templates
+      '(
+        ("p" "person" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: person\n"
+         :unnarrowed t)
+        ("c" "code" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: code\n"
+         :unnarrowed t)
+        ("P" "process" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: process\n"
+         :unnarrowed t)
+        )
+      )
+   #+end_src
+
