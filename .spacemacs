@@ -60,7 +60,9 @@ values."
      latex
      lsp
      ;; enable lsp for ESS
-     (ess :variables ess-r-backend 'lsp)
+     (ess :variables
+          ess-r-backend 'lsp
+          lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
      markdown
      org
      org-roam
@@ -341,6 +343,7 @@ you should place your code here."
   ;; (load-file "~/github/emacs-config/mu4e-config.el")
   (load-file "~/github/emacs-config/magit-config.el")
   (org-babel-load-file "~/github/emacs-config/org-setup.org")
+  (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/polymode-config.el")
   )
