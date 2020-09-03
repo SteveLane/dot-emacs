@@ -6,7 +6,7 @@
   ;; Set ESS up the way you like it
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
-  (setq ess-ask-for-ess-directory nil)
+  (setq ess-ask-for-ess-directory t)
   (setq inferior-R-program-name "/usr/local/bin/R")
   (setq ess-local-process-name "R")
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
@@ -38,5 +38,5 @@
     (insert "%>%")
     (reindent-then-newline-and-indent)
     )
-  (define-key ess-mode-map (kbd "M-p") 'my-add-pipe)
+  (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
 )

@@ -6,7 +6,7 @@
 (use-package yasnippet
   :ensure t
   :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
+  (setq yas-snippet-dirs '("~/github/emacs-config/snippets"))
   :config
   ;; Fix indentation
   (setq yas-indent-line 'fixed)

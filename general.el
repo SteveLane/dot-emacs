@@ -42,3 +42,7 @@
 
 ;; make sure that ess-mode has linting
 (add-to-list 'flycheck-global-modes 'ess-mode)
+
+;; try and speed projectile up by using alien indexing
+;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
+(setq projectile-indexing-method 'alien)
