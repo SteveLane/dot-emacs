@@ -47,3 +47,5 @@
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
 (setq projectile-indexing-method 'alien)
 
+;; Include line numbers always
+(global-display-line-numbers-mode 1)
