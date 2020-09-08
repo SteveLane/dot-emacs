@@ -5,8 +5,8 @@
   (use-package org-roam
     :hook
     (after-init . org-roam-mode)
-    :custom
-    (org-roam-directory "~/github/org-roam-files/")
+    :config
+    (setq org-roam-directory "~/github/org-roam-files/")
     :init
     (progn
       (spacemacs/declare-prefix "ar" "org-roam")
