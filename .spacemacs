@@ -47,18 +47,20 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t)
+                      auto-completion-enable-help-tooltip nil)
      ;; better-defaults
      emacs-lisp
-     (ess :variables
-          ess-r-backend 'lsp
-          lsp-clients-r-server-command (quote ("c:/Program Files/R/R-4.0.1/bin/x64/Rterm.exe" "--slave" "-e" "languageserver::run()")))
+     ess
+     ;; (ess :variables
+     ;;      ess-r-backend 'lsp
+     ;;      lsp-clients-r-server-command (quote ("c:/Program Files/R/R-4.0.1/bin/x64/Rterm.exe" "--slave" "-e" "languageserver::run()")))
      ;; extra-langs
      ;; (mu4e :variables
      ;;        mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
      ;; latex
-     lsp
+     ;; (lsp :variables
+     ;;      lsp-ui-doc-enable nil)
      markdown
      org
      org-roam

@@ -1,4 +1,4 @@
-;; Time-stamp: <2020-07-02 07:57:33 (lanes1)>
+;; Time-stamp: <2020-09-21 09:18:04 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -39,4 +39,15 @@
     (reindent-then-newline-and-indent)
     )
   (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
+
+  ;; Add in company-mode helpers
+  (defun my-ess-company-hook ()
+    ;; ensure company-R-library is in ESS backends
+    (make-variable-buffer-local 'company-backends)
+    (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+    (add-to-list 'company-backends
+                 '(company-R-args company-R-objects company-R-library
+                                  company-dabbrev-code :separate)))
+  (add-hook 'ess-mode-hook #'my-ess-company-hook)
+  ;; (setq ess-use-company t)
 )
