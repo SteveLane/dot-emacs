@@ -17,7 +17,7 @@ This document is literate explanation of the setup for my org-roam implementatio
 
 Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
 
-** Template definitions
+** Capture template definitions
    
    #+header: :tangle yes
    #+begin_src emacs-lisp :export yes
@@ -25,25 +25,56 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       ;; Define custom org-roam capture templates
       org-roam-capture-templates
       '(
+        ("d" "default" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+TITLE: ${title}
+     ,#+CREATED: %<%Y-%m-%d>
+     ,#+ROAM_ALIAS:
+     ,#+ROAM_TAGS:\n
+     ,* ${title}\n"
+         :unnarrowed t)
         ("p" "person" plain (function org-roam--capture-get-point)
          "%?"
          :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: person\n"
+         :head "#+TITLE: ${title}
+     ,#+CREATED: %<%Y-%m-%d>
+     ,#+ROAM_ALIAS:
+     ,#+ROAM_TAGS: person\n
+     ,* ${title}\n"
          :unnarrowed t)
         ("c" "code" plain (function org-roam--capture-get-point)
          "%?"
          :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: code\n"
+         :head "#+TITLE: ${title}
+     ,#+CREATED: %<%Y-%m-%d>
+     ,#+ROAM_ALIAS:
+     ,#+ROAM_TAGS: code\n
+     ,* ${title}\n"
          :unnarrowed t)
         ("P" "process" plain (function org-roam--capture-get-point)
          "%?"
          :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: process\n"
+         :head "#+TITLE: ${title}
+     ,#+CREATED: %<%Y-%m-%d>
+     ,#+ROAM_ALIAS:
+     ,#+ROAM_TAGS: process\n
+     ,* ${title}\n"
          :unnarrowed t)
         )
       )
+   #+end_src
+
+
+** Daily template definitions
+
+   #+header: :tangle yes
+   #+begin_src emacs-lisp :export yes
+     (setq org-roam-dailies-capture-templates
+           '(("d" "default" entry
+              #'org-roam-capture--get-point
+              "* %?"
+              :file-name "daily/%<%Y-%m-%d>"
+              :head "#+title: %<%Y-%m-%d>\n\n")))
    #+end_src
 

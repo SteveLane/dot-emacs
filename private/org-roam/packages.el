@@ -7,6 +7,7 @@
     (after-init . org-roam-mode)
     :config
     (setq org-roam-directory "~/github/org-roam-files/")
+    (setq org-roam-dailies-directory "daily/")
     :init
     (progn
       (spacemacs/declare-prefix "ar" "org-roam")
@@ -14,6 +15,7 @@
         "arl" 'org-roam
         "art" 'org-roam-dailies-today
         "arf" 'org-roam-find-file
+        "arF" 'org-roam-dailies-find-today
         "arg" 'org-roam-graph)
 
       (spacemacs/declare-prefix-for-mode 'org-mode "mr" "org-roam")
@@ -22,5 +24,6 @@
         "rt" 'org-roam-dailies-today
         "rb" 'org-roam-switch-to-buffer
         "rf" 'org-roam-find-file
+        "rF" 'org-roam-dailies-find-today
         "ri" 'org-roam-insert
         "rg" 'org-roam-graph))))
