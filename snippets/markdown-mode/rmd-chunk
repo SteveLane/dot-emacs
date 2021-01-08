@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Insert r code chunk into Rmd file
+# contributor: Steve Lane
+# key: chunk
+# mode: markdown-mode
+# condition: (string= ess-language "R")
+# --
+\`\`\`{r $1}
+$0
+\`\`\`
