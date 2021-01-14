@@ -46,3 +46,6 @@
 ;; try and speed projectile up by using alien indexing
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
 (setq projectile-indexing-method 'alien)
+
+;; Set default enconding to unix utf 8
+(setq-default buffer-file-coding-system 'utf-8-unix)
