@@ -38,7 +38,7 @@
 (add-to-list 'auto-mode-alist '("[mM]akefile\\.[a-zA-Z]*\\'" . makefile-mode))
 
 ;; make spacemacs the global git editor
-(global-git-commit-mode t)
+;; (global-git-commit-mode t)
 
 ;; make sure that ess-mode has linting
 (add-to-list 'flycheck-global-modes 'ess-mode)
