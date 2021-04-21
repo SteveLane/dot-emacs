@@ -41,19 +41,19 @@ First up, we'll add a block to load all this org config after spacemacs starts, 
 
 * Where do I store stuff?
 
-The default directory for org files is ~/org, and I'm going to stick with that convention, but make it explicit. When I capture tasks/notes (=C-c t= / =C-c n=), I'm going to have them sent to the ~/org/refile.org file, when I can refile them at my convenience. This saves time when capturing TODO items, as it means I don't have to decide which project they'll go into straight away. Speaking of, when it comes time to refile, these can be put into separate project files; the refile-targets allows the nesting to be searched. Finally, I set the agenda from the default org directory.
+The default directory for org files is ~/org, but I'll change this to a sub-directory of my github. When I capture tasks/notes (=C-c t= / =C-c n=), I'm going to have them sent to the ~/github/org/refile.org file, when I can refile them at my convenience. This saves time when capturing TODO items, as it means I don't have to decide which project they'll go into straight away. Speaking of, when it comes time to refile, these can be put into separate project files; the refile-targets allows the nesting to be searched. Finally, I set the agenda from the default org directory.
 
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Default directory for org files
-   org-directory "~/org"
+   org-directory "~/github/org"
    ;; Directory for notes/tasks to be refiled
    org-default-notes-file (concat org-directory "/refile.org")
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
-   org-refile-targets (quote ((nil :maxlevel . 1)
-   			      (org-agenda-files :maxlevel . 1)))
+   org-refile-targets (quote ((nil :maxlevel . 2)
+   			      (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files (list org-directory)
    )
@@ -347,3 +347,18 @@ Finally close off the =with=eval-after-load= from earlier:
 #+begin_src emacs-lisp :exports none
   )
 #+end_src
+
+* Projectile support
+
+Each project can have it's own TODO file, which will make it heaps easier to track tasks. These are not added to the agenda by default, so we can add by:
+
+#+begin_src emacs-lisp :export yes
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (mapcar '(lambda (file)
+               (when (file-exists-p file)
+                 (push file org-agenda-files)))
+            (org-projectile-todo-files)))
+#+end_src
+
+these details come from the spacemacs page: [[https://develop.spacemacs.org/layers/+emacs/org/README.html][org layer README]].
