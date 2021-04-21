@@ -58,12 +58,23 @@ values."
      ;; (mu4e :variables
      ;;        mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
+     groovy
      ;; latex
      ;; (lsp :variables
      ;;      lsp-ui-doc-enable nil)
      markdown
-     org
+     (org :variables
+          org-enable-roam-support t
+          org-enable-jira-support t
+          jiralib-url "https://jira.worksafe.vic.gov.au/"
+          org-jira-working-dir "~/github/org-jira"
+      )
      org-roam
+     org-pomodoro
+     ;; (org-jira :variables
+     ;;           org-jira-working-dir "~/.org-jira"
+     ;;           jiralib-url "https://jira.worksafe.vic.gov.au/"
+     ;;  )
      polymode
      ;; (shell :variables
      ;;        shell-default-height 30
