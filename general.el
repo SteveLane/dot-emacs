@@ -49,3 +49,10 @@
 
 ;; Set default enconding to unix utf 8
 (setq-default buffer-file-coding-system 'utf-8-unix)
+
+;; projectile hack to stop tr issue on windows
+;; https://github.com/bbatsov/projectile/issues/1302
+(setq projectile-git-submodule-command nil)
+
+;; make the default directory where I want it
+(setq default-directory "c:/Users/LANES1")
