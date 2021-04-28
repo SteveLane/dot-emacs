@@ -303,7 +303,9 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
            ((agenda "" ((org-agenda-span 'day)
                         (org-agenda-overriding-header "Today's Items")
                         (org-super-agenda-groups
-                         '((:name "Today"
+                         '((:discard (:todo "DONE"))
+                           (:discard (:tag "MEETING"))
+                           (:name "Today"
                                   :time-grid t
                                   :todo "TODAY"
                                   :scheduled today
