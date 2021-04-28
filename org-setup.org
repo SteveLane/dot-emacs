@@ -49,11 +49,12 @@ The default directory for org files is ~/org, but I'll change this to a sub-dire
    org-directory "~/github/org"
    ;; Directory for notes/tasks to be refiled
    org-default-notes-file (concat org-directory "/refile.org")
+   org-journal-file (concat org-directory "/journal-club.org")
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
    org-refile-targets (quote ((nil :maxlevel . 2)
-   			      (org-agenda-files :maxlevel . 2)))
+              (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files (list org-directory)
    )
@@ -152,7 +153,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      ("p" "Project entry" entry (file org-default-notes-file)
       "* PROJECT %? :PROJECT: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
-     ("j" "Journal Club" entry (file org-default-notes-file)
+     ("j" "Journal Club" entry (file org-journal-file)
       "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      )
    ;; Keep a line between headers
