@@ -70,7 +70,6 @@ values."
           org-jira-working-dir "~/github/org-jira"
       )
      org-roam
-     org-pomodoro
      ;; (org-jira :variables
      ;;           org-jira-working-dir "~/.org-jira"
      ;;           jiralib-url "https://jira.worksafe.vic.gov.au/"
@@ -79,7 +78,7 @@ values."
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
+     ;; spell-checking
      stan-mode
      syntax-checking
      themes-megapack
@@ -90,7 +89,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      org-super-agenda
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
