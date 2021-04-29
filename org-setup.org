@@ -324,9 +324,10 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                            ))))
             (todo "" ((org-agenda-overriding-header "All Other TODOs")
                       (org-super-agenda-groups
-                       '((:discard (:scheduled nil))
+                       '((:scheduled nil)
                          (:auto-category t
-                                         :order 9)
+                                         :order 9
+                                         :discard (:scheduled t))
                          ))))))
           ("t" "Todo View"
            (
