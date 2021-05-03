@@ -77,7 +77,9 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages '(
+                                      org-super-agenda
+                                      )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -301,7 +303,11 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers '(
+                               :visual t
+                               :disabled-for-modes dired
+                               :size-limit-kb 1000
+                               )
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -352,7 +358,9 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (load-file "~/github/emacs-config/general.el")
-  ;; (load-file "~/github/emacs-config/mu4e-config.el")
+  (when (spacemacs/system-is-mac)
+    (load-file "~/github/emacs-config/mu4e-config.el")
+    )
   (load-file "~/github/emacs-config/magit-config.el")
   (org-babel-load-file "~/github/emacs-config/org-setup.org")
   (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
