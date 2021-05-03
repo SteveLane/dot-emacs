@@ -1,4 +1,4 @@
-;; Time-stamp: <2019-04-17 15:07:45 (slane)>
+;; Time-stamp: <2021-05-03 14:27:26 (sprazza)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -7,7 +7,10 @@
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
   (setq ess-ask-for-ess-directory t)
-  (setq inferior-R-program-name "/usr/local/bin/R")
+  (when (spacemacs/system-is-mac)
+    ((setq inferior-R-program-name "/usr/local/bin/R")))
+  (when (spacemacs/system-is-mswindows)
+    ((setq inferior-R-program-name "c:/Program Files/R/R-4.0.2/bin/x64/Rterm.exe")))
   (setq ess-local-process-name "R")
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
   (add-hook 'ess-mode-hook (lambda ()
@@ -38,5 +41,20 @@
     (insert "%>%")
     (reindent-then-newline-and-indent)
     )
-  (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
-)
+  (when (spacemacs/system-is-mac)
+    (define-key ess-mode-map (kbd "M-S-m") 'my-add-pipe))
+  (when (spacemacs/system-is-mswindows)
+    (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe))
+
+  ;; Add in company-mode helpers
+  (defun my-ess-company-hook ()
+    ;; ensure company-R-library is in ESS backends
+    (make-variable-buffer-local 'company-backends)
+    (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+    (add-to-list 'company-backends
+                 '(company-R-args company-R-objects company-R-library
+                                  company-dabbrev-code :separate)))
+  (add-hook 'ess-mode-hook #'my-ess-company-hook)
+  ;; (setq ess-use-company t)
+
+  )
