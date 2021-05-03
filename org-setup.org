@@ -46,14 +46,15 @@ The default directory for org files is ~/org, and I'm going to stick with that c
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
    ;; Default directory for org files
-   org-directory "~/org"
+   org-directory "~/github/org"
    ;; Directory for notes/tasks to be refiled
    org-default-notes-file (concat org-directory "/refile.org")
+   org-journal-file (concat org-directory "/journal-club.org")
    ;; Allows to store agenda files in their appropriate files.
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
-   org-refile-targets (quote ((nil :maxlevel . 1)
-   			      (org-agenda-files :maxlevel . 1)))
+   org-refile-targets (quote ((nil :maxlevel . 2)
+              (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files (list org-directory)
    )
@@ -84,15 +85,16 @@ I'm migrating/supplementing a BuJo. The following provides my current 'bullets' 
 #+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
   (setq org-todo-keywords
-	(quote ((sequence "TODO(t)" "|" "DONE(d)")
-		(sequence "PROJECT(p)" "|" "DONE(d)" "CANCELLED(c)")
-		(sequence "WAITING(w)" "|")
-		(sequence "|" "CANCELLED(c)")
-		(sequence "SOMEDAY(s)" "|" "CANCELLED(c)")
-		(sequence "|" "MEETING")
-		)
-	       )
-	)
+  (quote ((sequence "TODO(t)" "|" "DONE(d)")
+          (sequence "TODAY(T)" "|" "DONE(d)")
+          (sequence "PROJECT(p)" "|" "DONE(d)" "CANCELLED(c)")
+          (sequence "WAITING(w)" "|")
+          (sequence "|" "CANCELLED(c)")
+          (sequence "SOMEDAY(s)" "|" "CANCELLED(c)")
+          (sequence "|" "MEETING")
+          )
+         )
+  )
 #+END_SRC
 
 My BuJo is pretty simple, I've mapped it as follows:
@@ -112,7 +114,7 @@ On top of this, I'm going to try and use GS/BH's keyword:
 When we display these in the agenda, we'd also like to have different colours for different keywords:
 
 #+header: :tangle yes
-#+BEGIN_SRC emacs-lisp :export yes
+#+BEGIN_SRC emacs-lisp :export no
   (setq
    ;; Coloured faces for agenda/todo items
    org-todo-keyword-faces
@@ -152,6 +154,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      ("p" "Project entry" entry (file org-default-notes-file)
       "* PROJECT %? :PROJECT: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
+     ("j" "Journal Club" entry (file org-journal-file)
+      "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1
@@ -270,71 +274,6 @@ I wanted some bling! I added the all-the-icons requirement above, now the next b
 
 #+END_SRC
 
-* Agenda View
-
-The default agenda lacks a little oomph. What I'd like to see is collections such as:
-
-- tasks for today
-- tasks to be refiled
-- tasks for next week
-- tasks that are unscheduled
-- tasks that are waiting/someday
-
-#+BEGIN_SRC emacs-lisp :export yes
-  ;; Custom agenda views
-  (setq org-agenda-custom-commands
-	'(				; start list
-	  (" " "Agenda" ((agenda "" ((org-agenda-overriding-header "Today's Schedule:")
-				     (org-agenda-span 'day)
-				     (org-agenda-ndays 1)
-				     (org-agenda-start-on-weekday nil)
-				     (org-agenda-start-day "+0d")
-				     ;; Remove refiling tasks (https://www.reddit.com/r/orgmode/comments/69acg5/orgagendaskipentryif_but_for_categories/)
-				     (org-agenda-skip-function '(cond ((equal (file-name-nondirectory (buffer-file-name)) "refile.org")
-								       (outline-next-heading) (1- (point)))
-								      (t (org-agenda-skip-entry-if 'todo 'done))
-								      ))
-				     ;; (org-agenda-skip-entry-if 'todo 'done)
-				     (org-agenda-todo-ignore-deadlines nil)))
-			 ;; Project tickle list.
-			 (todo "PROJECT" ((org-agenda-overriding-header "Project list:")
-					 (org-tags-match-list-sublevels nil)))
-			 ;; Refiling category set file wide in file.
-			 (tags "REFILING" ((org-agenda-overriding-header "Tasks to Refile:")
-					 (org-tags-match-list-sublevels nil)))
-			 ;; Tasks upcoming (should be similar to above?)
-			 (agenda "" ((org-agenda-overriding-header "Upcoming:")
-				     (org-agenda-span 7)
-				     (org-agenda-start-day "+1d")
-				     (org-agenda-start-on-weekday nil)
-				     (org-agenda-skip-function '(cond ((equal (file-name-nondirectory (buffer-file-name)) "refile.org")
-								       (outline-next-heading) (1- (point)))
-								      (t (org-agenda-skip-entry-if 'todo 'done))
-								      ))
-				     ;; I should set this next one to true, so that deadlines are ignored...?
-				     (org-agenda-todo-ignore-deadlines nil)))
-			 ;; Tasks that are unscheduled
-			 (todo "TODO" ((org-agenda-overriding-header "Unscheduled Tasks:")
-				       (org-tags-match-list-sublevels nil)
-				       ;; (org-agenda-skip-entry-if 'scheduled 'deadline)
-				       (org-agenda-todo-ignore-scheduled 'all)
-				       ))
-			 ;; Tasks that are waiting or someday
-			 (todo "WAITING|SOMEDAY" ((org-agenda-overriding-header "Waiting/Someday Tasks:")
-					 (org-tags-match-list-sublevels nil)))
-			 )
-	   )
-	  )				; end list
-
-	;; If an item has a (near) deadline, and is scheduled, only show the deadline.
-	org-agenda-skip-scheduled-if-deadline-is-shown t
-	)
-#+END_SRC
-
-The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
-
-2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
-
 * Habits
 
 Habits allows some recurring tasks to reappear when marked done. See [[https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html][here]] for some good info. To enable habits, you need to load the =org-habits= module into org, which is achieved with the following:
@@ -347,3 +286,81 @@ Finally close off the =with=eval-after-load= from earlier:
 #+begin_src emacs-lisp :exports none
   )
 #+end_src
+
+* Agenda View
+
+The default agenda lacks a little oomph. What I'd like to see is collections such as:
+
+- tasks for today
+- tasks to be refiled
+- tasks for next week
+- tasks that are unscheduled
+- tasks that are waiting/someday
+
+This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~org-super-agenda~]] to set up a nicely grouped agenda:
+
+#+BEGIN_SRC emacs-lisp :export yes
+  (setq org-agenda-custom-commands
+        '(("a" "Super Agenda"
+           ((agenda "" ((org-agenda-span 'day)
+                        (org-agenda-overriding-header "Today's Items")
+                        (org-super-agenda-groups
+                         '((:discard (:todo "DONE"))
+                           (:discard (:tag "MEETING"))
+                           (:name "Today"
+                                  :time-grid t
+                                  :todo "TODAY"
+                                  :scheduled today
+                                  :order 0)
+                           (:habit t)
+                           (:name "Due Today"
+                                  :deadline today
+                                  :order 2)
+                           (:name "Due Soon"
+                                  :deadline future
+                                  :order 8)
+                           (:name "Overdue"
+                                  :deadline past
+                                  :order 7)
+                           ))))
+            (todo "" ((org-agenda-overriding-header "All Other TODOs")
+                      (org-super-agenda-groups
+                       '((:and (:deadline nil :scheduled nil))
+                         (:discard (:scheduled t))
+                         (:auto-category t :order 9)
+                         ))))))
+          ("t" "Todo View"
+           (
+            (todo "" ((org-agenda-overriding-header "")
+                      (org-super-agenda-groups
+                       '((:name "Inbox"
+                                :file-path "inbox"
+                                :order 0
+                                )
+                         (:auto-category t
+                                         :order 9)
+                         ))))))
+          ))
+
+  (org-super-agenda-mode);; Custom agenda views
+
+#+END_SRC
+
+The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
+
+2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
+
+* Projectile support
+
+Each project can have it's own TODO file, which will make it heaps easier to track tasks. These are not added to the agenda by default, so we can add by:
+
+#+begin_src emacs-lisp :export yes
+  (with-eval-after-load 'org-agenda
+    (require 'org-projectile)
+    (mapcar #'(lambda (file)
+               (when (file-exists-p file)
+                 (push file org-agenda-files)))
+            (org-projectile-todo-files)))
+#+end_src
+
+these details come from the spacemacs page: [[https://develop.spacemacs.org/layers/+emacs/org/README.html][org layer README]].
