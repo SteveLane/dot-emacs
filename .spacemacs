@@ -49,20 +49,13 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip t)
+                      auto-completion-enable-help-tooltip nil)
      ;; better-defaults
      emacs-lisp
      ess
      ;; extra-langs
-     ;; (mu4e :variables
-     ;;         mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
      latex
-     ;; lsp
-     ;; enable lsp for ESS
-     ;; (ess :variables
-     ;;      ess-r-backend 'lsp
-     ;;      lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
      markdown
      org
      org-roam
@@ -94,6 +87,21 @@ values."
    ;; them if they become unused. `all' installs *all* packages supported by
    ;; Spacemacs and never uninstall them. (default is `used-only')
    dotspacemacs-install-packages 'used-only))
+
+;; Operating system-specific package loads/config
+;; See: https://www.reddit.com/r/spacemacs/comments/8iaaoi/how_to_conditionally_include_a_layer_or_set_a/
+(when (spacemacs/system-is-mac)
+  (append dotspacemacs-configuration-layers)
+  '(
+    ;; lsp
+    ;; enable lsp for ESS
+    ;; (ess :variables
+    ;;      ess-r-backend 'lsp
+    ;;      lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
+    (mu4e :variables
+            mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
+
+    ))
 
 (defun dotspacemacs/init ()
   "Initialization function.
