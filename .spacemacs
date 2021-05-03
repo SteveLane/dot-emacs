@@ -58,11 +58,11 @@ values."
      ;;         mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
      git
      latex
-     lsp
+     ;; lsp
      ;; enable lsp for ESS
-     (ess :variables
-          ess-r-backend 'lsp
-          lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
+     ;; (ess :variables
+     ;;      ess-r-backend 'lsp
+     ;;      lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
      markdown
      org
      org-roam
