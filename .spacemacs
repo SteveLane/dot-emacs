@@ -55,20 +55,23 @@ values."
      ess
      ;; extra-langs
      git
+     groovy
      latex
      markdown
-     org
+     (org :variables
+          org-enable-roam-support t
+          org-enable-jira-support t
+          org-jira-working-dir "~/github/org-jira"
+          )
      org-roam
      polymode
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
-     spell-checking
      stan-mode
      syntax-checking
      themes-megapack
      treemacs
-     ;; version-control
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -98,6 +101,7 @@ values."
     ;; (ess :variables
     ;;      ess-r-backend 'lsp
     ;;      lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
+    spell-checking
     (mu4e :variables
             mu4e-installation-path "/usr/local/Cellar/mu/1.0_1/share/emacs/site-lisp/mu/mu4e")
 
