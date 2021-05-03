@@ -1,4 +1,4 @@
-;; Time-stamp: <2021-05-03 14:27:26 (sprazza)>
+;; Time-stamp: <2021-05-03 15:06:56 (sprazza)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -7,8 +7,9 @@
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
   (setq ess-ask-for-ess-directory t)
-  (when (spacemacs/system-is-mac)
-    ((setq inferior-R-program-name "/usr/local/bin/R")))
+  ;; (when (spacemacs/system-is-mac)
+  ;;   ((setq inferior-ess-r-program "/usr/local/bin/R")))
+  ;; this should only need setting in windows
   (when (spacemacs/system-is-mswindows)
     ((setq inferior-R-program-name "c:/Program Files/R/R-4.0.2/bin/x64/Rterm.exe")))
   (setq ess-local-process-name "R")
