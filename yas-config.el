@@ -1,15 +1,11 @@
-;; Time-stamp: <2018-06-27 19:52:26 (slane)>
-;; Split out package loading into a separate file.
-;; Now using use-package
+;; Time-stamp: <2020-09-03 08:50:05 (lanes1)>
 ;; yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
-(use-package yasnippet
-  :ensure t
-  :init
-  (setq yas-snippet-dirs '("~/.emacs.d/snippets"))
-  :config
-  ;; Fix indentation
-  (setq yas-indent-line 'fixed)
+(with-eval-after-load 'yasnippet
+  (setq yas-snippet-dirs '("~/github/emacs-config/snippets")
+        ;; Fix indentation
+        yas-indent-line 'fixed
+        )
   ;; Load snippet tables
   (yas-reload-all)
   ;; Make sure yasnippet is on for org files
@@ -22,6 +18,9 @@
   (add-hook 'ess-jags-mode-hook 'yas/minor-mode-on)
   ;; Make sure yasnippet is on for rmarkdown files
   (add-hook 'markdown-mode-hook 'yas/minor-mode-on)
+  ;; Add snippet availability in all modes
+  (add-hook 'yas-minor-mode-hook (lambda ()
+                                   (yas-activate-extra-mode 'fundamental-mode)))
   ;; Don't expand when you are typing in a string or comment.
   (add-hook 'prog-mode-hook
 	    (lambda ()

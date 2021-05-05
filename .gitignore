@@ -6,3 +6,4 @@ elpa/
 /org-setup.el
 /.DS_Store
 /snippets/.DS_Store
+/org-roam-setup.el

@@ -1,11 +1,8 @@
-;; Time-stamp: <2017-08-21 12:07:00 (slane)>
+;; Time-stamp: <2019-03-27 16:30:14 (slane)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; magit
-(use-package magit
-  :ensure t
-  :bind (("C-x g" . magit-status))
-  :config
+(with-eval-after-load 'magit
   (add-hook 'git-commit-mode-hook (lambda () (setq fill-column 72)))
   (setq
    magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256"))
