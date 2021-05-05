@@ -61,6 +61,7 @@ values."
           org-enable-roam-support t
           org-enable-jira-support t
           org-jira-working-dir "~/github/org-jira"
+          org-roam-directory "~/github/org-roam-files"
           )
      polymode
      ;; (shell :variables
