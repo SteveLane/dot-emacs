@@ -63,7 +63,7 @@ values."
           org-jira-working-dir "~/github/org-jira"
           org-roam-directory "~/github/org-roam-files"
           )
-     ;; polymode
+     polymode
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
