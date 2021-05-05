@@ -61,13 +61,14 @@ values."
           org-enable-roam-support t
           org-enable-jira-support t
           org-jira-working-dir "~/github/org-jira"
+          org-roam-directory "~/github/org-roam-files"
           )
      polymode
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      rust
-     stan-mode
+     ;; stan-mode
      syntax-checking
      themes-megapack
      treemacs
@@ -381,7 +382,7 @@ you should place your code here."
   (org-babel-load-file "~/github/emacs-config/org-setup.org")
   ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
-  (load-file "~/github/emacs-config/polymode-config.el")
+  ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")
   )
 
