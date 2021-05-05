@@ -348,6 +348,22 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (when (spacemacs/system-is-mac)
+    (setq-default dotspacemacs-default-font '("Iosevka"
+                                              :size 16
+                                              :weight light
+                                              :width normal
+                                              :powerline-scale 1.1)
+                  )
+    )
+  (when (spacemacs/system-is-mswindows)
+    (setq-default dotspacemacs-default-font '("Iosevka"
+                                              :size 20
+                                              :weight light
+                                              :width normal
+                                              :powerline-scale 1.1)
+                  )
+    )
   )
 
 (defun dotspacemacs/user-config ()
