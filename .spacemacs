@@ -56,7 +56,6 @@ values."
      ;; extra-langs
      git
      groovy
-     latex
      markdown
      (org :variables
           org-enable-roam-support t
@@ -103,6 +102,7 @@ values."
     ;; (ess :variables
     ;;      ess-r-backend 'lsp
     ;;      lsp-clients-r-server-command (quote ("/usr/local/bin/R" "--slave" "-e" "languageserver::run()")))
+    latex
     spell-checking
     ;; (mu4e :variables
     ;;         mu4e-installation-path "/usr/local/Cellar/mu/1.4.15/share/emacs/site-lisp/mu/mu4e")
