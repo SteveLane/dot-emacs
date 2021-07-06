@@ -11,8 +11,6 @@ This document is literate explanation of the setup for my spelling implementatio
 
 * Simple setup
 
-Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
-
 ** Template definitions
    
    #+header: :tangle yes
