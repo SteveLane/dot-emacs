@@ -1,0 +1,26 @@
+#+TITLE: Spelling setup
+#+AUTHOR: Steve Lane
+#+DESCRIPTION: Describes how I've set up spelling (windows).
+#+EXPORT_SELECT_TAGS: export
+#+EXPORT_EXCLUDE_TAGS: noexport
+#+PROPERTY: header-args :tangle yes
+
+* Introduction
+
+This document is literate explanation of the setup for my spelling implementation. Windows is a pain, and I've used mingw64 to set up hunspell. But to set up hunspell in emacs, I'm taking my cues from [[https://github.com/nobiot/Zero-to-Emacs-and-Org-roam/blob/main/80.Spell-checker.md][~nobiot~]].
+
+* Simple setup
+
+** Template definitions
+   
+   #+header: :tangle yes
+   #+begin_src emacs-lisp :export yes
+     ;; Set up languages
+     (setenv "LANG" "en_AU")
+
+     (when (spacemacs/system-is-mswindows)
+       (setq ispell-program-name
+             "C:/msys64/mingw64/bin/hunspell.exe")
+       )
+   #+end_src
+

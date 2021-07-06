@@ -7,3 +7,4 @@ elpa/
 /.DS_Store
 /snippets/.DS_Store
 /org-roam-setup.el
+/spelling-setup.el
