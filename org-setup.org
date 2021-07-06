@@ -306,7 +306,7 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                         (org-agenda-overriding-header "Today's Items")
                         (org-agenda-skip-scheduled-if-deadline-is-shown t)
                         (org-super-agenda-groups
-                         '((:discard (:todo "DONE"))
+                         '((:discard (:todo ("DONE" "CANCELLED")))
                            (:discard (:tag "MEETING"))
                            (:name "Today"
                                   :time-grid t
