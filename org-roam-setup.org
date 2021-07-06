@@ -53,7 +53,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
 ** Template definitions
    
-   #+header: :tangle yes
+   #+header: :tangle no
    #+begin_src emacs-lisp :export no
      (setq
       ;; Define custom org-roam capture templates
