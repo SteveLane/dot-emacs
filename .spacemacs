@@ -62,6 +62,7 @@ values."
           org-enable-jira-support t
           org-jira-working-dir "~/github/org-jira"
           org-roam-directory "~/github/org-roam-files"
+          org-roam-db-location "~/github/org-roam-files/org-roam.db"
           )
      polymode
      ;; (shell :variables
@@ -381,7 +382,7 @@ you should place your code here."
   ;;   )
   (load-file "~/github/emacs-config/magit-config.el")
   (org-babel-load-file "~/github/emacs-config/org-setup.org")
-  ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
+  (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")

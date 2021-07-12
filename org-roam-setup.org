@@ -7,11 +7,45 @@
 
 * Introduction
 
-This document is literate explanation of the setup for my org-roam implementation. I've got a pretty basic ~packages.el~ in use that installs and sets up leader keys:
+  I've now migrated over to v2 of [[https://github.com/org-roam/org-roam/tree/v2][Org-roam]]. To do this, I needed to follow a number of steps.
 
-** ~/private/org-roam/packages.el~
+  1. Make sure that ~gcc~ is in my path ([[https://org-roam.discourse.group/t/v2-do-we-want-org-roam-project-to-host-an-executable-file/1549/5][follow the thread here]]).
+  2. Edit the org-roam enabling in .spacemacs layer ("~/.emacs.d/layers/+emacs/org/layers.el") to
+  #+begin_src emacs-lisp :tangle no
+    (org-roam :toggle org-enable-roam-support
+              :location (recipe :fetcher github :repo "org-roam/org-roam" :branch "v2")
+              )
 
-   #+INCLUDE: ./private/org-roam/packages.el example emacs-lisp
+  #+end_src
+  3. Add new spacemacs leader keys and capture templates (below).
+
+* Initial configuration
+
+  (to overwrite the defaults in spacemacs)
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+      (use-package org-roam
+        :defer t
+        :hook (after-init . org-roam-mode)
+        :init
+        (progn
+          (spacemacs/set-leader-keys
+            "aorf" 'org-roam-node-find
+            "aorg" 'org-roam-graph
+            "aori" 'org-roam-node-insert
+            "aorl" 'org-roam-buffer-toggle
+            "aorc" 'org-roam-capture)
+
+          (spacemacs/set-leader-keys-for-major-mode 'org-mode
+            "rf" 'org-roam-node-find
+            "ri" 'org-roam-node-insert
+            "rl" 'org-roam-buffer-toggle
+            "rc" 'org-roam-capture))
+        :config
+        (org-roam-setup)
+        )
+
+  #+end_src
 
 * Capture templates
 
@@ -19,8 +53,8 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
 ** Template definitions
    
-   #+header: :tangle yes
-   #+begin_src emacs-lisp :export yes
+   #+header: :tangle no
+   #+begin_src emacs-lisp :export no
      (setq
       ;; Define custom org-roam capture templates
       org-roam-capture-templates
