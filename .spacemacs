@@ -384,6 +384,7 @@ you should place your code here."
   (org-babel-load-file "~/github/emacs-config/org-setup.org")
   (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
+  (load-file "~/github/emacs-config/stan-config.el")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")
   )
