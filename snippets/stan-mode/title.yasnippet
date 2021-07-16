@@ -1,0 +1,33 @@
+# -*- mode: snippet -*-
+# name: ## Title ##
+# key: title
+# --
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+// Title: ${1:Some Title}
+// Author: Steve Lane
+// Date: `(format-time-string "%A, %d %B %Y" (current-time))`
+// Synopsis: ${2:Description}
+// Time-stamp: <>
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+data {
+  // Data to be supplied to sampler
+}
+
+parameters {
+  // Parameters for the model
+}
+
+transformed parameters {
+  // Make it easier for some sampling statements (not necessary)
+}
+
+model {
+  // Model sampling statements
+}
+
+generated quantities {
+  // Statements for predictive outputs, e.g. new data
+}
