@@ -69,7 +69,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      rust
-     ;; stan-mode
+     stan-mode
      syntax-checking
      themes-megapack
      treemacs

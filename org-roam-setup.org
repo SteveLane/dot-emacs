@@ -24,26 +24,27 @@
   (to overwrite the defaults in spacemacs)
 
   #+begin_src emacs-lisp :tangle yes :export yes
-      (use-package org-roam
-        :defer t
-        :hook (after-init . org-roam-mode)
-        :init
-        (progn
-          (spacemacs/set-leader-keys
-            "aorf" 'org-roam-node-find
-            "aorg" 'org-roam-graph
-            "aori" 'org-roam-node-insert
-            "aorl" 'org-roam-buffer-toggle
-            "aorc" 'org-roam-capture)
+    (use-package org-roam
+      :defer t
+      :hook (after-init . org-roam-mode)
+      :init
+      (setq org-roam-v2-ack t)
+      (progn
+        (spacemacs/set-leader-keys
+          "aorf" 'org-roam-node-find
+          "aorg" 'org-roam-graph
+          "aori" 'org-roam-node-insert
+          "aorl" 'org-roam-buffer-toggle
+          "aorc" 'org-roam-capture)
 
-          (spacemacs/set-leader-keys-for-major-mode 'org-mode
-            "rf" 'org-roam-node-find
-            "ri" 'org-roam-node-insert
-            "rl" 'org-roam-buffer-toggle
-            "rc" 'org-roam-capture))
-        :config
-        (org-roam-setup)
-        )
+        (spacemacs/set-leader-keys-for-major-mode 'org-mode
+          "rf" 'org-roam-node-find
+          "ri" 'org-roam-node-insert
+          "rl" 'org-roam-buffer-toggle
+          "rc" 'org-roam-capture))
+      :config
+      (org-roam-setup)
+      )
 
   #+end_src
 
@@ -59,24 +60,14 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       ;; Define custom org-roam capture templates
       org-roam-capture-templates
       '(
-        ("p" "person" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: person\n"
-         :unnarrowed t)
-        ("c" "code" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: code\n"
-         :unnarrowed t)
-        ("P" "process" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: process\n"
-         :unnarrowed t)
+        ("p" "Permanent Note" plain "%?"
+         :if-new file+head "${slug}.org" "#+title: ${title}\n"
+         :unnarrowed t
+         )
+        ("l" "Literature Note" plain "%?"
+         :if-new file+head "literature/${slug}.org" "#+title: ${title} %^{ROAM_REF}p\n"
+         :unnarrowed t
+         )
         )
       )
    #+end_src
