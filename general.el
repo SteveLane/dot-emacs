@@ -56,3 +56,6 @@
   ;; make the default directory where I want it
   (setq default-directory "c:/Users/LANES1")
   )
+
+;; Turn off org-roam v2 warning
+(setq org-roam-v2-ack t)
