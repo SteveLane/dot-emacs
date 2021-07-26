@@ -11,22 +11,22 @@
   ;; The officially recommended offset is 2.
   (setq stan-indentation-offset 2))
 
-;;; company-stan.el
-(use-package company-stan
-  :ensure t
-  :after (stan-mode)
-  :hook (stan-mode . company-stan-setup)
-  ;;
-  :config
-  ;; Whether to use fuzzy matching in `company-stan'
-  (setq company-stan-fuzzy nil))
+;; ;;; company-stan.el
+;; (use-package company-stan
+;;   :ensure t
+;;   :after (stan-mode)
+;;   :hook (stan-mode . company-stan-setup)
+;;   ;;
+;;   :config
+;;   ;; Whether to use fuzzy matching in `company-stan'
+;;   (setq company-stan-fuzzy nil))
 
-;;; eldoc-stan.el
-(use-package eldoc-stan
-  :ensure t
-  :after (stan-mode company-stan)
-  :hook (stan-mode . eldoc-stan-setup)
-  ;;
-  :config
-  ;; No configuration options as of now.
-  )
+;; ;;; eldoc-stan.el
+;; (use-package eldoc-stan
+;;   :ensure t
+;;   :after (stan-mode company-stan)
+;;   :hook (stan-mode . eldoc-stan-setup)
+;;   ;;
+;;   :config
+;;   ;; No configuration options as of now.
+;;   )
