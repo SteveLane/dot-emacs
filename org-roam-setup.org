@@ -12,26 +12,6 @@
   1. Make sure that ~gcc~ is in my path ([[https://org-roam.discourse.group/t/v2-do-we-want-org-roam-project-to-host-an-executable-file/1549/5][follow the thread here]]).
   2. Add new spacemacs leader keys and capture templates (below).
 
-* Initial configuration
-
-  (to overwrite the defaults in spacemacs)
-
-  #+begin_src emacs-lisp :tangle yes :export yes
-    (progn
-      (spacemacs/set-leader-keys
-        "aorf" 'org-roam-node-find
-        "aorg" 'org-roam-graph
-        "aori" 'org-roam-node-insert
-        "aorl" 'org-roam-buffer-toggle
-        "aorc" 'org-roam-capture)
-
-      (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "rf" 'org-roam-node-find
-        "ri" 'org-roam-node-insert
-        "rl" 'org-roam-buffer-toggle
-        "rc" 'org-roam-capture))
-  #+end_src
-
 * Capture templates
 
 Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
@@ -97,5 +77,38 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
   #+begin_src emacs-lisp :tangle yes :export yes
     ;; start org roam
     (org-roam-setup)
+  #+end_src
+
+* Searching through your notes
+
+  To make it a little easier to search, use ripgrep.
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    (defun sprazza/org-roam-rg-search ()
+      "Search in the org-roam directory with `rg'."
+      (interactive)
+      (spacemacs/helm-files-do-rg org-roam-directory))
+  #+end_src
+
+* Leader keys
+
+  (to overwrite the defaults in spacemacs)
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    (progn
+      (spacemacs/set-leader-keys
+        "aorf" 'org-roam-node-find
+        "aorg" 'org-roam-graph
+        "aori" 'org-roam-node-insert
+        "aorl" 'org-roam-buffer-toggle
+        "aorc" 'org-roam-capture
+        "aors" 'sprazza/org-roam-ag-search)
+
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "rf" 'org-roam-node-find
+        "ri" 'org-roam-node-insert
+        "rl" 'org-roam-buffer-toggle
+        "rc" 'org-roam-capture
+        "rs" 'sprazza/org-roam-ag-search))
   #+end_src
 
