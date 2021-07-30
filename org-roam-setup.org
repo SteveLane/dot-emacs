@@ -48,6 +48,10 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t
          )
+        ("i" "Ideas and Somedays" plain "%?"
+         :if-new (file+head "ideas/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t
+         )
         ("l" "Literature Note" plain "%?"
          :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t
