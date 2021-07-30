@@ -32,7 +32,11 @@ values."
                                            )
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(csv
+   '(
+     (bibtex :variables
+             org-ref-default-bibliography "~/github/references.bib"
+      )
+     csv
      octave
      yaml
      html
@@ -61,6 +65,8 @@ values."
      markdown
      (org :variables
           org-enable-roam-support t
+          ;; org-enable-roam-server t
+          ;; org-enable-roam-protocol t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           )
