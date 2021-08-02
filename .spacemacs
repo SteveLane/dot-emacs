@@ -65,11 +65,14 @@ values."
      markdown
      (org :variables
           org-enable-roam-support t
+          ;; turn off v2 warning
+          org-roam-v2-ack t
           ;; org-enable-roam-server t
           ;; org-enable-roam-protocol t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           )
+     ;; org-roam-ui
      polymode
      ;; (shell :variables
      ;;        shell-default-height 30
