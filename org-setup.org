@@ -153,7 +153,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
      ("j" "Journal Club" entry (file org-journal-file)
       "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      ("P" "Professional development templates")
-     ("Pl" "Seminar" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Seminars")
+     ("Ps" "Seminar" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Seminars")
       "* Title: %?\n** Date: %^t\n** Speaker: " :clock-in t :clock-resume t)
      ("Pw" "Workshop" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Workshops")
       "* Title: %?\n** Date: %^t\n** Presenter: " :clock-in t :clock-resume t)
