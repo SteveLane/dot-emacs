@@ -32,7 +32,11 @@ values."
                                            )
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(csv
+   '(
+     (bibtex :variables
+             org-ref-default-bibliography "~/github/references.bib"
+      )
+     csv
      octave
      yaml
      html
@@ -49,7 +53,9 @@ values."
                       auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip nil)
+                      auto-completion-enable-help-tooltip nil
+                      ;; spacemacs-default-company-backends (add-to-list 'spacemacs-default-company-backends '(company-capf))
+                      )
      ;; better-defaults
      emacs-lisp
      ess
@@ -59,11 +65,14 @@ values."
      markdown
      (org :variables
           org-enable-roam-support t
-          org-enable-jira-support t
-          org-jira-working-dir "~/github/org-jira"
+          ;; turn off v2 warning
+          org-roam-v2-ack t
+          ;; org-enable-roam-server t
+          ;; org-enable-roam-protocol t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           )
+     ;; org-roam-ui
      polymode
      ;; (shell :variables
      ;;        shell-default-height 30

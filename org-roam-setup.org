@@ -10,47 +10,35 @@
   I've now migrated over to v2 of [[https://github.com/org-roam/org-roam/tree/v2][Org-roam]]. To do this, I needed to follow a number of steps.
 
   1. Make sure that ~gcc~ is in my path ([[https://org-roam.discourse.group/t/v2-do-we-want-org-roam-project-to-host-an-executable-file/1549/5][follow the thread here]]).
-  2. Edit the org-roam enabling in .spacemacs layer ("~/.emacs.d/layers/+emacs/org/layers.el") to
-  #+begin_src emacs-lisp :tangle no
-    (org-roam :toggle org-enable-roam-support
-              :location (recipe :fetcher github :repo "org-roam/org-roam" :branch "v2")
-              )
-
-  #+end_src
-  3. Add new spacemacs leader keys and capture templates (below).
-
-* Initial configuration
-
-  (to overwrite the defaults in spacemacs)
-
-  #+begin_src emacs-lisp :tangle yes :export yes
-    (use-package org-roam
-      :defer t
-      :hook (after-init . org-roam-mode)
-      :init
-      (setq org-roam-v2-ack t)
-      (progn
-        (spacemacs/set-leader-keys
-          "aorf" 'org-roam-node-find
-          "aorg" 'org-roam-graph
-          "aori" 'org-roam-node-insert
-          "aorl" 'org-roam-buffer-toggle
-          "aorc" 'org-roam-capture)
-
-        (spacemacs/set-leader-keys-for-major-mode 'org-mode
-          "rf" 'org-roam-node-find
-          "ri" 'org-roam-node-insert
-          "rl" 'org-roam-buffer-toggle
-          "rc" 'org-roam-capture))
-      :config
-      (org-roam-setup)
-      )
-
-  #+end_src
+  2. Add new spacemacs leader keys and capture templates (below).
 
 * Capture templates
 
 Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
+
+** Template definitions
+   
+   #+header: :tangle yes
+   #+begin_src emacs-lisp :export yes
+     (setq
+      ;; Define custom org-roam capture templates
+      org-roam-capture-templates
+      '(
+        ("p" "Permanent Note" plain "%?"
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t
+         )
+        ("i" "Ideas and Somedays" plain "%?"
+         :if-new (file+head "ideas/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t
+         )
+        ("l" "Literature Note" plain "%?"
+         :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :unnarrowed t
+         )
+        )
+      )
+   #+end_src
 
 ** Template definitions
    
@@ -60,15 +48,67 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       ;; Define custom org-roam capture templates
       org-roam-capture-templates
       '(
-        ("p" "Permanent Note" plain "%?"
-         :if-new file+head "${slug}.org" "#+title: ${title}\n"
-         :unnarrowed t
-         )
-        ("l" "Literature Note" plain "%?"
-         :if-new file+head "literature/${slug}.org" "#+title: ${title} %^{ROAM_REF}p\n"
-         :unnarrowed t
-         )
+        ("p" "person" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: person\n"
+         :unnarrowed t)
+        ("c" "code" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: code\n"
+         :unnarrowed t)
+        ("P" "process" plain (function org-roam--capture-get-point)
+         "%?"
+         :file-name "%<%Y%m%d%H%M%S>-${slug}"
+         :head "#+title: ${title}
+     ,#+roam_tags: process\n"
+         :unnarrowed t)
         )
       )
    #+end_src
+
+* Starting org-roam
+
+  Org-roam needs to be 'started' with v2. So we call the setup function to get it going:
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    ;; start org roam
+    (org-roam-setup)
+  #+end_src
+
+* Searching through your notes
+
+  To make it a little easier to search, use ripgrep.
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    (defun sprazza/org-roam-rg-search ()
+      "Search in the org-roam directory with `rg'."
+      (interactive)
+      (spacemacs/helm-files-do-rg org-roam-directory))
+  #+end_src
+
+* Leader keys
+
+  (to overwrite the defaults in spacemacs)
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    (progn
+      (spacemacs/set-leader-keys
+        "aorf" 'org-roam-node-find
+        "aorg" 'org-roam-graph
+        "aori" 'org-roam-node-insert
+        "aorl" 'org-roam-buffer-toggle
+        "aorc" 'org-roam-capture
+        "aors" 'sprazza/org-roam-ag-search)
+
+      (spacemacs/set-leader-keys-for-major-mode 'org-mode
+        "rf" 'org-roam-node-find
+        "ri" 'org-roam-node-insert
+        "rl" 'org-roam-buffer-toggle
+        "rc" 'org-roam-capture
+        "rs" 'sprazza/org-roam-ag-search))
+  #+end_src
 
