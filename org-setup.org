@@ -140,8 +140,11 @@ The following code provides the capture templates when I add TODO tasks. Best pl
    org-capture-templates
    '(("t" "todo" entry (file org-default-notes-file)
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-     ("m" "Meeting/Interruption" entry (file org-default-notes-file)
-      "* MEETING Subject: %? :MEETING:\n%t \n** Attendees: " :clock-in t :clock-resume t)
+     ("m" "Meeting templates")
+     ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "People Leaders")
+      "* MEETING :MEETING:\n** Date: %^t \n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in t :clock-resume t)
+     ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "General Meetings")
+      "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("r" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
