@@ -102,13 +102,13 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         "aori" 'org-roam-node-insert
         "aorl" 'org-roam-buffer-toggle
         "aorc" 'org-roam-capture
-        "aors" 'sprazza/org-roam-ag-search)
+        "aors" 'sprazza/org-roam-rg-search)
 
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "rf" 'org-roam-node-find
         "ri" 'org-roam-node-insert
         "rl" 'org-roam-buffer-toggle
         "rc" 'org-roam-capture
-        "rs" 'sprazza/org-roam-ag-search))
+        "rs" 'sprazza/org-roam-rg-search))
   #+end_src
 
