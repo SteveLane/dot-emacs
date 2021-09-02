@@ -145,6 +145,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING :MEETING:\n** Date: %^t \n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in t :clock-resume t)
      ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "General Meetings")
       "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
+      "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("r" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
@@ -166,6 +168,26 @@ The following code provides the capture templates when I add TODO tasks. Best pl
    org-cycle-separator-lines 1
    )
 #+END_SRC
+
+For the regular people meetings, we can search for the org target of interest, using this function (called in the above template):
+
+#+begin_src emacs-lisp :tangle yes :export yes
+  (defun sprazza/org-get-target-headline (&optional targets prompt)
+    "Prompt for a location in an org file and jump to it.
+
+  This is for promping for refile targets when doing captures.
+  Targets are selected from `org-refile-targets'. If TARGETS is
+  given it temporarily overrides `org-refile-targets'. PROMPT will
+  replace the default prompt message.
+
+  "
+    (let ((org-refile-targets (or targets org-refile-targets))
+          (prompt (or prompt "Capture Location")))
+        (org-refile t nil nil prompt))
+    )
+#+end_src
+
+Source for this function is [[https://emacs.stackexchange.com/questions/5923/org-capture-how-to-choose-the-target-file-at-the-end-of-the-process][this stack]].
 
 ** Tagging tasks
 
