@@ -56,7 +56,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    org-refile-targets (quote ((nil :maxlevel . 2)
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
-   org-agenda-files (list org-directory)
+   org-agenda-files (list org-directory "~/github/org-jira")
    )
 #+END_SRC
 

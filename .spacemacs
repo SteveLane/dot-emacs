@@ -71,6 +71,9 @@ values."
           ;; org-enable-roam-protocol t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
+          org-enable-jira-support t
+          jiralib-url "https://jira.worksafe.vic.gov.au"
+          org-jira-working-dir "~/github/org-jira"
           )
      ;; org-roam-ui
      polymode
