@@ -76,7 +76,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
   #+begin_src emacs-lisp :tangle yes :export yes
     ;; start org roam
-    (org-roam-setup)
+    ;; (org-roam-setup)
   #+end_src
 
 * Searching through your notes

@@ -57,3 +57,7 @@
   (setq default-directory "c:/Users/LANES1")
   )
 
+;; Ensure that plink is used as default tramp on windows
+(when (spacemacs/system-is-mswindows)
+  (setq tramp-default-method "plink")
+  )
