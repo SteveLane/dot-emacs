@@ -58,6 +58,11 @@
   )
 
 ;; Ensure that plink is used as default tramp on windows
+;; And don't use authinfo - always ask for a password
 (when (spacemacs/system-is-mswindows)
   (setq tramp-default-method "plink")
+  (setq auth-sources nil)
   )
+
+;; Prefer utf-8 linux, so we don't get crazy linefeeds
+(prefer-coding-system 'utf-8-unix)
