@@ -62,6 +62,7 @@
 (when (spacemacs/system-is-mswindows)
   (setq tramp-default-method "plink")
   (setq auth-sources nil)
+  (setq password-cache-expiry nil)
   )
 
 ;; Prefer utf-8 linux, so we don't get crazy linefeeds
