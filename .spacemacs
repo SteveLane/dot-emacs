@@ -399,6 +399,10 @@ you should place your code here."
   (load-file "~/github/emacs-config/stan-config.el")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")
+  ;; Tell babel where R is (align with ESS as well...)
+  (when (spacemacs/system-is-mswindows)
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.0.5/bin/x64/Rterm.exe --slave --no-save")
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
