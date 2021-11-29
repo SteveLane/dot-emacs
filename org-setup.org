@@ -138,7 +138,12 @@ The following code provides the capture templates when I add TODO tasks. Best pl
   (setq
    ;; Define the custum capture templates
    org-capture-templates
-   '(("t" "todo" entry (file org-default-notes-file)
+   '(("t" "Todo's and other general notes")
+     ("tt" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("tT" "Todo (to refile)" entry (file org-default-notes-file)
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("tr" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ("m" "Meeting templates")
      ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "People Leaders")
@@ -147,8 +152,6 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
       "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("r" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
-      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
      ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
      ;; ("s" "Someday" entry (file org-default-notes-file)
@@ -162,7 +165,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* Title: %?\n** Date: %^t\n** Speaker: \n** Notes\n" :clock-in t :clock-resume t)
      ("Pw" "Workshop" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Workshops")
       "* Title: %?\n** Date: %^t\n** Presenter: " :clock-in t :clock-resume t)
-
+  
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1
