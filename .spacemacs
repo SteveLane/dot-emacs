@@ -92,6 +92,7 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
                                       org-super-agenda
+                                      poly-R
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -403,6 +404,9 @@ you should place your code here."
   (when (spacemacs/system-is-mswindows)
     (setq org-babel-R-command "c:/Progra~1/R/R-4.0.5/bin/x64/Rterm.exe --slave --no-save")
     )
+  ;; associate Rnw
+  (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+  (add-to-list 'auto-mode-alist '("\\.rnw" . poly-noweb+r-mode))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
