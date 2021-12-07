@@ -165,6 +165,15 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* Title: %?\n** Date: %^t\n** Speaker: \n** Notes\n" :clock-in t :clock-resume t)
      ("Pw" "Workshop" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Workshops")
       "* Title: %?\n** Date: %^t\n** Presenter: " :clock-in t :clock-resume t)
+     ("M" "Management")
+     ("Mt" "Task Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("Mp" "People Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "People Management")
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("Mm" "Task Management Meeting" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
+      "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
+  
+      )
   
      )
    ;; Keep a line between headers
