@@ -173,8 +173,6 @@ The following code provides the capture templates when I add TODO tasks. Best pl
      ("Mm" "Task Management Meeting" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
       "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
   
-      )
-  
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1
