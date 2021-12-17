@@ -62,6 +62,7 @@ values."
      ;; extra-langs
      git
      groovy
+     latex
      markdown
      (org :variables
           org-enable-roam-support t
