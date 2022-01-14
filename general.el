@@ -67,3 +67,6 @@
 
 ;; Prefer utf-8 linux, so we don't get crazy linefeeds
 (prefer-coding-system 'utf-8-unix)
+
+;; Make dired lists nicer
+(setq dired-listing-switches "-alh")
