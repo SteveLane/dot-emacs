@@ -58,11 +58,14 @@ values."
                       )
      ;; better-defaults
      emacs-lisp
-     ess
+     (ess :variables
+          ess-r-backend 'lsp
+          )
      ;; extra-langs
      git
      groovy
      latex
+     lsp
      markdown
      (org :variables
           org-enable-roam-support t
@@ -82,6 +85,7 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      rust
+     sql
      stan-mode
      syntax-checking
      themes-megapack
@@ -94,6 +98,7 @@ values."
    dotspacemacs-additional-packages '(
                                       org-super-agenda
                                       poly-R
+                                      org-clock-csv
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -183,8 +188,8 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(zenburn
-                         dichromacy
+   dotspacemacs-themes '(dichromacy
+                         zenburn
                          spacemacs-dark
                          spacemacs-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
