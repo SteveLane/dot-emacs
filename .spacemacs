@@ -36,6 +36,9 @@ values."
      (bibtex :variables
              org-ref-default-bibliography "~/github/references.bib"
       )
+     (conda :variables
+            conda-anaconda-home "c:/Users/LANES1/AppData/Local/Continuum/anaconda3/"
+            )
      csv
      octave
      yaml
@@ -64,6 +67,7 @@ values."
      ;; extra-langs
      git
      groovy
+     ipython-notebook
      latex
      lsp
      markdown
@@ -81,6 +85,7 @@ values."
           )
      ;; org-roam-ui
      polymode
+     python
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
