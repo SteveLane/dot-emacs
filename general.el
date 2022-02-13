@@ -39,7 +39,7 @@
 (add-to-list 'auto-mode-alist '("[mM]akefile\\.[a-zA-Z]*\\'" . makefile-mode))
 
 ;; make spacemacs the global git editor
-(global-git-commit-mode t)
+;; (global-git-commit-mode t)
 
 ;; make sure that ess-mode has linting
 (add-to-list 'flycheck-global-modes 'ess-mode)
@@ -68,5 +68,6 @@
 ;; Prefer utf-8 linux, so we don't get crazy linefeeds
 (prefer-coding-system 'utf-8-unix)
 
-;; Make dired lists nicer
+;; Make dired lists nicer and stop warnings
+(setq ls-lisp-use-insert-directory-program t)
 (setq dired-listing-switches "-alh")

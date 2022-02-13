@@ -82,10 +82,14 @@ values."
           org-enable-jira-support t
           jiralib-url "https://jira.worksafe.vic.gov.au"
           org-jira-working-dir "~/github/org-jira"
+          org-adapt-indentation t
           )
      ;; org-roam-ui
      polymode
-     python
+     (python :variables
+             python-backend 'lsp
+             python-lsp-server 'pyright
+             )
      ;; (shell :variables
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
