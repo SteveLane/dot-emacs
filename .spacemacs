@@ -87,6 +87,7 @@ values."
      ;; org-roam-ui
      polymode
      (python :variables
+             python-shell-interpreter "ipython3"
              python-backend 'lsp
              python-lsp-server 'pyright
              )
