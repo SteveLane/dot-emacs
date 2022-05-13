@@ -42,6 +42,7 @@ values."
      csv
      octave
      yaml
+     graphviz
      html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -57,6 +58,7 @@ values."
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip nil
+                      spacemacs-default-company-backends '(company-capf :with company-yasnippet)
                       ;; spacemacs-default-company-backends (add-to-list 'spacemacs-default-company-backends '(company-capf))
                       )
      ;; better-defaults
@@ -423,6 +425,8 @@ you should place your code here."
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
   (add-to-list 'auto-mode-alist '("\\.rnw" . poly-noweb+r-mode))
+  ;; Prevent undo tree files from polluting your git repo
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
