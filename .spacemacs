@@ -65,6 +65,9 @@ values."
      emacs-lisp
      (ess :variables
           ess-r-backend 'lsp
+          ess-use-company 't
+          polymode-lsp-integration nil
+          :config (add-to-list 'auto-mode-alist '("\\.[qrR]md\\'" . poly-markdown+r-mode))
           )
      ;; extra-langs
      git
@@ -87,7 +90,6 @@ values."
           org-adapt-indentation t
           )
      ;; org-roam-ui
-     polymode
      (python :variables
              python-shell-interpreter "ipython3"
              python-backend 'lsp
@@ -109,7 +111,11 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
                                       org-super-agenda
+                                      (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
+                                      poly-markdown
+                                      poly-noweb
+                                      poly-org
                                       org-clock-csv
                                       quarto-mode
                                       )
