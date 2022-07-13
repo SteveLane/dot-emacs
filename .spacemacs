@@ -42,6 +42,7 @@ values."
      csv
      octave
      yaml
+     graphviz
      html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -57,12 +58,16 @@ values."
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-help-tooltip nil
+                      spacemacs-default-company-backends '(company-capf :with company-yasnippet)
                       ;; spacemacs-default-company-backends (add-to-list 'spacemacs-default-company-backends '(company-capf))
                       )
      ;; better-defaults
      emacs-lisp
      (ess :variables
           ess-r-backend 'lsp
+          ess-use-company 't
+          polymode-lsp-integration nil
+          :config (add-to-list 'auto-mode-alist '("\\.[qrR]md\\'" . poly-markdown+r-mode))
           )
      ;; extra-langs
      git
@@ -85,7 +90,6 @@ values."
           org-adapt-indentation t
           )
      ;; org-roam-ui
-     polymode
      (python :variables
              python-shell-interpreter "ipython3"
              python-backend 'lsp
@@ -107,8 +111,13 @@ values."
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
                                       org-super-agenda
+                                      (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
+                                      poly-markdown
+                                      poly-noweb
+                                      poly-org
                                       org-clock-csv
+                                      quarto-mode
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -423,6 +432,8 @@ you should place your code here."
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
   (add-to-list 'auto-mode-alist '("\\.rnw" . poly-noweb+r-mode))
+  ;; Prevent undo tree files from polluting your git repo
+  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
