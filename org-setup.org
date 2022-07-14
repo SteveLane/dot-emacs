@@ -152,6 +152,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
       "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mt" "T5k Regular Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
+      "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
      ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
      ;; ("s" "Someday" entry (file org-default-notes-file)
