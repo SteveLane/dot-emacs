@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: libname ... '/sasdata/prod/...'
+# key: libname
+# condition: (equal (file-name-extension (buffer-file-name)) "sas")
+# contributor: SteveLane
+# --
+libname ${1:name} '/sasdata/prod/worksafe/health_safety/${2:folder}/data/';
