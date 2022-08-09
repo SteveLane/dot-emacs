@@ -154,6 +154,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("mt" "T5k Regular Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
       "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mT" "T5k Other Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
+      "* MEETING T5k: %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
      ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
      ;; ("s" "Someday" entry (file org-default-notes-file)
@@ -174,7 +176,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ("Mm" "Task Management Meeting" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
       "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
-  
+
      )
    ;; Keep a line between headers
    org-cycle-separator-lines 1

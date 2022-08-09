@@ -84,10 +84,10 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
   To make it a little easier to search, use ripgrep.
 
   #+begin_src emacs-lisp :tangle yes :export yes
-    (defun sprazza/org-roam-rg-search ()
+    (defun sprazza/org-roam-search ()
       "Search in the org-roam directory with `rg'."
       (interactive)
-      (spacemacs/helm-files-do-rg org-roam-directory))
+      (spacemacs/compleseus-search t org-roam-directory))
   #+end_src
 
 * Leader keys
@@ -102,13 +102,13 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         "aori" 'org-roam-node-insert
         "aorl" 'org-roam-buffer-toggle
         "aorc" 'org-roam-capture
-        "aors" 'sprazza/org-roam-rg-search)
+        "aors" 'sprazza/org-roam-search)
 
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
         "rf" 'org-roam-node-find
         "ri" 'org-roam-node-insert
         "rl" 'org-roam-buffer-toggle
         "rc" 'org-roam-capture
-        "rs" 'sprazza/org-roam-rg-search))
+        "rs" 'sprazza/org-roam-search))
   #+end_src
 
