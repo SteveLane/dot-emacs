@@ -56,7 +56,6 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    org-refile-targets (quote ((nil :maxlevel . 2)
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
-   org-agenda-files (list org-directory "~/github/org-jira")
    )
 #+END_SRC
 
@@ -135,53 +134,55 @@ The following code provides the capture templates when I add TODO tasks. Best pl
 
 #+header: :tangle yes
 #+BEGIN_SRC emacs-lisp :export yes
-    (setq
-     ;; Define the custum capture templates
-     org-capture-templates
-     '(("t" "Todo's and other general notes")
-       ("tt" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
-        "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-       ("tT" "Todo (to refile)" entry (file org-default-notes-file)
-        "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-       ("tr" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
-        "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-       ("m" "Meeting templates")
-       ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "People Leaders")
-        "* MEETING :MEETING:\n** Date: %^t \n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in t :clock-resume t)
-       ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "General Meetings")
-        "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-       ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
-        "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-       ("mt" "T5k Regular Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
-        "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-       ("mT" "T5k Other Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
-        "* MEETING T5k: %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-       ;; ("e" "Respond email" entry (file org-default-notes-file)
-       ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-       ;; ("s" "Someday" entry (file org-default-notes-file)
-       ;;  "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
-       ("p" "Project entry" entry (file org-default-notes-file)
-        "* PROJECT %? :PROJECT: \nCaptured: %u\n" :clock-in t :clock-resume t :empty-lines 1)
-       ("j" "Journal Club" entry (file org-journal-file)
-        "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
-       ("P" "Professional development templates")
-       ("Ps" "Seminar" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Seminars")
-        "* Title: %?\n** Date: %^t\n** Speaker: \n** Notes\n" :clock-in t :clock-resume t)
-       ("Pw" "Workshop" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Workshops")
-        "* Title: %?\n** Date: %^t\n** Presenter: " :clock-in t :clock-resume t)
-       ("M" "Management")
-       ("Mt" "Task Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
-        "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-       ("Mp" "People Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "People Management")
-        "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-       ("Mm" "Task Management Meeting" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
-        "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
-       ("i" "Issue tracking" entry (file (lambda() (concat org-directory "/issue-tracking.org")))
+  (setq
+   ;; Define the custum capture templates
+   org-capture-templates
+   '(("t" "Todo's and other general notes")
+     ("tt" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("tT" "Todo (to refile)" entry (file org-default-notes-file)
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("tr" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("m" "Meeting templates")
+     ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "People Leaders")
+      "* MEETING :MEETING:\n** Date: %^t \n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in t :clock-resume t)
+     ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "General Meetings")
+      "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
+      "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mt" "T5k Regular Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
+      "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ("mT" "T5k Other Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
+      "* MEETING T5k: %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
+     ;; ("e" "Respond email" entry (file org-default-notes-file)
+     ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+     ;; ("s" "Someday" entry (file org-default-notes-file)
+     ;;  "* SOMEDAY %? :SOMEDAY: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
+     ("p" "Project entry" entry (file org-default-notes-file)
+      "* PROJECT %? :PROJECT: \nCaptured: %u\n" :clock-in t :clock-resume t :empty-lines 1)
+     ("j" "Journal Club" entry (file org-journal-file)
+      "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
+     ("P" "Professional development templates")
+     ("Ps" "Seminar" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Seminars")
+      "* Title: %?\n** Date: %^t\n** Speaker: \n** Notes\n" :clock-in t :clock-resume t)
+     ("Pw" "Workshop" entry (file+headline (lambda() (concat org-directory "/professional-development.org")) "Workshops")
+      "* Title: %?\n** Date: %^t\n** Presenter: " :clock-in t :clock-resume t)
+     ("M" "Management")
+     ("Mt" "Task Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("Mp" "People Management" entry (file+headline (lambda() (concat org-directory "/management.org")) "People Management")
+      "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
+     ("Mm" "Task Management Meeting" entry (file+headline (lambda() (concat org-directory "/management.org")) "Task Management")
+      "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
+     ("i" "Issue tracking" entry (file (lambda() (concat org-directory "/issue-tracking.org")))
       "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n" :clock-in t :clock-resume t)
-       )
-     ;; Keep a line between headers
-     org-cycle-separator-lines 1
+     ("J" "Journal wins/losses" entry (function sprazza/org-get-target-headline)
+    "* %u\n** %U\n%?" :clock-in nil)
      )
+   ;; Keep a line between headers
+   org-cycle-separator-lines 1
+   )
 #+END_SRC
 
 For the regular people meetings, we can search for the org target of interest, using this function (called in the above template):
@@ -368,7 +369,7 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                            ))))
             (todo "" ((org-agenda-overriding-header "All Other TODOs")
                       (org-super-agenda-groups
-                       '((:discard (:category "Issues"))
+                       '((:discard (:category ("Issues" "Refile")))
                          (:and (:deadline nil :scheduled nil))
                          (:discard (:scheduled t))
                          (:auto-category t :order 9)
