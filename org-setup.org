@@ -138,9 +138,9 @@ The following code provides the capture templates when I add TODO tasks. Best pl
    ;; Define the custum capture templates
    org-capture-templates
    '(("t" "Todo's and other general notes")
-     ("tt" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
+     ("tt" "Todo (inbox/to refile)" entry (file org-default-notes-file)
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
-     ("tT" "Todo (to refile)" entry (file org-default-notes-file)
+     ("tT" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ("tr" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
@@ -369,16 +369,37 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                            ))))
             (todo "" ((org-agenda-overriding-header "All Other TODOs")
                       (org-super-agenda-groups
-                       '((:discard (:category ("Issues" "Refile")))
+                       '((:discard (:category ("Issues" "Refile" "Waiting")))
                          (:and (:deadline nil :scheduled nil))
                          (:discard (:scheduled t))
                          (:auto-category t :order 9)
+                         ))))
+            (todo "" ((org-agenda-overriding-header "Waiting for")
+                      (org-super-agenda-groups
+                       '((:category "Waiting")
+                         (:discard (:anything t))
                          ))))
             (todo "" ((org-agenda-overriding-header "Issues")
                     (org-super-agenda-groups
                      '((:category "Issues")
                        (:discard (:anything t))
                        ))))))
+          ("r" "Daily review"
+           (
+            (todo "" ((org-agenda-overriding-header "Daily review")
+                      (org-super-agenda-groups
+                       '((:category "Refile")
+                         (:discard (:anything t))
+                         ))))))
+          ("R" "Weekly review"
+           (
+            (todo "" ((org-agenda-overriding-header "Weekly review")
+                      (org-super-agenda-groups
+                       '((:discard (:category ("Issues" "Refile")))
+                         (:and (:deadline nil :scheduled nil))
+                         (:discard (:scheduled t))
+                         (:auto-category t)
+                         ))))))
           ("t" "Todo View"
            (
             (todo "" ((org-agenda-overriding-header "")
@@ -390,13 +411,20 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                          (:auto-category t
                                          :order 9)
                          ))))))
-         ("i" "Issues Tracking"
+          ("i" "Issues Tracking"
+           (
+            (todo "" ((org-agenda-overriding-header "Issues tracking")
+                      (org-super-agenda-groups
+                       '((:category "Issues")
+                         (:discard (:anything t))
+                         ))))))
+         ("w" "Waiting for"
                (
-                (todo "" ((org-agenda-overriding-header "Issues tracking")
+                (todo "" ((org-agenda-overriding-header "Waiting for")
                           (org-super-agenda-groups
-                           '((:category "Issues")
+                           '((:category "Waiting")
                              (:discard (:anything t))
-                             )))))) 
+                             ))))))
           ))
 
   (org-super-agenda-mode);; Custom agenda views
