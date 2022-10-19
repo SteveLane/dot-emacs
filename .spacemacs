@@ -49,7 +49,8 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     helm
+     ;; helm
+     compleseus
      (auto-completion :variables
                       auto-completion-return-key-behavior 'complete
                       auto-completion-tab-key-behavior 'cycle
@@ -427,13 +428,14 @@ you should place your code here."
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.0.5/bin/x64/Rterm.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.2.1/bin/x64/Rterm.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
   (add-to-list 'auto-mode-alist '("\\.rnw" . poly-noweb+r-mode))
   ;; Prevent undo tree files from polluting your git repo
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+  (setq undo-tree-auto-save-history nil)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
