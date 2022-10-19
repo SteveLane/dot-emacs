@@ -56,6 +56,9 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    org-refile-targets (quote ((nil :maxlevel . 2)
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
+   org-agenda-files '(
+                      "~/github/org/waiting-for.org" "c:/Users/LANES1/github/org/t5k.org" "c:/Users/LANES1/github/org/refile.org" "c:/Users/LANES1/github/org/meetings-2021.org" "c:/Users/LANES1/github/org/issue-tracking.org" "c:/Users/LANES1/github/org/habits-and-schedules.org" "c:/Users/LANES1/github/org/general.org" "c:/Users/LANES1/github/org/analysis.org"
+                      )
    )
 #+END_SRC
 
