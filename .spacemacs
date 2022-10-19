@@ -81,13 +81,8 @@ values."
           org-enable-roam-support t
           ;; turn off v2 warning
           org-roam-v2-ack t
-          ;; org-enable-roam-server t
-          ;; org-enable-roam-protocol t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
-          org-enable-jira-support t
-          jiralib-url "https://jira.worksafe.vic.gov.au"
-          org-jira-working-dir "~/github/org-jira"
           org-adapt-indentation t
           )
      ;; org-roam-ui
@@ -117,7 +112,6 @@ values."
                                       poly-markdown
                                       poly-noweb
                                       poly-org
-                                      org-clock-csv
                                       quarto-mode
                                       )
    ;; A list of packages that cannot be updated.
