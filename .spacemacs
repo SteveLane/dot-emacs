@@ -37,10 +37,9 @@ values."
              org-ref-default-bibliography "~/github/references.bib"
       )
      (conda :variables
-            conda-anaconda-home "c:/Users/LANES1/AppData/Local/Continuum/anaconda3/"
+            conda-anaconda-home "c:/Users/lanes1/AppData/Local/Continuum/anaconda3/"
             )
      csv
-     octave
      yaml
      graphviz
      html
@@ -95,10 +94,10 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      rust
+     snakemake-mode
      sql
      stan-mode
      syntax-checking
-     themes-megapack
      treemacs
      )
    ;; List of additional packages that will be installed without being
