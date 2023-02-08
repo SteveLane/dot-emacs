@@ -1,4 +1,4 @@
-;; Time-stamp: <2022-08-10 09:47:25 (lanes1)>
+;; Time-stamp: <2022-12-16 09:15:29 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -59,3 +59,6 @@
   ;; (setq ess-use-company t)
 
   )
+
+;; Make sure quarto-mode is loaded
+(require 'quarto-mode)
