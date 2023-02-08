@@ -94,7 +94,6 @@ values."
      ;;        shell-default-height 30
      ;;        shell-default-position 'bottom)
      rust
-     snakemake-mode
      sql
      stan-mode
      syntax-checking
