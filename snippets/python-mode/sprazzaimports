@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: sprazzaimports
+# key: /imports
+# --
+import tensorflow.keras as kr
+import matplotlib.pyplot as plt
+import pandas as pd
