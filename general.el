@@ -54,7 +54,7 @@
   (setq projectile-git-submodule-command nil)
 
   ;; make the default directory where I want it
-  (setq default-directory "c:/Users/LANES1")
+  (setq default-directory "c:/Users/lanes1")
   )
 
 ;; Ensure that plink is used as default tramp on windows
