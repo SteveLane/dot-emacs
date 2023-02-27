@@ -71,3 +71,6 @@
 ;; Make dired lists nicer and stop warnings
 (setq ls-lisp-use-insert-directory-program t)
 (setq dired-listing-switches "-alh")
+
+;; Set environment variable for display of unicode in ipython
+(setenv "PYTHONIOENCODING" "utf-8")
