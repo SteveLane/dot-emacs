@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: def
+# key: def
+# --
+def ${1:FunctionName}(${2:, args}):
+    """
+    ${3:Definition}
+
+    Parameters:
+        Figure something here
+
+    Returns:
+        Figure something here
+    """
+
