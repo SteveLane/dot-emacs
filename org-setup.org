@@ -428,7 +428,9 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                            '((:category "Waiting")
                              (:discard (:anything t))
                              ))))))
-          ))
+         ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
+          )
+        )
 
   (org-super-agenda-mode);; Custom agenda views
 
