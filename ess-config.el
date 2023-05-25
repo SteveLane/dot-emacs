@@ -1,4 +1,4 @@
-;; Time-stamp: <2022-12-16 09:15:29 (lanes1)>
+;; Time-stamp: <2023-05-26 08:53:03 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -30,10 +30,9 @@
   (setq ess-eval-visibly 'nowait)
   ;; Remove old _ mapping
   (setq ess-smart-S-assign-key nil)
-  ;; Similarly for bugs/jags mode
-  ;; (define-key ess-jags-mode-map "_" nil)
-  ;; (define-key ess-jags-mode-map ";" #'ess-bugs-hot-arrow)
-  
+  ;; Turn off flymake (will use flycheck)
+  (setq ess-use-flymake nil)
+
   ;; Function to add the pipe operator (set in map above)
   (defun my-add-pipe ()
     "Adds a pipe operator %>% with one space to the left and then starts a newline with proper indentation"
