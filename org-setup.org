@@ -57,7 +57,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files '(
-                      "~/github/org/waiting-for.org" "c:/Users/lanes1/github/org/t5k.org" "c:/Users/lanes1/github/org/refile.org" "c:/Users/lanes1/github/org/meetings-2021.org" "c:/Users/lanes1/github/org/issue-tracking.org" "c:/Users/lanes1/github/org/habits-and-schedules.org" "c:/Users/lanes1/github/org/general.org" "c:/Users/lanes1/github/org/analysis.org"
+                      "~/github/org/waiting-for.org" "c:/Users/lanes1/github/org/t5k.org" "c:/Users/lanes1/github/org/refile.org" "c:/Users/lanes1/github/org/meetings-2021.org" "c:/Users/lanes1/github/org/issue-tracking.org" "c:/Users/lanes1/github/org/habits-and-schedules.org" "c:/Users/lanes1/github/org/general.org" "c:/Users/lanes1/github/org/analysis.org" "c:/Users/lanes1/github/org/someday.org"
                       )
    )
 #+END_SRC
@@ -214,19 +214,16 @@ Extensibility is provided by tagging. You can tag on the fly, or use a predefine
 
 #+BEGIN_SRC emacs-lisp :export yes
   ;; Custom tags
-  (setq org-tag-alist '((:startgroup . nil)
-  			("@work" . ?w)
-  			("@train" . ?t)
-  			("@home" . ?h)
-  			(:endgroup . nil)
-  			("research" . ?r)
-  			("coding" . ?c)
-  			("writing" . ?p)
-  			("emacs" . ?e)
-			("miscellaneous" . ?m)
-			("supervision" . ?s)
-  			)
-  	)
+  (setq org-tag-alist
+        '(
+          ("meeting" . ?m)
+          ("review" . ?r)
+          ("analysis" . ?a)
+          ("statistical" . ?s)
+          ("documenting" . ?d)
+          ("coding" . ?c)
+          )
+        )
 
 #+END_SRC
 
@@ -373,6 +370,7 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
             (todo "" ((org-agenda-overriding-header "All Other TODOs")
                       (org-super-agenda-groups
                        '((:discard (:category ("Issues" "Refile" "Waiting")))
+                         (:discard (:todo ("SOMEDAY")))
                          (:and (:deadline nil :scheduled nil))
                          (:discard (:scheduled t))
                          (:auto-category t :order 9)
@@ -394,26 +392,6 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                        '((:category "Refile")
                          (:discard (:anything t))
                          ))))))
-          ("R" "Weekly review"
-           (
-            (todo "" ((org-agenda-overriding-header "Weekly review")
-                      (org-super-agenda-groups
-                       '((:discard (:category ("Issues" "Refile")))
-                         (:and (:deadline nil :scheduled nil))
-                         (:discard (:scheduled t))
-                         (:auto-category t)
-                         ))))))
-          ("t" "Todo View"
-           (
-            (todo "" ((org-agenda-overriding-header "")
-                      (org-super-agenda-groups
-                       '((:name "Inbox"
-                                :file-path "inbox"
-                                :order 0
-                                )
-                         (:auto-category t
-                                         :order 9)
-                         ))))))
           ("i" "Issues Tracking"
            (
             (todo "" ((org-agenda-overriding-header "Issues tracking")
@@ -421,14 +399,24 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
                        '((:category "Issues")
                          (:discard (:anything t))
                          ))))))
-         ("w" "Waiting for"
-               (
-                (todo "" ((org-agenda-overriding-header "Waiting for")
-                          (org-super-agenda-groups
-                           '((:category "Waiting")
-                             (:discard (:anything t))
-                             ))))))
-         ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
+          ("w" "Waiting for"
+           (
+            (todo "" ((org-agenda-overriding-header "Waiting for")
+                      (org-super-agenda-groups
+                       '((:category "Waiting")
+                         (:discard (:anything t))
+                         ))))))
+          ("s" "Someday"
+           (
+            (todo "" ((org-agenda-overriding-header "Someday")
+                      (org-super-agenda-groups
+                       '(
+                         (:name "Someday"
+                                :todo "SOMEDAY")
+                         (:discard (:anything t))
+                         )
+                       )))))
+          ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
           )
         )
 
