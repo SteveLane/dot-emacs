@@ -396,6 +396,9 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :width normal
                                               :powerline-scale 1.1)
                   )
+    ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
+    ;; because shit was getting stuffed up with packages and msys gnu.
+    (setq-default package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
     )
   )
 
