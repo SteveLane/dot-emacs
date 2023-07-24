@@ -57,7 +57,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files '(
-                      "~/github/org/waiting-for.org" "c:/Users/lanes1/github/org/t5k.org" "c:/Users/lanes1/github/org/refile.org" "c:/Users/lanes1/github/org/meetings-2021.org" "c:/Users/lanes1/github/org/issue-tracking.org" "c:/Users/lanes1/github/org/habits-and-schedules.org" "c:/Users/lanes1/github/org/general.org" "c:/Users/lanes1/github/org/analysis.org" "c:/Users/lanes1/github/org/someday.org"
+                      "~/github/org/waiting-for.org" "c:/Users/lanes1/github/org/t5k.org" "c:/Users/lanes1/github/org/refile.org" "c:/Users/lanes1/github/org/meetings-2021.org" "c:/Users/lanes1/github/org/issue-tracking.org" "c:/Users/lanes1/github/org/habits-and-schedules.org" "c:/Users/lanes1/github/org/general.org" "c:/Users/lanes1/github/org/analysis.org" "c:/Users/lanes1/github/org/someday.org" "c:/Users/lanes1/github/org/meetings-2023.org"
                       )
    )
 #+END_SRC
@@ -148,11 +148,11 @@ The following code provides the capture templates when I add TODO tasks. Best pl
      ("tr" "Ticklers/Reminders" entry (file+headline (lambda() (concat org-directory "/general.org")) "Ticklers")
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ("m" "Meeting templates")
-     ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "People Leaders")
+     ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings-2023.org")) "People Leaders")
       "* MEETING :MEETING:\n** Date: %^t \n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in t :clock-resume t)
-     ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2021.org")) "General Meetings")
+     ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings-2023.org")) "General Meetings")
       "* MEETING Topic: %? :MEETING:\n** Date: %^t \n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2021.org")) sprazza/org-get-target-headline)
+     ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings-2023.org")) sprazza/org-get-target-headline)
       "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("mt" "T5k Regular Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
       "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
@@ -180,7 +180,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING Task Management :MEETING:\nDate: %^t\n** Attendees: SL, RN, MN\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in t :clock-resume t)
      ("i" "Issue tracking" entry (file (lambda() (concat org-directory "/issue-tracking.org")))
       "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n" :clock-in t :clock-resume t)
-     ("J" "Journal wins/losses" entry (function sprazza/org-get-target-headline)
+     ("J" "Journal wins/losses" entry (file+function (lambda() (concat org-directory "/wins-and-losses.org")) sprazza/org-get-target-headline)
     "* %u\n** %U\n%?" :clock-in nil)
      )
    ;; Keep a line between headers
