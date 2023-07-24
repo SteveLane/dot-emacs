@@ -36,6 +36,23 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
          :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t
          )
+        ("m" "Meeting Note" plain "%?"
+         :if-new (file+head "meetings/%<%Y%m%d%H%M%S>-${slug}.org" "
+     ,#+ROAM_TAGS: %^G
+     ,#+title: ${title}
+
+     Date: %^{Meeting date}u
+     Time-stamp: <>
+
+     Attendees:
+
+     ,* Notes Prior
+
+     ,* Notes During
+
+     ")
+         :unnarrowed t
+         )
         )
       )
    #+end_src
@@ -112,3 +129,32 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         "rs" 'sprazza/org-roam-search))
   #+end_src
 
+* Helper Functions
+
+  These helpers come/are adapted from [[https://github.com/org-roam/org-roam/wiki/User-contributed-Tricks#showing-the-number-of-backlinks-for-each-node-in-org-roam-node-find][this link]].
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    ;; Make sure only to do these after org-roam is loaded
+    (with-eval-after-load 'org-roam
+      (cl-defmethod org-roam-node-directories ((node org-roam-node))
+        (if-let ((dirs (file-name-directory (file-relative-name (org-roam-node-file node) org-roam-directory))))
+            (format "(%s)" (car (split-string dirs "/")))
+          ""))
+
+      (cl-defmethod org-roam-node-backlinkscount ((node org-roam-node))
+        (let* ((count (caar (org-roam-db-query
+                             [:select (funcall count source)
+                                      :from links
+                                      :where (= dest $s1)
+                                      :and (= type "id")]
+                             (org-roam-node-id node)))))
+          (format "[%d]" count)))
+
+      (cl-defmethod org-roam-node-date ((node org-roam-node))
+        (format-time-string "%Y-%m-%d" (org-roam-node-file-mtime node))
+        )
+
+    ;; (setq org-roam-node-display-template "${directories:10} ${tags:20} ${title:100} ${backlinkscount:6}")
+      (setq org-roam-node-display-template "${title:*} ${directories:20} ${tags:40} ${backlinkscount:6} ${date:10}")
+    )
+  #+end_src
