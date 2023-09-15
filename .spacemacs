@@ -83,8 +83,9 @@ values."
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           org-adapt-indentation t
+          org-enable-notifications t
+          org-enable-roam-ui t
           )
-     ;; org-roam-ui
      (python :variables
              python-shell-interpreter "ipython3"
              python-backend 'lsp
@@ -213,7 +214,7 @@ values."
                                :size 16
                                :weight light
                                :width normal
-                               :powerline-scale 1.1)
+                               :powerline-scale 0.8)
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -386,7 +387,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :size 16
                                               :weight light
                                               :width normal
-                                              :powerline-scale 1.1)
+                                              :powerline-scale 0.8)
                   )
     )
   (when (spacemacs/system-is-mswindows)
@@ -394,7 +395,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
                                               :size 20
                                               :weight light
                                               :width normal
-                                              :powerline-scale 1.1)
+                                              :powerline-scale 0.8)
                   )
     ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
     ;; because shit was getting stuffed up with packages and msys gnu.
@@ -423,7 +424,7 @@ you should place your code here."
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.2.1/bin/x64/Rterm.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.1/bin/x64/Rterm.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
@@ -431,6 +432,14 @@ you should place your code here."
   ;; Prevent undo tree files from polluting your git repo
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   (setq undo-tree-auto-save-history nil)
+  ;; Set/unset some spacelines
+  (setq spaceline-major-mode-p nil
+        spaceline-minor-modes-p nil
+        spaceline-buffer-size-p nil
+        spaceline-buffer-position-p nil
+        spaceline-buffer-encoding-abbrev-p nil
+        spaceline-org-clock-p t
+   )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
