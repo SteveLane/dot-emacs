@@ -155,6 +155,9 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         )
 
     ;; (setq org-roam-node-display-template "${directories:10} ${tags:20} ${title:100} ${backlinkscount:6}")
-      (setq org-roam-node-display-template "${title:*} ${directories:20} ${tags:40} ${backlinkscount:6} ${date:10}")
+      (setq
+       org-roam-node-display-template "${title:*} ${directories:20} ${tags:40} ${backlinkscount:6} ${date:10}"
+       org-roam-db-autosync-mode t
+       )
     )
   #+end_src
