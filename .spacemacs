@@ -105,6 +105,7 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      emacsql-sqlite-builtin
                                       org-super-agenda
                                       (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
@@ -424,7 +425,7 @@ you should place your code here."
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.1/bin/x64/Rterm.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.2/bin/x64/Rterm.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
