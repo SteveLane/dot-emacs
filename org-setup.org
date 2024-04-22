@@ -57,7 +57,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files '(
-                      "~/github/org/waiting-for.org" "c:/Users/lanes1/github/org/t5k.org" "c:/Users/lanes1/github/org/refile.org" "c:/Users/lanes1/github/org/meetings-2021.org" "c:/Users/lanes1/github/org/issue-tracking.org" "c:/Users/lanes1/github/org/habits-and-schedules.org" "c:/Users/lanes1/github/org/general.org" "c:/Users/lanes1/github/org/analysis.org" "c:/Users/lanes1/github/org/someday.org" "c:/Users/lanes1/github/org/meetings-2023.org" "~/github/recovery.org"
+                      "~/github/org/waiting-for.org" "~/github/org/t5k.org" "~/github/org/refile.org" "~/github/org/meetings-2021.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings-2023.org"
                       )
    )
 #+END_SRC
@@ -158,31 +158,6 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING Regular T5k :MEETING:\n** Date: %^t \n** Attendees: SL, MN, FW\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ("mT" "T5k Other Meeting" entry (file+headline (lambda() (concat org-directory "/t5k.org")) "Meetings")
       "* MEETING T5k: %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("R" "Recovery Analytics templates")
-     ("Rp" "Recovery People Meetings" entry (file+function (lambda() (concat org-directory "/recovery.org")) sprazza/org-get-target-headline)
-      "* MEETING Regular meeting with %? :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("RP" "People Leaders" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "People Leaders")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, AA, KS\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rl" "Legal Reform Systems and Reporting" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Scheme Reform")
-      "* MEETING Legal Reform Systems and Reporting :MEETING:\n** Date: %^t \n** Attendees: SL, Craig B, Roma G, Will M, Nick H\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Ri" "Legal Reform IMF Project" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Scheme Reform")
-      "* MEETING Legal Reform IMF Project :MEETING:\n** Date: %^t \n** Attendees: SL, Will M, Hari V, Katrina S, Tony D, Jarrad C, Christ Z\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rr" "Legal Reform Roundtable" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Scheme Reform")
-      "* MEETING Legal Reform Roundtable :MEETING:\n** Date: %^t \n** Attendees: SL, Stream Leads\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rc" "Claims Division Catchup" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Scheme Reform")
-      "* MEETING Claims Division Catchup :MEETING:\n** Date: %^t \n** Attendees: SL, Simon N, Katrina S, Lucas K, Abi A\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rs" "Recovery and Strategy Alignment" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Recovery and Strategy Alignment")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, Emma K, Jaimie M\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Ra" "Insights and Analytics" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Insights and Analytics Managers Meeting")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, Armand P, Alex T, Mark N\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rd" "Data Impact Review Forum" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Data Impact Review Forum")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, Nick Hayward, acction people, data warehouse people\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Rq" "Prioritisation Forum" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Prioritisation Forum")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, Managers\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("Ro" "Other Meetings" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Other Meetings")
-      "* MEETING Regular Meeting :MEETING:\n** Date: %^t \n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
-     ("RS" "Planning Meeting" entry (file+headline (lambda() (concat org-directory "/recovery.org")) "Other Meetings")
-      "* MEETING Recovery Planning Meeting :MEETING:\n** Date: %^t \n** Attendees: SL, Seniors\n** Notes Prior\n** Notes During\n" :clock-in t :clock-resume t)
      ;; ("e" "Respond email" entry (file org-default-notes-file)
      ;;  "* TODO Respond to %:from on %:subject :EMAIL: \nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
      ;; ("s" "Someday" entry (file org-default-notes-file)
@@ -350,11 +325,6 @@ Habits allows some recurring tasks to reappear when marked done. See [[https://b
   (add-to-list 'org-modules 'org-habit t)
 #+END_SRC
 
-Finally close off the =with=eval-after-load= from earlier:
-#+begin_src emacs-lisp :exports none
-  )
-#+end_src
-
 * Agenda View
 
 The default agenda lacks a little oomph. What I'd like to see is collections such as:
@@ -453,17 +423,7 @@ The last line only shows one copy of the task---without it, both the scheduled, 
 
 2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
 
-* Projectile support
-
-Each project can have it's own TODO file, which will make it heaps easier to track tasks. These are not added to the agenda by default, so we can add by:
-
-#+begin_src emacs-lisp :export yes
-  (with-eval-after-load 'org-agenda
-    (require 'org-projectile)
-    (mapcar #'(lambda (file)
-               (when (file-exists-p file)
-                 (push file org-agenda-files)))
-            (org-projectile-todo-files)))
+Finally close off the =with=eval-after-load= from earlier:
+#+begin_src emacs-lisp :exports none
+  )
 #+end_src
-
-these details come from the spacemacs page: [[https://develop.spacemacs.org/layers/+emacs/org/README.html][org layer README]].
