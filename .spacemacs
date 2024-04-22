@@ -33,9 +33,10 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (bibtex :variables
-             org-ref-default-bibliography "~/github/references.bib"
-      )
+     ;; (bibtex :variables
+     ;;         org-ref-default-bibliography "~/github/references.bib"
+     ;;  )
+     bibtex
      (conda :variables
             conda-anaconda-home "c:/Users/lanes1/AppData/Local/Continuum/anaconda3/"
             )
@@ -78,12 +79,9 @@ values."
      markdown
      (org :variables
           org-enable-roam-support t
-          ;; turn off v2 warning
-          org-roam-v2-ack t
           org-roam-directory "~/github/org-roam-files"
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           org-adapt-indentation t
-          org-enable-notifications t
           org-enable-roam-ui t
           )
      (python :variables
@@ -383,6 +381,8 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; (use-package org
+  ;;   :straight t)
   (when (spacemacs/system-is-mac)
     (setq-default dotspacemacs-default-font '("Iosevka"
                                               :size 16
@@ -417,15 +417,15 @@ you should place your code here."
   ;;   (load-file "~/github/emacs-config/mu4e-config.el")
   ;;   )
   (load-file "~/github/emacs-config/magit-config.el")
-  (org-babel-load-file "~/github/emacs-config/org-setup.org")
-  (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/stan-config.el")
+  (org-babel-load-file "~/github/emacs-config/org-setup.org")
+  (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.2/bin/x64/Rterm.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.3/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
@@ -451,8 +451,8 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss helm-company helm-c-yasnippet haml-mode fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck emmet-mode csv-mode company-web web-completion-data company-statistics company-auctex company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete thrift stan-mode scad-mode qml-mode matlab-mode auctex-latexmk auctex arduino-mode ess-smart-equals ess-R-data-view ctable ess julia-mode org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit transient git-commit with-editor mu4e-maildirs-extension mu4e-alert ht alert log4e gntp ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+   )
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -470,8 +470,8 @@ This function is called at the very end of Spacemacs initialization."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (zenburn-theme zen-and-art-theme white-sand-theme underwater-theme ujelly-theme twilight-theme twilight-bright-theme twilight-anti-bright-theme toxi-theme tao-theme tangotango-theme tango-plus-theme tango-2-theme sunny-day-theme sublime-themes subatomic256-theme subatomic-theme spacegray-theme soothe-theme solarized-theme soft-stone-theme soft-morning-theme soft-charcoal-theme smyx-theme seti-theme reverse-theme rebecca-theme railscasts-theme purple-haze-theme professional-theme planet-theme phoenix-dark-pink-theme phoenix-dark-mono-theme organic-green-theme org-roam emacsql-sqlite3 emacsql omtose-phellack-theme oldlace-theme occidental-theme obsidian-theme noctilux-theme naquadah-theme mustang-theme monokai-theme monochrome-theme molokai-theme moe-theme minimal-theme material-theme majapahit-theme madhat2r-theme lush-theme light-soap-theme kaolin-themes jbeans-theme jazz-theme ir-black-theme inkpot-theme heroku-theme hemisu-theme hc-zenburn-theme gruvbox-theme gruber-darker-theme grandshell-theme gotham-theme gandalf-theme flatui-theme flatland-theme farmhouse-theme eziam-theme exotica-theme espresso-theme dracula-theme doom-themes django-theme darktooth-theme autothemer darkokai-theme darkmine-theme darkburn-theme dakrone-theme cyberpunk-theme company-quickhelp color-theme-sanityinc-tomorrow color-theme-sanityinc-solarized clues-theme cherry-blossom-theme busybee-theme bubbleberry-theme birds-of-paradise-plus-theme badwolf-theme apropospriate-theme anti-zenburn-theme ample-zen-theme ample-theme alect-themes afternoon-theme yaml-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode helm-css-scss helm-company helm-c-yasnippet haml-mode fuzzy flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck emmet-mode csv-mode company-web web-completion-data company-statistics company-auctex company auto-yasnippet yasnippet auto-dictionary ac-ispell auto-complete thrift stan-mode scad-mode qml-mode matlab-mode auctex-latexmk auctex arduino-mode ess-smart-equals ess-R-data-view ctable ess julia-mode org-projectile org-category-capture org-present org-pomodoro org-mime org-download htmlize gnuplot smeargle orgit magit-gitflow magit-popup helm-gitignore gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link evil-magit magit transient git-commit with-editor mu4e-maildirs-extension mu4e-alert ht alert log4e gntp ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
+   )
+ )
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
