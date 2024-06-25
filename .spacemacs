@@ -94,6 +94,7 @@ values."
      ;;        shell-default-position 'bottom)
      rust
      sql
+     spell-checking
      stan-mode
      syntax-checking
      treemacs
