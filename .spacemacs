@@ -426,7 +426,7 @@ you should place your code here."
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.3.3/bin/x64/R.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.4.1/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
