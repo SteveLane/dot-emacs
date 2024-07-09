@@ -7,16 +7,16 @@
 ;; Here I'm changing my option and meta keys to where I would normally have them.
 (when (spacemacs/system-is-mac)
   (setq mac-option-key-is-meta nil
-	      mac-command-key-is-meta t
-	      mac-command-modifier 'meta
-	      mac-option-modifier 'none)
+        mac-command-key-is-meta t
+        mac-command-modifier 'meta
+        mac-option-modifier 'none)
   )
 
 ;; OK, now I'm going to remap escaping (are you jk'ing? haha)
 (setq-default
  evil-escape-key-sequence "jk"
  evil-escape-unordered-key-sequence "true"
-)
+ )
 
 ;; I'm sick of backups... at least in my working directory.
 ;; Let's place them somewhere else (plus some other cool stuff:
@@ -29,9 +29,9 @@
 
 ;; Add a timestamp to files (and on save)
 ;; http://emacs-fu.blogspot.com.au/2008/12/automatic-timestamps.html
-(setq 
+(setq
  time-stamp-active t          ; do enable time-stamps
- time-stamp-line-limit 20     ; check first 10 buffer lines for Time-stamp: 
+ time-stamp-line-limit 20     ; check first 10 buffer lines for Time-stamp:
  time-stamp-format "%Y-%m-%d %02H:%02M:%02S (%u)") ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
@@ -54,7 +54,7 @@
   (setq projectile-git-submodule-command nil)
 
   ;; make the default directory where I want it
-  (setq default-directory "c:/Users/lanes1")
+  (setq default-directory "~/")
   )
 
 ;; Ensure that plink is used as default tramp on windows
