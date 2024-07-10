@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Column Margin
+# key: mnote
+# --
+::: {.column-margin}
+$0
+:::
