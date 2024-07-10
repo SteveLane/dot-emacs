@@ -95,7 +95,10 @@ This function should only modify configuration layer settings."
      ;;        shell-default-position 'bottom)
      rust
      sql
-     spell-checking
+     ;; Only works windows here, but at least allows spell to be set...
+     (spell-checking :variables
+                     ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe"
+                     ispell-dictionary "en_AU")
      stan-mode
      syntax-checking
      treemacs
@@ -245,9 +248,12 @@ It should only modify the values of Spacemacs settings."
    ;; pair of numbers, e.g. `(recents-by-project . (7 .  5))', where the first
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
-   dotspacemacs-startup-lists '((recents-by-project . (3 . 3))
+   dotspacemacs-startup-lists '(
+                                (projects . 5)
                                 (recents . 3)
-                                (bookmarks . 3))
+                                (bookmarks . 3)
+                                (recents-by-project . (3 .  3))
+                                )
 
    ;; True if the home buffer should respond to resize events. (default t)
    dotspacemacs-startup-buffer-responsive t
@@ -298,7 +304,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons :separator wave :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -605,6 +611,7 @@ default it calls `spacemacs/load-spacemacs-env' which loads the environment
 variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
+  (setenv "LANG" "en_AU")
   )
 
 (defun dotspacemacs/user-init ()
@@ -674,14 +681,20 @@ you should place your code here."
   ;; Prevent undo tree files from polluting your git repo
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   (setq undo-tree-auto-save-history nil)
-  ;; Set/unset some spacelines
-  (setq spaceline-major-mode-p nil
-        spaceline-minor-modes-p nil
-        spaceline-buffer-size-p nil
-        spaceline-buffer-position-p nil
-        spaceline-buffer-encoding-abbrev-p nil
-        spaceline-org-clock-p t
+  ;; Set/unset some spacelines (requires all-the-icons spaceline)
+  (setq spaceline-all-the-icons-time-p nil
+        ;; spaceline-all-the-icons-eyebrowse-workspace-p nil
+        spaceline-all-the-icons-buffer-position-p nil
+        spaceline-all-the-icons-buffer-size-p nil
+        spaceline-all-the-icons-weather-p nil
+        spaceline-all-the-icons-org-clock-current-task-p nil
+        spaceline-all-the-icons-mode-icon-p nil
+        spaceline-all-the-icons-hud-p nil
         )
+  ;; Not working yet to add clocked-in time...
+  ;; (load-file "~/github/emacs-config/my-spaceline.el")
+  ;; Make buffers split in golden ratio
+  (golden-ratio-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
