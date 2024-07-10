@@ -57,7 +57,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files '(
-                      "~/github/org/waiting-for.org" "~/github/org/t5k.org" "~/github/org/refile.org" "~/github/org/meetings-2021.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings-2023.org"
+                      "~/github/org/waiting-for.org" "~/github/org/t5k.org" "~/github/org/refile.org" "~/github/org/meetings-2021.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings-2023.org" "~/github/org/meetings.org"
                       )
    )
 #+END_SRC
