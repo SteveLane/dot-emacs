@@ -683,7 +683,7 @@ you should place your code here."
   (setq undo-tree-auto-save-history nil)
   ;; Set/unset some spacelines (requires all-the-icons spaceline)
   (setq spaceline-all-the-icons-time-p nil
-        ;; spaceline-all-the-icons-eyebrowse-workspace-p nil
+        spaceline-all-the-icons-eyebrowse-workspace-p nil
         spaceline-all-the-icons-buffer-position-p nil
         spaceline-all-the-icons-buffer-size-p nil
         spaceline-all-the-icons-weather-p nil
@@ -691,8 +691,8 @@ you should place your code here."
         spaceline-all-the-icons-mode-icon-p nil
         spaceline-all-the-icons-hud-p nil
         )
-  ;; Not working yet to add clocked-in time...
-  ;; (load-file "~/github/emacs-config/my-spaceline.el")
+  ;; Add clocked-in time to spaceline-all-the-icons
+  (load-file "~/github/emacs-config/spaceline-extra-segments.el")
   ;; Make buffers split in golden ratio
   (golden-ratio-mode)
   )
