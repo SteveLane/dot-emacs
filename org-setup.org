@@ -415,11 +415,25 @@ Finally close off the =with=eval-after-load= from earlier:
 
 * Searching through your notes
 
-  To make it a little easier to search, use ripgrep.
+  To make it a little easier to search, use ripgrep. It replaces the current org-search-view which is not helpful (imo).
 
   #+begin_src emacs-lisp :tangle yes :export yes
     (defun sprazza/org-search ()
-      "Search in the org-roam directory with `rg'."
+      "Search in the org directory with `rg'."
       (interactive)
       (spacemacs/compleseus-search t org-directory))
+
+    (progn
+      (spacemacs/set-leader-keys
+        "aos" 'sprazza/org-search
+        )
+
+      ;; Is not as helpful in major mode, but can be done...
+      ;; (spacemacs/set-leader-keys-for-major-mode 'org-mode
+      ;;   "q" 'sprazza/org-search
+      ;;   )
+      )
+  #+end_src
+
+  #+begin_src emacs-lisp :tangle yes :export yes
   #+end_src

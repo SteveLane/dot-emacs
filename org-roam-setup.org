@@ -105,28 +105,16 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       "Search in the org-roam directory with `rg'."
       (interactive)
       (spacemacs/compleseus-search t org-roam-directory))
-  #+end_src
 
-* Leader keys
-
-  (to overwrite the defaults in spacemacs)
-
-  #+begin_src emacs-lisp :tangle yes :export yes
     (progn
       (spacemacs/set-leader-keys
-        "aorf" 'org-roam-node-find
-        "aorg" 'org-roam-graph
-        "aori" 'org-roam-node-insert
-        "aorl" 'org-roam-buffer-toggle
-        "aorc" 'org-roam-capture
-        "aors" 'sprazza/org-roam-search)
+        "aors" 'sprazza/org-roam-search
+        )
 
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
-        "rf" 'org-roam-node-find
-        "ri" 'org-roam-node-insert
-        "rl" 'org-roam-buffer-toggle
-        "rc" 'org-roam-capture
-        "rs" 'sprazza/org-roam-search))
+        "rs" 'sprazza/org-roam-search
+        )
+      )
   #+end_src
 
 * Helper Functions
