@@ -57,7 +57,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
               (org-agenda-files :maxlevel . 2)))
    ;; Org agenda files read from here
    org-agenda-files '(
-                      "~/github/org/waiting-for.org" "~/github/org/t5k.org" "~/github/org/refile.org" "~/github/org/meetings-2021.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings-2023.org" "~/github/org/meetings.org"
+                      "~/github/org/waiting-for.org" "~/github/org/refile.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings.org"
                       )
    )
 #+END_SRC
@@ -152,8 +152,8 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* MEETING :MEETING:\n** Date: %^u\n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in nil :clock-resume t)
      ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings.org")) "General Meetings")
       "* MEETING Topic: %? :MEETING:\n** Date: %^u\n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in nil :clock-resume t)
-     ("mr" "Regular People Meetings" entry (file+function (lambda() (concat org-directory "/meetings.org")) sprazza/org-get-target-headline)
-      "* MEETING Regular meeting with %? :MEETING:\n** Date: %^u\n** Attendees: SL\n** Notes Prior\n** Notes During\n" :clock-in nil :clock-resume t)
+     ("mr" "Regular One-on-one's" entry (file+function (lambda() (concat org-directory "/meetings.org")) sprazza/org-get-target-headline)
+      "* MEETING Regular meeting with %? :MEETING:\n** Date: %^u\n** Notes Prior\n** Notes During\n" :clock-in nil :clock-resume t)
      ("mw" "Weekly Review" entry (file+headline (lambda() (concat org-directory "/meetings.org")) "Weekly Review")
       "* MEETING Weekly Review - %^u :MEETING:\n** Attendees: Steve Lane, Sally Donovan, Ryan Alldis\n** Notes Prior\n*** %?\n** Notes During\n" :clock-in nil :clock-resume t)
      ("j" "Journal Club" entry (file org-journal-file)
@@ -412,3 +412,14 @@ Finally close off the =with=eval-after-load= from earlier:
 #+begin_src emacs-lisp :exports none
   )
 #+end_src
+
+* Searching through your notes
+
+  To make it a little easier to search, use ripgrep.
+
+  #+begin_src emacs-lisp :tangle yes :export yes
+    (defun sprazza/org-search ()
+      "Search in the org-roam directory with `rg'."
+      (interactive)
+      (spacemacs/compleseus-search t org-directory))
+  #+end_src
