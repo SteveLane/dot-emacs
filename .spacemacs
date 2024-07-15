@@ -53,15 +53,9 @@ This function should only modify configuration layer settings."
      ;; helm
      compleseus
      (auto-completion :variables
-                      auto-completion-return-key-behavior 'complete
-                      auto-completion-tab-key-behavior 'cycle
-                      auto-completion-complete-with-key-sequence nil
-                      auto-completion-complete-with-key-sequence-delay 0.1
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-help-tooltip nil
-                      spacemacs-default-company-backends '(company-capf :with company-yasnippet)
-                      ;; spacemacs-default-company-backends (add-to-list 'spacemacs-default-company-backends '(company-capf))
+                      auto-completion-enable-sort-by-usage t
                       )
      ;; better-defaults
      emacs-lisp
@@ -252,7 +246,7 @@ It should only modify the values of Spacemacs settings."
                                 (projects . 5)
                                 (recents . 3)
                                 (bookmarks . 3)
-                                (recents-by-project . (3 .  3))
+                                (recents-by-project . (3 . 3))
                                 )
 
    ;; True if the home buffer should respond to resize events. (default t)
