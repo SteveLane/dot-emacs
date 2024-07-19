@@ -1,4 +1,4 @@
-;; Time-stamp: <2024-07-15 11:53:08 (lanes1)>
+;; Time-stamp: <2024-07-17 14:33:23 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -6,13 +6,8 @@
   ;; Set ESS up the way you like it
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
-  (setq ess-ask-for-ess-directory t)
-  ;; (when (spacemacs/system-is-mac)
-  ;;   ((setq inferior-ess-r-program "/usr/local/bin/R")))
-  ;; this should only need setting in windows
   (when (spacemacs/system-is-mswindows)
     (setq inferior-R-program-name "c:/Program Files/R/R-4.4.1/bin/x64/R.exe"))
-  (setq ess-local-process-name "R")
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
   (add-hook 'ess-mode-hook (lambda ()
                              (setq
@@ -25,13 +20,17 @@
                               ess-indent-with-fancy-comments nil)
                              )
             )
-  (setq ess-indent-offset 4)
-  (setq ess-nuke-trailing-whitespace t)
-  (setq ess-eval-visibly 'nowait)
-  ;; Remove old _ mapping
-  (setq ess-smart-S-assign-key nil)
-  ;; Turn off flymake (will use flycheck)
-  (setq ess-use-flymake nil)
+  ;; Make some nicer settings
+  (setq
+   ess-ask-for-ess-directory t
+   ess-local-process-name "R"
+   ess-nuke-trailing-whitespace t
+   ess-eval-visibly 'nowait
+   ;; Remove old _ mapping
+   ess-smart-S-assign-key nil
+   ;; Turn off flymake (will use flycheck)
+   ess-use-flymake nil
+   )
 
   ;; Function to add the pipe operator (set in map above)
   (defun my-add-pipe ()
