@@ -70,7 +70,9 @@ This function should only modify configuration layer settings."
      groovy
      ipython-notebook
      latex
-     lsp
+     (lsp :variables
+          lsp-use-lsp-ui nil
+          )
      markdown
      (org :variables
           org-enable-roam-support t
