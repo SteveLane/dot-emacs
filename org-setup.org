@@ -149,7 +149,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
       "* TODO %?\nCaptured: %u\n%a\n" :clock-in t :clock-resume t)
      ("m" "Meeting templates")
      ("mp" "People Leaders" entry (file+headline (lambda() (concat org-directory "/meetings.org")) "People Leaders")
-      "* MEETING :MEETING:\n** Date: %^u\n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n" :clock-in nil :clock-resume t)
+      "* MEETING :MEETING:\n** Date: %^u\n** Attendees: MN, RN, SL\n** SL Updates\n*** %?\n** RN Updates\n** MN Updates\n** Mood assessment\n" :clock-in nil :clock-resume t)
      ("mg" "General Meeting" entry (file+headline (lambda() (concat org-directory "/meetings.org")) "General Meetings")
       "* MEETING Topic: %? :MEETING:\n** Date: %^u\n** Attendees: Steve Lane\n** Notes Prior\n** Notes During\n" :clock-in nil :clock-resume t)
      ("mr" "Regular One-on-one's" entry (file+function (lambda() (concat org-directory "/meetings.org")) sprazza/org-get-target-headline)
