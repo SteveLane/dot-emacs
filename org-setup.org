@@ -421,7 +421,8 @@ Finally close off the =with=eval-after-load= from earlier:
     (defun sprazza/org-search ()
       "Search in the org directory with `rg'."
       (interactive)
-      (spacemacs/compleseus-search t org-directory))
+      (spacemacs/compleseus-search nil (expand-file-name org-directory))
+      )
 
     (progn
       (spacemacs/set-leader-keys
