@@ -614,6 +614,9 @@ See the header of this file for more information."
   (setenv "LANG" "en_AU")
   (push "c:/Program Files/R/R-4.4.1/bin/x64" exec-path)
   (push "c:/Program Files/R/R-4.4.1/bin" exec-path)
+  (push "c:/msys64/usr/bin" exec-path)
+  (push "c:/msys64/ucrt64/bin" exec-path)
+  (push "c:/msys64/mingw64/bin" exec-path)
   )
 
 (defun dotspacemacs/user-init ()
@@ -662,15 +665,19 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (load-file "~/github/emacs-config/general.el")
-  (org-babel-load-file "~/github/emacs-config/spelling-setup.org")
+  ;; I've now moved to extract elisp from the org files
+  (load-file "~/github/emacs-config/spelling-setup.el")
+  ;; (org-babel-load-file "~/github/emacs-config/spelling-setup.org")
   ;; (when (spacemacs/system-is-mac)
   ;;   (load-file "~/github/emacs-config/mu4e-config.el")
   ;;   )
   (load-file "~/github/emacs-config/magit-config.el")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/stan-config.el")
-  (org-babel-load-file "~/github/emacs-config/org-setup.org")
-  (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
+  (load-file "~/github/emacs-config/org-setup.el")
+  (load-file "~/github/emacs-config/org-roam-setup.el")
+  ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
+  ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
