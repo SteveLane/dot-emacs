@@ -1,10 +1,12 @@
 (use-package citar
-  :custom
-  (citar-bibliography '("~/Development/references.bib"))
-  (org-cite-insert-processor 'citar)
-  (org-cite-follow-processor 'citar)
-  (org-cite-activate-processor 'citar)
-  (org-cite-global-bibliography citar-bibliography)
+  :config
+  (setq
+   citar-bibliography '("~/Development/references.bib")
+   org-cite-insert-processor 'citar
+   org-cite-follow-processor 'citar
+   org-cite-activate-processor 'citar
+   org-cite-global-bibliography citar-bibliography
+   )
   :hook
   (LaTeX-mode . citar-capf-setup)
   (org-mode . citar-capf-setup)
