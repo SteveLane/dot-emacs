@@ -33,7 +33,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
          :unnarrowed t
          )
         ("l" "Literature Note" plain "%?"
-         :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${note-title}. ${citar-citekey} (${citar-date}).\n#+created: %U\n\n")
          :unnarrowed t
          )
         ("m" "Meeting Note" plain "%?"

@@ -16,10 +16,16 @@
 (use-package citar-embark
   :after citar embark
   :no-require
-  :config (citar-embark-mode)
+  :config
+  (citar-embark-mode)
   )
 
 (use-package citar-org-roam
   :after (citar org-roam)
-  :config (citar-org-roam-mode)
+  :config
+  (citar-org-roam-mode)
+  (setq
+   citar-org-roam-note-title-template "${author} - ${title}"
+   citar-org-roam-capture-template-key "l"
+   )
   )
