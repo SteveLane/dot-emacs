@@ -614,9 +614,9 @@ See the header of this file for more information."
   (setenv "LANG" "en_AU")
   (push "c:/Program Files/R/R-4.4.1/bin/x64" exec-path)
   (push "c:/Program Files/R/R-4.4.1/bin" exec-path)
+  ;; (push "c:/msys64/ucrt64/bin" exec-path)
+  ;; (push "c:/msys64/mingw64/bin" exec-path)
   (push "c:/msys64/usr/bin" exec-path)
-  (push "c:/msys64/ucrt64/bin" exec-path)
-  (push "c:/msys64/mingw64/bin" exec-path)
   )
 
 (defun dotspacemacs/user-init ()
