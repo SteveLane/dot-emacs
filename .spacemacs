@@ -316,7 +316,7 @@ It should only modify the values of Spacemacs settings."
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Iosevka"
-                               :size 16
+                               :size 12.0
                                :weight light
                                :width normal
                                :powerline-scale 0.8)
@@ -630,7 +630,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;;   :straight t)
   (when (spacemacs/system-is-mac)
     (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 16
+                                              :size 10.0
                                               :weight light
                                               :width normal
                                               :powerline-scale 0.8)
@@ -638,7 +638,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     )
   (when (spacemacs/system-is-mswindows)
     (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 20
+                                              :size 12.0
                                               :weight light
                                               :width normal
                                               :powerline-scale 0.8)

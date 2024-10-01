@@ -1,4 +1,4 @@
-;; Time-stamp: <2024-07-17 14:33:23 (lanes1)>
+;; Time-stamp: <2024-10-01 10:58:49 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
@@ -37,13 +37,17 @@
     "Adds a pipe operator %>% with one space to the left and then starts a newline with proper indentation"
     (interactive)
     (just-one-space 1)
-    (insert "%>%")
+    (insert "|>")
     (reindent-then-newline-and-indent)
     )
   (when (spacemacs/system-is-mac)
-    (define-key ess-mode-map (kbd "M-S-m") 'my-add-pipe))
+    (define-key ess-mode-map (kbd "M-S-m") 'my-add-pipe)
+    (define-key inferior-ess-mode-map (kbd "M-S-m") " |> ")
+    )
   (when (spacemacs/system-is-mswindows)
-    (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe))
+    (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
+    (define-key inferior-ess-mode-map (kbd "C-S-m") " |> ")
+    )
 
   )
 
