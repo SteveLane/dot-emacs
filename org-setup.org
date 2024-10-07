@@ -155,7 +155,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
      ("mr" "Regular One-on-one's" entry (file+function (lambda() (concat org-directory "/meetings.org")) sprazza/org-get-target-headline)
       "* MEETING Regular meeting with %? :MEETING:\n** Date: %^u\n** Notes Prior\n** Notes During\n*** Mood assessment\n" :clock-in nil :clock-resume t)
      ("mw" "Weekly Review" entry (file+headline (lambda() (concat org-directory "/meetings.org")) "Weekly Review")
-      "* MEETING Weekly Review - %^u :MEETING:\n** Attendees: Steve Lane, Sally Donovan, Ryan Alldis\n** Notes Prior\n*** Both\n*** Ryan\n*** Sally\n** Notes During\n*** Mood assessment\n" :clock-in nil :clock-resume t)
+      "* MEETING Weekly Review - %^u :MEETING:\n** Attendees: Steve, Sally, Ryan, Jason, Seb\n** Notes Prior\n*** All\n*** Ryan\n*** Sally\n*** Jason\n*** Seb\n** Notes During\n*** Mood assessment\n" :clock-in nil :clock-resume t)
      ("j" "Journal Club" entry (file org-journal-file)
       "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in t :clock-resume t :empty-lines 1)
      ("P" "Professional development templates")
