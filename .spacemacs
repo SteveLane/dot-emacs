@@ -69,7 +69,10 @@ This function should only modify configuration layer settings."
      git
      groovy
      ipython-notebook
-     latex
+     (latex :variables
+            latex-backend 'lsp
+            latex-enable-folding t
+            )
      (lsp :variables
           lsp-use-lsp-ui nil
           )
