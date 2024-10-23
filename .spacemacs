@@ -73,6 +73,10 @@ This function should only modify configuration layer settings."
             latex-backend 'lsp
             latex-enable-folding t
             )
+     ;; LLM integration
+     (llm-client :variables
+                 llm-client-enable-gptel t
+                 )
      (lsp :variables
           lsp-use-lsp-ui nil
           )
