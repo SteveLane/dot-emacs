@@ -713,6 +713,14 @@ you should place your code here."
   (load-file "~/github/emacs-config/spaceline-extra-segments.el")
   ;; Make buffers split in golden ratio
   (golden-ratio-mode)
+  ;; Set up LLM stuff for ollama
+  (setq gptel-model 'mistral:latest
+        gptel-backend (gptel-make-ollama "Ollama"
+                        :host "localhost:11434"
+                        :stream t
+                        :models '("mistral:latest")
+                        )
+        )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
