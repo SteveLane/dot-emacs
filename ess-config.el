@@ -1,4 +1,4 @@
-;; Time-stamp: <2025-02-19 11:53:57 (lanes1)>
+;; Time-stamp: <2025-02-19 12:04:43 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (with-eval-after-load 'ess-mode
@@ -56,6 +56,7 @@
 (require 'quarto-mode)
 
 ;; Function to skip code-chunks when ispell in quarto-mode
+;; See https://endlessparentheses.com/ispell-and-org-mode.html for details
 (defun my/polymode-ispell()
   "Configure `ispell-skip-region-alist' for `quarto-mode'"
   (make-local-variable 'ispell-skip-region-alist)
