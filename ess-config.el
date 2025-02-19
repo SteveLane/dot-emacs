@@ -1,5 +1,6 @@
-;; Time-stamp: <2024-10-01 10:58:49 (lanes1)>
+;; Time-stamp: <2025-02-19 11:53:57 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
+
 (with-eval-after-load 'ess-mode
   (define-key ess-mode-map ";" 'ess-insert-assign)
   (define-key inferior-ess-mode-map ";" 'ess-insert-assign)
@@ -53,3 +54,11 @@
 
 ;; Make sure quarto-mode is loaded
 (require 'quarto-mode)
+
+;; Function to skip code-chunks when ispell in quarto-mode
+(defun my/polymode-ispell()
+  "Configure `ispell-skip-region-alist' for `quarto-mode'"
+  (make-local-variable 'ispell-skip-region-alist)
+  (add-to-list 'ispell-skip-region-alist '("^```" . "^```"))
+  )
+(add-hook 'markdown-mode-hook #'my/polymode-ispell)
