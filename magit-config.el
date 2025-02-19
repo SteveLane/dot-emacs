@@ -1,4 +1,4 @@
-;; Time-stamp: <2019-03-27 16:30:14 (slane)>
+;; Time-stamp: <2025-02-19 13:43:23 (lanes1)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; magit
@@ -7,5 +7,6 @@
   (setq
    magit-log-arguments (quote ("--graph" "--color" "--decorate" "-n256"))
    magit-tag-arguments (quote ("--annotate"))
+   magit-diff-refine-hunk t
    )
   )
