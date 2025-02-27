@@ -87,6 +87,7 @@ This function should only modify configuration layer settings."
           org-roam-db-location "~/github/org-roam-files/org-roam.db"
           org-adapt-indentation t
           org-enable-roam-ui t
+          org-roam-database-connector 'sqlite-builtin
           )
      (python :variables
              python-shell-interpreter "ipython3"
@@ -115,7 +116,6 @@ This function should only modify configuration layer settings."
                                       citar
                                       citar-embark
                                       citar-org-roam
-                                      emacsql-sqlite-builtin
                                       org-super-agenda
                                       (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
