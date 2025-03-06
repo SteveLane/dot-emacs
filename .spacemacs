@@ -88,6 +88,7 @@ This function should only modify configuration layer settings."
           org-adapt-indentation t
           org-enable-roam-ui t
           org-roam-database-connector 'sqlite-builtin
+          org-enable-roam-protocol t
           )
      (python :variables
              python-shell-interpreter "ipython3"
