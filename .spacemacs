@@ -312,7 +312,7 @@ It should only modify the values of Spacemacs settings."
    ;; refer to the DOCUMENTATION.org for more info on how to create your own
    ;; spaceline theme. Value can be a symbol or list with additional properties.
    ;; (default '(spacemacs :separator wave :separator-scale 1.5))
-   dotspacemacs-mode-line-theme '(all-the-icons :separator arrow :separator-scale 1.5)
+   dotspacemacs-mode-line-theme '(doom :separator arrow :separator-scale 1.5)
 
    ;; If non-nil the cursor color matches the state color in GUI Emacs.
    ;; (default t)
@@ -700,18 +700,15 @@ you should place your code here."
   ;; Prevent undo tree files from polluting your git repo
   (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
   (setq undo-tree-auto-save-history nil)
-  ;; Set/unset some spacelines (requires all-the-icons spaceline)
-  (setq spaceline-all-the-icons-time-p nil
-        spaceline-all-the-icons-eyebrowse-workspace-p nil
-        spaceline-all-the-icons-buffer-position-p nil
-        spaceline-all-the-icons-buffer-size-p nil
-        spaceline-all-the-icons-weather-p nil
-        spaceline-all-the-icons-org-clock-current-task-p nil
-        spaceline-all-the-icons-mode-icon-p nil
-        spaceline-all-the-icons-hud-p nil
+  ;; Set/unset some spacelines (requires doom spaceline)
+  (setq doom-modeline-major-mode-icon nil
+        doom-modeline-minor-modes nil
+        doom-modeline-buffer-encoding nil
+        doom-modeline-time nil
+        doom-modeline-percent-position nil
+        doom-modeline-position-column-line-format nil
+        doom-modeline-vcs-max-length 25
         )
-  ;; Add clocked-in time to spaceline-all-the-icons
-  (load-file "~/github/emacs-config/spaceline-extra-segments.el")
   ;; Make buffers split in golden ratio
   (golden-ratio-mode)
   (delete "dired-mode" golden-ratio-exclude-modes)
@@ -752,44 +749,47 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(nov esxml kv zenburn-theme yasnippet-snippets yapfify yaml-mode ws-butler
-           writeroom-mode winum window-purpose which-key wgrep web-mode
-           web-beautify volatile-highlights vim-powerline vi-tilde-fringe vertico
-           uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-magit
-           treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor
-           tagedit symon symbol-overlay string-edit-at-point stan-snippets
-           sql-indent sphinx-doc spacemacs-whitespace-cleanup
-           spacemacs-purpose-popwin spaceline-all-the-icons space-doc smeargle
-           slim-mode scss-mode sass-mode rustic ron-mode restart-emacs
-           rainbow-delimiters quickrun quarto-mode pytest pylookup pyenv-mode
-           pydoc py-isort pug-mode prettier-js popwin poly-org poly-R poetry
-           pippel pipenv pip-requirements pcre2el password-generator paradox
-           overseer orgit org-superstar org-super-agenda org-roam-ui org-rich-yank
-           org-ref org-projectile org-present org-pomodoro org-mime org-download
-           org-contrib org-cliplink orderless open-junk-file nose nameless
-           multi-line markdown-toc marginalia macrostep lsp-pyright lsp-origami
-           lsp-latex lsp-julia lorem-ipsum live-py-mode link-hint julia-ts-mode
-           julia-repl inspector info+ indent-guide importmagic impatient-mode
-           hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses
-           highlight-numbers highlight-indentation hide-comnt helm-make
-           groovy-mode groovy-imports graphviz-dot-mode google-translate
-           golden-ratio gnuplot gitignore-templates git-timemachine git-modes
-           git-messenger git-link gh-md flyspell-correct-popup flycheck-pos-tip
-           flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse
-           expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired
-           evil-tutor evil-textobj-line evil-tex evil-surround evil-org
-           evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion
-           evil-indent-plus evil-iedit-state evil-goggles evil-exchange
-           evil-evilified-state evil-escape evil-easymotion evil-collection
-           evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr
-           emmet-mode embark-consult elisp-slime-nav elisp-demos elisp-def ein
-           editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish
-           devdocs define-word dap-mode cython-mode csv-mode consult-yasnippet
-           consult-lsp conda compleseus-spacemacs-help company-web
-           company-statistics company-reftex company-math company-auctex
-           company-anaconda column-enforce-mode code-cells clean-aindent-mode
-           centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol
-           auto-dictionary auto-compile auctex-latexmk aggressive-indent ace-link))
+     '(ace-link aggressive-indent all-the-icons auctex-latexmk auto-compile
+                auto-highlight-symbol auto-yasnippet centered-cursor-mode
+                citar-embark citar-org-roam clean-aindent-mode code-review
+                column-enforce-mode company-auctex company-math company-reftex
+                company-statistics company-web compleseus-spacemacs-help conda
+                consult-lsp consult-yasnippet csv-mode cython-mode define-word
+                devdocs diminish dired-quick-sort disable-mouse doom-modeline
+                dotenv-mode drag-stuff dumb-jump edit-indirect ein elisp-def
+                elisp-demos elisp-slime-nav ellama embark-consult emmet-mode emr
+                ess-R-data-view eval-sexp-fu evil-anzu evil-args evil-cleverparens
+                evil-collection evil-easymotion evil-escape evil-evilified-state
+                evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                evil-lion evil-lisp-state evil-matchit evil-nerd-commenter
+                evil-numbers evil-org evil-surround evil-tex evil-textobj-line
+                evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar
+                expand-region eyebrowse fancy-battery flycheck-elsa
+                flycheck-package flycheck-pos-tip flyspell-correct-popup gh-md
+                git-link git-messenger git-modes git-timemachine
+                gitignore-templates gnuplot golden-ratio google-translate gptel
+                graphviz-dot-mode groovy-imports groovy-mode helm-make hide-comnt
+                highlight-indentation highlight-numbers highlight-parentheses
+                hl-todo holy-mode hungry-delete hybrid-mode impatient-mode
+                indent-guide info+ inspector link-hint live-py-mode lorem-ipsum
+                lsp-latex lsp-origami lsp-pyright lsp-treemacs macrostep
+                marginalia markdown-toc multi-line nameless nerd-icons nov
+                open-junk-file orderless org-cliplink org-contrib org-download
+                org-mime org-pomodoro org-present org-projectile org-ref
+                org-rich-yank org-roam-ui org-super-agenda org-superstar orgit
+                overseer paradox password-generator pcre2el pip-requirements
+                pipenv pippel poetry poly-R poly-org popwin prettier-js pug-mode
+                py-isort pydoc pyenv-mode pylookup pytest quarto-mode quickrun
+                rainbow-delimiters restart-emacs ron-mode rustic sass-mode
+                scss-mode shrink-path slim-mode smeargle space-doc spaceline
+                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
+                sql-indent stan-snippets string-edit-at-point symbol-overlay symon
+                tagedit term-cursor toc-org toml-mode treemacs-evil
+                treemacs-icons-dired treemacs-magit treemacs-persp
+                treemacs-projectile undo-fu undo-fu-session vertico
+                vi-tilde-fringe vim-powerline volatile-highlights vundo
+                web-beautify web-mode wgrep window-purpose winum writeroom-mode
+                ws-butler yaml-mode yapfify yasnippet-snippets zenburn-theme))
    '(paradox-github-token t))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
