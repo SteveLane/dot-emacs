@@ -257,10 +257,10 @@ It should only modify the values of Spacemacs settings."
    ;; number is the project limit and the second the limit on the recent files
    ;; within a project.
    dotspacemacs-startup-lists '(
-                                (projects . 5)
+                                (recents-by-project . (3 . 3))
                                 (recents . 3)
                                 (bookmarks . 3)
-                                (recents-by-project . (3 . 3))
+                                (projects . 3)
                                 )
 
    ;; True if the home buffer should respond to resize events. (default t)
@@ -746,55 +746,55 @@ you should place your code here."
 This is an auto-generated function, do not modify its content directly, use
 Emacs customize menu instead.
 This function is called at the very end of Spacemacs initialization."
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(nov esxml kv zenburn-theme yasnippet-snippets yapfify yaml-mode ws-butler
-         writeroom-mode winum window-purpose which-key wgrep web-mode
-         web-beautify volatile-highlights vim-powerline vi-tilde-fringe vertico
-         uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-magit
-         treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor
-         tagedit symon symbol-overlay string-edit-at-point stan-snippets
-         sql-indent sphinx-doc spacemacs-whitespace-cleanup
-         spacemacs-purpose-popwin spaceline-all-the-icons space-doc smeargle
-         slim-mode scss-mode sass-mode rustic ron-mode restart-emacs
-         rainbow-delimiters quickrun quarto-mode pytest pylookup pyenv-mode
-         pydoc py-isort pug-mode prettier-js popwin poly-org poly-R poetry
-         pippel pipenv pip-requirements pcre2el password-generator paradox
-         overseer orgit org-superstar org-super-agenda org-roam-ui org-rich-yank
-         org-ref org-projectile org-present org-pomodoro org-mime org-download
-         org-contrib org-cliplink orderless open-junk-file nose nameless
-         multi-line markdown-toc marginalia macrostep lsp-pyright lsp-origami
-         lsp-latex lsp-julia lorem-ipsum live-py-mode link-hint julia-ts-mode
-         julia-repl inspector info+ indent-guide importmagic impatient-mode
-         hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses
-         highlight-numbers highlight-indentation hide-comnt helm-make
-         groovy-mode groovy-imports graphviz-dot-mode google-translate
-         golden-ratio gnuplot gitignore-templates git-timemachine git-modes
-         git-messenger git-link gh-md flyspell-correct-popup flycheck-pos-tip
-         flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse
-         expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired
-         evil-tutor evil-textobj-line evil-tex evil-surround evil-org
-         evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion
-         evil-indent-plus evil-iedit-state evil-goggles evil-exchange
-         evil-evilified-state evil-escape evil-easymotion evil-collection
-         evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr
-         emmet-mode embark-consult elisp-slime-nav elisp-demos elisp-def ein
-         editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish
-         devdocs define-word dap-mode cython-mode csv-mode consult-yasnippet
-         consult-lsp conda compleseus-spacemacs-help company-web
-         company-statistics company-reftex company-math company-auctex
-         company-anaconda column-enforce-mode code-cells clean-aindent-mode
-         centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol
-         auto-dictionary auto-compile auctex-latexmk aggressive-indent ace-link))
- '(paradox-github-token t))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
-)
+  (custom-set-variables
+   ;; custom-set-variables was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   '(package-selected-packages
+     '(nov esxml kv zenburn-theme yasnippet-snippets yapfify yaml-mode ws-butler
+           writeroom-mode winum window-purpose which-key wgrep web-mode
+           web-beautify volatile-highlights vim-powerline vi-tilde-fringe vertico
+           uuidgen undo-tree treemacs-projectile treemacs-persp treemacs-magit
+           treemacs-icons-dired treemacs-evil toml-mode toc-org term-cursor
+           tagedit symon symbol-overlay string-edit-at-point stan-snippets
+           sql-indent sphinx-doc spacemacs-whitespace-cleanup
+           spacemacs-purpose-popwin spaceline-all-the-icons space-doc smeargle
+           slim-mode scss-mode sass-mode rustic ron-mode restart-emacs
+           rainbow-delimiters quickrun quarto-mode pytest pylookup pyenv-mode
+           pydoc py-isort pug-mode prettier-js popwin poly-org poly-R poetry
+           pippel pipenv pip-requirements pcre2el password-generator paradox
+           overseer orgit org-superstar org-super-agenda org-roam-ui org-rich-yank
+           org-ref org-projectile org-present org-pomodoro org-mime org-download
+           org-contrib org-cliplink orderless open-junk-file nose nameless
+           multi-line markdown-toc marginalia macrostep lsp-pyright lsp-origami
+           lsp-latex lsp-julia lorem-ipsum live-py-mode link-hint julia-ts-mode
+           julia-repl inspector info+ indent-guide importmagic impatient-mode
+           hybrid-mode hungry-delete holy-mode hl-todo highlight-parentheses
+           highlight-numbers highlight-indentation hide-comnt helm-make
+           groovy-mode groovy-imports graphviz-dot-mode google-translate
+           golden-ratio gnuplot gitignore-templates git-timemachine git-modes
+           git-messenger git-link gh-md flyspell-correct-popup flycheck-pos-tip
+           flycheck-package flycheck-elsa flx-ido fancy-battery eyebrowse
+           expand-region evil-visualstar evil-visual-mark-mode evil-unimpaired
+           evil-tutor evil-textobj-line evil-tex evil-surround evil-org
+           evil-numbers evil-nerd-commenter evil-matchit evil-lisp-state evil-lion
+           evil-indent-plus evil-iedit-state evil-goggles evil-exchange
+           evil-evilified-state evil-escape evil-easymotion evil-collection
+           evil-cleverparens evil-args evil-anzu eval-sexp-fu ess-R-data-view emr
+           emmet-mode embark-consult elisp-slime-nav elisp-demos elisp-def ein
+           editorconfig dumb-jump drag-stuff dotenv-mode dired-quick-sort diminish
+           devdocs define-word dap-mode cython-mode csv-mode consult-yasnippet
+           consult-lsp conda compleseus-spacemacs-help company-web
+           company-statistics company-reftex company-math company-auctex
+           company-anaconda column-enforce-mode code-cells clean-aindent-mode
+           centered-cursor-mode blacken auto-yasnippet auto-highlight-symbol
+           auto-dictionary auto-compile auctex-latexmk aggressive-indent ace-link))
+   '(paradox-github-token t))
+  (custom-set-faces
+   ;; custom-set-faces was added by Custom.
+   ;; If you edit it by hand, you could mess it up, so be careful.
+   ;; Your init file should contain only one such instance.
+   ;; If there is more than one, they won't work right.
+   )
+  )
