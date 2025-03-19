@@ -8,3 +8,4 @@ elpa/
 /snippets/.DS_Store
 /org-roam-setup.el
 /spelling-setup.el
+/.projectile

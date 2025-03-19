@@ -705,8 +705,6 @@ you should place your code here."
         doom-modeline-minor-modes nil
         doom-modeline-buffer-encoding nil
         doom-modeline-time nil
-        doom-modeline-percent-position nil
-        doom-modeline-position-column-line-format nil
         doom-modeline-vcs-max-length 25
         )
   ;; Make buffers split in golden ratio
