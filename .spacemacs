@@ -72,6 +72,7 @@ This function should only modify configuration layer settings."
      (latex :variables
             latex-backend 'lsp
             latex-enable-folding t
+            latex-build-command 'latexmk
             )
      ;; LLM integration
      (llm-client :variables
