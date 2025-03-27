@@ -76,7 +76,7 @@ This function should only modify configuration layer settings."
             )
      ;; LLM integration
      (llm-client :variables
-                 llm-client-enable-gptel t
+                 llm-client-enable-ellama t
                  )
      (lsp :variables
           lsp-use-lsp-ui nil
@@ -712,13 +712,13 @@ you should place your code here."
   (golden-ratio-mode)
   (delete "dired-mode" golden-ratio-exclude-modes)
   ;; Set up LLM stuff for ollama
-  (setq gptel-model 'mistral:latest
-        gptel-backend (gptel-make-ollama "Ollama"
-                        :host "localhost:11434"
-                        :stream t
-                        :models '("mistral:latest")
-                        )
-        )
+  ;; (setq gptel-model 'mistral:latest
+  ;;       gptel-backend (gptel-make-ollama "Ollama"
+  ;;                       :host "localhost:11434"
+  ;;                       :stream t
+  ;;                       :models '("mistral:latest")
+  ;;                       )
+  ;;       )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
