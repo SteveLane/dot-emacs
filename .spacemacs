@@ -95,6 +95,7 @@ This function should only modify configuration layer settings."
              python-shell-interpreter "ipython3"
              python-backend 'lsp
              python-lsp-server 'pyright
+             python-formatter 'black
              )
      ;; (shell :variables
      ;;        shell-default-height 30
@@ -711,14 +712,8 @@ you should place your code here."
   ;; Make buffers split in golden ratio
   (golden-ratio-mode)
   (delete "dired-mode" golden-ratio-exclude-modes)
-  ;; Set up LLM stuff for ollama
-  ;; (setq gptel-model 'mistral:latest
-  ;;       gptel-backend (gptel-make-ollama "Ollama"
-  ;;                       :host "localhost:11434"
-  ;;                       :stream t
-  ;;                       :models '("mistral:latest")
-  ;;                       )
-  ;;       )
+  ;; Disable pycompile
+  (setq-default flycheck-disabled-checkers '(python-pycompile))
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
