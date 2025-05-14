@@ -1,4 +1,4 @@
-;; Time-stamp: <2025-02-19 12:04:43 (lanes1)>
+;; Time-stamp: <2025-05-06 12:29:20 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (with-eval-after-load 'ess-mode
@@ -8,7 +8,7 @@
   (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
   (when (spacemacs/system-is-mswindows)
-    (setq inferior-R-program-name "c:/Program Files/R/R-4.4.1/bin/x64/R.exe"))
+    (setq inferior-R-program-name "c:/Program Files/R/R-4.4.3/bin/x64/R.exe"))
   ;; Default indentation style as RStudio (spacemacs sets a bunch of dumb stuff)
   (add-hook 'ess-mode-hook (lambda ()
                              (setq

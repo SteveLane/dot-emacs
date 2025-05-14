@@ -622,8 +622,8 @@ variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
   (setenv "LANG" "en_AU")
-  (push "c:/Program Files/R/R-4.4.1/bin/x64" exec-path)
-  (push "c:/Program Files/R/R-4.4.1/bin" exec-path)
+  (push "c:/Program Files/R/R-4.4.3/bin/x64" exec-path)
+  (push "c:/Program Files/R/R-4.4.3/bin" exec-path)
   (push "c:/msys64/usr/bin" exec-path)
   ;; Make sure LSP can find lsp-latex
   (push "~/AppData/Local/texlab-x86_64-windows" exec-path)
@@ -694,7 +694,7 @@ you should place your code here."
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.4.1/bin/x64/R.exe --slave --no-save")
+    (setq org-babel-R-command "c:/Progra~1/R/R-4.4.3/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
