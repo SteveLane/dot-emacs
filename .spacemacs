@@ -34,40 +34,34 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ;; (bibtex :variables
-     ;;         org-ref-default-bibliography "~/github/references.bib"
-     ;;  )
-     bibtex
-     (conda :variables
-            conda-anaconda-home "c:/Users/lanes1/AppData/Local/Continuum/anaconda3/"
-            )
-     csv
-     yaml
-     graphviz
-     html
-     ;; ----------------------------------------------------------------
-     ;; Example of useful layers you may want to use right away.
-     ;; Uncomment some layer names and press `SPC f e R' (Vim style) or
-     ;; `M-m f e R' (Emacs style) to install them.
-     ;; ----------------------------------------------------------------
-     ;; helm
-     compleseus
      (auto-completion :variables
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
                       )
-     ;; better-defaults
+     ;; (bibtex :variables
+     ;;         org-ref-default-bibliography "~/github/references.bib"
+     ;;  )
+     bibtex
+     compleseus
+     (conda :variables
+            conda-anaconda-home "c:/Users/lanes1/AppData/Local/Continuum/anaconda3/"
+            )
+     csv
      emacs-lisp
+     epub
      (ess :variables
           ess-r-backend 'lsp
           ess-use-company 't
           polymode-lsp-integration nil
           :config (add-to-list 'auto-mode-alist '("\\.[qrR]md\\'" . poly-markdown+r-mode))
           )
-     epub
      git
-     groovy
+     graphviz
+     (groovy :variables
+             groovy-backend 'company-groovy
+             )
+     html
      ipython-notebook
      (latex :variables
             latex-backend 'lsp
@@ -109,6 +103,7 @@ This function should only modify configuration layer settings."
      stan-mode
      syntax-checking
      treemacs
+     yaml
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
