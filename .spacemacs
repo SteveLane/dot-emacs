@@ -39,9 +39,6 @@ This function should only modify configuration layer settings."
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
                       )
-     ;; (bibtex :variables
-     ;;         org-ref-default-bibliography "~/github/references.bib"
-     ;;  )
      bibtex
      compleseus
      (conda :variables
@@ -87,9 +84,6 @@ This function should only modify configuration layer settings."
              python-lsp-server 'pyright
              python-formatter 'black
              )
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
      rust
      sql
      ;; Only works windows here, but at least allows spell to be set...
