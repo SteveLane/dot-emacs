@@ -68,10 +68,6 @@ This function should only modify configuration layer settings."
             latex-enable-folding t
             latex-build-command 'latexmk
             )
-     ;; LLM integration
-     (llm-client :variables
-                 llm-client-enable-ellama t
-                 )
      (lsp :variables
           lsp-use-lsp-ui nil
           )
