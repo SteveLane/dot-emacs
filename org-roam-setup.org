@@ -56,7 +56,17 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         )
       org-roam-dailies-capture-templates
       '(
-        ("d" "default" entry "* %<%H:%M>\n  * %?" :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))
+        ("d" "Daily (throughout) notes" entry "* %<%H:%M>\n  * %?" :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))
+        ("j" "Journalling" plain "%^{What went well today?}
+     %^{What didn't go as well? Can I do anything to address them?}
+     %^{Should I focus on something in particular tomorrow?}
+     %^{Are there any patterns I'm beginning to notice?}
+     %^{How did I feel today?}
+     \n%?
+     "
+         :target (file+head "journal/%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n#+filetags: :JOURNAL:\n")
+         :unnarrowed t
+         )
         )
       )
    #+end_src
@@ -108,7 +118,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
     (defun sprazza/org-roam-search ()
       "Search in the org-roam directory with `rg'."
       (interactive)
-      (spacemacs/compleseus-search t org-roam-directory))
+      (spacemacs/compleseus-search nil (expand-file-name org-roam-directory)))
 
     (progn
       (spacemacs/set-leader-keys
