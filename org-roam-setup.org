@@ -17,7 +17,7 @@
 Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roam capture templates. For example, I'm going to have common tags, such as person, division, process, code. I'd like to have those pre-populated wherever possible. The following will create such capture templates.
 
 ** Template definitions
-   
+
    #+header: :tangle yes
    #+begin_src emacs-lisp :export yes
      (setq
@@ -54,11 +54,15 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
          :unnarrowed t
          )
         )
+      org-roam-dailies-capture-templates
+      '(
+        ("d" "default" entry "* %<%H:%M>\n  * %?" :target (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))
+        )
       )
    #+end_src
 
 ** Template definitions
-   
+
    #+header: :tangle no
    #+begin_src emacs-lisp :export no
      (setq
@@ -109,6 +113,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
     (progn
       (spacemacs/set-leader-keys
         "aors" 'sprazza/org-roam-search
+        "aordc" 'org-roam-dailies-capture-today
         )
 
       (spacemacs/set-leader-keys-for-major-mode 'org-mode
