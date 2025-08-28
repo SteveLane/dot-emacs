@@ -88,3 +88,6 @@
                       (append exec-path
                               (split-string (getenv "PATH") path-separator t)))))
     (setenv "PATH" (mapconcat 'identity (delete-dups path) path-separator))))
+
+;; Lower the number of recent files
+(setq recentf-max-saved-items 50)
