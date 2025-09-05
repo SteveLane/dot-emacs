@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Quarto R chunk (GT table)
+# key: rgt
+# contributor: SteveLane
+# --
+\`\`\`{r}
+#| label: tbl-${1:name of table ref}
+#| tbl-cap: "Table caption"
+${2:R object name} |>
+  gt() |>
+  # Add percentage format
+  fmt_percent(columns = c(column, names), decimals = 0) |>
+  # Add column spanning (i.e. top-level column header)
+  tab_spanner(
+    label = "Column header",
+    columns = c(columns, to, span)
+  ) |>
+  tab_options(
+    container.overflow.y = TRUE,
+    container.height = 600
+  )
+$0
+
+\`\`\`
