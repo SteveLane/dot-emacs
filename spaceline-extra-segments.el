@@ -47,8 +47,8 @@ This segment overrides the modeline functionality of `org-mode-line-string'."
     (let ((face `(:height ,(spaceline-all-the-icons--height 0.9) :inherit)))
       (propertize
        (concat
-        (propertize (all-the-icons-faicon "check-circle" :v-adjust 0.1)
-                    'face `(:height ,(spaceline-all-the-icons--height 1.1) :family ,(all-the-icons-faicon-family) :inherit))
+        (propertize (nerd-icons-faicon "check-circle" :v-adjust 0.1)
+                    'face `(:height ,(spaceline-all-the-icons--height 1.1) :family ,(nerd-icons-faicon-family) :inherit))
         " "
         (propertize (truncate-string-to-width (funcall spaceline-org-clock-format-function) 50 nil nil "…")
                     'face face
