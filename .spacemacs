@@ -77,6 +77,7 @@ This function should only modify configuration layer settings."
           org-enable-roam-ui t
           org-roam-database-connector 'sqlite-builtin
           org-enable-roam-protocol t
+          org-enable-notifications t
           )
      (python :variables
              python-shell-interpreter "ipython3"
@@ -697,6 +698,12 @@ you should place your code here."
   (delete "dired-mode" golden-ratio-exclude-modes)
   ;; Disable pycompile
   (setq-default flycheck-disabled-checkers '(python-pycompile))
+  ;; Set alerts configs
+  (setq alert-default-style 'mode-line
+        org-alert-interval 120
+        org-alert-notify-cutoff 5
+        org-alert-notify-after-event-cutoff 5
+        )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
