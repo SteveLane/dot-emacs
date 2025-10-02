@@ -1,0 +1,34 @@
+# -*- mode: snippet -*-
+# name: chart_skeleton(...) { ... } + roxygen2
+# key: ch
+# contributor: SteveLane
+# --
+#' ${2:Barebones chart skeleton with sensible defaults}
+#'
+#' \\code{$1} $2
+#'
+#' @param df cleaned data used to build the function.
+#'
+#' @return string. Path to chart.
+${1:chart_skeleton_name} <- function(df) {
+
+  my_chart <- df |>
+    ggplot()
+
+  if (!dir.exists(here::here("figs"))) dir.create(here::here("figs"))
+  fname <- here::here("figs/my_chart_name.png")
+
+  ggsave(
+    fname, my_chart,
+    width = 8.1, height = 5, units = "in", device = ragg::agg_png,
+    bg = "white"
+  )
+
+  if (interactive()) {
+    ## Return the ggplot object if called interactively
+    my_chart
+  } else {
+    ## Return the path string if not called interactively
+    fname
+  }
+}
