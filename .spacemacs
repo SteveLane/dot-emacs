@@ -84,6 +84,7 @@ This function should only modify configuration layer settings."
              python-backend 'lsp
              python-lsp-server 'pyright
              python-formatter 'black
+             python-enable-tools '(uv)
              )
      rust
      sql
