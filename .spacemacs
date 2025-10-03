@@ -41,9 +41,6 @@ This function should only modify configuration layer settings."
                       )
      bibtex
      compleseus
-     (conda :variables
-            conda-anaconda-home "c:/Users/lanes1/AppData/Local/miniforge3/"
-            )
      csv
      emacs-lisp
      epub
