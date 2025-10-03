@@ -82,9 +82,11 @@ This function should only modify configuration layer settings."
      (python :variables
              python-shell-interpreter "ipython3"
              python-backend 'lsp
-             python-lsp-server 'pyright
+             python-lsp-server 'pylsp
              python-formatter 'black
+             python-format-on-save t
              python-enable-tools '(uv)
+             python-virtualenv-management 'pet
              )
      rust
      sql
