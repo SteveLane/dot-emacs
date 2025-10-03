@@ -408,12 +408,6 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
 The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
 
 2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
-
-Finally close off the =with=eval-after-load= from earlier:
-#+begin_src emacs-lisp :exports none
-  )
-#+end_src
-
 * Searching through your notes
 
   To make it a little easier to search, use ripgrep. It replaces the current org-search-view which is not helpful (imo).
@@ -439,3 +433,8 @@ Finally close off the =with=eval-after-load= from earlier:
 
   #+begin_src emacs-lisp :tangle yes :export yes
   #+end_src
+
+Finally close off the =with=eval-after-load= from earlier:
+#+begin_src emacs-lisp :exports none
+  )
+#+end_src
