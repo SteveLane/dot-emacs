@@ -78,7 +78,7 @@ This function should only modify configuration layer settings."
           )
      (python :variables
              python-shell-interpreter "ipython3"
-             python-backend 'lsp
+             python-backend 'eglot
              python-lsp-server 'pylsp
              python-formatter 'black
              python-format-on-save t
