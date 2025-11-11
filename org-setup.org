@@ -54,7 +54,7 @@ The default directory for org files is ~/org, and I'm going to stick with that c
    ;; This is useful when per project task lists are used.
    ;; Only show level 1 headings for refiling (level 2 are the task headers)
    org-refile-targets (quote ((nil :maxlevel . 2)
-              (org-agenda-files :maxlevel . 2)))
+              (org-agenda-files :maxlevel . 3)))
    ;; Org agenda files read from here
    org-agenda-files '(
                       "~/github/org/waiting-for.org" "~/github/org/refile.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings.org"
