@@ -1,0 +1,15 @@
+# -*- mode: snippet -*-
+# name: function_docstring_sphinx
+# key: fds
+# group: definitions
+# Use minimum indentation, because Emacs 25+ doesn't dedent docstrings.
+# --
+def ${1:Function Name}(${2:Arguments}):
+ \"\"\"${3:Description}
+
+ ${2:$(sphinx/python-args-to-docstring)}
+
+ :return: ${4:Description of return}
+ :rtype: ${5:Return type}
+ \"\"\"
+ $0
