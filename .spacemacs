@@ -77,7 +77,8 @@ This function should only modify configuration layer settings."
           org-enable-notifications t
           )
      (python :variables
-             python-shell-interpreter "ipython3"
+             python-shell-interpreter "uv"
+             python-shell-interpreter-args "run -q ipython -i --simple-prompt"
              python-backend 'eglot
              python-lsp-server 'pylsp
              python-formatter 'black
@@ -677,6 +678,7 @@ you should place your code here."
   (load-file "~/github/emacs-config/stan-config.el")
   (load-file "~/github/emacs-config/org-setup.el")
   (load-file "~/github/emacs-config/org-roam-setup.el")
+  (load-file "~/github/emacs-config/python-config.el")
   ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
   ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
