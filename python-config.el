@@ -12,7 +12,7 @@
 
   (defun sl/project-shell-name ()
     "Return the project-scoped Python shell buffer name."
-    (format "*Python: %s*" (sl/project-name)))
+    (format "Python: %s" (sl/project-name)))
 
   ;; Ensure buffers default to project shell (shared across buffers)
   (defun sl/python-shell-buffer-config ()
@@ -36,7 +36,7 @@ With prefix ARG, prompt for the command line."
                                  default-directory)))
       (when (bound-and-true-p pet-mode)
         (ignore-errors (pet-activate)))
-      (run-python (when arg (python-shell-parse-command)) t t)))
+      (run-python (when arg (python-shell-parse-command)) nil t)))
 
   ;; Advice: every run-python call starts in project root and uses our name
   (defun sl--run-python-in-project-root-advice (orig &rest args)
@@ -63,8 +63,7 @@ With prefix ARG, prompt for the command line."
                 python-shell-send-statement
                 python-shell-send-file
                 python-shell-send-line))
-    (when (fboundp fn)
-      (advice-add fn :around #'sl/with-project-shell)))
+    (advice-add fn :around #'sl/with-project-shell))
 
   ;; Wrap Spacemacs layer helpers (if present)
   (dolist (fn '(spacemacs/python-send-line
@@ -73,8 +72,7 @@ With prefix ARG, prompt for the command line."
                 spacemacs/python-send-defun
                 spacemacs/python-exec
                 spacemacs/python-start-or-switch-repl))
-    (when (fboundp fn)
-      (advice-add fn :around #'sl/with-project-shell)))
+    (advice-add fn :around #'sl/with-project-shell))
 
   ;; ---------------------------------------------
   ;; Auto-start REPL before sending
@@ -102,8 +100,7 @@ With prefix ARG, prompt for the command line."
                 spacemacs/python-send-defun
                 spacemacs/python-exec
                 spacemacs/python-start-or-switch-repl))
-    (when (fboundp fn)
-      (advice-add fn :before #'sl/ensure-python-repl)))
+    (advice-add fn :before #'sl/ensure-python-repl))
 
   ;; ---------------------------------------------
   ;; Prompt handling: disable auto-detect & define IPython regexps
