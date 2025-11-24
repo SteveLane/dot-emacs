@@ -1,69 +1,61 @@
-;;; python-config.el --- Project-scoped Python REPL via uv -*- lexical-binding: t; -*-
+;;; python-config.el --- Project-scoped Python REPL (uv) + robust send -*- lexical-binding: t; -*-
 
 (with-eval-after-load 'python
   ;; ---------------------------------------------
-  ;; Helper: get current Projectile project name
+  ;; Helper: project name & shell buffer name
   ;; ---------------------------------------------
   (defun sl/project-name ()
-    "Return the current Projectile project name or 'unknown'."
+    "Return current Projectile project name (or 'unknown')."
     (let* ((root (ignore-errors (projectile-project-root)))
            (name (and root (file-name-nondirectory (directory-file-name root)))))
       (or name "unknown")))
 
-  ;; ---------------------------------------------
-  ;; Make REPL buffer name project-specific
-  ;; ---------------------------------------------
-  (defun sl/python-shell-buffer-name-per-project ()
-    "Set buffer-local `python-shell-buffer-name` to *Python: <project>*."
-    (let ((name (sl/project-name)))
-      (setq-local python-shell-buffer-name (format "*Python: %s*" name))
-      ;; Ensure we don't create per-buffer dedicated shells
-      ;; (we want one REPL per project shared across buffers)
-      (setq-local python-shell-dedicated nil)))
-  (add-hook 'python-mode-hook #'sl/python-shell-buffer-name-per-project)
+  (defun sl/project-shell-name ()
+    "Return the project-scoped Python shell buffer name."
+    (format "*Python: %s*" (sl/project-name)))
 
-  ;; Also set the name inside inferior Python buffers, so switching works cleanly.
-  (add-hook 'inferior-python-mode-hook
-            (lambda ()
-              (let ((name (sl/project-name)))
-                (setq-local python-shell-buffer-name (format "*Python: %s*" name)))))
+  ;; Ensure buffers default to project shell (shared across buffers)
+  (defun sl/python-shell-buffer-config ()
+    "Set buffer-local shell vars for a shared per-project REPL."
+    (setq-local python-shell-buffer-name (sl/project-shell-name))
+    (setq-local python-shell-dedicated nil)) ;; never create per-buffer shells
+
+  (add-hook 'python-mode-hook #'sl/python-shell-buffer-config)
+  (add-hook 'inferior-python-mode-hook #'sl/python-shell-buffer-config)
 
   ;; ---------------------------------------------
-  ;; Start IPython via `uv` in the project root
+  ;; Force run-python to use project root & name
   ;; ---------------------------------------------
   (defun sl/run-python-in-projectile-root (&optional arg)
     "Start IPython via `uv run` in the Projectile project root.
 With prefix ARG, prompt for the command line."
     (interactive "P")
-    ;; Respect the project-scoped shell name before starting
-    (sl/python-shell-buffer-name-per-project)
+    ;; set shell name in the current buffer before creating the REPL
+    (sl/python-shell-buffer-config)
     (let ((default-directory (or (ignore-errors (projectile-project-root))
                                  default-directory)))
       (when (bound-and-true-p pet-mode)
         (ignore-errors (pet-activate)))
       (run-python (when arg (python-shell-parse-command)) t t)))
 
-  ;; Force ALL run-python calls to start in the project root
+  ;; Advice: every run-python call starts in project root and uses our name
   (defun sl--run-python-in-project-root-advice (orig &rest args)
     (let ((default-directory (or (ignore-errors (projectile-project-root))
                                  default-directory)))
-      ;; Ensure the buffer name is set before the REPL is created
-      (sl/python-shell-buffer-name-per-project)
+      (sl/python-shell-buffer-config)
       (apply orig args)))
   (advice-add 'run-python :around #'sl--run-python-in-project-root-advice)
 
   ;; ---------------------------------------------
-  ;; Auto-start REPL before send commands (line/region/buffer/etc.)
+  ;; VERY IMPORTANT: ensure project shell vars during send
   ;; ---------------------------------------------
-  (defun sl/ensure-python-repl (&rest _)
-    "Ensure a Python REPL is running via uv for the current project."
-    ;; Make sure buffer-local name is set so we attach to the project shell
-    (sl/python-shell-buffer-name-per-project)
-    (let ((proc (ignore-errors (python-shell-get-process))))
-      (unless (and proc (process-live-p proc))
-        (sl/run-python-in-projectile-root)
-        ;; Small delay avoids a race on first send
-        (sleep-for 0.05))))
+  (defun sl/with-project-shell (orig &rest args)
+    "Around advice to force project shell name + non-dedicated during send."
+    (let ((python-shell-buffer-name (sl/project-shell-name))
+          (python-shell-dedicated nil))
+      (apply orig args)))
+
+  ;; Wrap core python.el send functions
   (dolist (fn '(python-shell-send-string
                 python-shell-send-buffer
                 python-shell-send-defun
@@ -72,8 +64,39 @@ With prefix ARG, prompt for the command line."
                 python-shell-send-file
                 python-shell-send-line))
     (when (fboundp fn)
-      (advice-add fn :before #'sl/ensure-python-repl)))
+      (advice-add fn :around #'sl/with-project-shell)))
+
+  ;; Wrap Spacemacs layer helpers (if present)
   (dolist (fn '(spacemacs/python-send-line
+                spacemacs/python-send-region
+                spacemacs/python-send-buffer
+                spacemacs/python-send-defun
+                spacemacs/python-exec
+                spacemacs/python-start-or-switch-repl))
+    (when (fboundp fn)
+      (advice-add fn :around #'sl/with-project-shell)))
+
+  ;; ---------------------------------------------
+  ;; Auto-start REPL before sending
+  ;; ---------------------------------------------
+  (defun sl/ensure-python-repl (&rest _)
+    "Ensure a Python REPL is running via uv for the current project."
+    ;; also set shell config in case the current buffer missed the hook
+    (sl/python-shell-buffer-config)
+    (let ((proc (ignore-errors (python-shell-get-process))))
+      (unless (and proc (process-live-p proc))
+        (sl/run-python-in-projectile-root)
+        (sleep-for 0.05)))) ;; small delay to avoid first-send race
+
+  ;; Ensure before sends (python.el + Spacemacs)
+  (dolist (fn '(python-shell-send-string
+                python-shell-send-buffer
+                python-shell-send-defun
+                python-shell-send-region
+                python-shell-send-statement
+                python-shell-send-file
+                python-shell-send-line
+                spacemacs/python-send-line
                 spacemacs/python-send-region
                 spacemacs/python-send-buffer
                 spacemacs/python-send-defun
@@ -83,11 +106,10 @@ With prefix ARG, prompt for the command line."
       (advice-add fn :before #'sl/ensure-python-repl)))
 
   ;; ---------------------------------------------
-  ;; Prompts: avoid autodetect + define IPython regexps
+  ;; Prompt handling: disable auto-detect & define IPython regexps
   ;; ---------------------------------------------
   (setq python-shell-prompt-detect-enabled nil)
-  (dolist (re '("^In \\[[0-9]+\\]: *"
-                "^\\s-*\\.\\.\\.: *"))
+  (dolist (re '("^In \\[[0-9]+\\]: *" "^\\s-*\\.\\.\\.: *"))
     (add-to-list 'python-shell-prompt-input-regexps re))
   (add-to-list 'python-shell-prompt-output-regexps "^Out\\[[0-9]+\\]: *")
 
@@ -103,9 +125,9 @@ With prefix ARG, prompt for the command line."
   ;; ---------------------------------------------
   ;; Optional: silence 'No readline support' warning
   ;; ---------------------------------------------
-  ;; If you prefer no noise, uncomment the next two lines:
   ;; (defun sl/python-silence-readline-warning ()
   ;;   (when-let ((proc (python-shell-get-process)))
-  ;;     (comint-send-string proc "import warnings; warnings.filterwarnings('ignore', message='.*readline.*')\n")))
+  ;;     (comint-send-string proc
+  ;;       "import warnings; warnings.filterwarnings('ignore', message='.*readline.*')\n")))
   ;; (advice-add 'sl/run-python-in-projectile-root :after #'sl/python-silence-readline-warning)
   )
