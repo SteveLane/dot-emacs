@@ -617,6 +617,7 @@ See the header of this file for more information."
   (push "c:/Program Files/R/R-4.4.3/bin/x64" exec-path)
   (push "c:/Program Files/R/R-4.4.3/bin" exec-path)
   (push "c:/msys64/usr/bin" exec-path)
+  (push "c:/msys64/ucrt64/bin" exec-path)
   ;; Make sure LSP can find lsp-latex
   (push "~/AppData/Local/texlab-x86_64-windows" exec-path)
   )
@@ -766,7 +767,7 @@ This function is called at the very end of Spacemacs initialization."
                 hl-todo holy-mode hungry-delete impatient-mode indent-guide info+
                 inspector link-hint live-py-mode lorem-ipsum lsp-latex lsp-origami
                 lsp-pyright lsp-treemacs macrostep marginalia markdown-toc
-                multi-line nameless nov open-junk-file orderless org-cliplink
+                multi-line nameless nov open-junk-file orderless org org-cliplink
                 org-contrib org-download org-mime org-pomodoro org-present
                 org-projectile org-ref org-rich-yank org-roam-ui org-super-agenda
                 org-superstar orgit overseer page-break-lines paradox
