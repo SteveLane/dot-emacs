@@ -683,6 +683,8 @@ you should place your code here."
   ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
   ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
+  ;; Proxy configuration based on location
+  (load-file "~/github/emacs-config/proxies.el")
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
