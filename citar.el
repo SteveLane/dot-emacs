@@ -14,7 +14,7 @@
   )
 
 (use-package citar-embark
-  :after citar embark
+  :after (citar embark)
   :no-require
   :config
   (citar-embark-mode)
@@ -28,4 +28,11 @@
    citar-org-roam-note-title-template "${author} - ${title}"
    citar-org-roam-capture-template-key "l"
    )
+  )
+
+;; Set spacemacs leader keys to enter citations in org major mode (, R)
+(progn
+  (spacemacs/set-leader-keys-for-major-mode 'org-mode
+    "R" 'org-cite-insert
+    )
   )
