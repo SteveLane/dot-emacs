@@ -50,6 +50,7 @@ This function should only modify configuration layer settings."
           polymode-lsp-integration nil
           :config (add-to-list 'auto-mode-alist '("\\.[qrR]md\\'" . poly-markdown+r-mode))
           )
+     javascript
      git
      graphviz
      (groovy :variables
@@ -745,46 +746,50 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
-                auto-yasnippet blacken centered-cursor-mode citar-embark
-                citar-org-roam clean-aindent-mode code-review column-enforce-mode
-                company-auctex company-math company-reftex company-statistics
-                company-web compleseus-spacemacs-help conda consult-lsp
-                consult-yasnippet csv-mode cython-mode define-word devdocs
-                diminish dired-quick-sort disable-mouse doom-modeline dotenv-mode
-                drag-stuff dumb-jump edit-indirect ein elisp-def elisp-demos
-                elisp-slime-nav embark-consult emmet-mode emr ess-R-data-view
-                eval-sexp-fu evil-anzu evil-args evil-cleverparens evil-collection
+     '(ace-link add-node-modules-path aggressive-indent all-the-icons auto-compile
+                auto-highlight-symbol auto-yasnippet blacken bui
+                centered-cursor-mode citar-embark citar-org-roam
+                clean-aindent-mode code-review column-enforce-mode company-auctex
+                company-math company-reftex company-statistics company-web
+                compleseus-spacemacs-help consult-lsp consult-yasnippet csv-mode
+                cython-mode dap-mode define-word devdocs diminish dired-quick-sort
+                disable-mouse doom-modeline dotenv-mode drag-stuff dumb-jump
+                edit-indirect ein elisp-def elisp-demos elisp-slime-nav
+                embark-consult emmet-mode emr ess-R-data-view eval-sexp-fu
+                evil-anzu evil-args evil-cleverparens evil-collection
                 evil-easymotion evil-escape evil-evilified-state evil-exchange
                 evil-goggles evil-iedit-state evil-indent-plus evil-lion
                 evil-lisp-state evil-matchit evil-nerd-commenter evil-numbers
                 evil-org evil-surround evil-tex evil-textobj-line evil-tutor
                 evil-unimpaired evil-visual-mark-mode evil-visualstar
                 expand-region eyebrowse fancy-battery flycheck-elsa
-                flycheck-package flycheck-pos-tip flyspell-correct-popup gh-md
-                git-link git-messenger git-modes git-timemachine
+                flycheck-package flycheck-pos-tip flyspell-correct-popup ggtags
+                gh-md git-link git-messenger git-modes git-timemachine
                 gitignore-templates gnuplot golden-ratio google-translate
-                graphviz-dot-mode groovy-imports groovy-mode helm-make hide-comnt
-                highlight-indentation highlight-numbers highlight-parentheses
-                hl-todo holy-mode hungry-delete impatient-mode indent-guide info+
-                inspector link-hint live-py-mode lorem-ipsum lsp-latex lsp-origami
-                lsp-pyright lsp-treemacs macrostep marginalia markdown-toc
-                multi-line nameless nov open-junk-file orderless org org-cliplink
-                org-contrib org-download org-mime org-pomodoro org-present
-                org-projectile org-ref org-rich-yank org-roam-ui org-super-agenda
-                org-superstar orgit overseer page-break-lines paradox
-                password-generator pcre2el pip-requirements pipenv pippel poetry
-                poly-R poly-org popwin prettier-js pug-mode py-isort pydoc
-                pyenv-mode pylookup pytest quarto-mode quickrun rainbow-delimiters
-                restart-emacs ron-mode rustic sass-mode scss-mode slim-mode
-                smeargle space-doc spacemacs-purpose-popwin
-                spacemacs-whitespace-cleanup sphinx-doc sql-indent stan-snippets
-                string-edit-at-point symbol-overlay symon tagedit term-cursor
-                toc-org toml-mode treemacs-evil treemacs-icons-dired
-                treemacs-magit treemacs-persp treemacs-projectile undo-fu
-                undo-fu-session vertico vi-tilde-fringe volatile-highlights vundo
-                web-beautify web-mode wgrep window-purpose winum writeroom-mode
-                ws-butler yaml-mode yasnippet-snippets zenburn-theme))
+                graphviz-dot-mode grizzl groovy-imports groovy-mode helm-make
+                hide-comnt highlight-indentation highlight-numbers
+                highlight-parentheses hl-todo holy-mode hungry-delete hybrid-mode
+                impatient-mode import-js indent-guide info+ inspector js-doc
+                js2-mode js2-refactor link-hint live-py-mode livid-mode
+                lorem-ipsum lsp-docker lsp-latex lsp-origami lsp-treemacs
+                macrostep marginalia markdown-toc multi-line multiple-cursors
+                nameless nodejs-repl nov npm-mode open-junk-file orderless
+                org-alert org-cliplink org-contrib org-download org-mime
+                org-pomodoro org-present org-projectile org-ref org-rich-yank
+                org-roam-ui org-super-agenda org-superstar orgit overseer
+                page-break-lines paradox password-generator pcre2el pet
+                pip-requirements poly-R poly-org popwin prettier-js pug-mode
+                py-isort pydoc pyenv-mode pylookup python-pytest quarto-mode
+                quickrun rainbow-delimiters restart-emacs ron-mode rustic
+                sass-mode scss-mode skewer-mode slim-mode smeargle space-doc
+                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
+                sql-indent stan-snippets string-edit-at-point symbol-overlay symon
+                tagedit term-cursor tern toc-org toml-mode treemacs-evil
+                treemacs-icons-dired treemacs-magit treemacs-persp
+                treemacs-projectile undo-fu-session uv vertico vi-tilde-fringe
+                volatile-highlights vundo web-beautify web-mode wgrep
+                window-purpose winum writeroom-mode ws-butler yaml-mode
+                yasnippet-snippets zenburn-theme))
    '(paradox-github-token t))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
