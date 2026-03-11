@@ -106,6 +106,7 @@ This function should only modify configuration layer settings."
                                       citar
                                       citar-embark
                                       citar-org-roam
+                                      forge
                                       org-super-agenda
                                       (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R

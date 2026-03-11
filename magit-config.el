@@ -1,4 +1,4 @@
-;; Time-stamp: <2025-02-19 13:43:23 (lanes1)>
+;; Time-stamp: <2026-03-11 20:49:59 (sprazza)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; magit
@@ -9,4 +9,5 @@
    magit-tag-arguments (quote ("--annotate"))
    magit-diff-refine-hunk t
    )
+  (require 'forge)
   )
