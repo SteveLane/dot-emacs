@@ -12,7 +12,7 @@ This document is literate explanation of the setup for my spelling implementatio
 * Simple setup
 
 ** Template definitions
-   
+
    #+header: :tangle yes
    #+begin_src emacs-lisp :export yes
      ;; Set up languages
@@ -28,7 +28,10 @@ This document is literate explanation of the setup for my spelling implementatio
          (setq ispell-program-name
                "C:/msys64/mingw64/bin/hunspell.exe")
          )
+       (when (spacemacs/system-is-linux)
+         (setq ispell-program-name
+               "/usr/bin/hunspell")
+         )
        (add-hook 'flyspell-mode-hook 'my/fix-ispell-contraction)
        )
    #+end_src
-

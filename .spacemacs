@@ -93,7 +93,6 @@ This function should only modify configuration layer settings."
      sql
      ;; Only works windows here, but at least allows spell to be set...
      (spell-checking :variables
-                     ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe"
                      ispell-dictionary "en_AU")
      stan-mode
      syntax-checking
@@ -109,8 +108,8 @@ This function should only modify configuration layer settings."
                                       citar
                                       citar-embark
                                       citar-org-roam
-                                      ;; For org-jira support
                                       jiralib2
+                                      forge
                                       org-super-agenda
                                       (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
@@ -689,12 +688,12 @@ you should place your code here."
   ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
   ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; Proxy configuration based on location
-  (load-file "~/github/emacs-config/proxies.el")
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
+    (load-file "~/github/emacs-config/proxies.el")
     (setq org-babel-R-command "c:/Progra~1/R/R-4.5.2/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
