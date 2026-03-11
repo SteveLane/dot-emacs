@@ -76,6 +76,8 @@ This function should only modify configuration layer settings."
           org-roam-database-connector 'sqlite-builtin
           org-enable-roam-protocol t
           org-enable-notifications t
+          org-enable-jira-support t
+          jiralib-url "https://worksafe.atlassian.net/"
           )
      (python :variables
              python-shell-interpreter "uv"
@@ -107,6 +109,8 @@ This function should only modify configuration layer settings."
                                       citar
                                       citar-embark
                                       citar-org-roam
+                                      ;; For org-jira support
+                                      jiralib2
                                       org-super-agenda
                                       (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
                                       poly-R
@@ -717,6 +721,8 @@ you should place your code here."
         org-alert-notify-cutoff 5
         org-alert-notify-after-event-cutoff 5
         )
+  ;; For org-jira, set the working directory
+  (setq org-jira-working-dir "~/github/org-jira/")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
