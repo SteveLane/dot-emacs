@@ -261,9 +261,11 @@ It should only modify the values of Spacemacs settings."
 
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press `SPC T n' to cycle to the next theme in the list (works great
-   ;; with 2 themes variants, one dark and one light)
+   ;; with 2 themes variants, one dark and one light). A theme from external
+   ;; package can be defined with `:package', or a theme can be defined with
+   ;; `:location' to download the theme package, refer the themes section in
+   ;; DOCUMENTATION.org for the full theme specifications.
    dotspacemacs-themes '(dichromacy
-                         zenburn
                          spacemacs-dark
                          spacemacs-light)
 
@@ -533,7 +535,7 @@ It should only modify the values of Spacemacs settings."
    ;; The backend used for undo/redo functionality. Possible values are
    ;; `undo-redo', `undo-fu' and `undo-tree' see also `evil-undo-system'.
    ;; Note that saved undo history does not get transferred when changing
-   ;; your undo system from or to undo-tree. (default `undo-redo')"
+   ;; your undo system from or to undo-tree. (default `undo-redo')
    dotspacemacs-undo-system 'undo-redo
 
    ;; Format specification for setting the frame title.

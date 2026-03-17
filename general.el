@@ -91,3 +91,6 @@
 
 ;; Lower the number of recent files
 (setq recentf-max-saved-items 50)
+
+;; Use shorter yes/no answers
+(setopt use-short-answers t)
