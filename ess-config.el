@@ -1,4 +1,4 @@
-;; Time-stamp: <2026-03-11 17:18:45 (sprazza)>
+;; Time-stamp: <2026-03-19 15:07:36 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (with-eval-after-load 'ess-mode
@@ -58,15 +58,17 @@
     (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
     (define-key inferior-ess-mode-map (kbd "C-S-m") " |> "))))
 
-;; Skip code chunks when spell-checking in quarto/markdown
-(defun my/quarto-ispell-skip-code ()
-  "Skip fenced code blocks (everything between triple backticks) when spell-checking in Quarto/Markdown."
-  (setq-local ispell-skip-region-alist
-              (append '(("```" . "```"))
-                      ispell-skip-region-alist))
-  )
+;; Skip code when spell-checking in Markdown/Quarto via the predicate they provide
+(with-eval-after-load 'markdown-mode
+  (add-hook 'markdown-mode-hook
+            (lambda ()
+              (setq-local flyspell-generic-check-word-predicate
+                          #'markdown-flyspell-check-word-p))))
+
 
 (with-eval-after-load 'quarto-mode
-  (add-hook 'quarto-mode-hook #'my/quarto-ispell-skip-code))
-(with-eval-after-load 'markdown-mode
-  (add-hook 'markdown-mode-hook #'my/quarto-ispell-skip-code))
+  (add-hook 'quarto-mode-hook
+            (lambda ()
+              ;; quarto-mode derives from markdown-mode; use the same predicate
+              (setq-local flyspell-generic-check-word-predicate
+                          #'markdown-flyspell-check-word-p))))
