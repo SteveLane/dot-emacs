@@ -111,12 +111,15 @@ This function should only modify configuration layer settings."
                                       jiralib2
                                       forge
                                       org-super-agenda
-                                      (polymode :location (recipe :fetcher github :repo "polymode/polymode"))
-                                      poly-R
-                                      poly-markdown
-                                      poly-noweb
-                                      poly-org
-                                      quarto-mode
+                                      ;; Pull latest Polymode family from GitHub to avoid old pinned builds
+                                      (polymode      :location (recipe :fetcher github :repo "polymode/polymode"))
+                                      (poly-R        :location (recipe :fetcher github :repo "polymode/poly-R"))
+                                      (poly-markdown :location (recipe :fetcher github :repo "polymode/poly-markdown"))
+                                      (poly-noweb    :location (recipe :fetcher github :repo "polymode/poly-noweb"))
+                                      (poly-org      :location (recipe :fetcher github :repo "polymode/poly-org"))
+
+                                      ;; Quarto major mode — maintained by the quarto-dev team
+                                      (quarto-mode   :location (recipe :fetcher github :repo "quarto-dev/quarto-mode"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()

@@ -1,4 +1,4 @@
-;; Time-stamp: <2026-03-19 15:07:36 (lanes1)>
+;; Time-stamp: <2026-03-19 15:49:51 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (with-eval-after-load 'ess-mode
@@ -56,19 +56,18 @@
     (define-key inferior-ess-mode-map (kbd "M-S-m") " |> "))
    ((spacemacs/system-is-mswindows)
     (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
-    (define-key inferior-ess-mode-map (kbd "C-S-m") " |> "))))
+    (define-key inferior-ess-mode-map (kbd "C-S-m") " |> ")))
+  )
 
-;; Skip code when spell-checking in Markdown/Quarto via the predicate they provide
+;; Ensure no spell-check in code blocks
 (with-eval-after-load 'markdown-mode
   (add-hook 'markdown-mode-hook
             (lambda ()
               (setq-local flyspell-generic-check-word-predicate
                           #'markdown-flyspell-check-word-p))))
 
-
 (with-eval-after-load 'quarto-mode
   (add-hook 'quarto-mode-hook
             (lambda ()
-              ;; quarto-mode derives from markdown-mode; use the same predicate
               (setq-local flyspell-generic-check-word-predicate
                           #'markdown-flyspell-check-word-p))))
