@@ -119,7 +119,7 @@ This function should only modify configuration layer settings."
                                       (poly-org      :location (recipe :fetcher github :repo "polymode/poly-org"))
 
                                       ;; Quarto major mode — maintained by the quarto-dev team
-                                      (quarto-mode   :location (recipe :fetcher github :repo "quarto-dev/quarto-mode"))
+                                      (quarto-mode   :location (recipe :fetcher github :repo "quarto-dev/quarto-emacs"))
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
