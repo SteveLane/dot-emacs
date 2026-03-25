@@ -680,10 +680,6 @@ you should place your code here."
   (load-file "~/github/emacs-config/general.el")
   ;; I've now moved to extract elisp from the org files
   (load-file "~/github/emacs-config/spelling-setup.el")
-  ;; (org-babel-load-file "~/github/emacs-config/spelling-setup.org")
-  ;; (when (spacemacs/system-is-mac)
-  ;;   (load-file "~/github/emacs-config/mu4e-config.el")
-  ;;   )
   (load-file "~/github/emacs-config/magit-config.el")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/stan-config.el")
@@ -696,7 +692,7 @@ you should place your code here."
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (load-file "~/github/dot-emacs-extras/proxies.el")
+    (load "~/github/dot-emacs-extras/proxies.el" 'noerror 'nomessage)
     (setq org-babel-R-command "c:/Progra~1/R/R-4.5.2/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw

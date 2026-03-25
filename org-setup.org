@@ -162,7 +162,7 @@ The following code provides the capture templates when I add TODO tasks. Best pl
         )
 
   ;; Now combine the general with the specific for actual captures
-  (load-file "~/github/dot-emacs-extras/org-capture-extras.el")
+  (load "~/github/dot-emacs-extras/org-capture-extras.el" 'noerror 'nomessage)
   (setq org-capture-templates
         (append
          general-templates
