@@ -90,10 +90,8 @@ This function should only modify configuration layer settings."
              python-virtualenv-management 'pet
              )
      rust
+     spell-checking
      sql
-     ;; Only works windows here, but at least allows spell to be set...
-     (spell-checking :variables
-                     ispell-dictionary "en_AU")
      stan-mode
      syntax-checking
      treemacs
@@ -638,27 +636,30 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; (use-package org
-  ;;   :straight t)
-  (when (spacemacs/system-is-mac)
-    (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 10.0
-                                              :weight light
-                                              :width normal
-                                              :powerline-scale 0.8)
-                  )
-    )
-  (when (spacemacs/system-is-mswindows)
-    (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 12.0
-                                              :weight light
-                                              :width normal
-                                              :powerline-scale 0.8)
-                  )
+  (cond
+   ((spacemacs/system-is-mswindows)
+    (setq ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe")
+    (setq dotspacemacs-default-font '("Iosevka"
+                                      :size 12.0
+                                      :weight light
+                                      :width normal
+                                      :powerline-scale 0.8)
+          )
     ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
     ;; because shit was getting stuffed up with packages and msys gnu.
-    (setq-default package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
+    (setq package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
     )
+   ((spacemacs/system-is-linux)
+    (setq ispell-program-name "/usr/bin/hunspell")
+    (setq dotspacemacs-default-font '("Iosevka"
+                                      :size 10.0
+                                      :weight light
+                                      :width normal
+                                      :powerline-scale 0.8)
+          )
+    )
+   (setq ispell-dictionary "en_AU")
+   )
   )
 
 (defun dotspacemacs/user-load ()
@@ -679,26 +680,19 @@ you should place your code here."
   (load-file "~/github/emacs-config/general.el")
   ;; I've now moved to extract elisp from the org files
   (load-file "~/github/emacs-config/spelling-setup.el")
-  ;; (org-babel-load-file "~/github/emacs-config/spelling-setup.org")
-  ;; (when (spacemacs/system-is-mac)
-  ;;   (load-file "~/github/emacs-config/mu4e-config.el")
-  ;;   )
   (load-file "~/github/emacs-config/magit-config.el")
   (load-file "~/github/emacs-config/ess-config.el")
   (load-file "~/github/emacs-config/stan-config.el")
   (load-file "~/github/emacs-config/org-setup.el")
   (load-file "~/github/emacs-config/org-roam-setup.el")
   (load-file "~/github/emacs-config/python-config.el")
-  ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
-  ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
-  ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; Proxy configuration based on location
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (load-file "~/github/emacs-config/proxies.el")
+    (load "~/github/dot-emacs-extras/proxies.el" 'noerror 'nomessage)
     (setq org-babel-R-command "c:/Progra~1/R/R-4.5.2/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
