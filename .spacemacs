@@ -689,16 +689,13 @@ you should place your code here."
   (load-file "~/github/emacs-config/org-setup.el")
   (load-file "~/github/emacs-config/org-roam-setup.el")
   (load-file "~/github/emacs-config/python-config.el")
-  ;; (org-babel-load-file "~/github/emacs-config/org-setup.org")
-  ;; (org-babel-load-file "~/github/emacs-config/org-roam-setup.org")
-  ;; (load-file "~/github/emacs-config/polymode-config.el")
   ;; Proxy configuration based on location
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (load-file "~/github/emacs-config/proxies.el")
+    (load-file "~/github/dot-emacs-extras/proxies.el")
     (setq org-babel-R-command "c:/Progra~1/R/R-4.5.2/bin/x64/R.exe --slave --no-save")
     )
   ;; associate Rnw
