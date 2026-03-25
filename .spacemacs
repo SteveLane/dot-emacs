@@ -90,10 +90,8 @@ This function should only modify configuration layer settings."
              python-virtualenv-management 'pet
              )
      rust
+     spell-checking
      sql
-     ;; Only works windows here, but at least allows spell to be set...
-     (spell-checking :variables
-                     ispell-dictionary "en_AU")
      stan-mode
      syntax-checking
      treemacs
@@ -638,27 +636,30 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  ;; (use-package org
-  ;;   :straight t)
-  (when (spacemacs/system-is-mac)
-    (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 10.0
-                                              :weight light
-                                              :width normal
-                                              :powerline-scale 0.8)
-                  )
-    )
-  (when (spacemacs/system-is-mswindows)
-    (setq-default dotspacemacs-default-font '("Iosevka"
-                                              :size 12.0
-                                              :weight light
-                                              :width normal
-                                              :powerline-scale 0.8)
-                  )
+  (cond
+   ((spacemacs/system-is-mswindows)
+    (setq ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe")
+    (setq dotspacemacs-default-font '("Iosevka"
+                                      :size 12.0
+                                      :weight light
+                                      :width normal
+                                      :powerline-scale 0.8)
+          )
     ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
     ;; because shit was getting stuffed up with packages and msys gnu.
-    (setq-default package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
+    (setq package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
     )
+   ((spacemacs/system-is-linux)
+    (setq ispell-program-name "/usr/bin/hunspell")
+    (setq dotspacemacs-default-font '("Iosevka"
+                                      :size 10.0
+                                      :weight light
+                                      :width normal
+                                      :powerline-scale 0.8)
+          )
+    )
+   (setq ispell-dictionary "en_AU")
+   )
   )
 
 (defun dotspacemacs/user-load ()
