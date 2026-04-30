@@ -94,3 +94,6 @@
 
 ;; Use shorter yes/no answers
 (setopt use-short-answers t)
+
+;; Silence projectile warning...
+(setq projectile-warn-when-dirconfig-is-ignored nil)
