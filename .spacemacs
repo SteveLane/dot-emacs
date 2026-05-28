@@ -290,7 +290,7 @@ It should only modify the values of Spacemacs settings."
    ;; Point size is recommended, because it's device independent. (default 10.0)
    dotspacemacs-default-font '("Iosevka"
                                :size 12.0
-                               :weight light
+                               :weight normal
                                :width normal
                                :powerline-scale 0.8)
 
@@ -641,7 +641,7 @@ before packages are loaded. If you are unsure, you should try in setting them in
     (setq ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe")
     (setq dotspacemacs-default-font '("Iosevka"
                                       :size 12.0
-                                      :weight light
+                                      :weight normal
                                       :width normal
                                       :powerline-scale 0.8)
           )
@@ -652,8 +652,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
    ((spacemacs/system-is-linux)
     (setq ispell-program-name "/usr/bin/hunspell")
     (setq dotspacemacs-default-font '("Iosevka"
-                                      :size 10.0
-                                      :weight light
+                                      :size 12.0
+                                      :weight normal
                                       :width normal
                                       :powerline-scale 0.8)
           )
