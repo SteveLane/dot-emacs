@@ -101,12 +101,4 @@
 
 ;; Ensure UTF-8 everywhere
 (set-language-environment "UTF-8")
-(setq locale-coding-system 'utf-8)
-(set-default-coding-systems 'utf-8)
-
-;; Make eshell behave properly
-(with-eval-after-load 'eshell
-  (add-hook 'eshell-mode-hook
-            (lambda ()
-              (setq buffer-file-coding-system 'utf-8-unix)
-              (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))))
+(prefer-coding-system 'utf-8)
