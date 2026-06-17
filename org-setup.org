@@ -17,59 +17,111 @@ This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-
 
 # The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
 
-First up, we'll add a block to load all this org config after spacemacs starts, else we'll get conflicts. If you're following along at home, don't forget to complete the block at the end of the file.
++First up, we'll add a block to load all this org config after spacemacs starts, else we'll get conflicts. If you're following along at home, don't forget to complete the block at the end of the file.+
+
+Only certain items that /require/ org need to be inside the ~with-eval-after-load~ part. So we've reorganised this a little.
 
 #+begin_src emacs-lisp :exports none
   ;; Default directory for org files. This is set outside org loading to ensure it
   ;; is always available.
-  org-directory "~/github/org"
+  (setq org-directory "~/github/org"
+        ;; Directory for notes/tasks to be refiled
+        org-default-notes-file (expand-file-name "refile.org" org-directory)
+        org-journal-file (expand-file-name "journal-club.org" org-directory)
 
-  (with-eval-after-load 'org
+        ;; Org agenda files read from here
+        org-agenda-files (mapcar (lambda (f) (expand-file-name f org-directory))
+                                 '("waiting-for.org"
+                                   "refile.org"
+                                   "issue-tracking.org"
+                                   "habits-and-schedules.org"
+                                   "general.org"
+                                   "analysis.org"
+                                   "someday.org"
+                                   "meetings.org"
+                                   )
+                                 )
+        general-templates `(("t" "Todo's and other general notes")
+                            ("tt" "Todo (inbox/to refile)" entry (file org-default-notes-file)
+                             "* TODO %?\nCaptured: %u\n" :clock-in nil :empty-lines 1)
+                            ("tT" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
+                             "* TODO %?\nCaptured: %u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("tr" "Ticklers/Reminders" entry (file+headline ,(expand-file-name "general.org" org-directory) "Ticklers")
+                             "* TODO %?\nCaptured: %u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("j" "Journal Club" entry (file org-journal-file)
+                             "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("P" "Professional development templates")
+                            ("Ps" "Seminar" entry (file+headline ,(expand-file-name "professional-development.org" org-directory) "Seminars")
+                             "* Title: %?\n** Date: %^u\n** Speaker: \n** Notes\n" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("Pw" "Workshop" entry (file+headline ,(expand-file-name "professional-development.org" org-directory) "Workshops")
+                             "* Title: %?\n** Date: %^u\n** Presenter: " :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("i" "Issue tracking" entry (file ,(expand-file-name "issue-tracking.org" org-directory))
+                             "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            ("J" "Journal wins/losses" entry (file+function ,(expand-file-name "wins-and-losses.org" org-directory) sprazza/org-get-target-headline)
+                             "* %u\n** %U\n%?" :clock-in nil :jump-to-captured t :empty-lines 1)
+                            )
+        )
+
+  ;; Now combine the general with the specific for actual captures
+  (load (expand-file-name "~/github/dot-emacs-extras/org-capture-extras.el") 'noerror 'nomessage)
+  (setq org-capture-templates
+        (append
+         general-templates
+         sprazza/extra-templates
+         )
+
+        ;; Keep a line between headers
+        org-cycle-separator-lines 1
+        )
+
+  ;; And here's some function definitions that are used (but don't require ord)
+  (defun sprazza/org-get-target-headline (&optional targets prompt)
+    "Prompt for a location in an org file and jump to it.
+
+    This is for promping for refile targets when doing captures.
+    Targets are selected from `org-refile-targets'. If TARGETS is
+    given it temporarily overrides `org-refile-targets'. PROMPT will
+    replace the default prompt message.
+
+    "
+    (let ((org-refile-targets (or targets org-refile-targets))
+          (prompt (or prompt "Capture Location")))
+      (org-refile t nil nil prompt))
+    )
 #+end_src
 
+There's an issue with citar-capf apparently. Not entirely sure, but I'll try turning it off during capture and see what happens.
+
 #+BEGIN_SRC emacs-lisp :exports none
+  (defun sprazza/disable-citar-in-capture ()
+    (remove-hook 'completion-at-point-functions #'citar-capf t))
 
-  ;; keybindings
-  ;; (global-set-key (kbd "C-c a") 'org-agenda)
-  ;; (global-set-key (kbd "C-c c") 'org-capture)
-  ;; (global-set-key (kbd "C-c l") 'org-store-link)
+  (with-eval-after-load 'org
 
-  ;; ;; soft line wrapping
-  (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
-  ;; Disable whitespace mode in org mode
-  (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
-  ;; Flyspell on
-  (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
+    ;; soft line wrapping
+    (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
+    ;; Disable whitespace mode in org mode
+    (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
+    ;; Flyspell on
+    (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
 
+    ;; Turn of citar completion in org-capture
+    (add-hook 'org-capture-mode-hook #'sprazza/disable-citar-in-capture)
 #+END_SRC
 
 * Where do I store stuff?
-
-The default directory for org files is ~/org, and I'm going to stick with that convention, but make it explicit. When I capture tasks/notes (=C-c t= / =C-c n=), I'm going to have them sent to the ~/org/refile.org file, when I can refile them at my convenience. This saves time when capturing TODO items, as it means I don't have to decide which project they'll go into straight away. Speaking of, when it comes time to refile, these can be put into separate project files; the refile-targets allows the nesting to be searched. Finally, I set the agenda from the default org directory.
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Directory for notes/tasks to be refiled
-   org-default-notes-file (expand-file-name "/refile.org" org-directory)
-   org-journal-file (expand-file-name "/journal-club.org" org-directory)
-   ;; Allows to store agenda files in their appropriate files.
-   ;; This is useful when per project task lists are used.
-   ;; Only show level 1 headings for refiling (level 2 are the task headers)
-   org-refile-targets (quote ((nil :maxlevel . 2)
-              (org-agenda-files :maxlevel . 3)))
-   ;; Org agenda files read from here
-   ;; These should probably be mapped rather than spelt out directly...
-   org-agenda-files '(
-                      "~/github/org/waiting-for.org" "~/github/org/refile.org" "~/github/org/issue-tracking.org" "~/github/org/habits-and-schedules.org" "~/github/org/general.org" "~/github/org/analysis.org" "~/github/org/someday.org" "~/github/org/meetings.org"
-                      )
-   org-agenda-scheduled-leaders '("" "Sched.%2dx: ")
-   )
-#+END_SRC
 
 I spoke above about refiling. Here's where I set that up. I'm telling org to use the filename and the headers (so a level 2 header will be filename/level1/level2). complete-in-steps nil means that we can use helm/ivy to provide nice completion, and finally allow the creation of parent headers (with confirmation).
 
 #+BEGIN_SRC emacs-lisp :export yes
   (setq
+   ;; Allows to store agenda files in their appropriate files.
+   ;; This is useful when per project task lists are used.
+   ;; Only show level 1 headings for refiling (level 2 are the task headers)
+   org-refile-targets (quote ((nil :maxlevel . 2)
+                              (org-agenda-files :maxlevel . 3)))
+   org-agenda-scheduled-leaders '("" "Sched.%2dx: ")
+
    ;; Be sure to use the full path for refile setup
    org-refile-use-outline-path 'file
    ;; Set this to nil to use helm/ivy for completion
@@ -135,65 +187,7 @@ When we display these in the agenda, we'd also like to have different colours fo
    )
 #+END_SRC
 
-** Capture templates
-
-The following code provides the capture templates when I add TODO tasks. Best place to check how these work is the help for that variable. You can find the help for a variable by placing the cursor over the variable and entering =C-h v= (help for variable). To make sure that folded views keep some space between headers, we set the separator-lines variable.
-
-#+header: :tangle yes
-#+BEGIN_SRC emacs-lisp :export yes
-  ;; Define the custom (general) capture templates
-  (setq general-templates
-        '(("t" "Todo's and other general notes")
-          ("tt" "Todo (inbox/to refile)" entry (file org-default-notes-file)
-           "* TODO %?\nCaptured: %u\n" :clock-in nil :clock-resume t :empty-lines 1)
-          ("tT" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
-           "* TODO %?\nCaptured: %u\n" :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("tr" "Ticklers/Reminders" entry (file+headline (expand-file-name "/general.org" org-directory) "Ticklers")
-           "* TODO %?\nCaptured: %u\n" :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("j" "Journal Club" entry (file org-journal-file)
-           "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("P" "Professional development templates")
-          ("Ps" "Seminar" entry (file+headline (expand-file-name "/professional-development.org" org-directory) "Seminars")
-           "* Title: %?\n** Date: %^u\n** Speaker: \n** Notes\n" :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("Pw" "Workshop" entry (file+headline (expand-file-name "/professional-development.org" org-directory) "Workshops")
-           "* Title: %?\n** Date: %^u\n** Presenter: " :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("i" "Issue tracking" entry (file (expand-file-name "/issue-tracking.org" org-directory))
-           "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n" :clock-in nil :clock-resume t :jump-to-captured t :empty-lines 1)
-          ("J" "Journal wins/losses" entry (file+function (expand-file-name "/wins-and-losses.org" org-directory) sprazza/org-get-target-headline)
-           "* %u\n** %U\n%?" :clock-in nil :jump-to-captured t :empty-lines 1)
-          )
-        )
-
-  ;; Now combine the general with the specific for actual captures
-  (load "~/github/dot-emacs-extras/org-capture-extras.el" 'noerror 'nomessage)
-  (setq org-capture-templates
-        (append
-         general-templates
-         sprazza/extra-templates
-         )
-
-        ;; Keep a line between headers
-        org-cycle-separator-lines 1
-        )
-#+END_SRC
-
 For the regular people meetings, we can search for the org target of interest, using this function (called in the above template):
-
-#+begin_src emacs-lisp :tangle yes :export yes
-  (defun sprazza/org-get-target-headline (&optional targets prompt)
-    "Prompt for a location in an org file and jump to it.
-
-  This is for promping for refile targets when doing captures.
-  Targets are selected from `org-refile-targets'. If TARGETS is
-  given it temporarily overrides `org-refile-targets'. PROMPT will
-  replace the default prompt message.
-
-  "
-    (let ((org-refile-targets (or targets org-refile-targets))
-          (prompt (or prompt "Capture Location")))
-        (org-refile t nil nil prompt))
-    )
-#+end_src
 
 Source for this function is [[https://emacs.stackexchange.com/questions/5923/org-capture-how-to-choose-the-target-file-at-the-end-of-the-process][this stack]].
 
@@ -411,6 +405,7 @@ This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~or
 The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
 
 2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
+
 * Searching through your notes
 
   To make it a little easier to search, use ripgrep. It replaces the current org-search-view which is not helpful (imo).
@@ -432,9 +427,6 @@ The last line only shows one copy of the task---without it, both the scheduled, 
       ;;   "q" 'sprazza/org-search
       ;;   )
       )
-  #+end_src
-
-  #+begin_src emacs-lisp :tangle yes :export yes
   #+end_src
 
 Finally close off the =with=eval-after-load= from earlier:
