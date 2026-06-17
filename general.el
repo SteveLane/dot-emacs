@@ -102,3 +102,13 @@
 ;; Ensure UTF-8 everywhere
 (set-language-environment "UTF-8")
 (prefer-coding-system 'utf-8)
+
+;; Pop these in here for the moment, but this is some theming related stuff.
+;; Line spacing
+(setq-default line-spacing 0.12)
+
+;; Softer bold (helps with Catppuccin)
+(set-face-attribute 'bold nil :weight 'semi-bold)
+
+;; Optional: nicer comments with Catppuccin
+(set-face-attribute 'font-lock-comment-face nil :slant 'italic)

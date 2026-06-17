@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
                                            )
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(lua
      (auto-completion :variables
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
@@ -102,6 +102,7 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      catppuccin-theme
                                       ;; citar packages
                                       citar
                                       citar-embark
@@ -221,9 +222,9 @@ It should only modify the values of Spacemacs settings."
    ;; within a project.
    dotspacemacs-startup-lists '(
                                 (recents-by-project . (3 . 3))
+                                (projects . 3)
                                 (recents . 3)
                                 (bookmarks . 3)
-                                (projects . 3)
                                 )
 
    ;; True if the home buffer should respond to resize events. (default t)
@@ -266,7 +267,8 @@ It should only modify the values of Spacemacs settings."
    ;; package can be defined with `:package', or a theme can be defined with
    ;; `:location' to download the theme package, refer the themes section in
    ;; DOCUMENTATION.org for the full theme specifications.
-   dotspacemacs-themes '(dichromacy
+   dotspacemacs-themes '(catppuccin
+                         dichromacy
                          spacemacs-dark
                          spacemacs-light)
 
@@ -288,11 +290,11 @@ It should only modify the values of Spacemacs settings."
    ;; fixed-pitch faces. The `:size' can be specified as
    ;; a non-negative integer (pixel size), or a floating-point (point size).
    ;; Point size is recommended, because it's device independent. (default 10.0)
-   dotspacemacs-default-font '("Iosevka"
-                               :size 12.0
+   dotspacemacs-default-font '("Iosevka Fixed"
+                               :size 13.0
                                :weight normal
                                :width normal
-                               :powerline-scale 0.8)
+                               :powerline-scale 1.1)
 
    ;; Default icons font, it can be `all-the-icons' or `nerd-icons'.
    dotspacemacs-default-icons-font 'nerd-icons
@@ -639,24 +641,12 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (cond
    ((spacemacs/system-is-mswindows)
     (setq ispell-program-name "C:/msys64/mingw64/bin/hunspell.exe")
-    (setq dotspacemacs-default-font '("Iosevka"
-                                      :size 12.0
-                                      :weight normal
-                                      :width normal
-                                      :powerline-scale 0.8)
-          )
     ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
     ;; because shit was getting stuffed up with packages and msys gnu.
     (setq package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
     )
    ((spacemacs/system-is-linux)
     (setq ispell-program-name "/usr/bin/hunspell")
-    (setq dotspacemacs-default-font '("Iosevka"
-                                      :size 12.0
-                                      :weight normal
-                                      :width normal
-                                      :powerline-scale 0.8)
-          )
     )
    (setq ispell-dictionary "en_AU")
    )
@@ -750,48 +740,49 @@ This function is called at the very end of Spacemacs initialization."
    ;; Your init file should contain only one such instance.
    ;; If there is more than one, they won't work right.
    '(package-selected-packages
-     '(ace-link add-node-modules-path aggressive-indent all-the-icons auto-compile
-                auto-highlight-symbol auto-yasnippet blacken centered-cursor-mode
+     '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
+                auto-yasnippet blacken catppuccin-theme centered-cursor-mode
                 citar-embark citar-org-roam clean-aindent-mode code-review
                 column-enforce-mode company-auctex company-math company-reftex
                 company-statistics company-web compleseus-spacemacs-help
-                consult-lsp consult-yasnippet csv-mode cython-mode dap-mode
-                define-word devdocs diminish dired-quick-sort disable-mouse
-                doom-modeline dotenv-mode drag-stuff dumb-jump edit-indirect ein
-                elisp-def elisp-demos elisp-slime-nav embark-consult emmet-mode
-                emr ess-R-data-view eval-sexp-fu evil-anzu evil-args
-                evil-cleverparens evil-collection evil-easymotion evil-escape
-                evil-evilified-state evil-exchange evil-goggles evil-iedit-state
-                evil-indent-plus evil-lion evil-lisp-state evil-matchit
-                evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
-                evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
-                evil-visualstar expand-region eyebrowse fancy-battery
-                flycheck-elsa flycheck-package flycheck-pos-tip
-                flyspell-correct-popup ggtags gh-md git-link git-messenger
-                git-modes git-timemachine gitignore-templates gnuplot golden-ratio
-                google-translate graphviz-dot-mode groovy-imports groovy-mode
-                helm-make hide-comnt highlight-indentation highlight-numbers
-                highlight-parentheses hl-todo holy-mode hungry-delete hybrid-mode
-                impatient-mode import-js indent-guide info+ inspector js-doc
-                js2-refactor json-mode json-navigator json-reformat json-snatcher
-                link-hint live-py-mode livid-mode lorem-ipsum lsp-latex
-                lsp-origami macrostep marginalia markdown-toc multi-line nameless
-                nodejs-repl nov npm-mode open-junk-file orderless org-alert
-                org-cliplink org-contrib org-download org-mime org-pomodoro
+                consult-lsp consult-yasnippet csv-mode cython-mode define-word
+                devdocs diminish dired-quick-sort disable-mouse doom-modeline
+                dotenv-mode drag-stuff dumb-jump edit-indirect ein elisp-def
+                elisp-demos elisp-slime-nav embark-consult emmet-mode emr
+                ess-R-data-view eval-sexp-fu evil-anzu evil-args evil-cleverparens
+                evil-collection evil-easymotion evil-escape evil-evilified-state
+                evil-exchange evil-goggles evil-iedit-state evil-indent-plus
+                evil-lion evil-lisp-state evil-matchit evil-nerd-commenter
+                evil-numbers evil-org evil-surround evil-tex evil-textobj-line
+                evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar
+                expand-region eyebrowse fancy-battery flycheck-elsa
+                flycheck-package flycheck-pos-tip flyspell-correct-popup gh-md
+                git-link git-messenger git-modes git-timemachine
+                gitignore-templates gnuplot golden-ratio google-translate
+                graphviz-dot-mode groovy-imports groovy-mode helm-make hide-comnt
+                highlight-indentation highlight-numbers highlight-parentheses
+                hl-todo holy-mode hungry-delete hybrid-mode impatient-mode
+                indent-guide info+ inspector jiralib2 js-doc js2-refactor
+                json-mode json-navigator json-reformat link-hint live-py-mode
+                livid-mode lorem-ipsum lsp-latex lsp-origami lsp-treemacs lua-mode
+                macrostep marginalia markdown-toc multi-line nameless nodejs-repl
+                nov npm-mode open-junk-file orderless org-alert org-cliplink
+                org-contrib org-download org-jira org-mime org-pomodoro
                 org-present org-projectile org-ref org-rich-yank org-roam-ui
-                org-super-agenda org-superstar orgit overseer page-break-lines
-                paradox password-generator pcre2el pet pip-requirements poly-R
-                poly-org popwin prettier-js pug-mode py-isort pydoc pyenv-mode
-                pylookup python-pytest quarto-mode quickrun rainbow-delimiters
-                restart-emacs ron-mode rustic sass-mode scss-mode slim-mode
-                smeargle space-doc spacemacs-purpose-popwin
-                spacemacs-whitespace-cleanup sphinx-doc sql-indent stan-snippets
-                string-edit-at-point symbol-overlay symon tagedit term-cursor tern
-                toc-org toml-mode treemacs-evil treemacs-icons-dired
-                treemacs-magit treemacs-persp treemacs-projectile undo-fu-session
-                uv vertico vi-tilde-fringe volatile-highlights vundo web-beautify
-                web-mode wgrep window-purpose winum writeroom-mode ws-butler
-                yaml-mode yasnippet-snippets zenburn-theme))
+                org-super-agenda org-superstar orgit-forge overseer ox-jira
+                page-break-lines paradox password-generator pcre2el pet
+                pip-requirements poly-R poly-org popwin prettier-js pug-mode
+                py-isort pydoc pyenv-mode pylookup python-pytest quarto-mode
+                quickrun rainbow-delimiters restart-emacs ron-mode rustic
+                sass-mode scss-mode slim-mode smeargle space-doc
+                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
+                sql-indent stan-snippets string-edit-at-point symbol-overlay symon
+                tagedit term-cursor toc-org toml-mode treemacs-evil
+                treemacs-icons-dired treemacs-magit treemacs-persp
+                treemacs-projectile undo-fu-session uv vertico vi-tilde-fringe
+                volatile-highlights vundo web-beautify web-mode wgrep
+                window-purpose winum writeroom-mode ws-butler yaml-mode
+                yasnippet-snippets))
    '(paradox-github-token t))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
