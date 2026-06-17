@@ -13,423 +13,173 @@ If you want to use some (all) of this setup, you'll need to change directories a
 
 This setup has been greatly influenced by [[http://cachestocaches.com/2016/9/my-workflow-org-agenda/][Gregory Stein]] (GS) and in turn by [[http://doc.norang.ca/org-mode.html][Bernt Hansen]] (BH). You should check out those great resources.
 
-* Initial setup
+* Design Notes
 
-# The first piece of infrastructure I'm going to use is =use-package= to make sure org is loaded, and to set up some general keybindings. I also make sure that all-the-icons is loaded/installed for some bling! I want to make sure that org files have poly-org-mode, and some general editing stuff. *Edit*: poly-org-mode interferes with capturing tasks ([[https://github.com/vspinu/polymode/issues/40][see here]]). For now, I've disabled poly-org-mode for org files.
+- Capture templates must be defined *outside* ~with-eval-after-load~
+- Use ~expand-file-name~ (or helper) for all paths
+- Use backquote + comma when embedding evaluated paths
+- Avoid mixing ~:clock-in nil~ with ~:clock-resume t~
+- Some completion backends (e.g. citar) must be disabled in capture buffers
 
-+First up, we'll add a block to load all this org config after spacemacs starts, else we'll get conflicts. If you're following along at home, don't forget to complete the block at the end of the file.+
+* Core configuration (no org dependency)
 
-Only certain items that /require/ org need to be inside the ~with-eval-after-load~ part. So we've reorganised this a little.
+These settings do not depend on Org being loaded and should be defined eagerly.
 
-#+begin_src emacs-lisp :exports none
-  ;; Default directory for org files. This is set outside org loading to ensure it
-  ;; is always available.
-  (setq org-directory "~/github/org"
-        ;; Directory for notes/tasks to be refiled
-        org-default-notes-file (expand-file-name "refile.org" org-directory)
-        org-journal-file (expand-file-name "journal-club.org" org-directory)
+** Function definitions
 
-        ;; Org agenda files read from here
-        org-agenda-files (mapcar (lambda (f) (expand-file-name f org-directory))
-                                 '("waiting-for.org"
-                                   "refile.org"
-                                   "issue-tracking.org"
-                                   "habits-and-schedules.org"
-                                   "general.org"
-                                   "analysis.org"
-                                   "someday.org"
-                                   "meetings.org"
-                                   )
-                                 )
-        general-templates `(("t" "Todo's and other general notes")
-                            ("tt" "Todo (inbox/to refile)" entry (file org-default-notes-file)
-                             "* TODO %?\nCaptured: %u\n" :clock-in nil :empty-lines 1)
-                            ("tT" "Todo (with headline choice)" entry (function sprazza/org-get-target-headline)
-                             "* TODO %?\nCaptured: %u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("tr" "Ticklers/Reminders" entry (file+headline ,(expand-file-name "general.org" org-directory) "Ticklers")
-                             "* TODO %?\nCaptured: %u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("j" "Journal Club" entry (file org-journal-file)
-                             "* DETAILS: %? :JOURNAL CLUB: \n%u\n" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("P" "Professional development templates")
-                            ("Ps" "Seminar" entry (file+headline ,(expand-file-name "professional-development.org" org-directory) "Seminars")
-                             "* Title: %?\n** Date: %^u\n** Speaker: \n** Notes\n" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("Pw" "Workshop" entry (file+headline ,(expand-file-name "professional-development.org" org-directory) "Workshops")
-                             "* Title: %?\n** Date: %^u\n** Presenter: " :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("i" "Issue tracking" entry (file ,(expand-file-name "issue-tracking.org" org-directory))
-                             "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            ("J" "Journal wins/losses" entry (file+function ,(expand-file-name "wins-and-losses.org" org-directory) sprazza/org-get-target-headline)
-                             "* %u\n** %U\n%?" :clock-in nil :jump-to-captured t :empty-lines 1)
-                            )
-        )
+   Function definitions for capture templates and other org-related quality of life adjustments go here.
 
-  ;; Now combine the general with the specific for actual captures
-  (load (expand-file-name "~/github/dot-emacs-extras/org-capture-extras.el") 'noerror 'nomessage)
-  (setq org-capture-templates
-        (append
-         general-templates
-         sprazza/extra-templates
-         )
+   #+begin_src emacs-lisp :exports none
+     (defun sprazza/org-file (f)
+       "Construct paths to org files. Simplifies construction and is more readable."
+       (expand-file-name f org-directory))
 
-        ;; Keep a line between headers
-        org-cycle-separator-lines 1
-        )
+     (defun sprazza/org-get-target-headline (&optional targets prompt)
+       "Prompt for a location in an org file and jump to it."
+       (let ((org-refile-targets (or targets org-refile-targets))
+             (prompt (or prompt "Capture Location")))
+         (org-refile t nil nil prompt)))
 
-  ;; And here's some function definitions that are used (but don't require ord)
-  (defun sprazza/org-get-target-headline (&optional targets prompt)
-    "Prompt for a location in an org file and jump to it.
+     (defun sprazza/disable-citar-in-capture ()
+       "Disable citar completion during capture to avoid CAPF errors"
+       (remove-hook 'completion-at-point-functions #'citar-capf t))
+   #+end_src
 
-    This is for promping for refile targets when doing captures.
-    Targets are selected from `org-refile-targets'. If TARGETS is
-    given it temporarily overrides `org-refile-targets'. PROMPT will
-    replace the default prompt message.
+** Constants and settings
 
-    "
-    (let ((org-refile-targets (or targets org-refile-targets))
-          (prompt (or prompt "Capture Location")))
-      (org-refile t nil nil prompt))
-    )
+   #+begin_src emacs-lisp :exports none
+     ;; Base directory
+     (setq org-directory "~/github/org")
+
+     ;; Helper for constructing org file paths
+     (defun sprazza/org-file (f)
+       (expand-file-name f org-directory))
+
+     ;; Core files
+     (setq org-default-notes-file (sprazza/org-file "refile.org")
+           org-journal-file       (sprazza/org-file "journal-club.org"))
+
+     ;; Agenda files
+     (setq org-agenda-files
+           (mapcar #'sprazza/org-file
+                   '("waiting-for.org"
+                     "refile.org"
+                     "issue-tracking.org"
+                     "habits-and-schedules.org"
+                     "general.org"
+                     "analysis.org"
+                     "someday.org"
+                     "meetings.org")))
 #+end_src
 
-There's an issue with citar-capf apparently. Not entirely sure, but I'll try turning it off during capture and see what happens.
+* Capture setup
 
-#+BEGIN_SRC emacs-lisp :exports none
-  (defun sprazza/disable-citar-in-capture ()
-    (remove-hook 'completion-at-point-functions #'citar-capf t))
+Capture templates are defined eagerly so they are fully constructed before use.
 
-  (with-eval-after-load 'org
+#+begin_src emacs-lisp :exports none
+  (setq general-templates
+        `(("t" "Todo's and other general notes")
 
-    ;; soft line wrapping
-    (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
-    ;; Disable whitespace mode in org mode
-    (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
-    ;; Flyspell on
-    (add-hook 'org-mode-hook (lambda () (flyspell-mode 1)))
+          ("tt" "Todo (inbox/to refile)" entry
+           (file org-default-notes-file)
+           "* TODO %?\nCaptured: %u\n"
+           :clock-in nil :empty-lines 1)
 
-    ;; Turn of citar completion in org-capture
-    (add-hook 'org-capture-mode-hook #'sprazza/disable-citar-in-capture)
-#+END_SRC
+          ("tT" "Todo (with headline choice)" entry
+           (function sprazza/org-get-target-headline)
+           "* TODO %?\nCaptured: %u\n"
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-* Where do I store stuff?
+          ("tr" "Ticklers/Reminders" entry
+           (file+headline ,(sprazza/org-file "general.org") "Ticklers")
+           "* TODO %?\nCaptured: %u\n"
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-I spoke above about refiling. Here's where I set that up. I'm telling org to use the filename and the headers (so a level 2 header will be filename/level1/level2). complete-in-steps nil means that we can use helm/ivy to provide nice completion, and finally allow the creation of parent headers (with confirmation).
+          ("j" "Journal Club" entry
+           (file org-journal-file)
+           "* DETAILS: %? :JOURNAL CLUB: \n%u\n"
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Allows to store agenda files in their appropriate files.
-   ;; This is useful when per project task lists are used.
-   ;; Only show level 1 headings for refiling (level 2 are the task headers)
-   org-refile-targets (quote ((nil :maxlevel . 2)
-                              (org-agenda-files :maxlevel . 3)))
-   org-agenda-scheduled-leaders '("" "Sched.%2dx: ")
+          ("P" "Professional development templates")
 
-   ;; Be sure to use the full path for refile setup
-   org-refile-use-outline-path 'file
-   ;; Set this to nil to use helm/ivy for completion
-   org-outline-path-complete-in-steps nil
-   ;; Allow refile to create parent tasks with confirmation
-   org-refile-allow-creating-parent-nodes 'confirm
-   )
+          ("Ps" "Seminar" entry
+           (file+headline ,(sprazza/org-file "professional-development.org") "Seminars")
+           "* Title: %?\n** Date: %^u\n** Speaker: \n** Notes\n"
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-#+END_SRC
+          ("Pw" "Workshop" entry
+           (file+headline ,(sprazza/org-file "professional-development.org") "Workshops")
+           "* Title: %?\n** Date: %^u\n** Presenter: "
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-* How do I capture stuff?
+          ("i" "Issue tracking" entry
+           (file ,(sprazza/org-file "issue-tracking.org"))
+           "* TODO %^{Title}\n%^{Type}p\nCaptured: %u\n** Description\n"
+           :clock-in nil :jump-to-captured t :empty-lines 1)
 
-I now need to set up _capture templates_. When I go to capture a task/note etc, I am presented with the options listed below.
+          ("J" "Journal wins/losses" entry
+           (file+function ,(sprazza/org-file "wins-and-losses.org")
+                          sprazza/org-get-target-headline)
+           "* %u\n** %U\n%?"
+           :clock-in nil :jump-to-captured t :empty-lines 1)))
+#+end_src
 
-** Task categories
 
-I'm migrating/supplementing a BuJo. The following provides my current 'bullets' from my BuJo, translated to an org setup. What the code does is define the TODO keywords, and the transition between them. Keywords to the left of the =|= are in a state of 'not done' whilst those on the right are done.
+#+begin_src emacs-lisp :exports none
+  ;; Load additional templates
+  (load "~/github/dot-emacs-extras/org-capture-extras.el" 'noerror 'nomessage)
 
-#+header: :tangle yes
-#+BEGIN_SRC emacs-lisp :export yes
+  (setq org-capture-templates
+        (append general-templates sprazza/extra-templates)
+
+        ;; Keep a line between headers
+        org-cycle-separator-lines 1)
+#+end_src
+
+* Org runtime configuration (after load)
+
+These settings require Org to be fully loaded.
+
+#+begin_src emacs-lisp :exports none
+(with-eval-after-load 'org
+
+  ;; Hooks
+  (add-hook 'org-mode-hook #'visual-line-mode)
+  (add-hook 'org-mode-hook (lambda () (whitespace-mode -1)))
+  (add-hook 'org-mode-hook #'flyspell-mode)
+
+  ;; Disable citar in capture buffers
+  (add-hook 'org-capture-mode-hook #'sprazza/disable-citar-in-capture)
+
+  ;; Refile setup
+  (setq org-refile-targets '((nil :maxlevel . 2)
+                             (org-agenda-files :maxlevel . 3))
+        org-refile-use-outline-path 'file
+        org-outline-path-complete-in-steps nil
+        org-refile-allow-creating-parent-nodes 'confirm)
+
+  ;; Todo keywords
   (setq org-todo-keywords
-  (quote ((sequence "TODO(t)" "|" "DONE(d)")
+        '((sequence "TODO(t)" "|" "DONE(d)")
           (sequence "TODAY(T)" "|" "DONE(d)")
           (sequence "PROJECT(p)" "|" "DONE(d)" "CANCELLED(c)")
           (sequence "WAITING(w)" "|")
           (sequence "|" "CANCELLED(c)")
           (sequence "SOMEDAY(s)" "|" "CANCELLED(c)")
-          (sequence "|" "MEETING")
-          )
-         )
-  )
-#+END_SRC
+          (sequence "|" "MEETING")))
 
-My BuJo is pretty simple, I've mapped it as follows:
-
-- todo :: (t) this is the standard task/todo item, which can be marked done
-- waiting :: (w) this keyword is added to a task when I'm waiting to hear back from someone before progressing the task
-- cancelled :: (c) pretty self-explanatory ...
-- someday :: (s) this is for tasks that I may want to do at some stage, but not just yet. I still want to keep track of them though.
-- project :: (p) I'm using as a top-level to keep a track of projects.
-
-On top of this, I'm going to try and use GS/BH's keyword:
-
-- meeting :: This will be used for 'true' meetings, as well as any other interruptions that may carry on for a long time...
-
-*** Colours for the agenda
-
-When we display these in the agenda, we'd also like to have different colours for different keywords:
-
-#+header: :tangle yes
-#+BEGIN_SRC emacs-lisp :export no
-  (setq
-   ;; Coloured faces for agenda/todo items
-   org-todo-keyword-faces
-   '(
-     ("DONE" . (:foreground "#2B4450" :weight bold))
-     ("TODO" . (:foreground "#ff3030" :weight bold))
-     ("WAITING" . (:foreground "#fe2f92" :weight bold))
-     ("CANCELLED" . (:foreground "#999999" :weight bold))
-     ("SOMEDAY" . (:foreground "#ab82ff" :weight bold))
-     ("MEETING" . (:foreground "#1874cd" :weight bold))
-     )
-   )
-#+END_SRC
-
-For the regular people meetings, we can search for the org target of interest, using this function (called in the above template):
-
-Source for this function is [[https://emacs.stackexchange.com/questions/5923/org-capture-how-to-choose-the-target-file-at-the-end-of-the-process][this stack]].
-
-** Tagging tasks
-
-Extensibility is provided by tagging. You can tag on the fly, or use a predefined list. Below I set a predefined list. Everything between =:startgroup= =:endgroup= below is a single tag for that task---i.e. you can only choose one. =?= gives the shortcut to add the tag.
-
-#+BEGIN_SRC emacs-lisp :export yes
-  ;; Custom tags
+  ;; Tags
   (setq org-tag-alist
-        '(
-          ("meeting" . ?m)
+        '(("meeting" . ?m)
           ("review" . ?r)
           ("analysis" . ?a)
           ("statistical" . ?s)
           ("documenting" . ?d)
-          ("coding" . ?c)
-          )
-        )
+          ("coding" . ?c)))
 
-#+END_SRC
-
-** Automatic tagging of tasks.
-
-Tasks can have automatic actions taken to tag them. Following BH, I'm using the following triggers:
-
-- moving a task to CANCELLED adds a :CANCELLED: tag
-- moving a task to a done state removes cancelled tags
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Triggers for state changes
-   org-todo-state-tags-triggers
-   (quote (
-	   ;; Move to cancelled adds the cancelled tag
-	   ("CANCELLED" ("CANCELLED" . t))
-	   ;; Move to waiting adds the waiting tag
-	   ("WAITING" ("WAITING" . t))
-	   ;; Move to a done state removes waiting/cancelled
-	   (done ("WAITING") ("CANCELLED"))
-	   ("DONE" ("WAITING") ("CANCELLED"))
-	   ;; Move to todo, removes waiting/cancelled
-	   ("TODO" ("WAITING") ("CANCELLED"))
-	   )
-	  )
-   )
-#+END_SRC
-
-** Finishing tasks
-
-To make sure that tasks with child tasks are not completed prematurely:
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Ensure child dependencies complete before parents can be marked complete
-   org-enforce-todo-dependencies t
-   )
-
-#+END_SRC
-
-** Archiving
-
-We'll want to move stuff out of our agenda tree at some stage. This sets up our archiving to go into the archive sub-directory:
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Where I'm going to archive stuff
-   org-archive-location "archive/%s_archive::"
-   )
-
-  ;; How archive files will appear
-  (defvar org-archive-file-header-format "#+FILETAGS: ARCHIVE\nArchived entries from file %s\n")
-
-#+END_SRC
-
-* Effort
-
-When setting up a task, you can add effort estimates for billing/budgeting, and tracking how you're going with your tasks. Apparently the best way to set effort is by using [[info:org#Effort%20estimates][column view]]. Next I define the columns to display (and their widths), and also provide default effort values.
-
-Related to this is how tasks are clocked. If I clock-in and clock-out immediately (such as when capturing an email), I shouldn't record that clock.
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq
-   ;; Set column view headings
-   org-columns-default-format "%50ITEM(Task) %10Effort(Effort){:} %10CLOCKSUM"
-   ;; Set default effort values
-   org-global-properties (quote (("Effort_ALL" . "0:15 0:30 1:00 2:00 4:00 6:00 8:00 16:00")))
-   ;; When there's 0 time spent, remove the entry
-   org-clock-out-remove-zero-time-clocks t
-   )
-
-#+END_SRC
-
-
-* Bling
-
-I wanted some bling! I added the all-the-icons requirement above, now the next block of code sets some bling in the agenda:
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq org-agenda-category-icon-alist
-	`(("TODO" (list (all-the-icons-faicon "tasks")) nil nil :ascent center)))
-  ;; (setq
-   ;; Add fancy icons to the agenda...
-   ;; org-agenda-category-icon-alist
-   ;; '(
-   ;;   (("TODO" (#("" 0 1 (font-lock-ignore t rear-nonsticky t display (raise -0.24) face (:family "FontAwesome" :height 1.2)))) nil nil :ascent center))
-   ;;   ;; (`(("MEETING" ,(list (all-the-icons-faicon "tasks")) nil nil :ascent center)))
-   ;;   )
-   ;; )
-
-#+END_SRC
-
-* Habits
-
-Habits allows some recurring tasks to reappear when marked done. See [[https://blog.aaronbieber.com/2016/09/24/an-agenda-for-life-with-org-mode.html][here]] for some good info. To enable habits, you need to load the =org-habits= module into org, which is achieved with the following:
-
-#+BEGIN_SRC emacs-lisp :export yes
+  ;; Agenda
   (add-to-list 'org-modules 'org-habit t)
-#+END_SRC
 
-* Agenda View
-
-The default agenda lacks a little oomph. What I'd like to see is collections such as:
-
-- tasks for today
-- tasks to be refiled
-- tasks for next week
-- tasks that are unscheduled
-- tasks that are waiting/someday
-
-This next bit of setup uses [[https://github.com/alphapapa/org-super-agenda][~org-super-agenda~]] to set up a nicely grouped agenda:
-
-#+BEGIN_SRC emacs-lisp :export yes
-  (setq org-agenda-custom-commands
-        '(("a" "Super Agenda"
-           ((agenda "" ((org-agenda-span 'day)
-                        (org-agenda-overriding-header "Today's Items")
-                        (org-agenda-skip-scheduled-if-deadline-is-shown t)
-                        (org-super-agenda-groups
-                         '((:discard (:todo ("DONE" "CANCELLED")))
-                           ;; (:discard (:tag "MEETING"))
-                           (:name "Today"
-                                  :time-grid t
-                                  :todo "TODAY"
-                                  :scheduled today
-                                  :order 0)
-                           (:habit t)
-                           (:name "Due Today"
-                                  :deadline today
-                                  :order 2)
-                           (:name "Due Soon"
-                                  :deadline future
-                                  :order 8)
-                           (:name "Overdue"
-                                  :deadline past
-                                  :order 7)
-                           ))))
-            (todo "" ((org-agenda-overriding-header "All Other TODOs")
-                      (org-super-agenda-groups
-                       '((:discard (:category ("Issues" "Refile" "Waiting")))
-                         (:discard (:todo ("SOMEDAY")))
-                         (:and (:deadline nil :scheduled nil))
-                         (:discard (:scheduled t))
-                         (:auto-category t :order 9)
-                         ))))
-            (todo "" ((org-agenda-overriding-header "Waiting for")
-                      (org-super-agenda-groups
-                       '((:category "Waiting")
-                         (:discard (:anything t))
-                         ))))
-            (todo "" ((org-agenda-overriding-header "Issues")
-                    (org-super-agenda-groups
-                     '((:category "Issues")
-                       (:discard (:anything t))
-                       ))))))
-          ("r" "Daily review"
-           (
-            (todo "" ((org-agenda-overriding-header "Daily review")
-                      (org-super-agenda-groups
-                       '((:category "Refile")
-                         (:discard (:anything t))
-                         ))))))
-          ("i" "Issues Tracking"
-           (
-            (todo "" ((org-agenda-overriding-header "Issues tracking")
-                      (org-super-agenda-groups
-                       '((:category "Issues")
-                         (:discard (:anything t))
-                         ))))))
-          ("w" "Waiting for"
-           (
-            (todo "" ((org-agenda-overriding-header "Waiting for")
-                      (org-super-agenda-groups
-                       '((:category "Waiting")
-                         (:discard (:anything t))
-                         ))))))
-          ("s" "Someday"
-           (
-            (todo "" ((org-agenda-overriding-header "Someday")
-                      (org-super-agenda-groups
-                       '(
-                         (:name "Someday"
-                                :todo "SOMEDAY")
-                         (:discard (:anything t))
-                         )
-                       )))))
-          ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
-          )
-        )
-
-  (org-super-agenda-mode);; Custom agenda views
-
-#+END_SRC
-
-The last line only shows one copy of the task---without it, both the scheduled, and the deadline task will show up.
-
-2019-01-14: I've now added a new 'task' view in the custom agenda above. This is to list all projects that I have a hand in, just to keep me on track. I've added a new keyword 'PROJECT' to do this, which can be marked as DONE once the whole project is completed or cancelled.
-
-* Searching through your notes
-
-  To make it a little easier to search, use ripgrep. It replaces the current org-search-view which is not helpful (imo).
-
-  #+begin_src emacs-lisp :tangle yes :export yes
-    (defun sprazza/org-search ()
-      "Search in the org directory with `rg'."
-      (interactive)
-      (spacemacs/compleseus-search nil (expand-file-name org-directory))
-      )
-
-    (progn
-      (spacemacs/set-leader-keys
-        "aos" 'sprazza/org-search
-        )
-
-      ;; Is not as helpful in major mode, but can be done...
-      ;; (spacemacs/set-leader-keys-for-major-mode 'org-mode
-      ;;   "q" 'sprazza/org-search
-      ;;   )
-      )
-  #+end_src
-
-Finally close off the =with=eval-after-load= from earlier:
-#+begin_src emacs-lisp :exports none
-  )
+  ;; Super agenda
+  (org-super-agenda-mode))
 #+end_src
