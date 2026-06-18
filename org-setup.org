@@ -43,6 +43,17 @@ These settings do not depend on Org being loaded and should be defined eagerly.
      (defun sprazza/disable-citar-in-capture ()
        "Disable citar completion during capture to avoid CAPF errors"
        (remove-hook 'completion-at-point-functions #'citar-capf t))
+
+     (defun sprazza/org-search ()
+       "Search in the org directory with `rg'."
+       (interactive)
+       (spacemacs/compleseus-search nil (expand-file-name org-directory))
+       )
+
+     (progn
+       (spacemacs/set-leader-keys
+         "aos" 'sprazza/org-search
+         )
    #+end_src
 
 ** Constants and settings
@@ -220,11 +231,60 @@ These settings do not depend on Org being loaded and should be defined eagerly.
    #+begin_src emacs-lisp :exports none
      (with-eval-after-load 'org
 
-       ;; Agenda
+       ;; Agenda add my habits
        (add-to-list 'org-modules 'org-habit t)
 
-       ;; Super agenda
-       (org-super-agenda-mode)
+       ;; Super agenda, make the agenda look nicer
+
+       (with-eval-after-load 'org-super-agenda
+         (setq org-agenda-custom-commands
+               '(("a" "Super Agenda"
+                  ((agenda "" ((org-agenda-span 'day)
+                               (org-agenda-overriding-header "Today's Items")
+                               (org-agenda-skip-scheduled-if-deadline-is-shown t)
+                               (org-super-agenda-groups
+                                '((:name "Today"
+                                         :time-grid t
+                                         :todo "TODAY"
+                                         :scheduled today
+                                         :order 0)
+
+                                  (:habit t)
+
+                                  (:name "Due Today"
+                                         :deadline today
+                                         :order 2)
+
+                                  (:name "Overdue"
+                                         :deadline past
+                                         :order 3)
+
+                                  (:name "Due Soon"
+                                         :deadline future
+                                         :order 4)
+
+                                  (:discard (:todo ("DONE" "CANCELLED")))))))
+
+                   (todo "" ((org-agenda-overriding-header "All Other TODOs")
+                             (org-super-agenda-groups
+                              '((:discard (:category ("Issues" "Refile" "Waiting")))
+                                (:discard (:todo ("SOMEDAY")))
+                                (:and (:deadline nil :scheduled nil))
+                                (:auto-category t))))))
+
+                  (todo "" ((org-agenda-overriding-header "Waiting for")
+                            (org-super-agenda-groups
+                             '((:category "Waiting")
+                               (:discard (:anything t))))))
+
+                  (todo "" ((org-agenda-overriding-header "Issues")
+                            (org-super-agenda-groups
+                             '((:category "Issues")
+                               (:discard (:anything t)))))))))
+
+         (org-super-agenda-mode)
+
+         )
 
        )
    #+end_src
