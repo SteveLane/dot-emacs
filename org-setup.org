@@ -174,9 +174,27 @@ These settings do not depend on Org being loaded and should be defined eagerly.
               ("documenting" . ?d)
               ("coding" . ?c)))
 
+      (setq
+       ;; Triggers for state changes
+       org-todo-state-tags-triggers
+       (quote (
+    	         ;; Move to cancelled adds the cancelled tag
+    	         ("CANCELLED" ("CANCELLED" . t))
+    	         ;; Move to waiting adds the waiting tag
+    	         ("WAITING" ("WAITING" . t))
+    	         ;; Move to a done state removes waiting/cancelled
+    	         (done ("WAITING") ("CANCELLED"))
+    	         ("DONE" ("WAITING") ("CANCELLED"))
+    	         ;; Move to todo, removes waiting/cancelled
+    	         ("TODO" ("WAITING") ("CANCELLED"))
+    	         )
+    	        )
+       )
+
       ;; Agenda
       (add-to-list 'org-modules 'org-habit t)
 
       ;; Super agenda
-      (org-super-agenda-mode))
+      (org-super-agenda-mode)
+      )
   #+end_src
