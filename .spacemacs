@@ -107,8 +107,6 @@ This function should only modify configuration layer settings."
                                       citar
                                       citar-embark
                                       citar-org-roam
-                                      jiralib2
-                                      forge
                                       org-super-agenda
                                       ;; Pull latest Polymode family from GitHub to avoid old pinned builds
                                       (polymode      :location (recipe :fetcher github :repo "polymode/polymode"))
@@ -709,8 +707,6 @@ you should place your code here."
         org-alert-notify-cutoff 5
         org-alert-notify-after-event-cutoff 5
         )
-  ;; For org-jira, set the working directory
-  (setq org-jira-working-dir "~/github/org-jira/")
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
