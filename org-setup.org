@@ -54,6 +54,7 @@ These settings do not depend on Org being loaded and should be defined eagerly.
        (spacemacs/set-leader-keys
          "aos" 'sprazza/org-search
          )
+       )
    #+end_src
 
 ** Constants and settings
@@ -230,13 +231,12 @@ These settings do not depend on Org being loaded and should be defined eagerly.
 
    #+begin_src emacs-lisp :exports none
      (with-eval-after-load 'org
-
        ;; Agenda add my habits
        (add-to-list 'org-modules 'org-habit t)
 
        ;; Super agenda, make the agenda look nicer
-
        (with-eval-after-load 'org-super-agenda
+
          (setq org-agenda-custom-commands
                '(("a" "Super Agenda"
                   ((agenda "" ((org-agenda-span 'day)
@@ -280,7 +280,10 @@ These settings do not depend on Org being loaded and should be defined eagerly.
                   (todo "" ((org-agenda-overriding-header "Issues")
                             (org-super-agenda-groups
                              '((:category "Issues")
-                               (:discard (:anything t)))))))))
+                               (:discard (:anything t))))))
+                  )
+                 )
+               )
 
          (org-super-agenda-mode)
 
