@@ -114,9 +114,11 @@
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
 
 ;; Set some treesitter vars globally:
+(setq treesit-extra-load-path
+      (list (expand-file-name "tree-sitter" user-emacs-directory)))
 (setq treesit-language-source-alist
       '(
-        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (python "https://github.com/tree-sitter/tree-sitter-python" "v0.23.0")
         (r "https://github.com/r-lib/tree-sitter-r")
         )
       )
