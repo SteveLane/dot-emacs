@@ -83,7 +83,7 @@ This function should only modify configuration layer settings."
              python-shell-interpreter "uv"
              python-shell-interpreter-args "run -q ipython -i --simple-prompt"
              python-backend 'eglot
-             python-lsp-server 'pylsp
+             python-lsp-server nil
              python-formatter 'black
              python-format-on-save t
              python-enable-tools '(uv)

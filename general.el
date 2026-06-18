@@ -112,3 +112,11 @@
 
 ;; Optional: nicer comments with Catppuccin
 (set-face-attribute 'font-lock-comment-face nil :slant 'italic)
+
+;; Set some treesitter vars globally:
+(setq treesit-language-source-alist
+      '(
+        (python "https://github.com/tree-sitter/tree-sitter-python")
+        (r "https://github.com/r-lib/tree-sitter-r")
+        )
+      )

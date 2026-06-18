@@ -1,5 +1,13 @@
-;; Time-stamp: <2026-03-19 15:49:51 (lanes1)>
+;; Time-stamp: <2026-06-18 16:36:16 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
+
+;; Ensure that treesitter is used
+(when (fboundp 'r-ts-mode)
+  (add-to-list 'major-mode-remap-alist
+               '(ess-r-mode . r-ts-mode)
+               )
+  )
+
 
 (with-eval-after-load 'ess-mode
 

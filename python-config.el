@@ -1,5 +1,19 @@
 ;;; python-config.el --- Project-scoped Python REPL (uv) + robust send -*- lexical-binding: t; -*-
 
+;; Use tree-sitter Python mode if available (Emacs 29+)
+(when (fboundp 'python-ts-mode)
+  (add-to-list 'major-mode-remap-alist
+               '(python-mode . python-ts-mode)))
+
+;; Make sure we're using ty with eglot
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '((python-base-mode :language-id "python")
+                 . ("uv" "run" "--quiet" "ty" "server"))))
+
+;; And ensure that eglot is running for python files
+(add-hook 'python-base-mode-hook #'eglot-ensure)
+
 (with-eval-after-load 'python
   ;; ---------------------------------------------
   ;; Helper: project name & shell buffer name
