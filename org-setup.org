@@ -50,10 +50,9 @@ These settings do not depend on Org being loaded and should be defined eagerly.
        (spacemacs/compleseus-search nil (expand-file-name org-directory))
        )
 
-     (progn
-       (spacemacs/set-leader-keys
-         "aos" 'sprazza/org-search
-         )
+     ;; Ensure spacemacs has org-search available more broadly
+     (spacemacs/set-leader-keys
+       "aos" 'sprazza/org-search
        )
    #+end_src
 
@@ -235,59 +234,85 @@ These settings do not depend on Org being loaded and should be defined eagerly.
        (add-to-list 'org-modules 'org-habit t)
 
        ;; Super agenda, make the agenda look nicer
-       (with-eval-after-load 'org-super-agenda
-
-         (setq org-agenda-custom-commands
-               '(("a" "Super Agenda"
-                  ((agenda "" ((org-agenda-span 'day)
-                               (org-agenda-overriding-header "Today's Items")
-                               (org-agenda-skip-scheduled-if-deadline-is-shown t)
-                               (org-super-agenda-groups
-                                '((:name "Today"
-                                         :time-grid t
-                                         :todo "TODAY"
-                                         :scheduled today
-                                         :order 0)
-
-                                  (:habit t)
-
-                                  (:name "Due Today"
-                                         :deadline today
-                                         :order 2)
-
-                                  (:name "Overdue"
-                                         :deadline past
-                                         :order 3)
-
-                                  (:name "Due Soon"
-                                         :deadline future
-                                         :order 4)
-
-                                  (:discard (:todo ("DONE" "CANCELLED")))))))
-
-                   (todo "" ((org-agenda-overriding-header "All Other TODOs")
+       (require 'org-super-agenda)
+       (setq org-agenda-custom-commands
+             '(("a" "Super Agenda"
+                ((agenda "" ((org-agenda-span 'day)
+                             (org-agenda-overriding-header "Today's Items")
+                             (org-agenda-skip-scheduled-if-deadline-is-shown t)
                              (org-super-agenda-groups
-                              '((:discard (:category ("Issues" "Refile" "Waiting")))
-                                (:discard (:todo ("SOMEDAY")))
-                                (:and (:deadline nil :scheduled nil))
-                                (:auto-category t))))))
-
-                  (todo "" ((org-agenda-overriding-header "Waiting for")
-                            (org-super-agenda-groups
-                             '((:category "Waiting")
-                               (:discard (:anything t))))))
-
-                  (todo "" ((org-agenda-overriding-header "Issues")
-                            (org-super-agenda-groups
-                             '((:category "Issues")
-                               (:discard (:anything t))))))
-                  )
-                 )
+                              `((:discard (:todo ("DONE" "CANCELLED")))
+                                ;; (:discard (:tag "MEETING"))
+                                (:name "Today"
+                                       :time-grid t
+                                       :todo "TODAY"
+                                       :scheduled today
+                                       :order 0)
+                                (:habit t)
+                                (:name "Due Today"
+                                       :deadline today
+                                       :order 2)
+                                (:name "Due Soon"
+                                       :deadline future
+                                       :order 8)
+                                (:name "Overdue"
+                                       :deadline past
+                                       :order 7)
+                                ))))
+                 (todo "" ((org-agenda-overriding-header "All Other TODOs")
+                           (org-super-agenda-groups
+                            '((:discard (:category ("Issues" "Refile" "Waiting")))
+                              (:discard (:todo ("SOMEDAY")))
+                              (:and (:deadline nil :scheduled nil))
+                              (:discard (:scheduled t))
+                              (:auto-category t :order 9)
+                              ))))
+                 (todo "" ((org-agenda-overriding-header "Waiting for")
+                           (org-super-agenda-groups
+                            '((:category "Waiting")
+                              (:discard (:anything t))
+                              ))))
+                 (todo "" ((org-agenda-overriding-header "Issues")
+                           (org-super-agenda-groups
+                            '((:category "Issues")
+                              (:discard (:anything t))
+                              ))))))
+               ("r" "Daily review"
+                (
+                 (todo "" ((org-agenda-overriding-header "Daily review")
+                           (org-super-agenda-groups
+                            '((:category "Refile")
+                              (:discard (:anything t))
+                              ))))))
+               ("i" "Issues Tracking"
+                (
+                 (todo "" ((org-agenda-overriding-header "Issues tracking")
+                           (org-super-agenda-groups
+                            '((:category "Issues")
+                              (:discard (:anything t))
+                              ))))))
+               ("w" "Waiting for"
+                (
+                 (todo "" ((org-agenda-overriding-header "Waiting for")
+                           (org-super-agenda-groups
+                            '((:category "Waiting")
+                              (:discard (:anything t))
+                              ))))))
+               ("s" "Someday"
+                (
+                 (todo "" ((org-agenda-overriding-header "Someday")
+                           (org-super-agenda-groups
+                            '(
+                              (:name "Someday"
+                                     :todo "SOMEDAY")
+                              (:discard (:anything t))
+                              )
+                            )))))
+               ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
                )
+             )
 
-         (org-super-agenda-mode)
-
-         )
+       (org-super-agenda-mode)
 
        )
    #+end_src
