@@ -1,26 +1,35 @@
-;; Time-stamp: <2026-06-18 17:36:36 (lanes1)>
+;; Time-stamp: <2026-06-19 16:27:29 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
-(with-eval-after-load 'ess-mode
+(defun sprazza/eglot-start-if-available ()
+  ;; Now make sure that eglot is started if available
+  (when (fboundp 'eglot-ensure)
+    (eglot-ensure)))
+
+;; And now ESS specific settings
+(with-eval-after-load 'ess
+
+  ;; Remove any ESS-injected arguments
+  (setq ess-R-args nil)
+
+  ;; Where is my R? I haven't set it properly on the PATH with winblows...
+  ;; OS‑specific R binary
+  (cond
+   ((spacemacs/system-is-mswindows)
+    (setq inferior-ess-r-program "R.bat"))
+   ((spacemacs/system-is-linux)
+    (setq inferior-ess-r-program "/usr/bin/R"))
+   ((spacemacs/system-is-mac)
+    (setq inferior-ess-r-program "/usr/local/bin/R")))
+  ;; R startup args
+  (setq inferior-R-args "--no-restore-history --no-restore --no-save")
 
   ;; Keybindings
   (define-key ess-mode-map ";" 'ess-insert-assign)
   (define-key inferior-ess-mode-map ";" 'ess-insert-assign)
 
-  ;; R startup args
-  (setq-default inferior-R-args "--no-restore-history --no-restore --no-save")
-
   ;; Auto-fill in ESS buffers
   (add-hook 'ess-mode-hook (lambda () (auto-fill-mode 1)))
-
-  ;; OS‑specific R binary
-  (cond
-   ((spacemacs/system-is-mswindows)
-    (setq inferior-R-program-name "c:/Program Files/R/R-4.5.2/bin/x64/R.exe"))
-   ((spacemacs/system-is-linux)
-    (setq inferior-R-program-name "/usr/bin/R"))
-   ((spacemacs/system-is-mac)
-    (setq inferior-R-program-name "/usr/local/bin/R")))
 
   ;; RStudio‑like indentation
   (add-hook 'ess-mode-hook
@@ -39,7 +48,9 @@
         ess-nuke-trailing-whitespace t
         ess-eval-visibly 'nowait
         ess-smart-S-assign-key nil   ;; disable old _ assignment
-        ess-use-flymake nil)         ;; use flycheck instead
+        ess-use-flymake nil
+        ess-use-eldoc nil
+        )
 
   ;; Pipe operator helper
   (defun my-add-pipe ()
@@ -57,6 +68,8 @@
    ((spacemacs/system-is-mswindows)
     (define-key ess-mode-map (kbd "C-S-m") 'my-add-pipe)
     (define-key inferior-ess-mode-map (kbd "C-S-m") " |> ")))
+
+  (add-hook 'ess-r-mode-hook #'sprazza/eglot-start-if-available)
   )
 
 ;; Ensure no spell-check in code blocks
@@ -67,7 +80,15 @@
                           #'markdown-flyspell-check-word-p))))
 
 (with-eval-after-load 'quarto-mode
+  ;; Spelling
   (add-hook 'quarto-mode-hook
             (lambda ()
               (setq-local flyspell-generic-check-word-predicate
-                          #'markdown-flyspell-check-word-p))))
+                          #'markdown-flyspell-check-word-p)))
+  (add-hook 'quarto-mode-hook #'sprazza/eglot-start-if-available)
+  )
+
+;; Ensure that the language server is started
+(with-eval-after-load 'eglot
+  (add-to-list 'eglot-server-programs
+               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))))

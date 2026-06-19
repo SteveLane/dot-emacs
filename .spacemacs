@@ -42,15 +42,15 @@ This function should only modify configuration layer settings."
      bibtex
      compleseus
      csv
+     eglot
      emacs-lisp
      epub
      (ess :variables
-          ess-r-backend 'lsp
+          ess-r-backend 'eglot
           ess-use-company 't
-          polymode-lsp-integration nil
-          :config (add-to-list 'auto-mode-alist '("\\.[qrR]md\\'" . poly-markdown+r-mode))
           )
-     javascript
+     (javascript :variables
+                 javascript-backend nil)
      git
      graphviz
      (groovy :variables
@@ -59,13 +59,10 @@ This function should only modify configuration layer settings."
      html
      ipython-notebook
      (latex :variables
-            latex-backend 'lsp
+            latex-backend 'eglot
             latex-enable-folding t
             latex-build-command 'latexmk
             )
-     (lsp :variables
-          lsp-use-lsp-ui nil
-          )
      markdown
      (org :variables
           org-enable-roam-support t
@@ -93,7 +90,6 @@ This function should only modify configuration layer settings."
      spell-checking
      sql
      stan-mode
-     syntax-checking
      treemacs
      yaml
      )
@@ -642,6 +638,8 @@ before packages are loaded. If you are unsure, you should try in setting them in
     ;; From https://emacs.stackexchange.com/questions/60278/gpg-no-public-key
     ;; because shit was getting stuffed up with packages and msys gnu.
     (setq package-gnupghome-dir "/c/Users/lanes1/.emacs.d/elpa/gnupg")
+    ;; Setting proxies
+    (load "~/github/dot-emacs-extras/proxies.el" 'noerror 'nomessage)
     )
    ((spacemacs/system-is-linux)
     (setq ispell-program-name "/usr/bin/hunspell")
@@ -680,8 +678,7 @@ you should place your code here."
   (load-file "~/github/emacs-config/citar.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (load "~/github/dot-emacs-extras/proxies.el" 'noerror 'nomessage)
-    (setq org-babel-R-command "c:/Progra~1/R/R-4.5.2/bin/x64/R.exe --slave --no-save")
+    (setq org-babel-R-command "rig run --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
@@ -739,41 +736,40 @@ This function is called at the very end of Spacemacs initialization."
      '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
                 auto-yasnippet blacken catppuccin-theme centered-cursor-mode
                 citar-embark citar-org-roam clean-aindent-mode code-review
-                column-enforce-mode company-auctex company-math company-reftex
-                company-statistics company-web compleseus-spacemacs-help
-                consult-lsp consult-yasnippet csv-mode cython-mode define-word
-                devdocs diminish dired-quick-sort disable-mouse doom-modeline
-                dotenv-mode drag-stuff dumb-jump edit-indirect ein elisp-def
-                elisp-demos elisp-slime-nav embark-consult emmet-mode emr
-                ess-R-data-view eval-sexp-fu evil-anzu evil-args evil-cleverparens
-                evil-collection evil-easymotion evil-escape evil-evilified-state
-                evil-exchange evil-goggles evil-iedit-state evil-indent-plus
-                evil-lion evil-lisp-state evil-matchit evil-nerd-commenter
-                evil-numbers evil-org evil-surround evil-tex evil-textobj-line
-                evil-tutor evil-unimpaired evil-visual-mark-mode evil-visualstar
-                expand-region eyebrowse fancy-battery flycheck-elsa
-                flycheck-package flycheck-pos-tip flyspell-correct-popup gh-md
-                git-link git-messenger git-modes git-timemachine
-                gitignore-templates gnuplot golden-ratio google-translate
-                graphviz-dot-mode groovy-imports groovy-mode helm-make hide-comnt
-                highlight-indentation highlight-numbers highlight-parentheses
-                hl-todo holy-mode hungry-delete hybrid-mode impatient-mode
-                indent-guide info+ inspector jiralib2 js-doc js2-refactor
+                column-enforce-mode company-auctex company-lua company-math
+                company-reftex company-statistics company-web
+                compleseus-spacemacs-help consult-yasnippet csv-mode cython-mode
+                define-word devdocs diminish dired-quick-sort disable-mouse
+                doom-modeline dotenv-mode drag-stuff dumb-jump edit-indirect ein
+                elisp-def elisp-demos elisp-slime-nav embark-consult emmet-mode
+                emr ess-R-data-view eval-sexp-fu evil-anzu evil-args
+                evil-cleverparens evil-collection evil-easymotion evil-escape
+                evil-evilified-state evil-exchange evil-goggles evil-iedit-state
+                evil-indent-plus evil-lion evil-lisp-state evil-matchit
+                evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
+                evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
+                evil-visualstar expand-region eyebrowse fancy-battery
+                flycheck-eglot flycheck-elsa flycheck-package flycheck-pos-tip
+                flyspell-correct-popup gh-md git-link git-messenger git-modes
+                git-timemachine gitignore-templates gnuplot golden-ratio
+                google-translate graphviz-dot-mode groovy-imports groovy-mode
+                helm-make hide-comnt highlight-indentation highlight-numbers
+                highlight-parentheses hl-todo holy-mode hungry-delete hybrid-mode
+                impatient-mode indent-guide info+ inspector js-doc js2-refactor
                 json-mode json-navigator json-reformat link-hint live-py-mode
-                livid-mode lorem-ipsum lsp-latex lsp-origami lsp-treemacs lua-mode
-                macrostep marginalia markdown-toc multi-line nameless nodejs-repl
-                nov npm-mode open-junk-file orderless org-alert org-cliplink
-                org-contrib org-download org-jira org-mime org-pomodoro
-                org-present org-projectile org-ref org-rich-yank org-roam-ui
-                org-super-agenda org-superstar orgit-forge overseer ox-jira
-                page-break-lines paradox password-generator pcre2el pet
-                pip-requirements poly-R poly-org popwin prettier-js pug-mode
-                py-isort pydoc pyenv-mode pylookup python-pytest quarto-mode
-                quickrun rainbow-delimiters restart-emacs ron-mode rustic
-                sass-mode scss-mode slim-mode smeargle space-doc
+                livid-mode lorem-ipsum macrostep marginalia markdown-toc
+                multi-line nameless nodejs-repl nov npm-mode open-junk-file
+                orderless org-alert org-cliplink org-contrib org-download org-jira
+                org-mime org-pomodoro org-present org-projectile org-ref
+                org-rich-yank org-roam-ui org-super-agenda org-superstar orgit
+                overseer ox-jira page-break-lines paradox password-generator
+                pcre2el pet pip-requirements poly-R poly-org popwin prettier-js
+                pug-mode py-isort pydoc pyenv-mode pylookup python-pytest
+                quarto-mode quickrun rainbow-delimiters restart-emacs ron-mode
+                rustic sass-mode scss-mode slim-mode smeargle space-doc
                 spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
                 sql-indent stan-snippets string-edit-at-point symbol-overlay symon
-                tagedit term-cursor toc-org toml-mode treemacs-evil
+                tagedit term-cursor tern toc-org toml-mode treemacs-evil
                 treemacs-icons-dired treemacs-magit treemacs-persp
                 treemacs-projectile undo-fu-session uv vertico vi-tilde-fringe
                 volatile-highlights vundo web-beautify web-mode wgrep

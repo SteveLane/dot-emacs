@@ -38,12 +38,6 @@
 ;; Make sure that [mM]akefile's with an 'extension' are opened in makefile-mode
 (add-to-list 'auto-mode-alist '("[mM]akefile\\.[a-zA-Z]*\\'" . makefile-mode))
 
-;; make spacemacs the global git editor
-;; (global-git-commit-mode t)
-
-;; make sure that ess-mode has linting
-(add-to-list 'flycheck-global-modes 'ess-mode)
-
 ;; try and speed projectile up by using alien indexing
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
 (setq projectile-indexing-method 'alien)
