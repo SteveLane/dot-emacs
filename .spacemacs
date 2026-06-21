@@ -73,8 +73,6 @@ This function should only modify configuration layer settings."
           org-roam-database-connector 'sqlite-builtin
           org-enable-roam-protocol t
           org-enable-notifications t
-          org-enable-jira-support t
-          jiralib-url "https://worksafe.atlassian.net/"
           )
      (python :variables
              python-shell-interpreter "uv"
