@@ -105,21 +105,13 @@
 
     ;; REPL control
     "s i" #'sprazza/run-python
-    "s n" #'sprazza/run-python))  ;; restart = fresh uv session
+    "s n" #'sprazza/run-python)
+  ;; ---------------------------------------------
+  ;; IPython prompt handling (important for stability) only add if needed, delete after testing
+  ;; ---------------------------------------------
+  ;; (setq python-shell-prompt-detect-enabled nil)
+  ;; (add-to-list 'python-shell-prompt-input-regexps "^In \\[[0-9]+\\]: *")
+  ;; (add-to-list 'python-shell-prompt-input-regexps "^\\s-*\\.\\.\\.: *")
+  ;; (add-to-list 'python-shell-prompt-output-regexps "^Out\\[[0-9]+\\]: *")
 
-;; ---------------------------------------------
-;; IPython prompt handling (important for stability)
-;; ---------------------------------------------
-(setq python-shell-prompt-detect-enabled nil)
-
-(add-to-list 'python-shell-prompt-input-regexps "^In \\[[0-9]+\\]: *")
-(add-to-list 'python-shell-prompt-input-regexps "^\\s-*\\.\\.\\.: *")
-(add-to-list 'python-shell-prompt-output-regexps "^Out\\[[0-9]+\\]: *")
-
-;; ---------------------------------------------
-;; Optional: nicer REPL window behaviour
-;; ---------------------------------------------
-;; (add-to-list 'display-buffer-alist
-;;              '("\\*Python:"
-;;                (display-buffer-at-bottom)
-;;                (window-height . 0.3)))
+  )
