@@ -116,3 +116,6 @@
         (r "https://github.com/r-lib/tree-sitter-r")
         )
       )
+
+;; Make sure we start in home (~/)
+(setq default-directory "~/")
