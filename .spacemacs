@@ -79,10 +79,10 @@ This function should only modify configuration layer settings."
              python-shell-interpreter-args "run -q ipython -i --simple-prompt"
              python-backend 'eglot
              python-lsp-server nil
-             python-formatter 'black
+             python-formatter 'ruff
              python-format-on-save t
              python-enable-tools '(uv)
-             python-virtualenv-management 'pet
+             python-virtualenv-management nil
              )
      rust
      spell-checking
