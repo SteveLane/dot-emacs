@@ -119,3 +119,7 @@
 
 ;; Make sure we start in home (~/)
 (setq default-directory "~/")
+
+;; Ensure the server is started, which will be good for everyone.
+(unless (server-running-p)
+  (server-start))
