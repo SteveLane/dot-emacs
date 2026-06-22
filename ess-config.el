@@ -1,4 +1,4 @@
-;; Time-stamp: <2026-06-19 16:27:29 (lanes1)>
+;; Time-stamp: <2026-06-22 10:22:02 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (defun sprazza/eglot-start-if-available ()
@@ -70,6 +70,10 @@
     (define-key inferior-ess-mode-map (kbd "C-S-m") " |> ")))
 
   (add-hook 'ess-r-mode-hook #'sprazza/eglot-start-if-available)
+  (add-hook 'ess-r-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
   )
 
 ;; Ensure no spell-check in code blocks
@@ -86,9 +90,15 @@
               (setq-local flyspell-generic-check-word-predicate
                           #'markdown-flyspell-check-word-p)))
   (add-hook 'quarto-mode-hook #'sprazza/eglot-start-if-available)
+  (add-hook 'quarto-mode-hook
+            (lambda ()
+              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
+
   )
 
 ;; Ensure that the language server is started
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))))
+               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))
+               )
+  )
