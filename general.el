@@ -121,5 +121,6 @@
 (setq default-directory "~/")
 
 ;; Ensure the server is started, which will be good for everyone.
+(require 'server)
 (unless (server-running-p)
   (server-start))
