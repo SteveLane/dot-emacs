@@ -124,3 +124,6 @@
 (require 'server)
 (unless (server-running-p)
   (server-start))
+
+;; Disable fragile prompt detection (works better with uv + ipython)
+(setq python-shell-prompt-detect-enabled nil)
