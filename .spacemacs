@@ -77,6 +77,7 @@ This function should only modify configuration layer settings."
      (python :variables
              python-shell-interpreter "uv"
              python-shell-interpreter-args "run -q ipython -i --simple-prompt"
+             python-shell-dedicated 'project
              python-backend 'eglot
              python-lsp-server nil
              python-formatter 'ruff
