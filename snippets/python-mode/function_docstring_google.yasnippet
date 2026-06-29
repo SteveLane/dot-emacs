@@ -2,15 +2,14 @@
 # name: function_docstring_google
 # key: fdg
 # group: definitions
-# Use minimum indentation, because Emacs 25+ doesn't dedent docstrings.
 # --
-def ${1:Function Name}(${2:Arguments}) -> ${3:ReturnType}:
-    \"\"\"${4:Short Description}
+def ${1:function_name}(${2:arguments}) -> ${3:return_type}:
+    \"\"\"${4:short_description}
 
     Args:
         ${2:$(sprazza/yas-args-to-google)}
 
     Returns:
-        ${5:Return type}
+        ${5:return_details}
     \"\"\"
  $0
