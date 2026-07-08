@@ -1,10 +1,18 @@
-;; Time-stamp: <2026-06-22 10:22:02 (lanes1)>
+;; Time-stamp: <2026-07-08 10:56:36 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (defun sprazza/eglot-start-if-available ()
   ;; Now make sure that eglot is started if available
   (when (fboundp 'eglot-ensure)
     (eglot-ensure)))
+
+(defun sprazza/eglot-format-on-save-R ()
+  ;; Format R buffers before saving.
+  (when (and (derived-mode-p 'ess-r-mode)
+             (eglot-managed-p))
+    (eglot-format-buffer)
+    )
+  )
 
 ;; And now ESS specific settings
 (with-eval-after-load 'ess
@@ -70,10 +78,7 @@
     (define-key inferior-ess-mode-map (kbd "C-S-m") " |> ")))
 
   (add-hook 'ess-r-mode-hook #'sprazza/eglot-start-if-available)
-  (add-hook 'ess-r-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
-
+  (add-hook 'before-save-hook #'sprazza/eglot-format-on-save-R)
   )
 
 ;; Ensure no spell-check in code blocks
@@ -90,15 +95,12 @@
               (setq-local flyspell-generic-check-word-predicate
                           #'markdown-flyspell-check-word-p)))
   (add-hook 'quarto-mode-hook #'sprazza/eglot-start-if-available)
-  (add-hook 'quarto-mode-hook
-            (lambda ()
-              (add-hook 'before-save-hook #'eglot-format-buffer nil t)))
 
   )
 
 ;; Ensure that the language server is started
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))
+               '(ess-r-mode . ("air" "language-server"))
                )
   )
