@@ -242,13 +242,13 @@ These settings do not depend on Org being loaded and should be defined eagerly.
                              (org-agenda-skip-scheduled-if-deadline-is-shown t)
                              (org-super-agenda-groups
                               `((:discard (:todo ("DONE" "CANCELLED")))
-                                ;; (:discard (:tag "MEETING"))
                                 (:name "Today"
                                        :time-grid t
                                        :todo "TODAY"
                                        :scheduled today
                                        :order 0)
                                 (:habit t)
+                                (:discard (:tag "MEETING"))
                                 (:name "Due Today"
                                        :deadline today
                                        :order 2)
