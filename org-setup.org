@@ -309,6 +309,18 @@ These settings do not depend on Org being loaded and should be defined eagerly.
                               )
                             )))))
                ("d" "Done in the last week" tags "+TODO=\"DONE\"+CLOSED>=\"<-6d>\"")
+               ("m" "Meetings yesterday (for review)"
+                (
+                 (agenda "" ((org-agenda-overriding-header "Meetings yesterday (for review)")
+                             (org-agenda-span 1)
+                             (org-agenda-start-day "-1d")
+                             (org-super-agenda-groups
+                              '(
+                                (:name "Daily review"
+                                       :tag "MEETING")
+                                (:discard (:anything t))
+                                )
+                              )))))
                )
              )
 
