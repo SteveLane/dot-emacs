@@ -71,45 +71,6 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       )
    #+end_src
 
-** Template definitions
-
-   #+header: :tangle no
-   #+begin_src emacs-lisp :export no
-     (setq
-      ;; Define custom org-roam capture templates
-      org-roam-capture-templates
-      '(
-        ("p" "person" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: person\n"
-         :unnarrowed t)
-        ("c" "code" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: code\n"
-         :unnarrowed t)
-        ("P" "process" plain (function org-roam--capture-get-point)
-         "%?"
-         :file-name "%<%Y%m%d%H%M%S>-${slug}"
-         :head "#+title: ${title}
-     ,#+roam_tags: process\n"
-         :unnarrowed t)
-        )
-      )
-   #+end_src
-
-* Starting org-roam
-
-  Org-roam needs to be 'started' with v2. So we call the setup function to get it going:
-
-  #+begin_src emacs-lisp :tangle yes :export yes
-    ;; start org roam
-    ;; (org-roam-setup)
-  #+end_src
-
 * Searching through your notes
 
   To make it a little easier to search, use ripgrep.
@@ -163,4 +124,68 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
        org-roam-db-autosync-mode t
        )
     )
+  #+end_src
+
+* Prompting
+
+  I'm once again trying to get my PKM working better, so I'm trying out some extra prompting. The following presents the prompts in their own buffer when performing the reviews.
+
+  #+begin_src emacs-lisp :tangle yes
+    (defun sprazza/daily-review-prompts()
+      "Opens a buffer that contains review prompts."
+      (interactive)
+      (switch-to-buffer "*Daily Review*")
+      (erase-buffer)
+      (org-mode)
+
+      (insert
+       "* Daily Review\n"
+       "** What should become a permanent note?\n"
+       "** What idea keeps recurring?\n"
+       "** What idea changed my behaviour?\n"
+       "** What would be useful in a year?\n"
+       "** What can be stated as a general principle?\n"
+       "** What existing note should be updated?\n"
+       "** What conversations mattered?\n"
+       "** What decisions/failures were clear?\n"
+        )
+      )
+
+    (defun sprazza/daily-review-from-agenda ()
+      "Allows daily review to proceed directly from the agenda."
+      (interactive)
+
+      ;; Start clean
+      (delete-other-windows)
+
+      ;; Right: prompts
+      (let ((review-win (selected-window))
+            left-win top-left bottom-left)
+
+        ;; Split for left/right
+        ;; (setq left-win (split-window review-win nil 'left))
+        (setq left-win (split-window-right))
+
+        ;; Split left side into top/bottom
+        (select-window left-win)
+        (setq bottom-left (split-window-below))
+        (setq top-left (selected-window))
+
+        ;; Top-left: yesterday's org-roam daily
+        (select-window top-left)
+        (org-roam-dailies-goto-yesterday 1 "d")
+
+        ;; Bottom-left: meetings agenda
+        (select-window bottom-left)
+        (org-agenda nil "m")
+
+        ;; Right: prompts
+        (select-window review-win)
+        (sprazza/daily-review-prompts))
+
+      )
+
+    (with-eval-after-load 'org-agenda
+      (define-key org-agenda-mode-map (kbd "R")
+                  #'sprazza/daily-review-from-agenda))
   #+end_src
