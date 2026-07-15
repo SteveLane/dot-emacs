@@ -25,7 +25,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       org-roam-capture-templates
       '(
         ("p" "Permanent Note" plain "%?"
-         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n[[id:7b759d89-71fb-4066-8cd8-def55a7a7dec][Weekly Review]]")
          :unnarrowed t
          )
         ("i" "Ideas and Somedays" plain "%?"
@@ -140,14 +140,10 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
       (insert
        "* Daily Review\n"
+       "** What surprised me?\n"
+       "** What decision/s were made?\n"
+       "** What did I learn?\n"
        "** What should become a permanent note?\n"
-       "** What idea keeps recurring?\n"
-       "** What idea changed my behaviour?\n"
-       "** What would be useful in a year?\n"
-       "** What can be stated as a general principle?\n"
-       "** What existing note should be updated?\n"
-       "** What conversations mattered?\n"
-       "** What decisions/failures were clear?\n"
         )
       )
 
@@ -158,34 +154,74 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       ;; Start clean
       (delete-other-windows)
 
-      ;; Right: prompts
-      (let ((review-win (selected-window))
-            left-win top-left bottom-left)
+      ;; Set up variable names
+      (let ((left-window (selected-window))
+            right-window top-right bottom-right)
 
         ;; Split for left/right
-        ;; (setq left-win (split-window review-win nil 'left))
-        (setq left-win (split-window-right))
+        (setq right-window (split-window-right))
 
-        ;; Split left side into top/bottom
-        (select-window left-win)
-        (setq bottom-left (split-window-below))
-        (setq top-left (selected-window))
+        ;; Split right side into top/bottom
+        (select-window right-window)
+        (setq bottom-right (split-window-below))
+        (setq top-right (selected-window))
 
-        ;; Top-left: yesterday's org-roam daily
-        (select-window top-left)
-        (org-roam-dailies-goto-yesterday 1 "d")
+        ;; Top right: prompts
+        (select-window top-right)
+        (sprazza/daily-review-prompts)
 
-        ;; Bottom-left: meetings agenda
-        (select-window bottom-left)
+        ;; Bottom right: meetings agenda
+        (select-window bottom-right)
         (org-agenda nil "m")
 
-        ;; Right: prompts
-        (select-window review-win)
-        (sprazza/daily-review-prompts))
+        ;; Left: yesterday's org-roam daily
+        (select-window left-window)
+        (org-roam-dailies-goto-yesterday 1 "d")
+        )
 
       )
 
     (with-eval-after-load 'org-agenda
       (define-key org-agenda-mode-map (kbd "R")
                   #'sprazza/daily-review-from-agenda))
+  #+end_src
+
+  This next session now turns to the weekly review. In this review, I want to surface all permanent notes I've made and then create the connections back to other permanent notes if required.
+
+  #+begin_src emacs-lisp :tangle yes
+    (defun sprazza/weekly-review-prompts()
+      "Opens a buffer that contains review prompts."
+      (interactive)
+      (switch-to-buffer "*Weekly Review*")
+      (erase-buffer)
+      (org-mode)
+
+      (insert
+       "* Weekly Review\n"
+       "** What idea keeps recurring?\n"
+       "** What changed my behaviour?\n"
+       "** What pattern am I noticing?\n"
+       "** What can be stated as a general principle?\n"
+       "** What synthesis note should exist?\n"
+        )
+      )
+
+    (defun sprazza/weekly-review-from-agenda ()
+      "Allows weekly review to proceed directly from the agenda."
+      (interactive)
+
+      ;; Start clean
+      (delete-other-windows)
+
+      ;; Then pretty easily run through the opening commands...
+      (org-roam-buffer-display-dedicated
+       (org-roam-node-from-id "7b759d89-71fb-4066-8cd8-def55a7a7dec")
+       )
+      (sprazza/weekly-review-prompts)
+
+      )
+
+    (with-eval-after-load 'org-agenda
+      (define-key org-agenda-mode-map (kbd "W")
+                  #'sprazza/weekly-review-from-agenda))
   #+end_src
