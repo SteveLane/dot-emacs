@@ -675,6 +675,8 @@ you should place your code here."
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
+  ;; And some extra utilities
+  (load-file "~/github/emacs-config/utilities.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
     (setq org-babel-R-command "rig run --slave --no-save")
