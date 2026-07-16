@@ -616,8 +616,6 @@ variables declared in `~/.spacemacs.env' or `~/.spacemacs.d/.spacemacs.env'.
 See the header of this file for more information."
   (spacemacs/load-spacemacs-env)
   (setenv "LANG" "en_AU")
-  (push "c:/Program Files/R/R-4.5.2/bin/x64" exec-path)
-  (push "c:/Program Files/R/R-4.5.2/bin" exec-path)
   (push "c:/msys64/usr/bin" exec-path)
   (push "c:/msys64/ucrt64/bin" exec-path)
   ;; Make sure LSP can find lsp-latex
