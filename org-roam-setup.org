@@ -140,6 +140,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
       (insert
        "* Daily Review\n"
+       "** What actions should be tracked?\n"
        "** What surprised me?\n"
        "** What decision/s were made?\n"
        "** What did I learn?\n"
