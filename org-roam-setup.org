@@ -25,7 +25,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
       org-roam-capture-templates
       '(
         ("p" "Permanent Note" plain "%?"
-         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\n[[id:7b759d89-71fb-4066-8cd8-def55a7a7dec][Weekly Review]]")
+         :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\nCREATED: %u\n\n[[id:7b759d89-71fb-4066-8cd8-def55a7a7dec][Weekly Review]]")
          :unnarrowed t
          )
         ("i" "Ideas and Somedays" plain "%?"
