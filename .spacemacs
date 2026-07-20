@@ -678,7 +678,8 @@ you should place your code here."
   (load-file "~/github/emacs-config/utilities.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
-    (setq org-babel-R-command "rig run --slave --no-save")
+    ;; (setq org-babel-R-command "rig run --slave --no-save")
+    (setq org-babel-R-command "R.bat --slave --no-save")
     )
   ;; associate Rnw
   (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
