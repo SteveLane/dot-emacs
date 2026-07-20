@@ -42,9 +42,9 @@
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
 ;; (setq projectile-indexing-method 'alien)
 
-;; Switch back to native indexing as something's going funky in the updated
+;; Switch back to hybrid indexing as something's going funky in the updated
 ;; projectile.
-(setq projectile-indexing-method 'native)
+(setq projectile-indexing-method 'hybrid)
 
 (when (spacemacs/system-is-mswindows)
   ;; projectile hack to stop tr issue on windows
