@@ -33,7 +33,7 @@ This function should only modify configuration layer settings."
                                            )
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(lua
+   '(
      (auto-completion :variables
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
@@ -63,6 +63,7 @@ This function should only modify configuration layer settings."
             latex-enable-folding t
             latex-build-command 'latexmk
             )
+     lua
      markdown
      (org :variables
           org-enable-roam-support t
@@ -734,7 +735,7 @@ This function is called at the very end of Spacemacs initialization."
    '(package-selected-packages
      '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
                 auto-yasnippet blacken catppuccin-theme centered-cursor-mode
-                citar-embark citar-org-roam clean-aindent-mode code-review
+                citar-embark citar-org-roam clean-aindent-mode
                 column-enforce-mode company-auctex company-lua company-math
                 company-reftex company-statistics company-web
                 compleseus-spacemacs-help consult-yasnippet csv-mode cython-mode

@@ -40,7 +40,11 @@
 
 ;; try and speed projectile up by using alien indexing
 ;; https://docs.projectile.mx/en/latest/configuration/#alien-indexing
-(setq projectile-indexing-method 'alien)
+;; (setq projectile-indexing-method 'alien)
+
+;; Switch back to native indexing as something's going funky in the updated
+;; projectile.
+(setq projectile-indexing-method 'native)
 
 (when (spacemacs/system-is-mswindows)
   ;; projectile hack to stop tr issue on windows
