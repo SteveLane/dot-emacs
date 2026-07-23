@@ -38,6 +38,7 @@ This function should only modify configuration layer settings."
                       auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
                       auto-completion-enable-snippets-in-popup t
                       auto-completion-enable-sort-by-usage t
+                      auto-completion-minimum-prefix-length 3
                       )
      bibtex
      compleseus
