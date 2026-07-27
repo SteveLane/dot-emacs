@@ -737,46 +737,46 @@ This function is called at the very end of Spacemacs initialization."
    '(package-selected-packages
      '(ace-link aggressive-indent all-the-icons auto-compile auto-highlight-symbol
                 auto-yasnippet blacken catppuccin-theme centered-cursor-mode
-                citar-embark citar-org-roam clean-aindent-mode
-                column-enforce-mode company-auctex company-lua company-math
-                company-reftex company-statistics company-web
-                compleseus-spacemacs-help consult-yasnippet csv-mode cython-mode
-                define-word devdocs diminish dired-quick-sort disable-mouse
-                doom-modeline dotenv-mode drag-stuff dumb-jump edit-indirect ein
-                elisp-def elisp-demos elisp-slime-nav embark-consult emmet-mode
-                emr ess-R-data-view eval-sexp-fu evil-anzu evil-args
-                evil-cleverparens evil-collection evil-easymotion evil-escape
-                evil-evilified-state evil-exchange evil-goggles evil-iedit-state
-                evil-indent-plus evil-lion evil-lisp-state evil-matchit
-                evil-nerd-commenter evil-numbers evil-org evil-surround evil-tex
-                evil-textobj-line evil-tutor evil-unimpaired evil-visual-mark-mode
-                evil-visualstar expand-region eyebrowse fancy-battery
-                flycheck-eglot flycheck-elsa flycheck-package flycheck-pos-tip
-                flyspell-correct-popup gh-md git-link git-messenger git-modes
-                git-timemachine gitignore-templates gnuplot golden-ratio
-                google-translate graphviz-dot-mode groovy-imports groovy-mode
-                helm-make hide-comnt highlight-indentation highlight-numbers
-                highlight-parentheses hl-todo holy-mode hungry-delete hybrid-mode
-                impatient-mode indent-guide info+ inspector js-doc js2-refactor
-                json-mode json-navigator json-reformat link-hint live-py-mode
-                livid-mode lorem-ipsum macrostep marginalia markdown-toc
+                citar-embark citar-org-roam clean-aindent-mode column-enforce-mode
+                company-auctex company-lua company-math company-reftex
+                company-statistics company-web compleseus-spacemacs-help
+                consult-yasnippet csv-mode cython-mode define-word devdocs
+                diminish dired-quick-sort disable-mouse doom-modeline dotenv-mode
+                drag-stuff dumb-jump edit-indirect ein elisp-def elisp-demos
+                elisp-slime-nav embark-consult emmet-mode emr ess ess-R-data-view
+                eval-sexp-fu evil-anzu evil-args evil-cleverparens evil-collection
+                evil-easymotion evil-escape evil-evilified-state evil-exchange
+                evil-goggles evil-iedit-state evil-indent-plus evil-lion
+                evil-lisp-state evil-matchit evil-nerd-commenter evil-numbers
+                evil-org evil-surround evil-tex evil-textobj-line evil-tutor
+                evil-unimpaired evil-visual-mark-mode evil-visualstar
+                expand-region eyebrowse fancy-battery flycheck-eglot flycheck-elsa
+                flycheck-package flycheck-pos-tip flyspell-correct-popup gh-md
+                git-link git-messenger git-modes git-timemachine
+                gitignore-templates gnuplot golden-ratio google-translate
+                graphviz-dot-mode groovy-imports groovy-mode helm-make hide-comnt
+                highlight-indentation highlight-numbers highlight-parentheses
+                hl-todo holy-mode hungry-delete hybrid-mode impatient-mode
+                indent-guide info+ inspector js-doc js2-refactor json-mode
+                json-navigator json-reformat link-hint live-py-mode livid-mode
+                lorem-ipsum macrostep magit magit-section marginalia markdown-toc
                 multi-line nameless nodejs-repl nov npm-mode open-junk-file
                 orderless org-alert org-cliplink org-contrib org-download org-jira
                 org-mime org-pomodoro org-present org-projectile org-ref
                 org-rich-yank org-roam-ui org-super-agenda org-superstar orgit
                 overseer ox-jira page-break-lines paradox password-generator
                 pcre2el pet pip-requirements poly-R poly-org popwin prettier-js
-                pug-mode py-isort pydoc pyenv-mode pylookup python-pytest
-                quarto-mode quickrun rainbow-delimiters restart-emacs ron-mode
-                rustic sass-mode scss-mode slim-mode smeargle space-doc
-                spacemacs-purpose-popwin spacemacs-whitespace-cleanup sphinx-doc
-                sql-indent stan-snippets string-edit-at-point symbol-overlay symon
-                tagedit term-cursor tern toc-org toml-mode treemacs-evil
-                treemacs-icons-dired treemacs-magit treemacs-persp
-                treemacs-projectile undo-fu-session uv vertico vi-tilde-fringe
-                volatile-highlights vundo web-beautify web-mode wgrep
-                window-purpose winum writeroom-mode ws-butler yaml-mode
-                yasnippet-snippets))
+                projectile pug-mode py-isort pydoc pyenv-mode pylookup
+                python-pytest quarto-mode quickrun rainbow-delimiters
+                restart-emacs ron-mode rustic sass-mode scss-mode slim-mode
+                smeargle space-doc spacemacs-purpose-popwin
+                spacemacs-whitespace-cleanup sphinx-doc sql-indent stan-snippets
+                string-edit-at-point symbol-overlay symon tagedit term-cursor tern
+                toc-org toml-mode transient treemacs-evil treemacs-icons-dired
+                treemacs-magit treemacs-persp treemacs-projectile undo-fu-session
+                uv vertico vi-tilde-fringe volatile-highlights vundo web-beautify
+                web-mode wgrep window-purpose winum writeroom-mode ws-butler
+                yaml-mode yasnippet-snippets))
    '(paradox-github-token t))
   (custom-set-faces
    ;; custom-set-faces was added by Custom.
