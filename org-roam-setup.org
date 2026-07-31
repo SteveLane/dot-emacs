@@ -241,6 +241,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
        "* Literature Review\n"
        "** What ideas are worth keeping?\n"
        "** What ideas are worth exploring further?\n"
+       "** What would I use in my own work?\n"
        "** What did this paper mean?\n"
         )
       )
