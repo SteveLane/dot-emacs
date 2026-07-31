@@ -15,3 +15,6 @@
 (spacemacs/set-leader-keys
   "aW" 'sprazza/open-wezterm-project-root
   )
+
+;; Ensure yasnippets are loaded everywhere
+(yas-global-mode 1)
