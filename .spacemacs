@@ -34,12 +34,12 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (auto-completion :variables
-                      auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
-                      auto-completion-enable-snippets-in-popup t
-                      auto-completion-enable-sort-by-usage t
-                      auto-completion-minimum-prefix-length 3
-                      )
+     ;; (auto-completion :variables
+     ;;                  auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
+     ;;                  auto-completion-enable-snippets-in-popup t
+     ;;                  auto-completion-enable-sort-by-usage t
+     ;;                  auto-completion-minimum-prefix-length 3
+     ;;                  )
      bibtex
      compleseus
      csv
@@ -99,11 +99,13 @@ This function should only modify configuration layer settings."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      cape
                                       catppuccin-theme
                                       ;; citar packages
                                       citar
                                       citar-embark
                                       citar-org-roam
+                                      corfu
                                       org-super-agenda
                                       ;; polymodes
                                       polymode
@@ -113,6 +115,10 @@ This function should only modify configuration layer settings."
 
                                       ;; Quarto major mode — maintained by the quarto-dev team
                                       quarto-mode
+
+                                      ;; snippets
+                                      yasnippet
+                                      yasnippet-snippets
                                       )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
@@ -676,12 +682,13 @@ you should place your code here."
   (load-file "~/github/emacs-config/org-setup.el")
   (load-file "~/github/emacs-config/org-roam-setup.el")
   (load-file "~/github/emacs-config/python-config.el")
-  ;; Proxy configuration based on location
   (load-file "~/github/emacs-config/yas-config.el")
   ;; Bring in citations management
   (load-file "~/github/emacs-config/citar.el")
   ;; And some extra utilities
   (load-file "~/github/emacs-config/utilities.el")
+  ;; And corfu setup
+  (load-file "~/github/emacs-config/corfu-config.el")
   ;; Tell babel where R is (align with ESS as well...)
   (when (spacemacs/system-is-mswindows)
     ;; (setq org-babel-R-command "rig run --slave --no-save")
