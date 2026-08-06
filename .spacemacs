@@ -34,12 +34,6 @@ This function should only modify configuration layer settings."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     ;; (auto-completion :variables
-     ;;                  auto-completion-private-snippets-directory "~/github/emacs-config/snippets/"
-     ;;                  auto-completion-enable-snippets-in-popup t
-     ;;                  auto-completion-enable-sort-by-usage t
-     ;;                  auto-completion-minimum-prefix-length 3
-     ;;                  )
      bibtex
      compleseus
      csv
@@ -48,15 +42,13 @@ This function should only modify configuration layer settings."
      epub
      (ess :variables
           ess-r-backend 'eglot
-          ess-use-company 't
+          ess-use-company nil
           )
      (javascript :variables
                  javascript-backend nil)
      git
      graphviz
-     (groovy :variables
-             groovy-backend 'company-groovy
-             )
+     groovy
      html
      ipython-notebook
      (latex :variables

@@ -1,4 +1,4 @@
-;; Time-stamp: <2026-07-08 10:56:36 (lanes1)>
+;; Time-stamp: <2026-08-07 09:00:36 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (defun sprazza/eglot-start-if-available ()
@@ -101,6 +101,6 @@
 ;; Ensure that the language server is started
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(ess-r-mode . ("air" "language-server"))
+               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))
                )
   )
