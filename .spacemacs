@@ -38,6 +38,17 @@ This function should only modify configuration layer settings."
      compleseus
      csv
      eglot
+     (elfeed :variables
+             elfeed-feeds '(
+                            ("https://statmodeling.stat.columbia.edu/feed/" blog statistics)
+                            ("https://www.masteringemacs.org/?feed=rss2" blog emacs)
+                            ("https://irreal.org/blog/?feed=rss2" blog emacs)
+                            ("https://sachachua.com/blog/feed/" blog emacs)
+                            ("https://planet.emacslife.com/atom.xml" blog emacs)
+                            ("https://jdhao.github.io/index.xml" blog emacs)
+                            ("https://taonaw.com/feed.xml" blog emacs)
+                            )
+             )
      emacs-lisp
      epub
      (ess :variables
