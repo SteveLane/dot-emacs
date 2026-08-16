@@ -148,6 +148,16 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         )
       )
 
+    (defun sprazza/business-day-offset ()
+      "Calculates the offset for today->last busines day."
+      (pcase (string-to-number (format-time-string "%u"))
+        (1 3) ; Mon -> Fri
+        (6 1) ; Sat -> Fri
+        (7 2) ; Sun -> Fri
+        (_ 1)
+        )
+      )
+
     (defun sprazza/daily-review-from-agenda ()
       "Allows daily review to proceed directly from the agenda."
       (interactive)
@@ -177,7 +187,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
         ;; Left: yesterday's org-roam daily
         (select-window left-window)
-        (org-roam-dailies-goto-yesterday 1 "d")
+        (org-roam-dailies-goto-yesterday (sprazza/business-day-offset) "d")
         )
 
       )
