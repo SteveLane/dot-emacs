@@ -27,14 +27,17 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
         ("p" "Permanent Note" plain "%?"
          :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n\nCREATED: %u\n\n[[id:7b759d89-71fb-4066-8cd8-def55a7a7dec][Weekly Review]]")
          :unnarrowed t
+         :jump-to-captured t
          )
         ("i" "Ideas and Somedays" plain "%?"
          :if-new (file+head "ideas/%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n")
          :unnarrowed t
+         :jump-to-captured t
          )
         ("l" "Literature Note" plain "%?"
          :if-new (file+head "literature/%<%Y%m%d%H%M%S>-${citar-citekey}.org" "#+title: ${note-title}. ${citar-citekey} (${citar-date}).\n#+created: %U\n\n[[id:c792cb7b-8a3c-459a-931f-f80e59413f14][Literature Review]]\n\n* Key claims\n\n* Interesting methods\n\n* Quotes\n\n* Questions\n\n* Reactions")
          :unnarrowed t
+         :jump-to-captured t
          )
         ("m" "Meeting Note" plain "%?"
          :if-new (file+head "meetings/%<%Y%m%d%H%M%S>-${slug}.org" "
