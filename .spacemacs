@@ -37,7 +37,9 @@ This function should only modify configuration layer settings."
      bibtex
      compleseus
      csv
-     eglot
+     (eglot :variables
+            eglot-autoshutdown t
+            )
      (elfeed :variables
              elfeed-feeds '(
                             ("https://statmodeling.stat.columbia.edu/feed/" blog statistics)
@@ -48,6 +50,7 @@ This function should only modify configuration layer settings."
                             ("https://jdhao.github.io/index.xml" blog emacs)
                             ("https://taonaw.com/feed.xml" blog emacs)
                             )
+             elfeed-curl-program-name "C:/Windows/System32/curl.exe"
              )
      emacs-lisp
      epub
