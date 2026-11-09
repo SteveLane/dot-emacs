@@ -20,6 +20,7 @@ Similar to [[file:org-setup.org][my org setup]], we'd like some specific org-roa
 
    #+header: :tangle yes
    #+begin_src emacs-lisp :export yes
+     ;; -*- lexical-binding: t; -*-
      (setq
       ;; Define custom org-roam capture templates
       org-roam-capture-templates

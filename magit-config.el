@@ -1,4 +1,5 @@
-;; Time-stamp: <2026-07-16 10:58:38 (lanes1)>
+;; -*- lexical-binding: t; -*-
+;; Time-stamp: <2026-11-09 13:12:49 (lanes1)>
 ;; Split out package loading into a separate file.
 ;; Now using use-package
 ;; magit

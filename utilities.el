@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; General is getting too large
 ;; Set up some simple utility work here.
 

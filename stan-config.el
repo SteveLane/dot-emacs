@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; Uncomment the line below if not required elsewhere.
 ;; (require 'use-package)
 
