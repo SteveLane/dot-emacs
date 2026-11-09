@@ -1,5 +1,5 @@
 ;; -*- lexical-binding: t; -*-
-;; Time-stamp: <2026-11-09 13:13:33 (lanes1)>
+;; Time-stamp: <2026-11-09 13:25:49 (lanes1)>
 ;; Extra config for ESS that's required as spacemacs has some weird defaults.
 
 (defun sprazza/eglot-start-if-available ()
@@ -25,7 +25,7 @@
   ;; OS‑specific R binary
   (cond
    ((spacemacs/system-is-mswindows)
-    (setq inferior-ess-r-program "R.bat"))
+    (setq inferior-ess-r-program "R"))
    ((spacemacs/system-is-linux)
     (setq inferior-ess-r-program "/usr/bin/R"))
    ((spacemacs/system-is-mac)
@@ -102,6 +102,6 @@
 ;; Ensure that the language server is started
 (with-eval-after-load 'eglot
   (add-to-list 'eglot-server-programs
-               '(ess-r-mode . ("R.bat" "--slave" "-e" "languageserver::run()"))
+               '(ess-r-mode . ("R" "--slave" "-e" "languageserver::run()"))
                )
   )
