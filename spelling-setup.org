@@ -15,6 +15,7 @@ This document is literate explanation of the setup for my spelling implementatio
 
    #+header: :tangle yes
    #+begin_src emacs-lisp :export yes
+     ;; -*- lexical-binding: t; -*-
      ;; Set up languages
      (defun my/fix-ispell-contraction ()
        "Fixes contractions (e.g. shouldn't) aren't not being checked properly.

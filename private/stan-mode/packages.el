@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;; packages.el --- stan mode layer packages file for Spacemacs.
 ;;
 ;; Author: Steve Lane

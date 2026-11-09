@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; This is a general settings file for top-level settings
 
 ;; Where to save abbrevs (and silently)
@@ -32,7 +33,7 @@
 (setq
  time-stamp-active t          ; do enable time-stamps
  time-stamp-line-limit 20     ; check first 10 buffer lines for Time-stamp:
- time-stamp-format "%Y-%m-%d %02H:%02M:%02S (%u)") ; date format
+ time-stamp-format "%Y-%m-%d %02H:%02M:%02S (%l)") ; date format
 (add-hook 'write-file-hooks 'time-stamp) ; update when saving
 
 ;; Make sure that [mM]akefile's with an 'extension' are opened in makefile-mode

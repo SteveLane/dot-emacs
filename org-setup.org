@@ -30,6 +30,7 @@ These settings do not depend on Org being loaded and should be defined eagerly.
    Function definitions for capture templates and other org-related quality of life adjustments go here.
 
    #+begin_src emacs-lisp :exports none
+     ;; -*- lexical-binding: t; -*-
      (defun sprazza/org-file (f)
        "Construct paths to org files. Simplifies construction and is more readable."
        (expand-file-name f org-directory))

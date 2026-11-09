@@ -1,4 +1,5 @@
-;; Time-stamp: <2026-07-31 11:08:50 (lanes1)>
+;; -*- lexical-binding: t; -*-
+;; Time-stamp: <2026-11-09 13:15:20 (lanes1)>
 ;; yasnippet
 ;; Many ideas from https://github.com/fniessen/emacs-leuven/blob/master/emacs-leuven.el
 (with-eval-after-load 'yasnippet
